@@ -7,4 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'PHPMD\\' => array($vendorDir . '/phpmd/phpmd/src/main/php'),
+    'Monolog' => array($vendorDir . '/rsportella/popper/src'),
+    'ComponentInstaller' => array($vendorDir . '/robloach/component-installer/src'),
+    'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
 );
