@@ -9,7 +9,8 @@
         "fortawesome/font-awesome": "^5.14",
         "components/jquery-cookie": "1.4.1.2",
         "rsportella/popper": "dev-master",
-        "fancyapps/fancybox": "^2.1"
+        "fancyapps/fancybox": "^2.1",
+        "twig/extensions": "^v1.5.4"
     },
     "autoload": {
         "psr-4": {

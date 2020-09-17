@@ -12,7 +12,6 @@ class DataAccessManager
     private $db_user;
     private $db_pass;
     private $db_host;
-    protected static $_instance;
     private $pdo;
 
     protected function __construct()
@@ -28,15 +27,6 @@ class DataAccessManager
         $this->connect();
     }
 
-    private static function getTable () {
-
-        if (static::$table === null) {
-            $class_name = explode('\\', get_called_class());
-            static::$table = strtolower (end($class_name)) . 's';
-        }
-        return static::$table;
-    }
-
     private function connect()
     {
         $pdo = new PDO("mysql:dbname=$this->db_name;host=$this->db_host", $this->db_user, $this->db_pass);
@@ -47,8 +37,25 @@ class DataAccessManager
     public function all($one = false) {
         return self::query("
             SELECT *
-            FROM " . static::getTable(), get_called_class(), $one);
+            FROM " . static::$table, get_called_class(), $one);
     }
+
+    public function getById($id) {
+        return self::query("
+            SELECT *
+            FROM " . static::$table . " 
+            WHERE id = '" . htmlspecialchars($id) . "'"
+            , get_called_class(), true);
+    }
+
+    public function addComment () {
+        return self::prepare("INSERT INTO comments(id_user,content) VALUES(?, ?)", get_called_class());
+        $username = htmlspecialchars($_POST['username']);
+        $content = htmlspecialchars($_POST['content']);
+        $requete_ajout_message->execute(array(
+            'username' => username,
+            'content' => $content));
+        }
 
     protected function query($statement, $class_name, $one) {
         $req = $this->pdo->query($statement);
@@ -72,4 +79,9 @@ class DataAccessManager
         }
         return $data;
     }
+
+
+
+
+
 }

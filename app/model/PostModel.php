@@ -6,7 +6,7 @@ namespace App\model;
 
 class PostModel
 {
-    public $id_post;
+    public $id;
     public $id_user;
     public $creation_date;
     public $title;
@@ -14,12 +14,12 @@ class PostModel
     public $content;
     public $status;
     public $category;
-    public $blog_title;
+    public $user;
 
-    public function __construct($post_entity)
+    public function __construct($postEntity)
     {
-        foreach ($this as $key => $value) {
-            $this->$key = $post_entity->$key;
+        foreach ($postEntity as $key => $value) {
+            $this->$key = $postEntity->$key;
         }
     }
 }
