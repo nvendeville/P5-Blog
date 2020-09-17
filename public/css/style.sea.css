@@ -439,6 +439,14 @@ div[class*="-btn"] {
     width: 100%;
     text-align: center;
   }
+
+  p {
+    font-size:0.9em !important;
+  }
+
+  .h3 {
+    font-size: 1.3em !important;
+  }
 }
 
 /*
@@ -801,6 +809,11 @@ section.featured-posts .post-footer {
 */
 section.divider {
   color: #fff;
+
+}
+
+.flex-center {
+  justify-content: center;
 }
 
 /*
@@ -987,7 +1000,7 @@ section.newsletter .submit {
 
 /* Newsletter Section Media Query ------------------------------------- */
 @media (max-width: 575px) {
-  section.newsletter input {
+  section.newsletter input, .newsletter textarea {
     font-size: 0.95em;
     width: 100%;
   }
@@ -1092,7 +1105,7 @@ footer.main-footer a:hover, footer.main-footer a:focus {
 }
 
 footer.main-footer ul {
-  margin-right: 30px;
+  margin-right: 0px;
 }
 
 footer.main-footer .list-unstyled a {

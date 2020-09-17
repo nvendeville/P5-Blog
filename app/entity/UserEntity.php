@@ -6,9 +6,9 @@ namespace App\entity;
 
 use App\Core\Database\DataAccessManager;
 
-class HomeEntity extends DataAccessManager
+class UserEntity extends DataAccessManager
 {
-    protected static $table = 'home';
+    protected static $table = 'users';
     protected static $_instance;
 
     protected function __construct() {
@@ -18,7 +18,7 @@ class HomeEntity extends DataAccessManager
     public static function getInstance()
     {
         if (is_null(self::$_instance)) {
-            self::$_instance = new HomeEntity();
+            self::$_instance = new UserEntity();
         }
         return self::$_instance;
     }
