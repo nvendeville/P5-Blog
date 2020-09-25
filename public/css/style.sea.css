@@ -720,29 +720,14 @@ section.featured-posts .avatar {
   margin-right: 10px;
 }
 
-section.featured-posts .title,
-section.featured-posts .date,
-section.featured-posts .comments {
-  font-size: 0.8em;
-  font-weight: 400;
-  color: #999;
-}
 
-section.featured-posts .title i,
+
 section.featured-posts .date i,
 section.featured-posts .comments i {
   margin-right: 5px;
 }
 
-section.featured-posts .title::after,
-section.featured-posts .date::after,
-section.featured-posts .comments::after {
-  content: '|';
-  display: inline-block;
-  margin: 0 7px;
-  font-size: 0.9em;
-  color: #ccc;
-}
+
 
 section.featured-posts .comments::after {
   display: none;
@@ -951,6 +936,24 @@ section.latest-posts header {
   .post:last-of-type {
     margin-bottom: 0;
   }
+}
+
+/*
+* ==========================================================
+*     ADMINISTRATION PAGE
+* ==========================================================
+*/
+
+.space-evenly {
+  justify-content: space-evenly;
+}
+
+.center {
+  text-align: center;
+}
+
+.margin-100 {
+  margin-top: 100px;
 }
 
 /*
@@ -1242,12 +1245,16 @@ main.posts-listing .post-footer {
 
 .widget.latest-posts a {
   display: block;
-  color: #555;
+  color: #555555 !important;
   text-decoration: none;
 }
 
 .widget.latest-posts a:hover {
   color: #000;
+}
+
+.latest-posts-width-100 {
+  width: 100%;
 }
 
 .widget.latest-posts .image {
@@ -1256,6 +1263,7 @@ main.posts-listing .post-footer {
   height: 60px;
   overflow: hidden;
   margin-right: 20px;
+  min-height: unset!important;
 }
 
 .widget.latest-posts .item {
@@ -1263,16 +1271,17 @@ main.posts-listing .post-footer {
 }
 
 .widget.latest-posts strong {
-  font-size: 0.95em;
+  font-size: 1em !important;
   display: block;
-  line-height: 1em;
+  line-height: 1em !important;
+  margin-bottom: 10px;
 }
 
 .widget.latest-posts .views,
-.widget.latest-posts .comments {
-  font-size: 0.8em;
+.widget.latest-posts {
+  font-size: 1em !important;
   font-weight: 400;
-  color: #bbb;
+  color: #555555 !important;
   margin-top: 10px;
 }
 
@@ -1356,6 +1365,7 @@ main.posts-listing .post-footer {
   color: #444;
   line-height: 1.1em;
 }
+
 
 .blog-post h1:hover {
   color: #444;

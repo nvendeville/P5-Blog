@@ -1,0 +1,10 @@
+<div class="widget categories">
+    <header>
+        <h3 class="h6">Catégories</h3>
+    </header>
+    {% for category in categories %}
+
+    <div class="item d-flex justify-content-between"><a href="#">{{ category.categoryName }}</a><span>{{ category.nbPosts }}</span></div>
+
+    {% endfor %}
+</div>

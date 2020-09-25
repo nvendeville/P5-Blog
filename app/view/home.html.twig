@@ -3,11 +3,11 @@
 {% block body %}
 
 <!-- Hero Section-->
-<section style="background: url(img/{{ home.hero_img }}); background-size: cover; background-position: center center;" class="hero" >
+<section style="background: url(img/{{ home.heroImg }}); background-size: cover; background-position: center center;" class="hero" >
     <div class="container">
         <div class="row">
             <div class="col-lg-7">
-                <h1 class="text-orange">{{ home.hero_firstname }} {{ home.hero_lastname }}</h1><a href="#" class="hero-link text-orange">{{ home.hero_link }}</a>
+                <h1 class="text-orange">{{ home.heroFirstname }} {{ home.heroLastname }}</h1><a href="#" class="hero-link text-orange">{{ home.heroLink }}</a>
             </div>
         </div>
     </div>
@@ -18,12 +18,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <h2 class="h3">{{ home.section_title }}</h2>
-                <p class="text-big">{{ home.section_content }}</p>
+                <h2 class="h3">{{ home.sectionTitle }}</h2>
+                <p class="text-big">{{ home.sectionContent }}</p>
             </div>
             <div class="col-lg-4">
                 <h2 class="h3">Téléchargez mon CV !</h2>
-                <a href="img/CV.jpg"><img src="img/{{ home.cv_img }}" alt="..." class="img-fluid"></a>
+                <a href="img/CV.jpg"><img src="img/{{ home.cvImg }}" alt="..." class="img-fluid"></a>
             </div>
         </div>
     </div>
@@ -33,22 +33,22 @@
 <section class="gallery no-padding">
     <div class="row">
         <div class="mix col-lg-3 col-md-3 col-sm-6">
-            <div class="item"><img src="img/{{ home.gallery_img1 }}" alt="..." class="img-fluid"></div>
+            <div class="item"><img src="img/{{ home.galleryImg1 }}" alt="..." class="img-fluid"></div>
         </div>
         <div class="mix col-lg-3 col-md-3 col-sm-6">
-            <div class="item"><img src="img/{{ home.gallery_img2 }}" alt="..." class="img-fluid"></div>
+            <div class="item"><img src="img/{{ home.galleryImg2 }}" alt="..." class="img-fluid"></div>
         </div>
         <div class="mix col-lg-3 col-md-3 col-sm-6">
-            <div class="item"><img src="img/{{ home.gallery_img3 }}" alt="..." class="img-fluid"></div>
+            <div class="item"><img src="img/{{ home.galleryImg3 }}" alt="..." class="img-fluid"></div>
         </div>
         <div class="mix col-lg-3 col-md-3 col-sm-6">
-            <div class="item"><img src="img/{{ home.gallery_img4 }}" alt="..." class="img-fluid"></div>
+            <div class="item"><img src="img/{{ home.galleryImg4 }}" alt="..." class="img-fluid"></div>
         </div>
     </div>
 </section>
 
 <!-- Divider Section-->
-<section style="background: url(img/{{ home.divider_img }}); background-size: cover; background-position: center bottom" class="divider newsletter">
+<section style="background: url(img/{{ home.dividerImg }}); background-size: cover; background-position: center bottom" class="divider newsletter">
     <div class="container">
         <div class="row flex-center">
             <div class="col-md-7">
@@ -68,6 +68,52 @@
         </div>
     </div>
 </section>
+
+    <!-- Add a post Section-->
+    <section style="background: url(img/blog-post-2.jpg); background-size: cover; background-position: center bottom" class="divider newsletter">
+        <div class="container">
+            <div class="row flex-center">
+                <div class="col-md-7">
+                    <h1>Ajouter un article</h1>
+                    <div class="form-holder">
+                        <form action="/P5-Blog" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <select>
+                                    <label class="h6">
+                                        Catégorie du post :
+                                    </label>
+                                    <option>- Choisissez une catégorie -
+                                    <option>Catégorie 1
+                                    <option>Catégorie 2
+                                    <option>Catégorie 3
+                                </select>
+                                <label class="h6">
+                                    Titre du post :
+                                </label>
+                                <input type="text" name="title" id="title">
+                                <label class="h6">
+                                    Header du post :
+                                </label>
+                                <input type="text" name="header" id="header">
+                                <label class="h6">
+                                    Image du post :
+                                </label>
+                                <input type="file" name="postImg" id="postImg"/>
+                                <label class="h6">
+                                    Contenu du post :
+                                </label>
+                                <textarea class="textarea" name="content" id="content"></textarea>
+                            </div>
+                            <div class="alert alert-warning" role="alert">
+                                Pour enregistrer  le post, tous les champs doivent être renseignés
+                            </div>
+                            <button type="submit" class="submit">Enregistrer le post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 {% endblock %}

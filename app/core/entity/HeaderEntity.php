@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\entity;
+namespace App\core\entity;
 
 
 use App\Core\Database\DataAccessManager;
 
-class FooterEntity extends DataAccessManager
+class HeaderEntity extends DataAccessManager
 {
-    protected static $table = 'footer';
+    protected static $table = 'header';
     protected static $_instance;
 
     protected function __construct() {
@@ -18,7 +18,7 @@ class FooterEntity extends DataAccessManager
     public static function getInstance()
     {
         if (is_null(self::$_instance)) {
-            self::$_instance = new FooterEntity();
+            self::$_instance = new HeaderEntity();
         }
         return self::$_instance;
     }
