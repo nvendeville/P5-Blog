@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\entity;
+namespace App\core\entity;
 
 
 use App\Core\Database\DataAccessManager;
 
-class HeaderEntity extends DataAccessManager
+class UserEntity extends DataAccessManager
 {
-    protected static $table = 'header';
+    protected static $table = 'users';
     protected static $_instance;
 
     protected function __construct() {
@@ -18,7 +18,7 @@ class HeaderEntity extends DataAccessManager
     public static function getInstance()
     {
         if (is_null(self::$_instance)) {
-            self::$_instance = new HeaderEntity();
+            self::$_instance = new UserEntity();
         }
         return self::$_instance;
     }

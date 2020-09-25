@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\entity;
+namespace App\core\entity;
 
 
 use App\Core\Database\DataAccessManager;
@@ -25,16 +25,8 @@ class CommentEntity extends DataAccessManager
         return self::$_instance;
     }
 
-    public function getAll () {
-        $data = $this->getInstance()->all();
-        $comments = [];
-        foreach ($data as $comment) {
-            $commentModel = new CommentModel($comment);
-            $user = new UserModel(UserEntity::getInstance()->getById($commentModel->id_user));
-            $commentModel->user = $user;
-            array_push($comments, $commentModel);
-        }
-
-        return $comments;
+    public function getCommentsByPostId ($postId) {
+        $statement = "SELECT * FROM comments WHERE idPost = $postId AND status = 'validated' ORDER BY creationDate DESC";
+        return $this->query($statement, get_called_class(), false);
     }
 }

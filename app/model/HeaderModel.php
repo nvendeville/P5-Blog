@@ -3,13 +3,41 @@
 namespace App\Model;
 
 class HeaderModel {
-    public $id;
-    public $blog_title;
+    private $id;
+    private $blog_title;
 
-    public function __construct($header_entity) {
-        foreach ($this as $key => $value) {
-           $this->$key = $header_entity->$key;
-        }
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBlogTitle()
+    {
+        return $this->blog_title;
+    }
+
+    /**
+     * @param mixed $blog_title
+     */
+    public function setBlogTitle($blog_title)
+    {
+        $this->blog_title = $blog_title;
+    }
+
+    
 }
 

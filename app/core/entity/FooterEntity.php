@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\entity;
+namespace App\core\entity;
 
 
 use App\Core\Database\DataAccessManager;
 
-class UserEntity extends DataAccessManager
+class FooterEntity extends DataAccessManager
 {
-    protected static $table = 'users';
+    protected static $table = 'footer';
     protected static $_instance;
 
     protected function __construct() {
@@ -18,7 +18,7 @@ class UserEntity extends DataAccessManager
     public static function getInstance()
     {
         if (is_null(self::$_instance)) {
-            self::$_instance = new UserEntity();
+            self::$_instance = new FooterEntity();
         }
         return self::$_instance;
     }

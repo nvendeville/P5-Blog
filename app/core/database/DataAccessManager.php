@@ -34,10 +34,14 @@ class DataAccessManager
         $this->pdo = $pdo;
     }
 
-    public function all($one = false) {
+    public function one() {
+        return $this->all(true);
+    }
+
+    public function all($one = false, $order = "") {
         return self::query("
             SELECT *
-            FROM " . static::$table, get_called_class(), $one);
+            FROM " . static::$table . " $order", get_called_class(), $one);
     }
 
     public function getById($id) {

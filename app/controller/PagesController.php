@@ -24,20 +24,7 @@ class PagesController {
         $this->renderer = new Renderer();
     }
 
-    private function common() {
-        $header = new HeaderModel(HeaderEntity::getInstance()->all(true));
-        $footer = new FooterModel(FooterEntity::getInstance()->all(true));
-        return ["header" => $header, "footer" => $footer];
 
-    }
-
-    public function home() {
-
-        $home = new HomeModel(HomeEntity::getInstance()->all(true));
-        $common = $this->common();
-        $models = ["common" => $common, "home" => $home];
-        $this->renderer->render("home.html.twig", $models);
-    }
 
     public function posts() {
         $postEntity = new PostEntity();

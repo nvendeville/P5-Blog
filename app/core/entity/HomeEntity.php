@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\entity;
+namespace App\core\entity;
 
 
 use App\Core\Database\DataAccessManager;
