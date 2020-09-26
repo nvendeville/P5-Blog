@@ -27,14 +27,14 @@ class PostService extends AbstractService
             $userModel = new UserModel();
             $this->hydrate($userEntity, $userModel);
             $postModel->setUser($userModel);
-            $postModel->setUrl("/P5-blog/?p=post&action=detail&article=" . $postModel->getId());
+            $postModel->setUrl("/P5-blog/public/?p=post&action=detail&article=" . $postModel->getId());
             $postModel->setNbComments(count($this->getComments( $postModel->getId())));
             array_push($postsModel, $postModel);
         }
 
         return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
             "categories" =>$this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
-            "nbPages" => $nbPages];
+            "nbPages" => (int)$nbPages, "currentPage" => $currentPage];
     }
 
     private function getNbPage () {
