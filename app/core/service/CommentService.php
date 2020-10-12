@@ -5,10 +5,8 @@ namespace App\core\service;
 
 
 use App\core\entity\CommentEntity;
-use App\core\entity\PostEntity;
 use App\core\entity\UserEntity;
 use App\model\CommentModel;
-use App\model\PostModel;
 use App\model\UserModel;
 
 class CommentService extends AbstractService

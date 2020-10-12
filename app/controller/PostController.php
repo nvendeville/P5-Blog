@@ -27,4 +27,6 @@ class PostController
         $service = new PostService();
         $this->renderer->render("postdetail.html.twig", $service->getPost($id));
     }
+
+
 }

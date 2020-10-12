@@ -10,6 +10,7 @@ class Renderer
         $loader = new \Twig\Loader\FilesystemLoader('../app/view');
         $twig = new \Twig\Environment($loader);
         $twig->getExtension(\Twig\Extension\CoreExtension::class)->setDateFormat('d/m/Y H:i', '%d days');
+        $models['token'] = $_SESSION['token'];
         echo $twig->render($page_name, $models);
     }
 }

@@ -29,4 +29,16 @@ class CommentEntity extends DataAccessManager
         $statement = "SELECT * FROM comments WHERE idPost = $postId AND status = 'validated' ORDER BY creationDate DESC";
         return $this->query($statement, get_called_class(), false);
     }
+
+    public function getPaginatedComments ($from, $nbComment) {
+        $statement =
+            "SELECT * FROM `comments` ORDER BY `creationDate` DESC LIMIT $from, $nbComment";
+        return $this->query($statement, get_called_class(), false);
+    }
+
+    public function getNbComments() {
+        $statement =
+            "SELECT COUNT(comments.id) as nbComments FROM comments";
+        return $this->query($statement, get_called_class(), true);
+    }
 }

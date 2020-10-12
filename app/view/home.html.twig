@@ -69,51 +69,7 @@
     </div>
 </section>
 
-    <!-- Add a post Section-->
-    <section style="background: url(img/blog-post-2.jpg); background-size: cover; background-position: center bottom" class="divider newsletter">
-        <div class="container">
-            <div class="row flex-center">
-                <div class="col-md-7">
-                    <h1>Ecrire un nouvel article</h1>
-                    <div class="form-holder">
-                        <form action="/P5-Blog" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <select>
-                                    <label class="h6">
-                                        Catégorie du post :
-                                    </label>
-                                    <option>- Choisissez une catégorie -
-                                    <option>Catégorie 1
-                                    <option>Catégorie 2
-                                    <option>Catégorie 3
-                                </select>
-                                <label class="h6">
-                                    Titre du post :
-                                </label>
-                                <input type="text" name="title" id="title">
-                                <label class="h6">
-                                    Header du post :
-                                </label>
-                                <input type="text" name="header" id="header">
-                                <label class="h6">
-                                    Image du post :
-                                </label>
-                                <input type="file" name="postImg" id="postImg"/>
-                                <label class="h6">
-                                    Contenu du post :
-                                </label>
-                                <textarea class="textarea" name="content" id="content"></textarea>
-                            </div>
-                            <div class="alert alert-warning" role="alert">
-                                Pour enregistrer  le post, tous les champs doivent être renseignés
-                            </div>
-                            <button type="submit" class="submit">Enregistrer le post</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
 
 {% endblock %}

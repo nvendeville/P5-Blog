@@ -12,7 +12,7 @@ class DataAccessManager
     private $db_user;
     private $db_pass;
     private $db_host;
-    private $pdo;
+    protected $pdo;
 
     protected function __construct()
     {
@@ -57,7 +57,7 @@ class DataAccessManager
         $username = htmlspecialchars($_POST['username']);
         $content = htmlspecialchars($_POST['content']);
         $requete_ajout_message->execute(array(
-            'username' => username,
+            'username' => $username,
             'content' => $content));
         }
 

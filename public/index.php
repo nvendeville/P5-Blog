@@ -1,50 +1,62 @@
 <?php
+session_start();
 
 require_once '../vendor/autoload.php';
+require_once '../app/core/token.php';
 
 
-if (isset($_POST) AND !empty($_POST)) {
-    echo 'in $_post';
-    if (
-        isset($_FILES['postImg'])
-        AND $_FILES['postImg']['error'] == 0
-        AND($_FILES['postImg']['size'] <= 1000000)
-    ) {
-        $infoFileUploaded = pathinfo($_FILES['postImg']['name']);
-        $extensionFileUploaded = $infoFileUploaded['extension'];
-        $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-        if (in_array($extensionFileUploaded, $authorizedExtensions)) {
-            move_uploaded_file($_FILES['postImg']['tmp_name'], 'P5-Blog/public/img' . basename($_FILES['postImg']['name']));
-            echo "L'envoi a bien été effectué !";
-        }
-    }
-} else {
-// ternaire pour donner la page home en défault
-    $p = (isset($_GET["p"])) ? $_GET["p"] : "home";
-
-// indique par l'URL de la page vers quel controller aller
-    $controllerName = "App\Controller\\" . ucfirst($p) . "Controller";
-    $controller = new $controllerName();
-
-//indique quelle méthode appeler du controller choisi
-    $method = isset($_GET["action"]) ? $_GET["action"] : 'index';
-
-    if(isset($_GET['page']) && !empty($_GET['page'])){
-        $currentPage = (int) strip_tags($_GET['page']);
-    } elseif ($p == 'post' && $method=='index') {
-        $currentPage = 1;
-    }
-
-    if (isset($_GET["article"])) {
-        $controller->$method($_GET["article"]);
-    } elseif (isset($currentPage)) {
-        $controller->$method($currentPage);
-    } else {
-        $controller->$method();
-    }
+if (!isset($_SESSION['token'])) {
+    $_SESSION['token'] = generateToken();
 }
 
+if (isset($_POST) and !empty($_POST)) {
+    if (!isset($_POST['token']) or $_POST['token'] != $_SESSION['token']) {
+        echo "Vous n'êtes pas authorisé à accéder à cette fonctionnalité";
+    }
+    switch ($_POST["type"]) {
+        case "add_post":
+            if (
+                isset($_FILES['img'])
+                and $_FILES['img']['error'] == 0
+                and ($_FILES['img']['size'] <= 1000000)
+            ) {
+                $infoFileUploaded = pathinfo($_FILES['img']['name']);
+                $extensionFileUploaded = $infoFileUploaded['extension'];
+                $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
+                if (in_array($extensionFileUploaded, $authorizedExtensions)) {
+                    move_uploaded_file($_FILES['img']['tmp_name'], './img/' . basename($_FILES['img']['name']));
+                }
+                $_POST["img"] = $_FILES['img']['name'];
+            }
+            $adminPostsController = new \App\controller\AdminPostsController();
+            $adminPostsController->addPost($_POST);
+        default:
+            // nothing to do
+    }
+}
+// ternaire pour donner la page home en défault
+$p = (isset($_GET["p"])) ? $_GET["p"] : "home";
 
+// indique par l'URL de la page vers quel controller aller
+$controllerName = "App\Controller\\" . ucfirst($p) . "Controller";
+$controller = new $controllerName();
 
+//indique quelle méthode appeler du controller choisi
+$method = isset($_GET["action"]) ? $_GET["action"] : 'index';
 
+if (isset($_GET['page']) && !empty($_GET['page'])) {
+    $currentPage = (int)strip_tags($_GET['page']);
+} elseif ($p == 'post' or $p == 'adminPosts' or $p = 'adminComments' or $p='connection'&& $method == 'index') {
+    $currentPage = 1;
+}
+
+if (isset($_GET["article"])) {
+    $controller->$method($_GET["article"]);
+} elseif (isset($_GET["commentaire"])) {
+    $controller->$method($_GET["commentaire"], $currentPage);
+} elseif (isset($currentPage)) {
+    $controller->$method($currentPage);
+} else {
+    $controller->$method();
+}
 
