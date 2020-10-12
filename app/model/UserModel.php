@@ -13,7 +13,6 @@ class UserModel
     private $username;
     private $password;
     private $email;
-    private $ok_newsletter;
     private $is_admin;
 
     /**
@@ -126,22 +125,6 @@ class UserModel
     public function setEmail($email)
     {
         $this->email = $email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOkNewsletter()
-    {
-        return $this->ok_newsletter;
-    }
-
-    /**
-     * @param mixed $ok_newsletter
-     */
-    public function setOkNewsletter($ok_newsletter)
-    {
-        $this->ok_newsletter = $ok_newsletter;
     }
 
     /**

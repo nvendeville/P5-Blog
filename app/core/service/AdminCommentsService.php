@@ -49,10 +49,6 @@ class AdminCommentsService extends AbstractService
         return ["header" => $this->getHeader(), "adminComments" => $commentsModel, "nbPages" => (int)$nbPages, "currentPage" => $currentPage];
     }
 
-    private function getNbPage () {
-        $nbComments = CommentEntity::getInstance()->getNbComments();
-        return ceil((int)$nbComments->nbComments / (int)self::NB_COMMENTS_PER_PAGE);
-    }
 
     public function validateComment ($id, $currentPage) {
         AdminCommentsEntity::getInstance()->validateComment($id);
@@ -63,4 +59,16 @@ class AdminCommentsService extends AbstractService
         AdminCommentsEntity::getInstance()->rejectComment($id);
         return $this->getAll($currentPage);
     }
+
+    public function addComment($formAddComment) {
+        $commentModel = new commentModel();
+        $this->hydrateFromPostArray($formAddComment, $commentModel);
+        CommentEntity::getInstance()->addComment($commentModel);
+    }
+
+    private function getNbPage () {
+        $nbComments = CommentEntity::getInstance()->getNbComments();
+        return ceil((int)$nbComments->nbComments / (int)self::NB_COMMENTS_PER_PAGE);
+    }
+
 }

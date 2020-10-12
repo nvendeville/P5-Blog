@@ -30,6 +30,30 @@ if (isset($_POST) and !empty($_POST)) {
             }
             $adminPostsController = new \App\controller\AdminPostsController();
             $adminPostsController->addPost($_POST);
+            break;
+        case "add_comment":
+            $adminCommentsController = new \App\controller\AdminCommentsController();
+            $adminCommentsController->addComment($_POST);
+            break;
+        case "add_user":
+            if (
+                isset($_FILES['avatar'])
+                and $_FILES['avatar']['error'] == 0
+                and ($_FILES['avatar']['size'] <= 1000000)
+            ) {
+                $infoFileUploaded = pathinfo($_FILES['avatar']['name']);
+                $extensionFileUploaded = $infoFileUploaded['extension'];
+                $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
+                if (in_array($extensionFileUploaded, $authorizedExtensions)) {
+                    move_uploaded_file($_FILES['avatar']['tmp_name'], './img/' . basename($_FILES['avatar']['name']));
+                }
+                $_POST["avatar"] = $_FILES['avatar']['name'];
+            }
+            $userController = new \App\controller\UserController();
+            $userController->addUser($_POST);
+
+            echo "default";die();
+            break;
         default:
             // nothing to do
     }
@@ -46,7 +70,7 @@ $method = isset($_GET["action"]) ? $_GET["action"] : 'index';
 
 if (isset($_GET['page']) && !empty($_GET['page'])) {
     $currentPage = (int)strip_tags($_GET['page']);
-} elseif ($p == 'post' or $p == 'adminPosts' or $p = 'adminComments' or $p='connection'&& $method == 'index') {
+} elseif ($p == 'post' or $p == 'adminPosts' or $p = 'adminComments' or $p='connection' && $method == 'index') {
     $currentPage = 1;
 }
 
