@@ -22,4 +22,20 @@ class UserEntity extends DataAccessManager
         }
         return self::$_instance;
     }
+
+    public function addUser($userModel) {
+        $statement =
+            "INSERT INTO `users` (`firstname`, `lastname`, `avatar`, `username`, `password`, `email`, `isAdmin`) 
+            VALUES (?,?,?,?,?,?,?)";
+        $values=[];
+        array_push($values, htmlspecialchars($userModel->getFirstname()));
+        array_push($values, htmlspecialchars($userModel->getLastname()));
+        array_push($values, htmlspecialchars($userModel->getAvatar()));
+        array_push($values, htmlspecialchars($userModel->getUsername()));
+        array_push($values, htmlspecialchars($userModel->getPassword()));
+        array_push($values, htmlspecialchars($userModel->getEmail()));
+        array_push($values, htmlspecialchars($userModel->getIsAdmin()));
+        $insert = $this->pdo->prepare($statement);
+        $insert->execute($values);
+    }
 }

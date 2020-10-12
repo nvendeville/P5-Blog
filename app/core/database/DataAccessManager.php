@@ -52,15 +52,6 @@ class DataAccessManager
             , get_called_class(), true);
     }
 
-    public function addComment () {
-        return self::prepare("INSERT INTO comments(id_user,content) VALUES(?, ?)", get_called_class());
-        $username = htmlspecialchars($_POST['username']);
-        $content = htmlspecialchars($_POST['content']);
-        $requete_ajout_message->execute(array(
-            'username' => $username,
-            'content' => $content));
-        }
-
     protected function query($statement, $class_name, $one) {
         $req = $this->pdo->query($statement);
         $req->setFetchMode(PDO::FETCH_CLASS, $class_name);

@@ -54,7 +54,9 @@
             <div class="col-md-7">
                 <h2>Contactez-moi</h2>
                 <div class="form-holder">
-                    <form action="FormController.php" method="post">
+                    <form id="contactForm" class="select-width-100" action="/P5-Blog/" method="post">
+                        <input type="hidden" name="token" value="{{ token }}">
+                        <input type="hidden" name="type" value="contact-form">
                         <div class="form-group">
                             <input type="text" name="firstname" id="firstname" placeholder="Entrez votre prénom">
                             <input type="text" name="lastname" id="lastname" placeholder="Entrez votre nom">

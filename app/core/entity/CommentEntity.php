@@ -41,4 +41,17 @@ class CommentEntity extends DataAccessManager
             "SELECT COUNT(comments.id) as nbComments FROM comments";
         return $this->query($statement, get_called_class(), true);
     }
+
+    public function addComment($commentModel) {
+        $statement =
+            "INSERT INTO `comments` (`idUser`, `idPost`, `content`, `status`) 
+            VALUES (?,?,?,?)";
+        $values=[];
+        array_push($values, htmlspecialchars($commentModel->getIdUser()));
+        array_push($values, htmlspecialchars($commentModel->getIdPost()));
+        array_push($values, htmlspecialchars($commentModel->getContent()));
+        array_push($values, htmlspecialchars($commentModel->getStatus()));
+        $insert = $this->pdo->prepare($statement);
+        $insert->execute($values);
+    }
 }
