@@ -14,6 +14,12 @@ class PostService extends AbstractService
 {
     const NB_POSTS_PER_PAGE = 3;
 
+    /*private userEntity $userInstance;
+
+    public function __construct() {
+        $this->userInstance = userEntity::getInstance();
+    }*/
+
     public function getAll ($currentPage) {
         $nbPages = $this->getNbPage();
         $premier = ($currentPage * self::NB_POSTS_PER_PAGE) - self::NB_POSTS_PER_PAGE;
@@ -24,6 +30,7 @@ class PostService extends AbstractService
             $postModel = new PostModel();
             $this->hydrate($post, $postModel);
             $userEntity = UserEntity::getInstance()->getById($postModel->getIdUser());
+            //$userEntity = $this->userInstance->getById($postModel->getIdUser());
             $userModel = new UserModel();
             $this->hydrate($userEntity, $userModel);
             $postModel->setUser($userModel);
@@ -77,6 +84,7 @@ class PostService extends AbstractService
         foreach ($latestCommentedPosts as $latestCommentedPost) {
             $latestCommentedPostModel = new PostModel();
             $this->hydrate($latestCommentedPost, $latestCommentedPostModel);
+            $latestCommentedPostModel->setUrl("/P5-blog/public/?p=post&action=detail&article=" . $latestCommentedPostModel->getId());
             array_push($latestCommentedPostsModel, $latestCommentedPostModel);
         }
         return $latestCommentedPostsModel;

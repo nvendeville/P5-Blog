@@ -16,7 +16,7 @@
                                 <div class="text-inner d-flex align-items-center">
                                     <div class="content">
                                         <header class="post-header">
-                                            <div class="category text-orange"><a href="#">{{ post.category }}</a></div>
+                                            <div class="category text-orange">{{ post.category }}</div>
                                             <a href="{{ post.url }}">
                                                 <h2 class="h4">{{ post.title }}</h2>
                                             </a>
@@ -36,9 +36,9 @@
                             {% endif %}
                         </div>
                     {% endfor %}
+
                     <nav  class="post-footer" aria-label="Page navigation example">
                         <ul class="pagination pagination-template d-flex justify-content-center">
-
                             <li class="page-item{% if currentPage == 1 %} disabled {% endif %}"><a href="/P5-blog/public/?p=post&page={{ currentPage - 1 }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
                             {% for numPage in 1..nbPages %}
                                 <li class="page-item{% if currentPage == numPage %} active {% endif %}"><a href="/P5-blog/public/?p=post&page={{ numPage }}" class="page-link">{{ numPage }}</a></li>
@@ -46,6 +46,7 @@
                             <li class="page-item{% if currentPage == nbPages %} disabled {% endif %}"><a href="/P5-blog/public/?p=post&page={{ currentPage + 1 }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
                         </ul>
                     </nav>
+
                 </div>
             </main>
             <aside class="col-lg-4">

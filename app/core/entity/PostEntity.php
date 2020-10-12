@@ -23,6 +23,22 @@ class PostEntity extends DataAccessManager
         return self::$_instance;
     }
 
+    public function addPost($postModel) {
+        $statement =
+            "INSERT INTO `posts` (`idUser`, `title`, `header`, `content`, `img`, `status`, `category`) 
+            VALUES (?,?,?,?,?,?,?)";
+        $values=[];
+        array_push($values, htmlspecialchars($postModel->getIdUser()));
+        array_push($values, htmlspecialchars($postModel->getTitle()));
+        array_push($values, htmlspecialchars($postModel->getHeader()));
+        array_push($values, htmlspecialchars($postModel->getContent()));
+        array_push($values, htmlspecialchars($postModel->getImg()));
+        array_push($values, htmlspecialchars($postModel->getStatus()));
+        array_push($values, htmlspecialchars($postModel->getCategory()));
+        $insert = $this->pdo->prepare($statement);
+        $insert->execute($values);
+    }
+
     public function getPaginatedPosts ($from, $nbPost) {
         $statement =
             "SELECT * FROM `posts` ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
@@ -31,6 +47,14 @@ class PostEntity extends DataAccessManager
 
     public function getCategories() {
         $statement = 'SELECT  category as categoryName, COUNT(id) as nbPosts FROM `posts` group by category';
+        return $this->query($statement, get_called_class(), false);
+    }
+
+    public function getPostsByCategory () {
+        $statement = 'SELECT  `posts`.`id`, `posts`.`idUser`, `comments`.`creationDate`, `posts`.`title`, `posts`.`header`, 
+                    `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category`
+                    FROM `posts`
+                    WHERE `posts`.`category`=?';
         return $this->query($statement, get_called_class(), false);
     }
 

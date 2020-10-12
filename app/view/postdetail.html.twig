@@ -34,18 +34,7 @@
                                 <p class="lead">{{ post.header }}</p>
                                 <p>{{ post.content }}</p>
                             </div>
-                            <!--<div class="post-tags"><a href="#" class="tag">#Business</a>
-                            <a href="#" class="tag">#Tricks</a><a href="#" class="tag">#Financial</a><a href="#" class="tag">#Economy</a></div>-->
-                            <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row"><a href="#" class="prev-post text-left d-flex align-items-center">
-                                    <div class="icon prev"><i class="fa fa-angle-left"></i></div>
-                                    <div class="text"><strong class="text-primary">Previous Post </strong>
-                                        <h6>I Bought a Wedding Dress.</h6>
-                                    </div></a><a href="#" class="next-post text-right d-flex align-items-center justify-content-end">
-                                    <div class="text"><strong class="text-primary">Next Post </strong>
-                                        <h6>I Bought a Wedding Dress.</h6>
-                                    </div>
-                                    <div class="icon next"><i class="fa fa-angle-right">   </i></div></a></div>
-                            <div class="post-comments">
+                           <div class="post-comments">
                                 <header>
                                     {% set count = 0 %}
                                     {% for comment in comments %}
@@ -71,9 +60,14 @@
                             </div>
                             <div class="add-comment">
                                 <header>
-                                    <h3 class="h6">Ajouter un commentaire</h3>
+                                    <div class="space-between">
+                                        <h3 class="h6">Ajouter un commentaire</h3>
+                                        <a href="?p=connection">Se connecter</a>
+                                    </div>
+
                                 </header>
-                                <form action="DataAccessManager.php" method="post" class="commenting-form">
+                                <form action="/P5-blog/public/?p=post&action=detail&article={{ post.id }}" method="post" class="commenting-form">
+                                    <input type="hidden" name="token" value="{{ token }}">
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <input type="text" name="username" id="username" placeholder="Votre identifiant" class="form-control">

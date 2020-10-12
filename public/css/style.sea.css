@@ -752,6 +752,10 @@ section.featured-posts .post-footer {
   margin-top: 30px;
 }
 
+.align-items-center {
+  align-items: center;
+}
+
 /* Featured Posts Section Media Query ------------------------------------- */
 @media (max-width: 991px) {
   section.featured-posts .image {
@@ -798,8 +802,25 @@ section.divider {
 }
 
 .flex-center {
+  display: flex;
   justify-content: center;
 }
+
+/*
+* ==========================================================
+*     ADD A POST SECTION
+* ==========================================================
+*/
+
+.flex-direction {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  height: auto !important;
+}
+
 
 /*
 * ==========================================================
@@ -945,15 +966,23 @@ section.latest-posts header {
 */
 
 .space-evenly {
+  display: flex;
   justify-content: space-evenly;
 }
 
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
 .center {
   text-align: center;
 }
 
 .margin-100 {
   margin-top: 100px;
+}
+.label-form {
+  font-weight: bold;
 }
 
 /*
@@ -977,7 +1006,7 @@ section.newsletter .form-group {
   height: 150px !important;
 }
 
-section.newsletter input, .newsletter textarea {
+section.newsletter input, .newsletter textarea, .select {
   width: 80%;
   height: 60px;
   line-height: 60px;
@@ -987,6 +1016,18 @@ section.newsletter input, .newsletter textarea {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
   margin-bottom: 10px;
+}
+
+.manage-posts-list {
+  height: 60px;
+  line-height: 60px;
+  border: 1px solid #939393;
+  font-size: 1.1em;
+  font-family: "Open Sans", sans-serif;
+}
+
+.select-width-100 {
+  width: 100% !important;
 }
 
 section.newsletter .submit {
@@ -1257,13 +1298,22 @@ main.posts-listing .post-footer {
   width: 100%;
 }
 
-.widget.latest-posts .image {
+.widget.latest-posts .image, .admin-img {
   min-width: 60px;
   max-width: 60px;
-  height: 60px;
+  height: 58px;
   overflow: hidden;
   margin-right: 20px;
   min-height: unset!important;
+}
+
+.overflow-wrap {
+  overflow-wrap: break-word;
+  height: unset !important;
+}
+
+.align-self-center {
+  align-self: center;
 }
 
 .widget.latest-posts .item {
@@ -1352,7 +1402,7 @@ main.posts-listing .post-footer {
   padding-right: 0;
 }
 
-.blog-post .post-footer {
+.blog-post .post-footer, .commentsList {
   font-size: 0.8em;
 }
 

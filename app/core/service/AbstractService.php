@@ -21,6 +21,15 @@ class AbstractService
         }
     }
 
+    protected function hydrateFromPostArray($source, $target) {
+        foreach ($source as $key => $value) {
+            $targetSetter = 'set' . ucfirst($key);
+            if (method_exists($target, $targetSetter)) {
+                $target->$targetSetter($source[$key]);
+            }
+        }
+    }
+
     protected function getHeader() {
         $entity = HeaderEntity::getInstance()->all(true);
         $headerModel = new HeaderModel();

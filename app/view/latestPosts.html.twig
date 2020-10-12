@@ -4,7 +4,7 @@
     </header>
     {% for latestCommentedPost in latestCommentedPosts %}
             <div class="blog-post">
-                <a class="latest-posts-width-100" href="#">
+                <a class="latest-posts-width-100" href="{{ latestCommentedPost.url }}">
                     <div class="item d-flex align-items-center latest-posts-width-100">
                         <div class="image"><img src="img/{{ latestCommentedPost.img }}" alt="..." class="img-fluid"></div>
                         <div class="title latest-posts-width-100"><strong>{{ latestCommentedPost.title }}</strong>

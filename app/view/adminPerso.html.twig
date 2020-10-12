@@ -1,0 +1,80 @@
+{% extends "baseAdmin.html.twig" %}
+
+{% block body %}
+
+<section class="divider newsletter">
+    <h1 class="center text-orange">Personnaliser votre page d'accueil</h1>
+    <form class="select-width-100" action="/P5-Blog" method="post" enctype="multipart/form-data">
+        <div class="form-holder margin-100">
+            <div class="form-group">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-orange">
+                                Votre prénom :
+                            </h6>
+                            <input class="select-width-100" type="text" name="heroFirstname" id="heroFirstname">
+                            <h6 class="text-orange">
+                                Votre nom :
+                            </h6>
+                            <input class="select-width-100" type="text" name="heroLastname" id="heroLastname">
+                            <h6 class="text-orange">
+                                Phrase d'accroche :
+                            </h6>
+                            <input class="select-width-100" type="text" name="heroLink" id="heroLink">
+                            <h6 class="text-orange">
+                                Image de l'entête :
+                            </h6>
+                            <input class="select-width-100 height-60" type="file" name="heroImg" id="heroImg"/>
+                            <h6 class="text-orange">
+                                Lien du CV :
+                            </h6>
+                            <input class="select-width-100" type="file" name="cvLink" id="cvLink"/>
+                            <h6 class="text-orange">
+                                Image du CV :
+                            </h6>
+                            <input class="select-width-100" type="file" name="cvImg" id="cvImg"/>
+                            <h6 class="text-orange">
+                                Titre de la section :
+                            </h6>
+                            <input class="select-width-100" type="file" name="sectionTitle" id="sectionTitle"/>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-orange">
+                                Contenu de la section :
+                            </h6>
+                            <textarea class="textarea select-width-100" name="sectionContent" id="sectionContent"></textarea>
+                            <h6 class="text-orange">
+                                Image Compétence 1 :
+                            </h6>
+                            <input class="select-width-100" type="file" name="galleryImg1" id="galleryImg1"/>
+                            <h6 class="text-orange">
+                                Image Compétence 2 :
+                            </h6>
+                            <input class="select-width-100" type="file" name="galleryImg2" id="galleryImg2"/>
+                            <h6 class="text-orange">
+                                Image Compétence 3 :
+                            </h6>
+                            <input class="select-width-100" type="file" name="galleryImg3" id="galleryImg3"/>
+                            <h6 class="text-orange">
+                                Image Compétence 4 :
+                            </h6>
+                            <input class="select-width-100" type="file" name="galleryImg4" id="galleryImg4"/>
+                            <h6 class="text-orange">
+                                Image du Formulaire de contact :
+                            </h6>
+                            <input class="select-width-100" type="file" name="dividerImg" id="dividerImg"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="width-100 margin-100 flex-center">
+        <button type="submit" class="submit">Valider</button>
+    </div>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "baseAdmin.html.twig" %}
+
+{% block body %}
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <h1 class="text-orange d-flex flex-center latest-posts-width-100">Gérer les commentaires</h1>
+            </div>
+        </div>
+        <div class= "container margin-100">
+
+            {% for adminComment in adminComments %}
+                {% set style="" %}
+                {% if loop.index is not divisible by(2) %}
+                    {% set style="background-color: #f7c69e;" %}
+                {% endif %}
+                <div class= "row commentsList" style="{{style}}";>
+                    <div class="col-lg-2 align-self-center">{{ adminComment.user.firstname }} {{ adminComment.user.lastname }}</div>
+                    <div class="col-lg-1 align-self-center">{{ adminComment.creationDate | date(U)}}</div>
+                    <div class="col-lg-2 align-self-center">{{ postId.title }}</div>
+                    <div class="col-lg-4 overflow-wrap">{{ adminComment.content }}</div>
+                    <div class="col-lg-1 align-self-center">{{ adminComment.status }}</div>
+                    <div class="col-lg-2 space-evenly align-items-center">
+                        <a href="/P5-blog/public/?p=adminComments&page={{ currentPage }}&action=rejectComment&commentaire={{ adminComment.id }}"><i style="color: #6c757d;" class="fas fa-trash-alt fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminComments&page={{ currentPage }}&action=validateComment&commentaire={{ adminComment.id }}"><i style="color: #6c757d;" class="fas fa-check-square fa-2x"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <nav  class="post-footer margin-100" aria-label="Page navigation example">
+            <ul class="pagination pagination-template d-flex justify-content-center">
+
+                <li class="page-item{% if currentPage == 1 %} disabled {% endif %}"><a href="/P5-blog/public/?p=adminComments&page={{ currentPage - 1 }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                {% for numPage in 1..nbPages %}
+                    <li class="page-item{% if currentPage == numPage %} active {% endif %}"><a href="/P5-blog/public/?p=adminComments&page={{ numPage }}" class="page-link">{{ numPage }}</a></li>
+                {% endfor %}
+                <li class="page-item{% if currentPage == nbPages %} disabled {% endif %}"><a href="/P5-blog/public/?p=adminComments&page={{ currentPage + 1 }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+            </ul>
+        </nav>
+
+    </section>
+
+
+{% endblock %}

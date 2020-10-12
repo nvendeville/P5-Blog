@@ -25,6 +25,7 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="/img/favicon.ico">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="/vendor/components/jquery/jquery.min.js"></script>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
@@ -79,7 +80,7 @@
 <script src="/vendor/components/jquery-cookie/jquery.cookie.js"> </script>
 <script src="/vendor/fancyapps/fancybox/source/jquery.fancybox.js"></script>
 <script src="/js/front.js"></script>
-
+{% block script %}{% endblock %}
 </body>
 
 </html>
