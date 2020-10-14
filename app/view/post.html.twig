@@ -20,13 +20,21 @@
                                             <a href="{{ post.url }}">
                                                 <h2 class="h4">{{ post.title }}</h2>
                                             </a>
+                                            <div class="date">Dernière mise à jour : {{ post.lastUpdate | date(U) }}</div>
                                         </header>
                                         <p>{{ post.content | slice(0, 200) }} ...</p>
-                                        <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center">
-                                                <div class="avatar"><img src="img/{{ post.user.avatar }}" alt="..." class="img-fluid"></div>
-                                                <div class="title"><span>{{ post.user.firstname }} {{ post.user.lastname }}</span></div></a>
-                                            <div class="date"> {{ post.creationDate | date(U)}}</div>
-                                            <div class="comments"><i class="icon-comment"></i>{{ post.nbComments }}</div>
+                                        <footer class="post-footer d-flex align-items-center">
+                                            <div class="avatar"><img src="img/{{ post.user.avatar }}" alt="..." class="img-fluid"></div>
+                                            <div class="padding-post-footer">
+                                                <div class="title">{{ post.user.firstname }}</div>
+                                                <div class="title">{{ post.user.lastname }}</div>
+                                            </div>
+                                            <div class="date padding-post-footer"> {{ post.creationDate | date(U)}}</div>
+                                            <div class="padding-post-footer">
+                                                <div class="comments"><i class="icon-comment"></i></div>
+                                                <div>{{ post.nbComments }}</div>
+                                            </div>
+
                                         </footer>
                                     </div>
                                 </div>

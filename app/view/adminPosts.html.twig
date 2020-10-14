@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<section>
+    <section>
         <div class="container margin-100">
             <div class="row">
                 <h1 class="text-orange d-flex flex-center latest-posts-width-100">Gérer les articles</h1>
@@ -10,45 +10,55 @@
             <div class="row flex-center">
                 <div class="latest-posts-width-100 space-evenly margin-100 row d-flex">
                     <div class="col-lg-4">
-                        <button type="button" class="latest-posts-width-100 btn btn-outline-secondary"><a class="btn-outline-secondary" href="?p=adminAddPost">
+                        <button type="button" class="latest-posts-width-100 btn btn-outline-secondary"><a
+                                    class="btn-outline-secondary" href="?p=adminAddPost">
                                 Nouvel article</a></button>
                     </div>
                 </div>
             </div>
         </div>
-    <div class= "container margin-100">
+        <div class="container margin-100">
 
-{% for adminPost in adminPosts %}
-    {% set style="" %}
-    {% if loop.index is not divisible by(2) %}
-        {% set style="background-color: #f7c69e;" %}
-    {% endif %}
-        <div class= "row" style="{{style}}">
-            <div class="col-lg-2 align-self-center">{{ adminPost.category }}</div>
-            <div class="col-lg-2 align-self-center">{{ adminPost.creationDate | date(U)}}</div>
-            <div class="col-lg-4 align-self-center">{{ adminPost.title }}</div>
-            <div class="col-lg-2 flex-center"><img class="admin-img no-margin" src="img/{{ adminPost.img }}" alt="..."></div>
-            <div class="col-lg-2 space-evenly align-items-center">
-                <a href="/P5-blog/public/?p=post&action=detail&article={{ adminPost.id }}"><i style="color: #6c757d;" class="fas fa-pen-square fa-2x"></i></a>
-                <i style="color: #6c757d;" class="fas fa-folder-open fa-2x"></i>
-                <i style="color: #6c757d;" class="fas fa-check-square fa-2x"></i>
-            </div>
+            {% for adminPost in adminPosts %}
+                {% set style="" %}
+                {% if loop.index is not divisible by(2) %}
+                    {% set style="background-color: #f7c69e;" %}
+                {% endif %}
+                <div class="row" style="{{ style }}">
+                    <div class="col-lg-2 align-self-center">{{ adminPost.category }}</div>
+                    <div class="col-lg-2 align-self-center">{{ adminPost.creationDate | date(U) }}</div>
+                    <div class="col-lg-2 align-self-center">{{ adminPost.title }}</div>
+                    <div class="col-lg-2 flex-center"><img class="admin-img no-margin" src="img/{{ adminPost.img }}"
+                                                           alt="..."></div>
+                    <div class="col-lg-2 align-self-center">{{ adminPost.status }}</div>
+                    <div class="col-lg-2 space-evenly align-items-center">
+                        <a href="/P5-blog/public/?p=post&action=detail&article={{ adminPost.id }}"><i
+                                    style="color: #6c757d;" class="fas fa-pen-square fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=archivePost&adminArticle={{ adminPost.id }}"><i style="color: #6c757d;" class="fas fa-folder-open fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=validatePost&adminArticle={{ adminPost.id }}"><i style="color: #6c757d;" class="fas fa-check-square fa-2x"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+
         </div>
-{% endfor %}
-
-    </div>
-        <nav  class="post-footer margin-100" aria-label="Page navigation example">
+        <nav class="post-footer margin-100" aria-label="Page navigation example">
             <ul class="pagination pagination-template d-flex justify-content-center">
 
-                <li class="page-item{% if currentPage == 1 %} disabled {% endif %}"><a href="/P5-blog/public/?p=adminPosts&page={{ currentPage - 1 }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                <li class="page-item{% if currentPage == 1 %} disabled {% endif %}"><a
+                            href="/P5-blog/public/?p=adminPosts&page={{ currentPage - 1 }}" class="page-link"> <i
+                                class="fa fa-angle-left"></i></a></li>
                 {% for numPage in 1..nbPages %}
-                    <li class="page-item{% if currentPage == numPage %} active {% endif %}"><a href="/P5-blog/public/?p=adminPosts&page={{ numPage }}" class="page-link">{{ numPage }}</a></li>
+                    <li class="page-item{% if currentPage == numPage %} active {% endif %}"><a
+                                href="/P5-blog/public/?p=adminPosts&page={{ numPage }}"
+                                class="page-link">{{ numPage }}</a></li>
                 {% endfor %}
-                <li class="page-item{% if currentPage == nbPages %} disabled {% endif %}"><a href="/P5-blog/public/?p=adminPosts&page={{ currentPage + 1 }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                <li class="page-item{% if currentPage == nbPages %} disabled {% endif %}"><a
+                            href="/P5-blog/public/?p=adminPosts&page={{ currentPage + 1 }}" class="page-link"> <i
+                                class="fa fa-angle-right"></i></a></li>
             </ul>
         </nav>
 
-</section>
+    </section>
 
 
 {% endblock %}

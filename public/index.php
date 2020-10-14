@@ -80,6 +80,8 @@ if (isset($_GET["article"])) {
     $controller->$method($_GET["article"]);
 } elseif (isset($_GET["commentaire"])) {
     $controller->$method($_GET["commentaire"], $currentPage);
+} elseif (isset($_GET["adminArticle"])) {
+    $controller->$method($_GET["adminArticle"], $currentPage);
 } elseif (isset($currentPage)) {
     $controller->$method($currentPage);
 } else {
