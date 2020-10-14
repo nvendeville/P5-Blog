@@ -4,14 +4,15 @@
 		"phpmd/phpmd" : "@stable"
     },
     "require": {
-        "twig/twig": "^3.0",
+        "twig/twig": "^2.9",
         "twbs/bootstrap": "^4.5",
         "fortawesome/font-awesome": "^5.14",
         "components/jquery-cookie": "1.4.1.2",
         "rsportella/popper": "dev-master",
         "fancyapps/fancybox": "^2.1",
         "twig/extensions": "^v1.5.4",
-      "ext-openssl": "*"
+        "ext-openssl": "*",
+        "phpmailer/phpmailer": "^6.1"
     },
     "autoload": {
         "psr-4": {

@@ -58,13 +58,13 @@
             <!-- Navbar Menu -->
             <div id="navbarcollapse" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="/P5-Blog" class="nav-link active ">Home</a>
+                    <li class="nav-item"><a id="homeLink" href="/P5-Blog/" class="nav-link">Home</a>
                     </li>
-                    <li class="nav-item"><a href="?p=post" class="nav-link ">Blog</a>
+                    <li class="nav-item"><a href="?p=post" class="nav-link">Blog</a>
                     </li>
-                    <li class="nav-item"><a href="?p=adminHome" class="nav-link ">Administration</a>
+                    <li class="nav-item"><a href="?p=adminHome" class="nav-link">Administration</a>
                     </li>
-                    <li class="nav-item"><a href="?p=connection" class="nav-link ">Se connecter</a>
+                    <li class="nav-item"><a href="?p=connection" class="nav-link">Se connecter</a>
                     </li>
                 </ul>
             </div>
@@ -125,6 +125,8 @@
 <script src="/vendor/components/jquery-cookie/jquery.cookie.js"> </script>
 <script src="/vendor/fancyapps/fancybox/source/jquery.fancybox.js"></script>
 <script src="/js/front.js"></script>
+
+{% block script %}{% endblock %}
 
 </body>
 

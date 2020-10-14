@@ -7,6 +7,8 @@ namespace App\core\service;
 use App\core\entity\HomeEntity;
 use App\Model\HomeModel;
 
+
+
 class HomeService extends AbstractService
 {
 
@@ -16,4 +18,5 @@ class HomeService extends AbstractService
         $this->hydrate($entity, $homeModel);
         return ["header" => $this->getHeader(), "home" => $homeModel, "footer" => $this->getFooter()];
     }
+
 }

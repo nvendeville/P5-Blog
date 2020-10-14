@@ -51,8 +51,10 @@ if (isset($_POST) and !empty($_POST)) {
             }
             $userController = new \App\controller\UserController();
             $userController->addUser($_POST);
-
-            echo "default";die();
+            break;
+        case "contact_form":
+            $HomeController = new \App\controller\HomeController();
+            $HomeController->generateContactEmail($_POST);
             break;
         default:
             // nothing to do
