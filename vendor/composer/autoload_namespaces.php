@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Twig_Extensions_' => array($vendorDir . '/twig/extensions/lib'),
+    'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'PHPMD\\' => array($vendorDir . '/phpmd/phpmd/src/main/php'),
     'Monolog' => array($vendorDir . '/rsportella/popper/src'),
     'ComponentInstaller' => array($vendorDir . '/robloach/component-installer/src'),

@@ -18,6 +18,7 @@ class ComposerStaticInit6f6a87293d17b867c79700207079d182
     public static $prefixLengthsPsr4 = array (
         'T' => 
         array (
+            'Twig\\Extensions\\' => 16,
             'Twig\\' => 5,
         ),
         'S' => 
@@ -35,6 +36,7 @@ class ComposerStaticInit6f6a87293d17b867c79700207079d182
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
+            'PHPMailer\\PHPMailer\\' => 20,
             'PDepend\\' => 8,
         ),
         'C' => 
@@ -48,6 +50,10 @@ class ComposerStaticInit6f6a87293d17b867c79700207079d182
     );
 
     public static $prefixDirsPsr4 = array (
+        'Twig\\Extensions\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/extensions/src',
+        ),
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
@@ -92,6 +98,10 @@ class ComposerStaticInit6f6a87293d17b867c79700207079d182
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
         'PDepend\\' => 
         array (
             0 => __DIR__ . '/..' . '/pdepend/pdepend/src/main/php/PDepend',
@@ -107,6 +117,17 @@ class ComposerStaticInit6f6a87293d17b867c79700207079d182
     );
 
     public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_Extensions_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/extensions/lib',
+            ),
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
         'P' => 
         array (
             'PHPMD\\' => 

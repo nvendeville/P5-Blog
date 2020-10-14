@@ -4,17 +4,13 @@
 namespace App\controller;
 
 
+use App\core\Mailer;
 use App\core\Renderer;
 use App\core\service\HomeService;
-use App\entity\FooterEntity;
-use App\entity\HeaderEntity;
-use App\core\entity\HomeEntity;
-use App\Model\FooterModel;
-use App\Model\HeaderModel;
-use App\Model\HomeModel;
 
 class HomeController
 {
+    use Mailer;
     private $renderer;
 
     public function __construct()
@@ -27,5 +23,10 @@ class HomeController
     {
         $model = new HomeService();
         $this->renderer->render("home.html.twig", $model->getModel());
+    }
+
+    public function generateContactEmail ($contactForm) {
+        $this->sendMail($contactForm);
+        return $this->index();
     }
 }
