@@ -4,7 +4,7 @@
 namespace App\core\entity;
 
 
-use App\Core\Database\DataAccessManager;
+use App\core\database\DataAccessManager;
 use App\model\PostModel;
 use App\model\UserModel;
 

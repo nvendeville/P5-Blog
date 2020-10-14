@@ -4,7 +4,7 @@
 namespace App\core\entity;
 
 
-use App\Core\Database\DataAccessManager;
+use App\core\database\DataAccessManager;
 
 class HomeEntity extends DataAccessManager
 {

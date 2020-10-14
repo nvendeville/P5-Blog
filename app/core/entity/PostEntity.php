@@ -4,12 +4,15 @@
 namespace App\core\entity;
 
 
-use App\Core\Database\DataAccessManager;
+use App\core\database\DataAccessManager;
 
 class PostEntity extends DataAccessManager
 {
     protected static $table = 'posts';
     protected static $_instance;
+    private $draft = 1;
+    private $archived = 2;
+    private $posted = 3;
 
     public function __construct() {
         parent::__construct();
@@ -41,7 +44,7 @@ class PostEntity extends DataAccessManager
 
     public function getPaginatedPosts ($from, $nbPost) {
         $statement =
-            "SELECT * FROM `posts` ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
+            "SELECT * FROM `posts` WHERE `status` = $this->posted ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
         return $this->query($statement, get_called_class(), false);
     }
 
@@ -73,7 +76,7 @@ class PostEntity extends DataAccessManager
 
     public function getNbPosts() {
         $statement =
-            "SELECT COUNT(posts.id) as nbPosts FROM posts";
+            "SELECT COUNT(posts.id) as nbPosts FROM posts WHERE `status`=$this->posted";
         return $this->query($statement, get_called_class(), true);
     }
 }

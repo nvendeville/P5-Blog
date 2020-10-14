@@ -11,7 +11,7 @@
                         <form id="addPostForm" class="select-width-100" action="/P5-Blog/" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="token" value="{{ token }}">
                             <input type="hidden" name="type" value="add_post">
-                            <input type="hidden" id="status" name="status" value="draft">
+                            <input type="hidden" id="status" name="status" value="brouillon">
                             <input type="hidden" name="idUser" value="2">
                             <div class="form-group flex-direction">
                                 <label for="category" class="label-form text-orange">
@@ -56,7 +56,7 @@
     <script>
         $(document).ready(function() {
             $('#btnOnline').click(function(){
-                $('#status').val('edited')
+                $('#status').val('en ligne')
                 $('#addPostForm').submit()
                 return false
             });

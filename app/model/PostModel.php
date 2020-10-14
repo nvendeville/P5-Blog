@@ -15,9 +15,26 @@ class PostModel
     private $img;
     private $status;
     private $category;
+    private $lastUpdate;
     private $user;
     private $url;
     private $nbComments;
+
+    /**
+     * @return mixed
+     */
+    public function getLastUpdate()
+    {
+        return $this->lastUpdate;
+    }
+
+    /**
+     * @param mixed $lastUpdate
+     */
+    public function setLastUpdate($lastUpdate)
+    {
+        $this->lastUpdate = $lastUpdate;
+    }
 
     /**
      * @return mixed

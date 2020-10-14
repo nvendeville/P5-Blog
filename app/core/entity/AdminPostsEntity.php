@@ -4,12 +4,17 @@
 namespace App\core\entity;
 
 
-use App\Core\Database\DataAccessManager;
+use App\core\database\DataAccessManager;
+
+
 
 class AdminPostsEntity extends DataAccessManager
 {
     protected static $table = 'posts';
     protected static $_instance;
+    private $draft = 1;
+    private $archived = 2;
+    private $posted = 3;
 
     protected function __construct() {
         parent::__construct();
@@ -33,5 +38,17 @@ class AdminPostsEntity extends DataAccessManager
         $statement =
             "SELECT COUNT(posts.id) as nbPosts FROM posts";
         return $this->query($statement, get_called_class(), true);
+    }
+
+
+    public function validatePost($id) {
+        $date= date("Y-m-d H:i:s");
+        $statement = $this->pdo->prepare("UPDATE `posts` SET `status`=$this->posted, `lastUpdate`='$date' WHERE posts.id=?");
+        $statement->execute([$id]);
+    }
+
+    public function archivePost($id) {
+        $statement = $this->pdo->prepare("UPDATE `posts` SET `status`=$this->archived WHERE posts.id=?");
+        $statement->execute([$id]);
     }
 }

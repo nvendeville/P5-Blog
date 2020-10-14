@@ -10,9 +10,26 @@ class AdminPostsModel
     private $img;
     private $status;
     private $category;
+    private $lastUpdate;
     private $url;
     private $user;
     private $idUser;
+
+    /**
+     * @return mixed
+     */
+    public function getLastUpdate()
+    {
+        return $this->lastUpdate;
+    }
+
+    /**
+     * @param mixed $lastUpdate
+     */
+    public function setLastUpdate($lastUpdate)
+    {
+        $this->lastUpdate = $lastUpdate;
+    }
 
     /**
      * @return mixed

@@ -270,6 +270,10 @@ i[class*="icon-"] {
   color: #fff;
 }
 
+.padding-post-footer {
+  padding: 0 15px;
+}
+
 .no-padding {
   padding: 0 !important;
 }
