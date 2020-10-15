@@ -78,4 +78,11 @@ class AdminPostsService extends AbstractService
         AdminPostsEntity::getInstance()->archivePost($id);
         return $this->getAll($currentPage);
     }
+
+    public function modifyPost($formModifyPost, $id)
+    {
+        $adminPostModel = new AdminPostsModel();
+        $this->hydrateFromPostArray($formModifyPost, $adminPostModel);
+        AdminPostsEntity::getInstance()->modifyPost($adminPostModel, $id);
+    }
 }

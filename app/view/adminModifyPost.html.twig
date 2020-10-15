@@ -1,0 +1,67 @@
+{% extends "baseAdmin.html.twig" %}
+
+{% block body %}
+
+    <section class="divider newsletter">
+        <div class="container">
+            <div class="row flex-center">
+                <div class="col-md-7">
+                    <h1 class="center text-orange">Modifier un article</h1>
+                    <div class="form-holder margin-100 flex-center">
+                        <form id="addPostForm" class="select-width-100" action="/P5-Blog/" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="token" value="{{ token }}">
+                            <input type="hidden" name="type" value="modify_post">
+                            <input type="hidden" id="status" name="status" value="brouillon">
+                            <input type="hidden" name="idPost" value="{{ post.id }}">
+                            <div class="form-group flex-direction">
+                                <label for="category" class="label-form text-orange">
+                                    Catégorie de l'article :
+                                </label>
+                                <select id="category" name="category" class="select select-width-100">
+                                    <option value="" disabled {% if post.category == "" %}selected{% endif %}>- Choisissez une catégorie -</option>
+                                    <option value="Mes Astuces" {% if post.category == "Mes Astuces" %}selected{% endif %}>Mes Astuces</option>
+                                    <option value="Ma Formation" {% if post.category == "Ma Formation" %}selected{% endif %}>Ma Formation</option>
+                                    <option value="Mes recherches" {% if post.category == "Mes recherches" %}selected{% endif %}>Mes recherches</option>
+                                </select>
+                                <label for="title" class="label-form text-orange">
+                                    Titre de l'article :
+                                </label>
+                                <input class="select-width-100" type="text" name="title" id="title" value="{{ post.title }}">
+                                <label for="header" class="label-form text-orange">
+                                    Header de l'article :
+                                </label>
+                                <input class="select-width-100" type="text" name="header" id="header" value="{{ post.header }}">
+                                <label for="img" class="label-form text-orange">
+                                    Image de l'article :
+                                </label>
+                                <div class="col-lg-2 flex-center"><img class="admin-img no-margin" src="img/{{ post.img }}"
+                                                                       alt="..."></div>
+                                <input class="select-width-100" type="file" name="img" id="img" value="{{ post.img }}">
+                                <label for="content" class="label-form text-orange">
+                                    Contenu de l'article :
+                                </label>
+                                <textarea class="textarea select-width-100" name="content" id="content">{{ post.content }}</textarea>
+                            </div>
+                            <div class="width-100 space-evenly">
+                                <button type="submit" class="submit">Sauvegarder comme brouillon</button>
+                                <button id="btnOnline" class="submit">Mettre l'article en ligne</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            $('#btnOnline').click(function(){
+                $('#status').val('en ligne')
+                $('#addPostForm').submit()
+                return false
+            });
+        });
+    </script>
+{% endblock %}

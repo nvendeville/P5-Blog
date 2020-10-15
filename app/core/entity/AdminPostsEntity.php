@@ -51,4 +51,25 @@ class AdminPostsEntity extends DataAccessManager
         $statement = $this->pdo->prepare("UPDATE `posts` SET `status`=$this->archived WHERE posts.id=?");
         $statement->execute([$id]);
     }
+
+    public function modifyPost($adminPostModel, $id) {
+        $date= date("Y-m-d H:i:s");
+        $statement = "UPDATE `posts` SET `title`=?, `header`=?, `content`=?";
+        $values=[];
+        array_push($values, htmlspecialchars($adminPostModel->getTitle()));
+        array_push($values, htmlspecialchars($adminPostModel->getHeader()));
+        array_push($values, htmlspecialchars($adminPostModel->getContent()));
+        if ($adminPostModel->getImg() != '') {
+            $statement = $statement . ", `img`=?";
+            array_push($values, htmlspecialchars($adminPostModel->getImg()));
+        }
+        $statement = $statement . ",`status`=?, `category`=?, `lastUpdate`=?
+            WHERE id=?";
+        array_push($values, htmlspecialchars($adminPostModel->getStatus()));
+        array_push($values, htmlspecialchars($adminPostModel->getCategory()));
+        array_push($values, $date);
+        array_push($values, htmlspecialchars($id));
+        $insert = $this->pdo->prepare($statement);
+        $insert->execute($values);
+    }
 }
