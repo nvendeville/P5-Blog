@@ -56,6 +56,25 @@ if (isset($_POST) and !empty($_POST)) {
             $HomeController = new \App\controller\HomeController();
             $HomeController->generateContactEmail($_POST);
             break;
+        case "modify_post":
+            if (
+                isset($_FILES['img'])
+                and $_FILES['img']['error'] == 0
+                and ($_FILES['img']['size'] <= 1000000)
+            ) {
+                $infoFileUploaded = pathinfo($_FILES['img']['name']);
+                $extensionFileUploaded = $infoFileUploaded['extension'];
+                $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
+                if (in_array($extensionFileUploaded, $authorizedExtensions)) {
+                    move_uploaded_file($_FILES['img']['tmp_name'], './img/' . basename($_FILES['img']['name']));
+                }
+                $_POST["img"] = $_FILES['img']['name'];
+            }
+            $id = $_POST['idPost'];
+            $currentPage = (int)strip_tags($_GET['page']);
+            $adminModifyPostController = new \App\controller\AdminModifyPostController();
+            $adminModifyPostController->modifyPost($_POST, $id, $currentPage);
+            break;
         default:
             // nothing to do
     }
@@ -72,12 +91,13 @@ $method = isset($_GET["action"]) ? $_GET["action"] : 'index';
 
 if (isset($_GET['page']) && !empty($_GET['page'])) {
     $currentPage = (int)strip_tags($_GET['page']);
-} elseif ($p == 'post' or $p == 'adminPosts' or $p = 'adminComments' or $p='connection' && $method == 'index') {
+} elseif ($p == 'post' or $p == 'adminPosts' or $p == 'adminComments'
+    or $p =='connection' or $p == 'adminModifyPost' && $method == 'index') {
     $currentPage = 1;
 }
 
 if (isset($_GET["article"])) {
-    $controller->$method($_GET["article"]);
+    $controller->$method($_GET["article"], $currentPage);
 } elseif (isset($_GET["commentaire"])) {
     $controller->$method($_GET["commentaire"], $currentPage);
 } elseif (isset($_GET["adminArticle"])) {

@@ -35,6 +35,7 @@ class AdminPostsController
 
     }
 
+
     public function validatePost($id, $currentPage)
     {
         $service = new AdminPostsService();

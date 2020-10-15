@@ -7,6 +7,8 @@ class AdminPostsModel
     private $id;
     private $creationDate;
     private $title;
+    private $header;
+    private $content;
     private $img;
     private $status;
     private $category;
@@ -14,6 +16,38 @@ class AdminPostsModel
     private $url;
     private $user;
     private $idUser;
+
+    /**
+     * @return mixed
+     */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
+     * @param mixed $header
+     */
+    public function setHeader($header)
+    {
+        $this->header = $header;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
 
     /**
      * @return mixed
