@@ -63,7 +63,7 @@ class DataAccessManager
         return $data;
     }
 
-    protected function prepare ($statement, $attributes, $class_name, $one = false) {
+    protected function prepareAndFetch($statement, $attributes, $class_name, $one = false) {
         $req = $this->pdo->prepare($statement);
         $req->execute($attributes);
         $req->setFetchMode(PDO::FETCH_CLASS, $class_name);

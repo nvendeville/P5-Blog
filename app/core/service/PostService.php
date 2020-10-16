@@ -44,8 +44,40 @@ class PostService extends AbstractService
             "nbPages" => (int)$nbPages, "currentPage" => $currentPage];
     }
 
+    public function getPostsByCategory ($categoryName, $currentPage) {
+        $nbPages = $this->getNbPostsByCategories($categoryName);
+        $premier = ($currentPage * self::NB_POSTS_PER_PAGE) - self::NB_POSTS_PER_PAGE;
+
+        $entities = PostEntity::getInstance()->getPostsByCategory($categoryName, $premier, self::NB_POSTS_PER_PAGE);
+        $postsModel = [];
+        foreach ($entities as $post) {
+            $postModel = new PostModel();
+            $this->hydrate($post, $postModel);
+            $userEntity = UserEntity::getInstance()->getById($postModel->getIdUser());
+            //$userEntity = $this->userInstance->getById($postModel->getIdUser());
+            $userModel = new UserModel();
+            $this->hydrate($userEntity, $userModel);
+            $postModel->setUser($userModel);
+            $postModel->setUrl("/P5-blog/public/?p=post&action=detail&article=" . $postModel->getId());
+            $postModel->setNbComments(count($this->getComments($postModel->getId())));
+            $categoryModel = new CategoryModel();
+            $this->hydrate($post, $categoryModel);
+            $categoryModel->setCategoryName($postModel);
+            array_push($postsModel, $postModel);
+        }
+
+        return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
+            "categories" =>$this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
+            "nbPages" => (int)$nbPages, "currentPage" => $currentPage, "urlParam" => "&action=getPostsByCategory&categorie=$categoryName"];
+    }
+
     private function getNbPage () {
         $nbPosts = PostEntity::getInstance()->getNbPosts();
+        return ceil((int)$nbPosts->nbPosts / (int)self::NB_POSTS_PER_PAGE);
+    }
+
+    private function getNbPostsByCategories ($categoryName) {
+        $nbPosts = PostEntity::getInstance()->getNbPostsByCategories($categoryName);
         return ceil((int)$nbPosts->nbPosts / (int)self::NB_POSTS_PER_PAGE);
     }
 

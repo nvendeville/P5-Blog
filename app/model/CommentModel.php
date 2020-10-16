@@ -12,7 +12,6 @@ class CommentModel
     private $creationDate;
     private $content;
     private $status;
-    private $isAnAnswer;
     private $user;
 
     /**
@@ -111,21 +110,7 @@ class CommentModel
         $this->status = $status;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIsAnAnswer()
-    {
-        return $this->isAnAnswer;
-    }
 
-    /**
-     * @param mixed $isAnAnswer
-     */
-    public function setIsAnAnswer($isAnAnswer)
-    {
-        $this->isAnAnswer = $isAnAnswer;
-    }
 
     /**
      * @return mixed

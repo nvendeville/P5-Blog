@@ -4,76 +4,125 @@
 
 <section class="divider newsletter">
     <h1 class="center text-orange">Personnaliser votre page d'accueil</h1>
-    <form id="persoHomeForm" class="select-width-100" action="/P5-Blog" method="post" enctype="multipart/form-data">
+    <form id="persoHomeForm" class="select-width-100" action="/P5-Blog/" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="token" value="{{ token }}">
+        <input type="hidden" name="type" value="perso-home">
         <div class="form-holder margin-100">
             <div class="form-group">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
                             <label class="text-orange">
+                                Titre de votre blog :
+                            </label>
+                            <input class="select-width-100" type="text" name="blogTitle" id="blogTitle" value="{{ header.blogTitle }}">
+                            <label class="text-orange">
                                 Votre prénom :
                             </label>
-                            <input class="select-width-100" type="text" name="heroFirstname" id="heroFirstname">
+                            <input class="select-width-100" type="text" name="heroFirstname" id="heroFirstname" value="{{ home.heroFirstname }}">
                             <label class="text-orange">
                                 Votre nom :
                             </label>
-                            <input class="select-width-100" type="text" name="heroLastname" id="heroLastname">
+                            <input class="select-width-100" type="text" name="heroLastname" id="heroLastname" value="{{ home.heroLastname }}">
                             <label class="text-orange">
                                 Phrase d'accroche :
                             </label>
-                            <input class="select-width-100" type="text" name="heroLink" id="heroLink">
+                            <input class="select-width-100" type="text" name="heroLink" id="heroLink" value="{{ home.heroLink }}">
                             <label class="text-orange">
                                 Image de l'entête :
                             </label>
-                            <input class="select-width-100 height-60" type="file" name="heroImg" id="heroImg"/>
+                            <input class="select-width-100 height-60" type="file" name="heroImg" id="heroImg">
                             <label class="text-orange">
                                 Lien du CV :
                             </label>
-                            <input class="select-width-100" type="file" name="cvLink" id="cvLink"/>
+                            <input class="select-width-100" type="text" name="cvLink" id="cvLink" value="{{ home.cvLink }}">
                             <label class="text-orange">
                                 Image du CV :
                             </label>
-                            <input class="select-width-100" type="file" name="cvImg" id="cvImg"/>
+                            <input class="select-width-100" type="file" name="cvImg" id="cvImg">
                             <label class="text-orange">
                                 Titre de la section :
                             </label>
-                            <input class="select-width-100" type="file" name="sectionTitle" id="sectionTitle"/>
+                            <input class="select-width-100" type="text" name="sectionTitle" id="sectionTitle" value="{{ home.sectionTitle }}">
+                            <label class="text-orange">
+                                Contenu de la section :
+                            </label>
+                            <textarea class="textarea select-width-100" name="sectionContent" id="sectionContent" >{{ home.sectionContent }}</textarea>
+                            <label class="text-orange">
+                                Image Compétence 1 :
+                            </label>
+                            <input class="select-width-100" type="file" name="galleryImg1" id="galleryImg1">
+                            <label class="text-orange">
+                                Image Compétence 2 :
+                            </label>
+                            <input class="select-width-100" type="file" name="galleryImg2" id="galleryImg2">
                         </div>
                         <div class="col-md-6">
-                            <h6 class="text-orange">
-                                Contenu de la section :
-                            </h6>
-                            <textarea class="textarea select-width-100" name="sectionContent" id="sectionContent"></textarea>
-                            <h6 class="text-orange">
-                                Image Compétence 1 :
-                            </h6>
-                            <input class="select-width-100" type="file" name="galleryImg1" id="galleryImg1"/>
-                            <h6 class="text-orange">
-                                Image Compétence 2 :
-                            </h6>
-                            <input class="select-width-100" type="file" name="galleryImg2" id="galleryImg2"/>
-                            <h6 class="text-orange">
+                            <label class="text-orange">
                                 Image Compétence 3 :
-                            </h6>
-                            <input class="select-width-100" type="file" name="galleryImg3" id="galleryImg3"/>
-                            <h6 class="text-orange">
+                            </label>
+                            <input class="select-width-100" type="file" name="galleryImg3" id="galleryImg3">
+                            <label class="text-orange">
                                 Image Compétence 4 :
-                            </h6>
-                            <input class="select-width-100" type="file" name="galleryImg4" id="galleryImg4"/>
-                            <h6 class="text-orange">
+                            </label>
+                            <input class="select-width-100" type="file" name="galleryImg4" id="galleryImg4">
+                            <label class="text-orange">
                                 Image du Formulaire de contact :
-                            </h6>
-                            <input class="select-width-100" type="file" name="dividerImg" id="dividerImg"/>
+                            </label>
+                            <input class="select-width-100" type="file" name="dividerImg" id="dividerImg">
+                            <label class="text-orange">
+                                Prénom coordonnées :
+                            </label>
+                            <input class="select-width-100" type="text" name="firstname" id="firstname" value="{{ footer.firstname }}">
+                            <label class="text-orange">
+                                Nom coordonnées :
+                            </label>
+                            <input class="select-width-100" type="text" name="lastname" id="lastname" value="{{ footer.lastname }}">
+                            <label class="text-orange">
+                                Votre adresse :
+                            </label>
+                            <input class="select-width-100" type="text" name="address" id="address" value="{{ footer.address }}">
+                            <label class="text-orange">
+                                Votre téléphone :
+                            </label>
+                            <input class="select-width-100" type="text" name="phoneNumber" id="phoneNumber" value="{{ footer.phoneNumber }}">
+                            <label class="text-orange">
+                                Votre email :
+                            </label>
+                            <input class="select-width-100" type="text" name="email" id="email" value="{{ footer.email }}">
+                            <label class="text-orange">
+                                Lien facebook :
+                            </label>
+                            <input class="select-width-100" type="text" name="facebookLink" id="facebookLink" value="{{ footer.facebookLink }}">
+                            <label class="text-orange">
+                                Lien twitter :
+                            </label>
+                            <input class="select-width-100" type="text" name="twitterLink" id="twitterLink" value="{{ footer.twitterLink }}">
+                            <label class="text-orange">
+                                Lien instagram :
+                            </label>
+                            <input class="select-width-100" type="text" name="instagramLink" id="instagramLink" value="{{ footer.instagramLink }}">
+                            <label class="text-orange">
+                                Lien linkedin :
+                            </label>
+                            <input class="select-width-100" type="text" name="linkedinLink" id="linkedinLink" value="{{ footer.linkedinLink }}">
+                            <label class="text-orange">
+                                Lien github :
+                            </label>
+                            <input class="select-width-100" type="text" name="githubLink" id="githubLink" value="{{ footer.githubLink }}">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="width-100 margin-100 flex-center">
+            <button type="submit" class="submit">Valider</button>
+            <button type="reset" class="submit">Annuler</button>
+
+        </div>
     </form>
 
-    <div class="width-100 margin-100 flex-center">
-        <button type="submit" class="submit">Valider</button>
-    </div>
+
 </section>
 
 

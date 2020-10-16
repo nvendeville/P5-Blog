@@ -9,6 +9,7 @@ class CategoryModel
     private $categoryName;
     private $nbPosts;
 
+
     /**
      * @return mixed
      */
