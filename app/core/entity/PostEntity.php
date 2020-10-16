@@ -49,16 +49,16 @@ class PostEntity extends DataAccessManager
     }
 
     public function getCategories() {
-        $statement = 'SELECT  category as categoryName, COUNT(id) as nbPosts FROM `posts` group by category';
+        $statement = "SELECT  category as categoryName, COUNT(id) as nbPosts FROM `posts` WHERE `status`=$this->posted group by category";
         return $this->query($statement, get_called_class(), false);
     }
 
-    public function getPostsByCategory () {
-        $statement = 'SELECT  `posts`.`id`, `posts`.`idUser`, `comments`.`creationDate`, `posts`.`title`, `posts`.`header`, 
-                    `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category`
+    public function getPostsByCategory ($categoryName, $from, $nbPost) {
+        $statement = "SELECT `posts`.`id`, `posts`.`idUser`, `posts`.`creationDate`, `posts`.`title`, `posts`.`header`, 
+                    `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category`, `posts`.`lastUpdate`
                     FROM `posts`
-                    WHERE `posts`.`category`=?';
-        return $this->query($statement, get_called_class(), false);
+                    WHERE `posts`.`category`=? AND `status`=$this->posted ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
+        return $this->prepareAndFetch($statement, [$categoryName], get_called_class());
     }
 
     public function getLatestCommentedPosts() {
@@ -78,5 +78,11 @@ class PostEntity extends DataAccessManager
         $statement =
             "SELECT COUNT(posts.id) as nbPosts FROM posts WHERE `status`=$this->posted";
         return $this->query($statement, get_called_class(), true);
+    }
+
+    public function getNbPostsByCategories($categoryName) {
+        $statement =
+            "SELECT COUNT(posts.id) as nbPosts FROM posts WHERE `status`=$this->posted AND `posts`.`category`=?  ";
+        return $this->prepareAndFetch($statement, [$categoryName], get_called_class(), true);
     }
 }

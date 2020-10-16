@@ -27,6 +27,12 @@ class HomeController
 
     public function generateContactEmail ($contactForm) {
         $this->sendMail($contactForm);
-        return $this->index();
+        $this->index();
+    }
+
+    public function persoHomePage ($persoHomeForm) {
+        $homeService = new HomeService();
+        $homeService->persoHomePage($persoHomeForm);
+        $this->index();
     }
 }

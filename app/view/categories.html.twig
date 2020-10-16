@@ -4,7 +4,7 @@
     </header>
     {% for category in categories %}
 
-    <div class="item d-flex justify-content-between"><a href="#">{{ category.categoryName }}</a><span>{{ category.nbPosts }}</span></div>
+    <div class="item d-flex justify-content-between"><a href="/P5-blog/public/?p=post&action=getPostsByCategory&categorie={{ category.categoryName }}">{{ category.categoryName }}</a><span>{{ category.nbPosts }}</span></div>
 
     {% endfor %}
 </div>

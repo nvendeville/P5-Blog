@@ -47,11 +47,11 @@
 
                     <nav  class="post-footer" aria-label="Page navigation example">
                         <ul class="pagination pagination-template d-flex justify-content-center">
-                            <li class="page-item{% if currentPage == 1 %} disabled {% endif %}"><a href="/P5-blog/public/?p=post&page={{ currentPage - 1 }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                            <li class="page-item{% if currentPage == 1 %} disabled {% endif %}"><a href="/P5-blog/public/?p=post&page={{ currentPage - 1 }}{{ urlParam }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
                             {% for numPage in 1..nbPages %}
-                                <li class="page-item{% if currentPage == numPage %} active {% endif %}"><a href="/P5-blog/public/?p=post&page={{ numPage }}" class="page-link">{{ numPage }}</a></li>
+                                <li class="page-item{% if currentPage == numPage %} active {% endif %}"><a href="/P5-blog/public/?p=post&page={{ numPage }}{{ urlParam }}" class="page-link">{{ numPage }}</a></li>
                             {% endfor %}
-                            <li class="page-item{% if currentPage == nbPages %} disabled {% endif %}"><a href="/P5-blog/public/?p=post&page={{ currentPage + 1 }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                            <li class="page-item{% if currentPage == nbPages %} disabled {% endif %}"><a href="/P5-blog/public/?p=post&page={{ currentPage + 1 }}{{ urlParam }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
                         </ul>
                     </nav>
 

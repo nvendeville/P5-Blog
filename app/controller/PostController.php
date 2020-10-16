@@ -28,5 +28,10 @@ class PostController
         $this->renderer->render("postdetail.html.twig", $service->getPost($id));
     }
 
+    public function getPostsByCategory ($categoryName, $currentPage) {
+        $service = new PostService();
+        $this->renderer->render("post.html.twig", $service->getPostsByCategory($categoryName, $currentPage));
+    }
+
 
 }

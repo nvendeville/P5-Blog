@@ -22,4 +22,48 @@ class HomeEntity extends DataAccessManager
         }
         return self::$_instance;
     }
+
+    public function persoHomePage($homeModel) {
+        $statement =
+            "UPDATE `home` SET `heroFirstname`=?, `heroLastname`=?, `heroLink`=?";
+        $values=[];
+        array_push($values, htmlspecialchars($homeModel->getHeroFirstname()));
+        array_push($values, htmlspecialchars($homeModel->getHeroLastname()));
+        array_push($values, htmlspecialchars($homeModel->getHeroLink()));
+        if ($homeModel->getHeroImg() != '') {
+            $statement = $statement . ", `heroImg`=?";
+            array_push($values, htmlspecialchars($homeModel->getHeroImg()));
+        }
+        $statement = $statement . ", `cvLink`=?";
+        array_push($values, htmlspecialchars($homeModel->getCvLink()));
+        if ($homeModel->getcvImg() != '') {
+            $statement = $statement . ", `cvImg`=?";
+            array_push($values, htmlspecialchars($homeModel->getcvImg()));
+        }
+        $statement = $statement . ", `sectionTitle`=?, `sectionContent`=?";
+        array_push($values, htmlspecialchars($homeModel->getSectionTitle()));
+        array_push($values, htmlspecialchars($homeModel->getSectionContent()));
+        if ($homeModel->getGalleryImg1() != '') {
+            $statement = $statement . ", `galleryImg1`=?";
+            array_push($values, htmlspecialchars($homeModel->getGalleryImg1()));
+        }
+        if ($homeModel->getGalleryImg2() != '') {
+            $statement = $statement . ", `galleryImg2`=?";
+            array_push($values, htmlspecialchars($homeModel->getGalleryImg2()));
+        }
+        if ($homeModel->getGalleryImg3() != '') {
+            $statement = $statement . ", `galleryImg3`=?";
+            array_push($values, htmlspecialchars($homeModel->getGalleryImg3()));
+        }
+        if ($homeModel->getGalleryImg4() != '') {
+            $statement = $statement . ", `galleryImg4`=?";
+            array_push($values, htmlspecialchars($homeModel->getGalleryImg4()));
+        }
+        if ($homeModel->getDividerImg() != '') {
+            $statement = $statement . ", `dividerImg`=?";
+            array_push($values, htmlspecialchars($homeModel->getDividerImg()));
+        }
+        $insert = $this->pdo->prepare($statement);
+        $insert->execute($values);
+    }
 }

@@ -75,6 +75,24 @@ if (isset($_POST) and !empty($_POST)) {
             $adminModifyPostController = new \App\controller\AdminModifyPostController();
             $adminModifyPostController->modifyPost($_POST, $id, $currentPage);
             break;
+        case "perso-home":
+            foreach ($_FILES as $key => $image) {
+                if (
+                    $_FILES[$key]['error'] == 0
+                    and ($_FILES[$key]['size'] <= 1000000)
+                ) {
+                    $infoFileUploaded = pathinfo($_FILES[$key]['name']);
+                    $extensionFileUploaded = $infoFileUploaded['extension'];
+                    $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
+                    if (in_array($extensionFileUploaded, $authorizedExtensions)) {
+                        move_uploaded_file($_FILES[$key]['tmp_name'], './img/' . basename($_FILES[$key]['name']));
+                    }
+                    $_POST[$key] = $_FILES[$key]['name'];
+                }
+            }
+            $homeController = new \App\controller\HomeController();
+            $homeController->persoHomePage($_POST);
+            break;
         default:
             // nothing to do
     }
@@ -102,6 +120,8 @@ if (isset($_GET["article"])) {
     $controller->$method($_GET["commentaire"], $currentPage);
 } elseif (isset($_GET["adminArticle"])) {
     $controller->$method($_GET["adminArticle"], $currentPage);
+}elseif (isset($_GET["categorie"])) {
+    $controller->$method($_GET["categorie"], $currentPage);
 } elseif (isset($currentPage)) {
     $controller->$method($currentPage);
 } else {
