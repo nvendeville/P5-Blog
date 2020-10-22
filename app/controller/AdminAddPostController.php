@@ -5,14 +5,10 @@ namespace App\controller;
 
 
 use App\core\Renderer;
-use App\core\service\AdminAddPostService;
-use App\entity\FooterEntity;
-use App\entity\HeaderEntity;
+use App\core\service\AdminPostsService;
 
 class AdminAddPostController
 {
-    private $renderer;
-
     public function __construct()
     {
         $this->renderer = new Renderer();
@@ -21,9 +17,7 @@ class AdminAddPostController
 
     public function index()
     {
-        $model = new AdminAddPostService();
+        $model = new AdminPostsService();
         $this->renderer->render("adminAddPost.html.twig", $model->getModel());
     }
-
-
 }

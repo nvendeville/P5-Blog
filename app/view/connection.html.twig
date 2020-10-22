@@ -2,9 +2,9 @@
 
 {% block body %}
 
-    <section>
+    <section class="divider newsletter">
 
-        <div class="divider newsletter">
+        <div>
 
             <h1 class="center text-orange">Connectez-vous</h1>
 
@@ -48,12 +48,34 @@
                                         Confirmez votre mot de passe :
                                     </label>
                                     <input class="select-width-100" type="password" name="passwordConfirmed" id="passwordConfirmed">
-                                    <div class="margin-100 width-100 flex-center">
+                                    <div class="margin-100 width-100 flex-center space-evenly">
                                         <button type="submit" class="submit">S'inscrire</button>
+                                        <button type="reset" class="submit" id="resetSignUp">Annuler</button>
+
                                     </div>
                                 </div>
                             </div>
                         </form>
+                        {% if userExist %}
+                        <div class="modal fade" id="alreadyKnown" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Utilisateur déjà enregistré</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-gray">
+                                        <p>Un utilisateur existe déjà avec les informations saisies</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
 
                     <div class="col-md-6 margin-100">
@@ -67,8 +89,12 @@
                                 Votre mot de passe :
                             </label>
                             <input class="select-width-100" type="password" name="password" id="password">
-                            <div class="margin-100 width-100 flex-center">
+                            <div class="margin-100 margin-30 width-100 flex-center space-evenly">
                                 <button type="submit" class="submit">Se connecter</button>
+                                <button type="reset" class="submit" id="resetSignIn">Annuler</button>
+                            </div>
+                            <div class="center">
+                                <a href="#">Mot de passe oublié</a>
                             </div>
                         </form>
                     </div>
@@ -77,4 +103,28 @@
         </div>
     </section>
 
+{% endblock %}
+
+
+{% block script %}
+    <script>
+        $(document).ready(function(){
+            $("#AddUserForm").submit(function(){
+                if ($("#password").val() != $("#passwordConfirmed").val()) {
+                    document.getElementById("passwordConfirmed").setCustomValidity("Les mots de passe renseignés ne sont pas identiques")
+                    return false
+                }
+                return true
+            });
+            $("#resetSignUp").click(function() {
+                window.history.back()
+            });
+            if ($('#alreadyKnown')) {
+                $('#alreadyKnown').modal('show')
+            }
+            $("#resetSignIn").click(function() {
+                window.history.back()
+            });
+        });
+    </script>
 {% endblock %}

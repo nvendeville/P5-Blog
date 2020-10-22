@@ -3,21 +3,22 @@
 {% block body %}
 
     <section>
-        <div class="container margin-100">
+        <div class="container margin-30">
             <div class="row">
-                <h1 class="text-orange d-flex flex-center latest-posts-width-100">Gérer les articles</h1>
-            </div>
-            <div class="row flex-center">
-                <div class="latest-posts-width-100 space-evenly margin-100 row d-flex">
-                    <div class="col-lg-4">
-                        <button type="button" class="latest-posts-width-100 btn btn-outline-secondary"><a
+                <div class="col-lg-6">
+                    <h1 class="text-orange">Gérer les articles</h1>
+                </div>
+                <div class="col-lg-6 flex-end">
+                    <div>
+                        <button type="button" class="btn btn-outline-secondary"><a
                                     class="btn-outline-secondary" href="?p=adminAddPost">
                                 Nouvel article</a></button>
                     </div>
+
                 </div>
             </div>
         </div>
-        <div class="container margin-100">
+        <div class="container">
 
             {% for adminPost in adminPosts %}
                 {% set style="" %}
@@ -32,9 +33,9 @@
                                                            alt="..."></div>
                     <div class="col-lg-2 align-self-center">{{ adminPost.status }}</div>
                     <div class="col-lg-2 space-evenly align-items-center">
-                        <a href="/P5-blog/public/?p=adminModifyPost&page={{ currentPage }}&article={{ adminPost.id }}"><i style="color: #6c757d;" class="fas fa-pen-square fa-2x"></i></a>
-                        <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=archivePost&adminArticle={{ adminPost.id }}"><i style="color: #6c757d;" class="fas fa-folder-open fa-2x"></i></a>
-                        <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=validatePost&adminArticle={{ adminPost.id }}"><i style="color: #6c757d;" class="fas fa-check-square fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminModifyPost&page={{ currentPage }}&article={{ adminPost.id }}"><i title="Modifier l'article" style="color: #6c757d;" class="fas fa-pen-square fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=archivePost&adminArticle={{ adminPost.id }}"><i title="Archiver l'article" style="color: #6c757d;" class="fas fa-archive fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=validatePost&adminArticle={{ adminPost.id }}"><i title="Mettre en ligne l'article" style="color: #6c757d;" class="fas fa-globe fa-2x"></i></a>
                     </div>
                 </div>
             {% endfor %}
