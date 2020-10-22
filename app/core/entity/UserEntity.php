@@ -27,15 +27,22 @@ class UserEntity extends DataAccessManager
         $statement =
             "INSERT INTO `users` (`firstname`, `lastname`, `avatar`, `username`, `password`, `email`, `isAdmin`) 
             VALUES (?,?,?,?,?,?,?)";
-        $values=[];
+        $values = [
+            htmlspecialchars($userModel->getFirstname()),
+        ];
         array_push($values, htmlspecialchars($userModel->getFirstname()));
         array_push($values, htmlspecialchars($userModel->getLastname()));
         array_push($values, htmlspecialchars($userModel->getAvatar()));
         array_push($values, htmlspecialchars($userModel->getUsername()));
-        array_push($values, htmlspecialchars($userModel->getPassword()));
+        array_push($values, password_hash($userModel->getPassword(), PASSWORD_DEFAULT));
         array_push($values, htmlspecialchars($userModel->getEmail()));
         array_push($values, htmlspecialchars($userModel->getIsAdmin()));
         $insert = $this->pdo->prepare($statement);
         $insert->execute($values);
+    }
+
+    public function userExist ($email) {
+        $statement = "SELECT 1 as userExist FROM users WHERE email=?";
+        return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
     }
 }

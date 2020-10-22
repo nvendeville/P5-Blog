@@ -40,9 +40,12 @@
                                 </label>
                                 <textarea class="textarea select-width-100" name="content" id="content"></textarea>
                             </div>
-                            <div class="width-100 space-evenly">
+                            <div class="width-100 space-evenly margin-30">
                                 <button type="submit" class="submit">Sauvegarder comme brouillon</button>
                                 <button id="btnOnline" class="submit">Mettre l'article en ligne</button>
+                            </div>
+                            <div class="width-100  flex-center">
+                                <button id="resetAddPost" type="reset" class="submit">Annuler</button>
                             </div>
                         </form>
                     </div>
@@ -59,6 +62,9 @@
                 $('#status').val('en ligne')
                 $('#addPostForm').submit()
                 return false
+            });
+            $("#resetAddPost").click(function() {
+                window.history.back()
             });
         });
     </script>

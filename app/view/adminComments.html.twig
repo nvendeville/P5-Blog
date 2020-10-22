@@ -22,8 +22,8 @@
                     <div class="col-lg-4 overflow-wrap">{{ adminComment.content }}</div>
                     <div class="col-lg-1 align-self-center">{{ adminComment.status }}</div>
                     <div class="col-lg-2 space-evenly align-items-center">
-                        <a href="/P5-blog/public/?p=adminComments&page={{ currentPage }}&action=rejectComment&commentaire={{ adminComment.id }}"><i style="color: #6c757d;" class="fas fa-trash-alt fa-2x"></i></a>
-                        <a href="/P5-blog/public/?p=adminComments&page={{ currentPage }}&action=validateComment&commentaire={{ adminComment.id }}"><i style="color: #6c757d;" class="fas fa-check-square fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminComments&page={{ currentPage }}&action=rejectComment&commentaire={{ adminComment.id }}"><i title="Rejeter le commentaire" style="color: #6c757d;" class="fas fa-times fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminComments&page={{ currentPage }}&action=validateComment&commentaire={{ adminComment.id }}"><i title="Valider le commentaire"style="color: #6c757d;" class="fas fa-check fa-2x"></i></a>
                     </div>
                 </div>
             {% endfor %}

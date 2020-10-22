@@ -4,7 +4,6 @@
 namespace App\core\service;
 
 
-use App\core\entity\AdminCommentsEntity;
 use App\core\entity\AdminPostsEntity;
 use App\core\entity\PostEntity;
 use App\core\entity\UserEntity;

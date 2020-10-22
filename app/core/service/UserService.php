@@ -16,4 +16,7 @@ class UserService extends AbstractService
         UserEntity::getInstance()->addUser($userModel);
     }
 
+    public function userExist ($email) {
+        return UserEntity::getInstance()->userExist($email) != null;
+    }
 }

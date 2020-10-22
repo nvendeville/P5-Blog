@@ -17,9 +17,11 @@ class ConnectionController
     }
 
 
-    public function index()
+    public function index($userExist = false)
     {
         $model = new ConnectionService();
-        $this->renderer->render("connection.html.twig", $model->getModel());
+        $homeModel =  $model->getModel();
+        $homeModel['userExist'] = $userExist;
+        $this->renderer->render("connection.html.twig", $homeModel);
     }
 }

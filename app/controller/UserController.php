@@ -26,4 +26,9 @@ class UserController
         $this->renderer->render("home.html.twig", $service->getModel());
 
     }
+
+    public function userExist($email) {
+        $service = new UserService();
+        return $service->userExist($email);
+    }
 }

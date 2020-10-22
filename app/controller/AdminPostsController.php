@@ -5,7 +5,6 @@ namespace App\controller;
 
 
 use App\core\Renderer;
-use App\core\service\AdminCommentsService;
 use App\core\service\AdminPostsService;
 
 class AdminPostsController

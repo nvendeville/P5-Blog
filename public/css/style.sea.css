@@ -147,6 +147,26 @@ i[class*="icon-"] {
   z-index: 9999 !important;
 }
 
+.flex-end {
+  display: flex;
+  justify-content: flex-end
+}
+
+fieldset {
+  border-color: #ced4da !important;
+  border: solid 2px;
+  padding: 0 10px;
+  margin-top: 35px;
+}
+
+legend {
+  padding: 0 10px;
+  width: auto;
+}
+
+.section-content {
+  line-height: 25px !important;
+}
 /*=== Helpers ===*/
 .bg-red {
   background: #ff7676 !important;
@@ -270,6 +290,9 @@ i[class*="icon-"] {
   color: #fff;
 }
 
+.padding-modal {
+  padding: 30px;
+}
 .padding-post-footer {
   padding: 0 15px;
 }
@@ -296,6 +319,10 @@ i[class*="icon-"] {
 
 .no-margin-top {
   margin-top: 0 !important;
+}
+
+.margin-30 {
+  margin-bottom:30px !important;
 }
 
 .padding-small {
@@ -1007,7 +1034,7 @@ section.newsletter .form-group {
 }
 
 .textarea {
-  height: 150px !important;
+  height: 200px !important;
 }
 
 section.newsletter input, .newsletter textarea, .select {
