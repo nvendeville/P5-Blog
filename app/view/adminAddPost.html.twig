@@ -1,4 +1,4 @@
-{% extends "baseAdmin.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block body %}
 
@@ -55,6 +55,9 @@
     </section>
 
 {% endblock %}
+
+{% block footer %} {% endblock %}
+
 {% block script %}
     <script>
         $(document).ready(function() {
@@ -69,3 +72,4 @@
         });
     </script>
 {% endblock %}
+

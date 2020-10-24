@@ -279,7 +279,7 @@ legend {
 }
 
 .text-gray {
-  color: #999;
+  color: #999 !important;
 }
 
 .text-gray:hover {

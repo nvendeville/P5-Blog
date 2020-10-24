@@ -7,10 +7,11 @@ namespace App\core\service;
 use App\core\entity\FooterEntity;
 use App\core\entity\HeaderEntity;
 use App\core\entity\HomeEntity;
+use App\core\entity\UserEntity;
 use App\Model\FooterModel;
 use App\Model\HeaderModel;
 use App\Model\HomeModel;
-
+use App\model\UserModel;
 
 
 class HomeService extends AbstractService

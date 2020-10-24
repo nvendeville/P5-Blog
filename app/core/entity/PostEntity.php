@@ -30,14 +30,13 @@ class PostEntity extends DataAccessManager
         $statement =
             "INSERT INTO `posts` (`idUser`, `title`, `header`, `content`, `img`, `status`, `category`) 
             VALUES (?,?,?,?,?,?,?)";
-        $values=[];
-        array_push($values, htmlspecialchars($postModel->getIdUser()));
-        array_push($values, htmlspecialchars($postModel->getTitle()));
-        array_push($values, htmlspecialchars($postModel->getHeader()));
-        array_push($values, htmlspecialchars($postModel->getContent()));
-        array_push($values, htmlspecialchars($postModel->getImg()));
-        array_push($values, htmlspecialchars($postModel->getStatus()));
-        array_push($values, htmlspecialchars($postModel->getCategory()));
+        $values=[$postModel->getIdUser(),
+                $postModel->getTitle(),
+                $postModel->getHeader(),
+                $postModel->getContent(),
+                $postModel->getImg(),
+                $postModel->getStatus(),
+                $postModel->getCategory()];
         $insert = $this->pdo->prepare($statement);
         $insert->execute($values);
     }
@@ -49,7 +48,7 @@ class PostEntity extends DataAccessManager
     }
 
     public function getCategories() {
-        $statement = "SELECT  category as categoryName, COUNT(id) as nbPosts FROM `posts` WHERE `status`=$this->posted group by category";
+        $statement = "SELECT  `category` as categoryName, COUNT(id) as nbPosts FROM `posts` WHERE `status`=$this->posted group by category";
         return $this->query($statement, get_called_class(), false);
     }
 
@@ -76,13 +75,13 @@ class PostEntity extends DataAccessManager
 
     public function getNbPosts() {
         $statement =
-            "SELECT COUNT(posts.id) as nbPosts FROM posts WHERE `status`=$this->posted";
+            "SELECT COUNT(posts.id) as nbPosts FROM `posts` WHERE `status`=$this->posted";
         return $this->query($statement, get_called_class(), true);
     }
 
     public function getNbPostsByCategories($categoryName) {
         $statement =
-            "SELECT COUNT(posts.id) as nbPosts FROM posts WHERE `status`=$this->posted AND `posts`.`category`=?  ";
+            "SELECT COUNT(posts.id) as nbPosts FROM `posts` WHERE `status`=$this->posted AND `posts`.`category`=?  ";
         return $this->prepareAndFetch($statement, [$categoryName], get_called_class(), true);
     }
 }

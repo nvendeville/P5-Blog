@@ -25,24 +25,33 @@ class UserEntity extends DataAccessManager
 
     public function addUser($userModel) {
         $statement =
-            "INSERT INTO `users` (`firstname`, `lastname`, `avatar`, `username`, `password`, `email`, `isAdmin`) 
-            VALUES (?,?,?,?,?,?,?)";
-        $values = [
-            htmlspecialchars($userModel->getFirstname()),
-        ];
-        array_push($values, htmlspecialchars($userModel->getFirstname()));
-        array_push($values, htmlspecialchars($userModel->getLastname()));
-        array_push($values, htmlspecialchars($userModel->getAvatar()));
-        array_push($values, htmlspecialchars($userModel->getUsername()));
-        array_push($values, password_hash($userModel->getPassword(), PASSWORD_DEFAULT));
-        array_push($values, htmlspecialchars($userModel->getEmail()));
-        array_push($values, htmlspecialchars($userModel->getIsAdmin()));
+            "INSERT INTO `users` (`firstname`, `lastname`, `avatar`, `password`, `email`, `isAdmin`) 
+            VALUES (?,?,?,?,?,?)";
+        $values = [$userModel->getFirstname(),
+                $userModel->getLastname(),
+                $userModel->getAvatar(),
+                $userModel->getPassword(),
+                $userModel->getEmail(),
+                $userModel->getIsAdmin()];
         $insert = $this->pdo->prepare($statement);
         $insert->execute($values);
     }
 
     public function userExist ($email) {
-        $statement = "SELECT 1 as userExist FROM users WHERE email=?";
+        $statement = "SELECT 1 as userExist FROM `users` WHERE email=?";
         return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
+    }
+
+    public function getUserByEmail ($email) {
+        $statement = "SELECT * FROM `users` WHERE email=?";
+        return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
+
+    }
+
+    public function updatePassword ($newPassword, $email) {
+        $statement = "UPDATE `users` SET password=? WHERE email=?";
+        $values = [hashPassword($newPassword), $email];
+        $update = $this->pdo->prepare($statement);
+        $update->execute($values);
     }
 }

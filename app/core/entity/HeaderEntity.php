@@ -25,8 +25,7 @@ class HeaderEntity extends DataAccessManager
 
     public function persoHeader($headerModel) {
         $statement = "UPDATE `header` SET `blogTitle`=?";
-        $value= htmlspecialchars($headerModel->getBlogtitle());
         $insert = $this->pdo->prepare($statement);
-        $insert->execute([$value]);
+        $insert->execute([$headerModel->getBlogtitle()]);
     }
 }

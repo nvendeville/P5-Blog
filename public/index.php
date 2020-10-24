@@ -2,8 +2,12 @@
 session_start();
 
 require_once '../vendor/autoload.php';
-require_once '../app/core/token.php';
+require_once '../app/core/tools.php';
 
+
+if (isset($_GET['p']) and $_GET['p'] == 'logout') {
+    unset($_SESSION['user'], $_SESSION['token'], $_SESSION['isAdmin'], $_GET['p']);
+}
 
 if (!isset($_SESSION['token'])) {
     $_SESSION['token'] = generateToken();
@@ -38,6 +42,11 @@ if (isset($_POST) and !empty($_POST)) {
         case "add_user":
             $userController = new \App\controller\UserController();
             $email = $_POST['email'];
+            $password1 = $_POST['password'];
+            $password2 = $_POST['passwordConfirmed'];
+            if (!$userController->controlPassword($password1, $password2)) {
+                $userController->resetPassword($email);
+            }
             if (!$userController->userExist($email)) {
                 if (
                     isset($_FILES['avatar'])
@@ -53,6 +62,7 @@ if (isset($_POST) and !empty($_POST)) {
                     $_POST["avatar"] = $_FILES['avatar']['name'];
                 }
                 $userController->addUser($_POST);
+
             } else {
                 $connectionController = new \App\controller\ConnectionController();
                 $connectionController->index(true);
@@ -99,38 +109,57 @@ if (isset($_POST) and !empty($_POST)) {
             $homeController = new \App\controller\HomeController();
             $homeController->persoHomePage($_POST);
             break;
+        case "sign-in":
+            $userController = new \App\controller\UserController();
+            $userController->signIn($_POST);
+            break;
+        case "forgot-password":
+            $userController = new \App\controller\UserController();
+            $email = $_POST['email'];
+            $userController->resetPassword($email);
+            break;
+        case "reset-password":
+            $userController = new \App\controller\UserController();
+            $password1 = $_POST['newPassword'];
+            $password2 = $_POST['confirmedNewPassword'];
+            $email = $_POST['email'];
+            if (!$userController->controlPassword($password1, $password2)) {
+                $userController->resetPassword($email);
+            } $userController->updatePassword($password1, $email);
+            break;
         default:
             // nothing to do
     }
-}
+} else {
 // ternaire pour donner la page home en défault
-$p = (isset($_GET["p"])) ? $_GET["p"] : "home";
+    $p = (isset($_GET["p"])) ? $_GET["p"] : "home";
 
 // indique par l'URL de la page vers quel controller aller
-$controllerName = "App\Controller\\" . ucfirst($p) . "Controller";
-$controller = new $controllerName();
+    $controllerName = "App\Controller\\" . ucfirst($p) . "Controller";
+    $controller = new $controllerName();
 
 //indique quelle méthode appeler du controller choisi
-$method = isset($_GET["action"]) ? $_GET["action"] : 'index';
+    $method = isset($_GET["action"]) ? $_GET["action"] : 'index';
 
-if (isset($_GET['page']) && !empty($_GET['page'])) {
-    $currentPage = (int)strip_tags($_GET['page']);
-} elseif ($p == 'post' or $p == 'adminPosts' or $p == 'adminComments'
-    or $p == 'adminModifyPost' && $method == 'index') {
-    $currentPage = 1;
+    if (isset($_GET['page']) && !empty($_GET['page'])) {
+        $currentPage = (int)strip_tags($_GET['page']);
+    } elseif ($p == 'post' or $p == 'adminPosts' or $p == 'adminComments'
+        or $p == 'adminModifyPost' && $method == 'index') {
+        $currentPage = 1;
+    }
+
+    if (isset($_GET["article"])) {
+        $controller->$method($_GET["article"], $currentPage);
+    } elseif (isset($_GET["commentaire"])) {
+        $controller->$method($_GET["commentaire"], $currentPage);
+    } elseif (isset($_GET["adminArticle"])) {
+        $controller->$method($_GET["adminArticle"], $currentPage);
+    } elseif (isset($_GET["categorie"])) {
+        $controller->$method($_GET["categorie"], $currentPage);
+    } elseif (isset($currentPage)) {
+        $controller->$method($currentPage);
+    } else {
+        $controller->$method();
+    }
+
 }
-
-if (isset($_GET["article"])) {
-    $controller->$method($_GET["article"], $currentPage);
-} elseif (isset($_GET["commentaire"])) {
-    $controller->$method($_GET["commentaire"], $currentPage);
-} elseif (isset($_GET["adminArticle"])) {
-    $controller->$method($_GET["adminArticle"], $currentPage);
-}elseif (isset($_GET["categorie"])) {
-    $controller->$method($_GET["categorie"], $currentPage);
-} elseif (isset($currentPage)) {
-    $controller->$method($currentPage);
-} else {
-    $controller->$method();
-}
-
