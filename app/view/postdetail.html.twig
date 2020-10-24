@@ -60,29 +60,36 @@
                             </div>
                             <div class="add-comment">
                                 <header>
-                                    <div class="space-between">
-                                        <h3 class="h6">Ajouter un commentaire</h3>
-                                        <a href="?p=connection">Se connecter</a>
-                                    </div>
+                                    <h3 class="h6">Ajouter un commentaire</h3>
 
+                                    {% if logged %}
+                                    <form id="addCommentForm"  action="/P5-blog/public/?p=post&action=detail&article={{ post.id }}" method="post" class="commenting-form">
+                                        <input type="hidden" name="token" value="{{ token }}">
+                                        <input type="hidden" name="type" value="add_comment">
+                                        <input type="hidden" id="status" name="status" value="to_validate">
+                                        <input type="hidden" name="idPost" value="{{ post.id }}">
+                                        <input type="hidden" name="idUser" value="1">
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <textarea name="content" id="content" placeholder="Entrez votre commentaire" class="form-control"></textarea>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <button data-toggle="modal" data-target="#waitingValidation" type="submit" class="btn btn-secondary">Envoyer</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {% else %}
+                                    <div class="alert alert-warning latest-posts-width-100 space-between">
+                                        <div>
+                                            Pour pouvoir commenter, vous devez vous connecter
+                                        </div>
+                                        <div>
+                                            <a href="?p=connection">Se connecter</a>
+                                        </div>
+                                    </div>
+                                    {% endif %}
                                 </header>
-                                <form id="addCommentForm"  action="/P5-blog/public/?p=post&action=detail&article=
-                                {{ post.id }}" method="post" class="commenting-form">
-                                    <input type="hidden" name="token" value="{{ token }}">
-                                    <input type="hidden" name="type" value="add_comment">
-                                    <input type="hidden" id="status" name="status" value="to_validate">
-                                    <input type="hidden" name="idPost" value="{{ post.id }}">
-                                    <input type="hidden" name="idUser" value="1">
 
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            <textarea name="content" id="content" placeholder="Entrez votre commentaire" class="form-control"></textarea>
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <button data-toggle="modal" data-target="#waitingValidation" type="submit" class="btn btn-secondary">Envoyer</button>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
 
                         </div>

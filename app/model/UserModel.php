@@ -10,7 +10,6 @@ class UserModel
     private $firstname;
     private $lastname;
     private $avatar;
-    private $username;
     private $password;
     private $email;
     private $is_admin;
@@ -79,21 +78,7 @@ class UserModel
         $this->lastname = $lastname;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
 
-    /**
-     * @param mixed $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
 
     /**
      * @return mixed

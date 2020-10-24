@@ -26,42 +26,40 @@ class HomeEntity extends DataAccessManager
     public function persoHomePage($homeModel) {
         $statement =
             "UPDATE `home` SET `heroFirstname`=?, `heroLastname`=?, `heroLink`=?";
-        $values=[];
-        array_push($values, htmlspecialchars($homeModel->getHeroFirstname()));
-        array_push($values, htmlspecialchars($homeModel->getHeroLastname()));
-        array_push($values, htmlspecialchars($homeModel->getHeroLink()));
+        $values=[$homeModel->getHeroFirstname(), 
+                $homeModel->getHeroLastname(), 
+                $homeModel->getHeroLink()];
         if ($homeModel->getHeroImg() != '') {
             $statement = $statement . ", `heroImg`=?";
-            array_push($values, htmlspecialchars($homeModel->getHeroImg()));
+            array_push($values, $homeModel->getHeroImg());
         }
         $statement = $statement . ", `cvLink`=?";
-        array_push($values, htmlspecialchars($homeModel->getCvLink()));
+        array_push($values, $homeModel->getCvLink());
         if ($homeModel->getcvImg() != '') {
             $statement = $statement . ", `cvImg`=?";
-            array_push($values, htmlspecialchars($homeModel->getcvImg()));
+            array_push($values, $homeModel->getcvImg());
         }
         $statement = $statement . ", `sectionTitle`=?, `sectionContent`=?";
-        array_push($values, htmlspecialchars($homeModel->getSectionTitle()));
-        array_push($values, htmlspecialchars($homeModel->getSectionContent()));
+        array_push($values, $homeModel->getSectionTitle(), $homeModel->getSectionContent());
         if ($homeModel->getGalleryImg1() != '') {
             $statement = $statement . ", `galleryImg1`=?";
-            array_push($values, htmlspecialchars($homeModel->getGalleryImg1()));
+            array_push($values, $homeModel->getGalleryImg1());
         }
         if ($homeModel->getGalleryImg2() != '') {
             $statement = $statement . ", `galleryImg2`=?";
-            array_push($values, htmlspecialchars($homeModel->getGalleryImg2()));
+            array_push($values, $homeModel->getGalleryImg2());
         }
         if ($homeModel->getGalleryImg3() != '') {
             $statement = $statement . ", `galleryImg3`=?";
-            array_push($values, htmlspecialchars($homeModel->getGalleryImg3()));
+            array_push($values, $homeModel->getGalleryImg3());
         }
         if ($homeModel->getGalleryImg4() != '') {
             $statement = $statement . ", `galleryImg4`=?";
-            array_push($values, htmlspecialchars($homeModel->getGalleryImg4()));
+            array_push($values, $homeModel->getGalleryImg4());
         }
         if ($homeModel->getDividerImg() != '') {
             $statement = $statement . ", `dividerImg`=?";
-            array_push($values, htmlspecialchars($homeModel->getDividerImg()));
+            array_push($values, $homeModel->getDividerImg());
         }
         $insert = $this->pdo->prepare($statement);
         $insert->execute($values);

@@ -46,11 +46,8 @@ class CommentEntity extends DataAccessManager
         $statement =
             "INSERT INTO `comments` (`idUser`, `idPost`, `content`, `status`) 
             VALUES (?,?,?,?)";
-        $values=[];
-        array_push($values, htmlspecialchars($commentModel->getIdUser()));
-        array_push($values, htmlspecialchars($commentModel->getIdPost()));
-        array_push($values, htmlspecialchars($commentModel->getContent()));
-        array_push($values, htmlspecialchars($commentModel->getStatus()));
+        $values=[$commentModel->getIdUser(), $commentModel->getIdPost(),
+            $commentModel->getContent(), $commentModel->getStatus()];
         $insert = $this->pdo->prepare($statement);
         $insert->execute($values);
     }
