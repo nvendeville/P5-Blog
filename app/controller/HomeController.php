@@ -4,13 +4,11 @@
 namespace App\controller;
 
 
-use App\core\Mailer;
 use App\core\Renderer;
 use App\core\service\HomeService;
 
 class HomeController
 {
-    use Mailer;
     private $renderer;
 
     public function __construct()
@@ -21,18 +19,19 @@ class HomeController
 
     public function index()
     {
-        $model = new HomeService();
-        $this->renderer->render("home.html.twig", $model->getModel());
+        $homeService = new HomeService();
+        $homeModel = $homeService->getModel();
+        $this->renderer->render("home.html.twig", $homeModel);
     }
 
-    public function generateContactEmail ($contactForm) {
-        $this->sendMail($contactForm);
-        $this->index();
+    public function sendContactRequest ($contactForm) {
+        $homeService = new HomeService();
+        $homeService->sendContactRequest($contactForm);
+        $_SESSION['otherModel'] = ['mailSent' => true];
     }
 
     public function persoHomePage ($persoHomeForm) {
         $homeService = new HomeService();
         $homeService->persoHomePage($persoHomeForm);
-        $this->index();
     }
 }

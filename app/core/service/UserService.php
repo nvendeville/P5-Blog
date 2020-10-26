@@ -14,11 +14,13 @@ class UserService extends AbstractService
         $userModel = new UserModel();
         $this->hydrateFromPostArray($formAddUser, $userModel);
         UserEntity::getInstance()->addUser($userModel);
+        return UserEntity::getInstance()->getUserByEmail($userModel->getEmail());
     }
 
     public function userExist ($email) {
         return UserEntity::getInstance()->userExist($email) != null;
     }
+
 
     public function signIn ($email) {
         $user =  UserEntity::getInstance()->getUserByEmail($email);

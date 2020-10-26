@@ -18,7 +18,7 @@
                 <div class= "row commentsList" style="{{style}}";>
                     <div class="col-lg-2 align-self-center">{{ adminComment.user.firstname }} {{ adminComment.user.lastname }}</div>
                     <div class="col-lg-1 align-self-center">{{ adminComment.creationDate | date(U)}}</div>
-                    <div class="col-lg-2 align-self-center">{{ postId.title }}</div>
+                    <div class="col-lg-2 align-self-center">{{ adminComment.titlePost }}</div>
                     <div class="col-lg-4 overflow-wrap">{{ adminComment.content }}</div>
                     <div class="col-lg-1 align-self-center">{{ adminComment.status }}</div>
                     <div class="col-lg-2 space-evenly align-items-center">

@@ -34,11 +34,11 @@ if (isset($_POST) and !empty($_POST)) {
             }
             $adminPostsController = new \App\controller\AdminPostsController();
             $adminPostsController->addPost($_POST);
-            break;
+            exit;
         case "add_comment":
             $adminCommentsController = new \App\controller\AdminCommentsController();
             $adminCommentsController->addComment($_POST);
-            break;
+            exit;
         case "add_user":
             $userController = new \App\controller\UserController();
             $email = $_POST['email'];
@@ -64,13 +64,12 @@ if (isset($_POST) and !empty($_POST)) {
                 $userController->addUser($_POST);
 
             } else {
-                $connectionController = new \App\controller\ConnectionController();
-                $connectionController->index(true);
+                $_SESSION['otherModel'] = ['userExist' => true];
             }
             break;
         case "contact_form":
             $HomeController = new \App\controller\HomeController();
-            $HomeController->generateContactEmail($_POST);
+            $HomeController->sendContactRequest($_POST);
             break;
         case "modify_post":
             if (
@@ -90,7 +89,7 @@ if (isset($_POST) and !empty($_POST)) {
             $currentPage = (int)strip_tags($_GET['page']);
             $adminModifyPostController = new \App\controller\AdminModifyPostController();
             $adminModifyPostController->modifyPost($_POST, $id, $currentPage);
-            break;
+            exit;
         case "perso-home":
             foreach ($_FILES as $key => $image) {
                 if (
@@ -130,7 +129,7 @@ if (isset($_POST) and !empty($_POST)) {
         default:
             // nothing to do
     }
-} else {
+}
 // ternaire pour donner la page home en défault
     $p = (isset($_GET["p"])) ? $_GET["p"] : "home";
 
@@ -161,5 +160,3 @@ if (isset($_POST) and !empty($_POST)) {
     } else {
         $controller->$method();
     }
-
-}

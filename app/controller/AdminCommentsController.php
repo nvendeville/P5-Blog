@@ -40,6 +40,8 @@ class AdminCommentsController
         $service = new AdminCommentsService();
         $service->addComment($formAddComment);
         $postService = new PostService();
-        $this->renderer->render("postdetail.html.twig", $postService->getPost($formAddComment['idPost']));
+        $postModel = $postService->getPost($formAddComment['idPost']);
+        $postModel['addedComment'] = true;
+        $this->renderer->render("postdetail.html.twig", $postModel);
     }
 }

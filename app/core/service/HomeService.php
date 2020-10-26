@@ -7,15 +7,16 @@ namespace App\core\service;
 use App\core\entity\FooterEntity;
 use App\core\entity\HeaderEntity;
 use App\core\entity\HomeEntity;
-use App\core\entity\UserEntity;
+use App\core\Mailer;
 use App\Model\FooterModel;
 use App\Model\HeaderModel;
 use App\Model\HomeModel;
-use App\model\UserModel;
 
 
 class HomeService extends AbstractService
 {
+
+    use Mailer;
 
     public function getModel () {
         $entity = HomeEntity::getInstance()->one();
@@ -34,6 +35,12 @@ class HomeService extends AbstractService
         HeaderEntity::getInstance()->persoHeader ($headerModel);
         HomeEntity::getInstance()->persoHomePage ($homeModel);
         FooterEntity::getInstance()->persoFooter ($footerModel);
+    }
+
+    public function sendContactRequest($contactForm) {
+        $message = 'Vous avez reçu un message de <br/>' . $contactForm['firstname'] . ' ' . $contactForm['lastname'] . ' : <br/>' . $contactForm['message'];
+        $subject = 'Demande de contact';
+        $this->sendMail($subject, $message, $contactForm['email']);
     }
 
 }

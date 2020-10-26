@@ -31,11 +31,15 @@
 
 <body>
 
+
 {% block header %}
     {% include 'header.html.twig' %}
 {% endblock %}
 
 {% block body %}{% endblock %}
+
+{% include 'connection.html.twig' %}
+
 
 {% block footer %}
     {% include 'footer.html.twig' %}
@@ -69,7 +73,23 @@
         } else {
             $('#homeLink').addClass('active')
         }
-    })
+
+        $('#signInForm').attr('action', document.URL)
+        $('#ForgotPasswordForm').attr('action', document.URL)
+        $('#restPasswordForm').attr('action', document.URL)
+        $('#AddUserForm').attr('action', document.URL)
+
+        if ($('#alreadyKnown').length) {
+            $('#alreadyKnown').modal('show')
+        } else if ($('#resetPasswordModal').length) {
+            $('#resetPasswordModal').modal('show')
+        } else if ($('#noUserExistModal').length) {
+            $('#noUserExistModal').modal('show')
+        } else if ($('#wrongPasswordModal').length) {
+            $('#wrongPasswordModal').modal('show')
+        }
+    });
+
 </script>
 
 {% block script %}{% endblock %}

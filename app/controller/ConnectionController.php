@@ -21,7 +21,6 @@ class ConnectionController
     {
         $model = new ConnectionService();
         $homeModel =  $model->getModel();
-        $homeModel['userExist'] = $userExist;
         $this->renderer->render("connection.html.twig", $homeModel);
     }
 }

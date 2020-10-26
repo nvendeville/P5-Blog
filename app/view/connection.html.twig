@@ -1,13 +1,9 @@
-{% extends "base.html.twig" %}
-
-{% block body %}
-<section class="newsletter divider">
-    <div class="modal fade" id="SignInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <section class="modal fade newsletter divider" id="SignInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Connectez-vous</h5>
-                    <button type="rest" class="close" id="resetSignIn" data-dismiss="modal" aria-label="Close">
+                    <button type="reset" class="close" id="resetSignInTimes" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -31,20 +27,20 @@
                             <a data-toggle="modal" data-target="#AddUserModal" role="button" data-dismiss="modal" aria-expanded="false" aria-controls="AddUserModal">Créer un compte</a>
                         </div>
                         <div class="modal-footer">
-                            <button type="reset" class="btn btn-primary" id="resetSignIn" data-dismiss="modal">Fermer</button>
+                            <button type="reset" class="btn btn-primary" id="resetSignInBtn" data-dismiss="modal" aria-label="Close">Annuler</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="modal fade" id="ForgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <section class="modal fade newsletter divider" id="ForgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Mot de passe oublié</h5>
-                    <button type="rest" class="close" id="resetForgotPassword" data-dismiss="modal" aria-label="Close">
+                    <button type="reset" class="close" id="resetForgotPassword" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -59,19 +55,22 @@
                         <div class="margin-100 margin-30 width-100 flex-center space-evenly">
                             <button type="submit" class="submit">Envoyer</button>
                         </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-primary" id="resetForgotPassword" data-dismiss="modal">Annuler</button>
+                        </div>
                     </form>
 
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     {% if resetPassword %}
-    <div class="modal fade" id="resetPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <section class="modal fade newsletter divider" id="resetPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Mot de passe oublié</h5>
-                    <button type="rest" class="close" id="restPasswordForm" data-dismiss="modal" aria-label="Close">
+                    <button type="reset" class="close" id="restPasswordForm" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -92,17 +91,21 @@
                     <div class="margin-100 margin-30 width-100 flex-center space-evenly">
                         <button type="submit" class="submit">Envoyer</button>
                     </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-primary" id="restPasswordForm" data-dismiss="modal">Annuler</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
     {% endif %}
-    <div class="modal fade collapse text-small" id="AddUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+    <section class="modal fade collapse text-small newsletter divider" id="AddUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-gray" id="exampleModalCenterTitle2">Créez un compte</h5>
-                    <button type="rest" class="close" id="resetSignUp" data-dismiss="modal" aria-label="Close">
+                    <button type="reset" class="close" id="resetSignUp" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -160,7 +163,6 @@
                                 <div class="row">
                                     <div class="margin-100 width-100 flex-center space-evenly col-sm-12">
                                         <button type="submit" class="submit">S'inscrire</button>
-                                        <button type="reset" class="submit" id="resetSignUp">Annuler</button>
                                     </div>
                                 </div>
                             </div>
@@ -168,14 +170,14 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-primary" id="resetSignUp" data-dismiss="modal">Fermer</button>
+                    <button type="reset" class="btn btn-primary" id="resetSignUp" data-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     {% if userExist %}
-        <div class="modal fade" id="alreadyKnown" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <section class="modal fade newsletter divider" id="alreadyKnown" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -192,55 +194,47 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     {% endif %}
 
-        {% if noUserExist %}
-            <div class="modal fade" id="noUserExistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-gray">Utilisateur inconnu</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body text-gray">
-                            <p>Aucun utilisateur n'a été trouvé avec les informations saisies</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
-                        </div>
+    {% if noUserExist %}
+        <section class="modal fade newsletter divider" id="noUserExistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-gray">Utilisateur inconnu</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-gray">
+                        <p>Aucun utilisateur n'a été trouvé avec les informations saisies</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
             </div>
-        {% endif %}
-</section>
-{% endblock %}
+        </section>
+    {% endif %}
 
-
-{% block script %}
-    <script>
-        $(document).ready(function(){
-
-            if ($('#alreadyKnown').length) {
-                $('#alreadyKnown').modal('show')
-            } else if ($('#resetPasswordModal').length) {
-                $('#resetPasswordModal').modal('show')
-            } else if ($('#noUserExistModal').length) {
-                $('#noUserExistModal').modal('show')
-            }
-            else {
-                $('#SignInModal').modal('show')
-            }
-
-            $("#resetSignUp").click(function() {
-                window.history.back()
-            });
-
-            $("#resetSignIn").click(function() {
-                window.history.back()
-            });
-        });
-    </script>
-{% endblock %}
+    {% if wrongPassword %}
+        <section class="modal fade newsletter divider" id="wrongPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-gray">Connexion impossible</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-gray">
+                        <p>Aucun utilisateur n'a été trouvé avec les informations saisies</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}

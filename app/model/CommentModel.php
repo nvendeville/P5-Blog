@@ -13,6 +13,7 @@ class CommentModel
     private $content;
     private $status;
     private $user;
+    private $titlePost;
 
     /**
      * @return mixed
@@ -126,6 +127,22 @@ class CommentModel
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitlePost()
+    {
+        return $this->titlePost;
+    }
+
+    /**
+     * @param mixed $titlePost
+     */
+    public function setTitlePost($titlePost)
+    {
+        $this->titlePost = $titlePost;
     }
 
    }

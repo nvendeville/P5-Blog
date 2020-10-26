@@ -78,7 +78,34 @@
     </div>
 </section>
 
+    {% if mailSent %}
+        <div class="modal fade" id="sentMailContact" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content padding-modal center">
+                    <div class="modal-body text-gray">
+                        <p>Votre message a bien été envoyé.</p>
+                        <p>Je vous réponds au plus vite.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" id="resetwaitingValidation" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
 
+
+{% endblock %}
+
+{% block script %}
+
+    <script>
+        $(document).ready(function() {
+            if ($('#sentMailContact')) {
+                $('#sentMailContact').modal('show')
+            }
+        });
+    </script>
 
 {% endblock %}
