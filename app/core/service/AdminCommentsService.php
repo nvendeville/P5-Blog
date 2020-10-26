@@ -34,15 +34,18 @@ class AdminCommentsService extends AbstractService
         foreach ($entities as $comment) {
             $commentModel = new CommentModel();
             $this->hydrate($comment, $commentModel);
+
             $userEntity = UserEntity::getInstance()->getById($commentModel->getIdUser());
             //$userEntity = $this->userInstance->getById($postModel->getIdUser());
             $userModel = new UserModel();
             $this->hydrate($userEntity, $userModel);
             $commentModel->setUser($userModel);
+
             $postEntity = PostEntity::getInstance()->getById($commentModel->getIdPost());
             $postModel = new PostModel();
             $this->hydrate($postEntity, $postModel);
-            $commentModel->setIdPost($postModel);
+            $commentModel->setTitlePost($postModel->getTitle());
+
             array_push($commentsModel, $commentModel);
         }
 

@@ -30,7 +30,7 @@ class UserEntity extends DataAccessManager
         $values = [$userModel->getFirstname(),
                 $userModel->getLastname(),
                 $userModel->getAvatar(),
-                $userModel->getPassword(),
+                hashPassword($userModel->getPassword()),
                 $userModel->getEmail(),
                 $userModel->getIsAdmin()];
         $insert = $this->pdo->prepare($statement);
@@ -41,6 +41,7 @@ class UserEntity extends DataAccessManager
         $statement = "SELECT 1 as userExist FROM `users` WHERE email=?";
         return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
     }
+
 
     public function getUserByEmail ($email) {
         $statement = "SELECT * FROM `users` WHERE email=?";

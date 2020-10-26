@@ -8,31 +8,28 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 trait Mailer
 {
-    private $mail;
 
-    private $subject = 'Demande de contact';
-
-    public function sendMail($contactForm)
+    public function sendMail($subject, $message, $replyTo)
     {
-        $this->mail = new PHPMailer(true);
+        $config = ConfigClass::getInstance();
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->isHTML(true);
 
-        $this->mail->isSMTP();
-        $this->mail->SMTPAuth = false;
-        $this->mail->Host = 'localhost';
-        $this->mail->Port = 1025;
+        $mail->SMTPAuth = $config->get("smtp_auth");
+        $mail->Host = $config->get("smtp_host");
+        $mail->Port = $config->get("smtp_port");
+        $mail->setFrom($config->get("smtp_setFromMail"), $config->get("smtp_setFromName"));
+        $mail->addAddress($config->get("smtp_addAddress"));
 
-        $this->mail->setFrom('nvendeville@cenef.fr', 'Nathalie Vendeville');
-        $this->mail->addAddress($contactForm['email']);
-        $this->mail->isHTML(true);
+        $mail->addReplyTo($replyTo);
+        $mail->Subject = $subject;
+        $mail->Body = $message;
 
-        $this->mail->Subject = $this->subject;
-
-        $this->mail->Body = 'Vous avez reçu un message de ' . $contactForm['firstname'] . ' ' . $contactForm['lastname'] . ' : ' . $contactForm['message'];
-        if (!$this->mail->send()) {
+        if (!$mail->send()) {
             echo 'Erreur, message non envoyé.';
-            echo 'Mailer Error: ' . $this->mail->ErrorInfo;
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
             die();
         }
     }
-
 }
