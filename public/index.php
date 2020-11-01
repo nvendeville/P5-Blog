@@ -124,39 +124,40 @@ if (isset($_POST) and !empty($_POST)) {
             $email = $_POST['email'];
             if (!$userController->controlPassword($password1, $password2)) {
                 $userController->resetPassword($email);
-            } $userController->updatePassword($password1, $email);
+            }
+            $userController->updatePassword($password1, $email);
             break;
         default:
             // nothing to do
     }
 }
 // ternaire pour donner la page home en défault
-    $p = (isset($_GET["p"])) ? $_GET["p"] : "home";
+$p = (isset($_GET["p"])) ? $_GET["p"] : "home";
 
 // indique par l'URL de la page vers quel controller aller
-    $controllerName = "App\Controller\\" . ucfirst($p) . "Controller";
-    $controller = new $controllerName();
+$controllerName = "App\Controller\\" . ucfirst($p) . "Controller";
+$controller = new $controllerName();
 
 //indique quelle méthode appeler du controller choisi
-    $method = isset($_GET["action"]) ? $_GET["action"] : 'index';
+$method = isset($_GET["action"]) ? $_GET["action"] : 'index';
 
-    if (isset($_GET['page']) && !empty($_GET['page'])) {
-        $currentPage = (int)strip_tags($_GET['page']);
-    } elseif ($p == 'post' or $p == 'adminPosts' or $p == 'adminComments'
-        or $p == 'adminModifyPost' && $method == 'index') {
-        $currentPage = 1;
-    }
+if (isset($_GET['page']) && !empty($_GET['page'])) {
+    $currentPage = (int)strip_tags($_GET['page']);
+} elseif ($p == 'post' or $p == 'adminPosts' or $p == 'adminComments'
+    or $p == 'adminModifyPost' && $method == 'index') {
+    $currentPage = 1;
+}
 
-    if (isset($_GET["article"])) {
-        $controller->$method($_GET["article"], $currentPage);
-    } elseif (isset($_GET["commentaire"])) {
-        $controller->$method($_GET["commentaire"], $currentPage);
-    } elseif (isset($_GET["adminArticle"])) {
-        $controller->$method($_GET["adminArticle"], $currentPage);
-    } elseif (isset($_GET["categorie"])) {
-        $controller->$method($_GET["categorie"], $currentPage);
-    } elseif (isset($currentPage)) {
-        $controller->$method($currentPage);
-    } else {
-        $controller->$method();
-    }
+if (isset($_GET["article"])) {
+    $controller->$method($_GET["article"], $currentPage);
+} elseif (isset($_GET["commentaire"])) {
+    $controller->$method($_GET["commentaire"], $currentPage);
+} elseif (isset($_GET["adminArticle"])) {
+    $controller->$method($_GET["adminArticle"], $currentPage);
+} elseif (isset($_GET["categorie"])) {
+    $controller->$method($_GET["categorie"], $currentPage);
+} elseif (isset($currentPage)) {
+    $controller->$method($currentPage);
+} else {
+    $controller->$method();
+}

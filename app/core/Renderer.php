@@ -8,7 +8,8 @@ require_once '../vendor/autoload.php';
 
 class Renderer
 {
-    public function render($page_name, $models) {
+    public function render($page_name, $models)
+    {
         $loader = new \Twig\Loader\FilesystemLoader('../app/view');
         $twig = new \Twig\Environment($loader);
         $twig->getExtension(\Twig\Extension\CoreExtension::class)->setDateFormat('d/m/Y H:i', '%d days');
@@ -19,11 +20,12 @@ class Renderer
             $models['firstname'] = getVal($_SESSION['user'], 'firstname', 'getFirstname');
             $models['idConnectedUser'] = getVal($_SESSION['user'], 'id', 'getId');
         }
-        $models= $this->getOtherModel($models);
+        $models = $this->getOtherModel($models);
         echo $twig->render($page_name, $models);
     }
 
-    private function  getOtherModel($models) {
+    private function getOtherModel($models)
+    {
         if (isset($_SESSION['otherModel'])) {
             foreach ($_SESSION['otherModel'] as $key => $value) {
                 $models[$key] = $value;

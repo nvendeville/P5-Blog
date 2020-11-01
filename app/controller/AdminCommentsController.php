@@ -36,7 +36,8 @@ class AdminCommentsController
         $this->renderer->render("adminComments.html.twig", $service->rejectComment($id, $currentPage));
     }
 
-    public function addComment($formAddComment) {
+    public function addComment($formAddComment)
+    {
         $service = new AdminCommentsService();
         $service->addComment($formAddComment);
         $postService = new PostService();

@@ -2,13 +2,13 @@
 
 namespace App\Model;
 
-class HomeModel {
+class HomeModel
+{
     private $id;
     private $hero_firstname;
     private $hero_lastname;
     private $hero_link;
     private $hero_img;
-    private $cv_link;
     private $cv_img;
     private $section_title;
     private $section_content;
@@ -98,21 +98,7 @@ class HomeModel {
         $this->hero_img = $hero_img;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCvLink()
-    {
-        return $this->cv_link;
-    }
-
-    /**
-     * @param mixed $cv_link
-     */
-    public function setCvLink($cv_link)
-    {
-        $this->cv_link = $cv_link;
-    }
+   
 
     /**
      * @return mixed

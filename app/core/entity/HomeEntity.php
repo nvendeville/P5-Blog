@@ -11,7 +11,8 @@ class HomeEntity extends DataAccessManager
     protected static $table = 'home';
     protected static $_instance;
 
-    protected function __construct() {
+    protected function __construct()
+    {
         parent::__construct();
     }
 
@@ -23,12 +24,13 @@ class HomeEntity extends DataAccessManager
         return self::$_instance;
     }
 
-    public function persoHomePage($homeModel) {
+    public function persoHomePage($homeModel)
+    {
         $statement =
             "UPDATE `home` SET `heroFirstname`=?, `heroLastname`=?, `heroLink`=?";
-        $values=[$homeModel->getHeroFirstname(), 
-                $homeModel->getHeroLastname(), 
-                $homeModel->getHeroLink()];
+        $values = [$homeModel->getHeroFirstname(),
+            $homeModel->getHeroLastname(),
+            $homeModel->getHeroLink()];
         if ($homeModel->getHeroImg() != '') {
             $statement = $statement . ", `heroImg`=?";
             array_push($values, $homeModel->getHeroImg());

@@ -79,7 +79,6 @@ class UserModel
     }
 
 
-
     /**
      * @return mixed
      */

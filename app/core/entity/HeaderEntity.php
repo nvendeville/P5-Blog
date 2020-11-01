@@ -11,7 +11,8 @@ class HeaderEntity extends DataAccessManager
     protected static $table = 'header';
     protected static $_instance;
 
-    protected function __construct() {
+    protected function __construct()
+    {
         parent::__construct();
     }
 
@@ -23,7 +24,8 @@ class HeaderEntity extends DataAccessManager
         return self::$_instance;
     }
 
-    public function persoHeader($headerModel) {
+    public function persoHeader($headerModel)
+    {
         $statement = "UPDATE `header` SET `blogTitle`=?";
         $insert = $this->pdo->prepare($statement);
         $insert->execute([$headerModel->getBlogtitle()]);

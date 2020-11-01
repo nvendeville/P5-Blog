@@ -10,7 +10,8 @@ use App\Model\AdminHomeModel;
 class AdminHomeService extends AbstractService
 {
 
-    public function getModel () {
+    public function getModel()
+    {
         $entity = AdminHomeEntity::getInstance()->one();
         $adminModel = new AdminHomeModel();
         $this->hydrate($entity, $adminModel);

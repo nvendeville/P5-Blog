@@ -12,7 +12,8 @@ use App\model\UserModel;
 class CommentService extends AbstractService
 {
 
-    public function getCommentsByPostId ($postId) {
+    public function getCommentsByPostId($postId)
+    {
         $comments = CommentEntity::getInstance()->getCommentsByPostId($postId);
         $commentsModel = [];
         foreach ($comments as $comment) {

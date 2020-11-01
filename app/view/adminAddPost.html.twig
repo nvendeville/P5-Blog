@@ -8,12 +8,13 @@
                 <div class="col-md-7">
                     <h1 class="center text-orange">Ecrire un nouvel article</h1>
                     <div class="form-holder margin-100 flex-center">
-                        <form id="addPostForm" class="select-width-100" action="/P5-Blog/" method="post" enctype="multipart/form-data">
+                        <form id="addPostForm" class="select-width-100" action="/P5-Blog/" method="post"
+                              enctype="multipart/form-data">
                             <input type="hidden" name="token" value="{{ token }}">
                             <input type="hidden" name="type" value="add_post">
                             <input type="hidden" id="status" name="status" value="brouillon">
                             <input type="hidden" name="idUser" value="{{ idConnectedUser }}">
-                            <div class="form-group flex-direction">
+                            <div class="form-group flex-direction text-gray">
                                 <label for="category" class="label-form text-orange">
                                     Catégorie de l'article :
                                 </label>
@@ -60,13 +61,13 @@
 
 {% block script %}
     <script>
-        $(document).ready(function() {
-            $('#btnOnline').click(function(){
+        $(document).ready(function () {
+            $('#btnOnline').click(function () {
                 $('#status').val('en ligne')
                 $('#addPostForm').submit()
                 return false
             });
-            $("#resetAddPost").click(function() {
+            $("#resetAddPost").click(function () {
                 window.history.back()
             });
         });

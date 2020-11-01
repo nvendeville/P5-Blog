@@ -1,98 +1,110 @@
-    <section class="modal fade newsletter divider" id="SignInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Connectez-vous</h5>
-                    <button type="reset" class="close" id="resetSignInTimes" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-gray">
-                    <form id="signInForm" action="/P5-Blog/" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="token" value="{{ token }}">
-                        <input type="hidden" name="type" value="sign-in">
-                        <label for="email" class="text-orange">
-                            Votre email :
-                        </label>
-                        <input class="select-width-100" type="text" name="email" id="email">
-                        <label for="password" class="text-orange">
-                            Votre mot de passe :
-                        </label>
-                        <input class="select-width-100" type="password" name="password" id="password">
-                        <div class="margin-100 margin-30 width-100 flex-center space-evenly">
-                            <button type="submit" class="submit">Se connecter</button>
-                        </div>
-                        <div class="space-evenly margin-30">
-                            <a data-toggle="modal" data-target="#ForgotPasswordModal" role="button" data-dismiss="modal" aria-expanded="false" aria-controls="ForgotPasswordModal">Mot de passe oublié</a>
-                            <a data-toggle="modal" data-target="#AddUserModal" role="button" data-dismiss="modal" aria-expanded="false" aria-controls="AddUserModal">Créer un compte</a>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="reset" class="btn btn-primary" id="resetSignInBtn" data-dismiss="modal" aria-label="Close">Annuler</button>
-                        </div>
-                    </form>
-                </div>
+<section class="modal fade newsletter divider" id="SignInModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Connectez-vous</h5>
+                <button type="reset" class="close" id="resetSignInTimes" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
-    </section>
-
-    <section class="modal fade newsletter divider" id="ForgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Mot de passe oublié</h5>
-                    <button type="reset" class="close" id="resetForgotPassword" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-gray">
-                    <form id="ForgotPasswordForm" action="/P5-Blog/" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="token" value="{{ token }}">
-                        <input type="hidden" name="type" value="forgot-password">
-                        <label for="email" class="text-orange">
-                            Votre email :
-                        </label>
-                        <input class="select-width-100" type="text" name="email" id="email">
-                        <div class="margin-100 margin-30 width-100 flex-center space-evenly">
-                            <button type="submit" class="submit">Envoyer</button>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="reset" class="btn btn-primary" id="resetForgotPassword" data-dismiss="modal">Annuler</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    {% if resetPassword %}
-    <section class="modal fade newsletter divider" id="resetPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Mot de passe oublié</h5>
-                    <button type="reset" class="close" id="restPasswordForm" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-gray">
-                    <form id="restPasswordForm" action="/P5-Blog/" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="token" value="{{ token }}">
-                        <input type="hidden" name="type" value="reset-password">
-                        <input type="hidden" name="email" value="{{ email }}">
-
-                        <label for="newPassword" class="text-orange">
-                        Nouveau mot de passe :
+            <div class="modal-body text-gray">
+                <form id="signInForm" action="/P5-Blog/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="token" value="{{ token }}">
+                    <input type="hidden" name="type" value="sign-in">
+                    <label for="email" class="text-orange">
+                        Votre email :
                     </label>
-                    <input class="select-width-100" type="password" name="newPassword" id="newPassword">
-                        <label for="password" class="text-orange">
-                            Confirmez le nouveau mot de passe :
-                        </label>
-                        <input class="select-width-100" type="password" name="confirmedNewPassword" id="confirmedNewPassword">
+                    <input class="select-width-100" type="text" name="email" id="email">
+                    <label for="password" class="text-orange">
+                        Votre mot de passe :
+                    </label>
+                    <input class="select-width-100" type="password" name="password" id="password">
+                    <div class="margin-100 margin-30 width-100 flex-center space-evenly">
+                        <button type="submit" class="submit">Se connecter</button>
+                    </div>
+                    <div class="space-evenly margin-30">
+                        <a data-toggle="modal" data-target="#ForgotPasswordModal" role="button" data-dismiss="modal"
+                           aria-expanded="false" aria-controls="ForgotPasswordModal">Mot de passe oublié</a>
+                        <a data-toggle="modal" data-target="#AddUserModal" role="button" data-dismiss="modal"
+                           aria-expanded="false" aria-controls="AddUserModal">Créer un compte</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-primary" id="resetSignInBtn" data-dismiss="modal"
+                                aria-label="Close">Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="modal fade newsletter divider" id="ForgotPasswordModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Mot de passe oublié</h5>
+                <button type="reset" class="close" id="resetForgotPassword" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-gray">
+                <form id="ForgotPasswordForm" action="/P5-Blog/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="token" value="{{ token }}">
+                    <input type="hidden" name="type" value="forgot-password">
+                    <label for="email" class="text-orange">
+                        Votre email :
+                    </label>
+                    <input class="select-width-100" type="text" name="email" id="email">
                     <div class="margin-100 margin-30 width-100 flex-center space-evenly">
                         <button type="submit" class="submit">Envoyer</button>
                     </div>
                     <div class="modal-footer">
-                        <button type="reset" class="btn btn-primary" id="restPasswordForm" data-dismiss="modal">Annuler</button>
+                        <button type="reset" class="btn btn-primary" id="resetForgotPassword" data-dismiss="modal">
+                            Annuler
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% if resetPassword %}
+<section class="modal fade newsletter divider" id="resetPasswordModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Mot de passe oublié</h5>
+                <button type="reset" class="close" id="restPasswordForm" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-gray">
+                <form id="restPasswordForm" action="/P5-Blog/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="token" value="{{ token }}">
+                    <input type="hidden" name="type" value="reset-password">
+                    <input type="hidden" name="email" value="{{ email }}">
+
+                    <label for="newPassword" class="text-orange">
+                        Nouveau mot de passe :
+                    </label>
+                    <input class="select-width-100" type="password" name="newPassword" id="newPassword">
+                    <label for="password" class="text-orange">
+                        Confirmez le nouveau mot de passe :
+                    </label>
+                    <input class="select-width-100" type="password" name="confirmedNewPassword"
+                           id="confirmedNewPassword">
+                    <div class="margin-100 margin-30 width-100 flex-center space-evenly">
+                        <button type="submit" class="submit">Envoyer</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-primary" id="restPasswordForm" data-dismiss="modal">
+                            Annuler
+                        </button>
                     </div>
                 </form>
             </div>
@@ -100,7 +112,8 @@
     </div>
     {% endif %}
 
-    <section class="modal fade collapse text-small newsletter divider" id="AddUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+    <section class="modal fade collapse text-small newsletter divider" id="AddUserModal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -110,7 +123,8 @@
                     </button>
                 </div>
                 <div class="modal-body text-gray">
-                    <form id="AddUserForm" class="select-width-100" action="/P5-Blog/" method="post" enctype="multipart/form-data">
+                    <form id="AddUserForm" class="select-width-100" action="/P5-Blog/" method="post"
+                          enctype="multipart/form-data">
                         <input type="hidden" name="token" value="{{ token }}">
                         <input type="hidden" name="type" value="add_user">
                         <input type="hidden" name="isAdmin" value="0">
@@ -157,7 +171,8 @@
                                         <label for="passwordConfirmed" class="text-orange">
                                             Confirmez votre mot de passe
                                         </label>
-                                        <input class="select-width-100" type="password" name="passwordConfirmed" id="passwordConfirmed">
+                                        <input class="select-width-100" type="password" name="passwordConfirmed"
+                                               id="passwordConfirmed">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -177,7 +192,8 @@
     </section>
 
     {% if userExist %}
-        <section class="modal fade newsletter divider" id="alreadyKnown" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+        <section class="modal fade newsletter divider" id="alreadyKnown" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -198,7 +214,8 @@
     {% endif %}
 
     {% if noUserExist %}
-        <section class="modal fade newsletter divider" id="noUserExistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+        <section class="modal fade newsletter divider" id="noUserExistModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -219,7 +236,8 @@
     {% endif %}
 
     {% if wrongPassword %}
-        <section class="modal fade newsletter divider" id="wrongPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+        <section class="modal fade newsletter divider" id="wrongPasswordModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

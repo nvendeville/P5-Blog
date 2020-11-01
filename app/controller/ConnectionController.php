@@ -20,7 +20,7 @@ class ConnectionController
     public function index($userExist = false)
     {
         $model = new ConnectionService();
-        $homeModel =  $model->getModel();
+        $homeModel = $model->getModel();
         $this->renderer->render("connection.html.twig", $homeModel);
     }
 }

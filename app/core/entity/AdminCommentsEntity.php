@@ -14,7 +14,8 @@ class AdminCommentsEntity extends DataAccessManager
     private $validated = 2;
     private $deleted = 3;
 
-    protected function __construct() {
+    protected function __construct()
+    {
         parent::__construct();
     }
 
@@ -26,12 +27,14 @@ class AdminCommentsEntity extends DataAccessManager
         return self::$_instance;
     }
 
-    public function validateComment($id) {
+    public function validateComment($id)
+    {
         $statement = $this->pdo->prepare("UPDATE `comments` SET `status`=$this->validated WHERE comments.id=?");
         $statement->execute([$id]);
     }
 
-    public function rejectComment($id) {
+    public function rejectComment($id)
+    {
         $statement = $this->pdo->prepare("UPDATE `comments` SET `status`=$this->deleted WHERE comments.id=?");
         $statement->execute([$id]);
     }

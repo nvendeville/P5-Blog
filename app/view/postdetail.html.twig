@@ -13,13 +13,16 @@
                                 <div class="category"><a href="#">{{ post.category }}</a></div>
                             </div>
                             <h1>{{ post.title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                            <div>Dernière mise à jour : {{ post.lastUpdate | date(U) }}</div>
                             <div class="post-footer d-flex align-items-center flex-column flex-sm-row">
                                 <a href="#" class="author d-flex align-items-center flex-wrap">
-                                    <div class="avatar"><img src="img/{{ post.user.avatar }}" alt="..." class="img-fluid"></div>
-                                    <div class="title"><span>{{ post.user.firstname }} {{ post.user.lastname }}</span></div>
+                                    <div class="avatar"><img src="img/{{ post.user.avatar }}" alt="..."
+                                                             class="img-fluid"></div>
+                                    <div class="title"><span>{{ post.user.firstname }} {{ post.user.lastname }}</span>
+                                    </div>
                                 </a>
                                 <div class="d-flex align-items-center flex-wrap">
-                                    <div class="date">{{ post.creationDate | date(U)}}</div>
+                                    <div class="date">{{ post.creationDate | date(U) }}</div>
                                     <div class="comments meta-last">
                                         <i class="icon-comment"></i>
                                         {% set count = 0 %}
@@ -34,7 +37,7 @@
                                 <p class="lead">{{ post.header }}</p>
                                 <p>{{ post.content }}</p>
                             </div>
-                           <div class="post-comments">
+                            <div class="post-comments">
                                 <header>
                                     {% set count = 0 %}
                                     {% for comment in comments %}
@@ -47,8 +50,10 @@
                                     <div class="comment">
                                         <div class="comment-header d-flex justify-content-between">
                                             <div class="user d-flex align-items-center">
-                                                <div class="image"><img src="img/{{ comment.user.avatar }}" alt="..." class="img-fluid rounded-circle"></div>
-                                                <div class="title"><strong>{{ comment.user.firstname }} {{ comment.user.lasttname }}</strong>
+                                                <div class="image"><img src="img/{{ comment.user.avatar }}" alt="..."
+                                                                        class="img-fluid rounded-circle"></div>
+                                                <div class="title">
+                                                    <strong>{{ comment.user.firstname }} {{ comment.user.lasttname }}</strong>
                                                     <span class="date">{{ comment.creationDate | date(U) }}</span></div>
                                             </div>
                                         </div>
@@ -63,30 +68,35 @@
                                     <h3 class="h6">Ajouter un commentaire</h3>
 
                                     {% if logged %}
-                                    <form id="addCommentForm"  action="/P5-blog/public/?p=post&action=detail&article={{ post.id }}" method="post" class="commenting-form">
-                                        <input type="hidden" name="token" value="{{ token }}">
-                                        <input type="hidden" name="type" value="add_comment">
-                                        <input type="hidden" id="status" name="status" value="to_validate">
-                                        <input type="hidden" name="idPost" value="{{ post.id }}">
-                                        <input type="hidden" name="idUser" value="{{ idConnectedUser }}">
-                                        <div class="row">
-                                            <div class="form-group col-md-12">
-                                                <textarea name="content" id="content" placeholder="Entrez votre commentaire" class="form-control"></textarea>
+                                        <form id="addCommentForm"
+                                              action="/P5-blog/public/?p=post&action=detail&article={{ post.id }}"
+                                              method="post" class="commenting-form">
+                                            <input type="hidden" name="token" value="{{ token }}">
+                                            <input type="hidden" name="type" value="add_comment">
+                                            <input type="hidden" id="status" name="status" value="to_validate">
+                                            <input type="hidden" name="idPost" value="{{ post.id }}">
+                                            <input type="hidden" name="idUser" value="{{ idConnectedUser }}">
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <textarea name="content" id="content"
+                                                              placeholder="Entrez votre commentaire"
+                                                              class="form-control"></textarea>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <button type="submit" class="btn btn-secondary">Envoyer</button>
+                                                </div>
                                             </div>
-                                            <div class="form-group col-md-12">
-                                                <button type="submit" class="btn btn-secondary">Envoyer</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
                                     {% else %}
-                                    <div class="alert alert-warning latest-posts-width-100 space-between">
-                                        <div>
+                                        <div class="alert alert-warning latest-posts-width-100 space-between">
+                                            <div>
                                             Pour pouvoir commenter, vous devez vous connecter
                                         </div>
-                                        <div>
-                                            <a href="#" data-toggle="modal" data-target="#SignInModal">Se connecter</a>
+                                            <div>
+                                                <a href="#" data-toggle="modal" data-target="#SignInModal">Se
+                                                    connecter</a>
+                                            </div>
                                         </div>
-                                    </div>
                                     {% endif %}
                                 </header>
 
@@ -97,20 +107,22 @@
                 </div>
             </main>
             {% if addedComment %}
-            <div class="modal fade" id="waitingValidation" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content padding-modal center">
-                        <div class="modal-body text-gray">
-                            <p>Votre commentaire a bien été enregistré.</p>
-                            <p>Il sera en ligne après validation</p>
-                            <p>de l'administrateur du blog.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" id="resetwaitingValidation" data-dismiss="modal">Ok</button>
+                <div class="modal fade" id="waitingValidation" tabindex="-1" role="dialog" aria-hidden="true"
+                     data-backdrop="static">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content padding-modal center">
+                            <div class="modal-body text-gray">
+                                <p>Votre commentaire a bien été enregistré.</p>
+                                <p>Il sera en ligne après validation</p>
+                                <p>de l'administrateur du blog.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" id="resetwaitingValidation" data-dismiss="modal">Ok
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             {% endif %}
 
             <aside class="col-lg-4">
@@ -128,7 +140,7 @@
 
 {% block script %}
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             if ($('#waitingValidation')) {
                 $('#waitingValidation').modal('show')
             }
