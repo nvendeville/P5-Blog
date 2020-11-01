@@ -16,7 +16,8 @@ class AdminModifyPostController
         $this->renderer = new Renderer();
     }
 
-    public function index($id, $currentPage) {
+    public function index($id, $currentPage)
+    {
         $service = new AdminPostsService();
         $post = $service->getPost($id);
         $post["currentPage"] = $currentPage;
@@ -24,13 +25,13 @@ class AdminModifyPostController
 
     }
 
-    public function modifyPost($formModifyPost, $id, $currentPage) {
+    public function modifyPost($formModifyPost, $id, $currentPage)
+    {
         $service = new AdminPostsService();
         $service->modifyPost($formModifyPost, $id);
         return $service->getAll($currentPage);
 
     }
-
 
 
 }

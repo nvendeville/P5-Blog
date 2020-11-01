@@ -2,176 +2,193 @@
 
 {% block body %}
 
-<section class="divider newsletter">
-    <h1 class="center text-orange">Personnaliser votre page d'accueil</h1>
-    <div class="container center alert alert-warning margin-100 margin-30">
+    <section class="divider newsletter">
+        <h1 class="center text-orange">Personnaliser votre page d'accueil</h1>
+        <div class="container center alert alert-warning margin-100 margin-30">
         Pour une personnalisation optimale, tous les champs de cette page doivent être renseignés.
     </div>
-    <form id="persoHomeForm" class="select-width-100" action="/P5-Blog/" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="token" value="{{ token }}">
-        <input type="hidden" name="type" value="perso-home">
-        <div class="container">
-            <fieldset>
-                <legend class="text-gray">
-                    Vos coordonnées :
-                </legend>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label class="text-orange">
-                            Prénom coordonnées :
-                        </label>
-                        <input class="select-width-100" type="text" name="firstname" id="firstname" value="{{ footer.firstname }}">
-                        <label class="text-orange">
-                            Votre adresse :
-                        </label>
-                        <input class="select-width-100" type="text" name="address" id="address" value="{{ footer.address }}">
+        <form id="persoHomeForm" class="select-width-100" action="/P5-Blog/" method="post"
+              enctype="multipart/form-data">
+            <input type="hidden" name="token" value="{{ token }}">
+            <input type="hidden" name="type" value="perso-home">
+            <div class="container">
+                <fieldset>
+                    <legend class="text-gray">
+                        Vos coordonnées :
+                    </legend>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="text-orange">
+                                Prénom coordonnées :
+                            </label>
+                            <input class="select-width-100" type="text" name="firstname" id="firstname"
+                                   value="{{ footer.firstname }}">
+                            <label class="text-orange">
+                                Votre adresse :
+                            </label>
+                            <input class="select-width-100" type="text" name="address" id="address"
+                                   value="{{ footer.address }}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="text-orange">
+                                Nom coordonnées :
+                            </label>
+                            <input class="select-width-100" type="text" name="lastname" id="lastname"
+                                   value="{{ footer.lastname }}">
+                            <label class="text-orange">
+                                Votre téléphone :
+                            </label>
+                            <input class="select-width-100" type="text" name="phoneNumber" id="phoneNumber"
+                                   value="{{ footer.phoneNumber }}">
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label class="text-orange">
-                            Nom coordonnées :
-                        </label>
-                        <input class="select-width-100" type="text" name="lastname" id="lastname" value="{{ footer.lastname }}">
-                        <label class="text-orange">
-                            Votre téléphone :
-                        </label>
-                        <input class="select-width-100" type="text" name="phoneNumber" id="phoneNumber" value="{{ footer.phoneNumber }}">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label class="text-orange">
+                                Votre email :
+                            </label>
+                            <input class="select-width-100" type="text" name="email" id="email"
+                                   value="{{ footer.email }}">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <label class="text-orange">
-                            Votre email :
-                        </label>
-                        <input class="select-width-100" type="text" name="email" id="email" value="{{ footer.email }}">
+                </fieldset>
+                <fieldset class="text-gray">
+                    <legend>
+                        Réseaux sociaux et formulaire de contact :
+                    </legend>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="text-orange">
+                                Lien facebook :
+                            </label>
+                            <input class="select-width-100" type="text" name="facebookLink" id="facebookLink"
+                                   value="{{ footer.facebookLink }}">
+                            <label class="text-orange">
+                                Lien twitter :
+                            </label>
+                            <input class="select-width-100" type="text" name="twitterLink" id="twitterLink"
+                                   value="{{ footer.twitterLink }}">
+                            <label class="text-orange">
+                                Lien instagram :
+                            </label>
+                            <input class="select-width-100" type="text" name="instagramLink" id="instagramLink"
+                                   value="{{ footer.instagramLink }}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="text-orange">
+                                Lien linkedin :
+                            </label>
+                            <input class="select-width-100" type="text" name="linkedinLink" id="linkedinLink"
+                                   value="{{ footer.linkedinLink }}">
+                            <label class="text-orange">
+                                Lien github :
+                            </label>
+                            <input class="select-width-100" type="text" name="githubLink" id="githubLink"
+                                   value="{{ footer.githubLink }}">
+                            <label class="text-orange">
+                                Image du Formulaire de contact :
+                            </label>
+                            <input class="select-width-100" type="file" name="dividerImg" id="dividerImg">
+                        </div>
                     </div>
-                </div>
-            </fieldset>
-            <fieldset class="text-gray">
-                <legend>
-                    Réseaux sociaux et formulaire de contact :
-                </legend>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label class="text-orange">
-                            Lien facebook :
-                        </label>
-                        <input class="select-width-100" type="text" name="facebookLink" id="facebookLink" value="{{ footer.facebookLink }}">
-                        <label class="text-orange">
-                            Lien twitter :
-                        </label>
-                        <input class="select-width-100" type="text" name="twitterLink" id="twitterLink" value="{{ footer.twitterLink }}">
-                        <label class="text-orange">
-                            Lien instagram :
-                        </label>
-                        <input class="select-width-100" type="text" name="instagramLink" id="instagramLink" value="{{ footer.instagramLink }}">
+                </fieldset>
+                <fieldset class="text-gray">
+                    <legend>
+                        Entête de la page :
+                    </legend>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="text-orange">
+                                Titre de votre blog :
+                            </label>
+                            <input class="select-width-100" type="text" name="blogTitle" id="blogTitle"
+                                   value="{{ header.blogTitle }}">
+                            <label class="text-orange">
+                                Votre prénom :
+                            </label>
+                            <input class="select-width-100" type="text" name="heroFirstname" id="heroFirstname"
+                                   value="{{ home.heroFirstname }}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="text-orange">
+                                Phrase d'accroche :
+                            </label>
+                            <input class="select-width-100" type="text" name="heroLink" id="herolink"
+                                   value="{{ home.heroLink }}">
+                            <label class="text-orange">
+                                Votre nom :
+                            </label>
+                            <input class="select-width-100" type="text" name="heroLastname" id="heroLastname"
+                                   value="{{ home.heroLastname }}">
+                        </div>
                     </div>
-                   <div class="col-sm-6">
-                       <label class="text-orange">
-                           Lien linkedin :
-                       </label>
-                       <input class="select-width-100" type="text" name="linkedinLink" id="linkedinLink" value="{{ footer.linkedinLink }}">
-                       <label class="text-orange">
-                           Lien github :
-                       </label>
-                       <input class="select-width-100" type="text" name="githubLink" id="githubLink" value="{{ footer.githubLink }}">
-                       <label class="text-orange">
-                           Image du Formulaire de contact :
-                       </label>
-                       <input class="select-width-100" type="file" name="dividerImg" id="dividerImg">
-                   </div>
-                </div>
-            </fieldset>
-            <fieldset class="text-gray">
-                <legend>
-                    Entête de la page :
-                </legend>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label class="text-orange">
-                            Titre de votre blog :
-                        </label>
-                        <input class="select-width-100" type="text" name="blogTitle" id="blogTitle" value="{{ header.blogTitle }}">
-                        <label class="text-orange">
-                            Votre prénom :
-                        </label>
-                        <input class="select-width-100" type="text" name="heroFirstname" id="heroFirstname" value="{{ home.heroFirstname }}">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label class="text-orange">
+                                Image de l'entête :
+                            </label>
+                            <input class="select-width-100 height-60" type="file" name="heroImg" id="heroImg">
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label class="text-orange">
-                            Phrase d'accroche :
-                        </label>
-                        <input class="select-width-100" type="text" name="heroLink" id="herolink" value="{{ home.heroLink }}">
-                        <label class="text-orange">
-                            Votre nom :
-                        </label>
-                        <input class="select-width-100" type="text" name="heroLastname" id="heroLastname" value="{{ home.heroLastname }}">
+                </fieldset>
+                <fieldset class="text-gray">
+                    <legend>
+                        Contenu de la page :
+                    </legend>
+                    <label class="text-orange">
+                        Titre de la section :
+                    </label>
+                    <input class="select-width-100" type="text" name="sectionTitle" id="sectionTitle"
+                           value="{{ home.sectionTitle }}">
+                    <label class="text-orange">
+                        Contenu de la section :
+                    </label>
+                    <textarea class="textarea section-content select-width-100" name="sectionContent"
+                              id="sectionContent">{{ home.sectionContent }}</textarea>
+                    <label class="text-orange">
+                </fieldset>
+                <fieldset class="text-gray">
+                    <legend>
+                        Vos compétences :
+                    </legend>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="text-orange">
+                                Image Compétence 1 :
+                            </label>
+                            <input class="select-width-100" type="file" name="galleryImg1" id="galleryImg1">
+                            <label class="text-orange">
+                                Image Compétence 3 :
+                            </label>
+                            <input class="select-width-100" type="file" name="galleryImg3" id="galleryImg3">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="text-orange">
+                                Image Compétence 2 :
+                            </label>
+                            <input class="select-width-100" type="file" name="galleryImg2" id="galleryImg2">
+                            <label class="text-orange">
+                                Image Compétence 4 :
+                            </label>
+                            <input class="select-width-100" type="file" name="galleryImg4" id="galleryImg4">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <label class="text-orange">
-                            Image de l'entête :
-                        </label>
-                        <input class="select-width-100 height-60" type="file" name="heroImg" id="heroImg">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label class="text-orange">
+                                Image du CV :
+                            </label>
+                            <input class="select-width-100" type="file" name="cvImg" id="cvImg">
+                        </div>
                     </div>
-                </div>
-            </fieldset>
-            <fieldset class="text-gray">
-                <legend>
-                    Contenu de la page :
-                </legend>
-                <label class="text-orange">
-                    Titre de la section :
-                </label>
-                <input class="select-width-100" type="text" name="sectionTitle" id="sectionTitle" value="{{ home.sectionTitle }}">
-                <label class="text-orange">
-                    Contenu de la section :
-                </label>
-                <textarea class="textarea section-content select-width-100" name="sectionContent" id="sectionContent" >{{ home.sectionContent }}</textarea>
-                <label class="text-orange">
-            </fieldset>
-            <fieldset class="text-gray">
-                <legend>
-                    Vos compétences :
-                </legend>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label class="text-orange">
-                            Image Compétence 1 :
-                        </label>
-                        <input class="select-width-100" type="file" name="galleryImg1" id="galleryImg1">
-                        <label class="text-orange">
-                            Image Compétence 3 :
-                        </label>
-                        <input class="select-width-100" type="file" name="galleryImg3" id="galleryImg3">
-                    </div>
-                    <div class="col-sm-6">
-                        <label class="text-orange">
-                            Image Compétence 2 :
-                        </label>
-                        <input class="select-width-100" type="file" name="galleryImg2" id="galleryImg2">
-                        <label class="text-orange">
-                            Image Compétence 4 :
-                        </label>
-                        <input class="select-width-100" type="file" name="galleryImg4" id="galleryImg4">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <label class="text-orange">
-                            Image du CV :
-                        </label>
-                        <input class="select-width-100" type="file" name="cvImg" id="cvImg">
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div class="width-100 margin-100 flex-center space-evenly">
-            <button type="submit" class="submit">Valider</button>
-            <button id="resetPersoHome" type="reset" class="submit">Annuler</button>
-        </div>
-    </form>
-</section>
+                </fieldset>
+            </div>
+            <div class="width-100 margin-100 flex-center space-evenly">
+                <button type="submit" class="submit">Valider</button>
+                <button id="resetPersoHome" type="reset" class="submit">Annuler</button>
+            </div>
+        </form>
+    </section>
 
 
 {% endblock %}
@@ -180,8 +197,8 @@
 
 {% block script %}
     <script>
-        $(document).ready(function() {
-            $("#resetPersoHome").click(function() {
+        $(document).ready(function () {
+            $("#resetPersoHome").click(function () {
                 window.history.back()
             });
         });

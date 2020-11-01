@@ -2,7 +2,8 @@
 
 namespace App\Model;
 
-class HeaderModel {
+class HeaderModel
+{
     private $id;
     private $blog_title;
 
@@ -38,6 +39,6 @@ class HeaderModel {
         $this->blog_title = $blog_title;
     }
 
-    
+
 }
 

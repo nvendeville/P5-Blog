@@ -10,7 +10,8 @@ use App\model\ConnectionModel;
 class ConnectionService extends AbstractService
 {
 
-    public function getModel () {
+    public function getModel()
+    {
         $entity = ConnectionEntity::getInstance()->one();
         $homeModel = new ConnectionModel();
         $this->hydrate($entity, $homeModel);

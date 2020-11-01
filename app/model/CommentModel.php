@@ -112,7 +112,6 @@ class CommentModel
     }
 
 
-
     /**
      * @return mixed
      */
@@ -145,4 +144,4 @@ class CommentModel
         $this->titlePost = $titlePost;
     }
 
-   }
+}

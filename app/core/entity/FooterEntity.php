@@ -11,7 +11,8 @@ class FooterEntity extends DataAccessManager
     protected static $table = 'footer';
     protected static $_instance;
 
-    protected function __construct() {
+    protected function __construct()
+    {
         parent::__construct();
     }
 
@@ -23,20 +24,21 @@ class FooterEntity extends DataAccessManager
         return self::$_instance;
     }
 
-    public function persoFooter ($footerModel) {
+    public function persoFooter($footerModel)
+    {
         $statement =
             "UPDATE `footer` SET `firstname`=?, `lastname`=?, `address`=?, `phoneNumber`=?, `email`=?, `facebookLink`=?,
                   `twitterLink`=?, `instagramLink`=?, `linkedinLink`=?, `githubLink`=?";
-        $values=[$footerModel->getFirstname(),
-                $footerModel->getLastname(),
-                $footerModel->getAddress(),
-                $footerModel->getPhoneNumber(),
-                $footerModel->getEmail(),
-                $footerModel->getFacebookLink(),
-                $footerModel->getTwitterLink(),
-                $footerModel->getInstagramLink(),
-                $footerModel->getLinkedinLink(),
-                $footerModel->getGithubLink()];
+        $values = [$footerModel->getFirstname(),
+            $footerModel->getLastname(),
+            $footerModel->getAddress(),
+            $footerModel->getPhoneNumber(),
+            $footerModel->getEmail(),
+            $footerModel->getFacebookLink(),
+            $footerModel->getTwitterLink(),
+            $footerModel->getInstagramLink(),
+            $footerModel->getLinkedinLink(),
+            $footerModel->getGithubLink()];
         $insert = $this->pdo->prepare($statement);
         $insert->execute($values);
     }

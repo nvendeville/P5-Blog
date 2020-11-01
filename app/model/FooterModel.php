@@ -2,7 +2,8 @@
 
 namespace App\Model;
 
-class FooterModel {
+class FooterModel
+{
     private $id;
     private $firstname;
     private $lastname;
@@ -191,6 +192,6 @@ class FooterModel {
         $this->github_link = $github_link;
     }
 
-    
+
 }
 

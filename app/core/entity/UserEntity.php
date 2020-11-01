@@ -11,7 +11,8 @@ class UserEntity extends DataAccessManager
     protected static $table = 'users';
     protected static $_instance;
 
-    protected function __construct() {
+    protected function __construct()
+    {
         parent::__construct();
     }
 
@@ -23,33 +24,37 @@ class UserEntity extends DataAccessManager
         return self::$_instance;
     }
 
-    public function addUser($userModel) {
+    public function addUser($userModel)
+    {
         $statement =
             "INSERT INTO `users` (`firstname`, `lastname`, `avatar`, `password`, `email`, `isAdmin`) 
             VALUES (?,?,?,?,?,?)";
         $values = [$userModel->getFirstname(),
-                $userModel->getLastname(),
-                $userModel->getAvatar(),
-                hashPassword($userModel->getPassword()),
-                $userModel->getEmail(),
-                $userModel->getIsAdmin()];
+            $userModel->getLastname(),
+            $userModel->getAvatar(),
+            hashPassword($userModel->getPassword()),
+            $userModel->getEmail(),
+            $userModel->getIsAdmin()];
         $insert = $this->pdo->prepare($statement);
         $insert->execute($values);
     }
 
-    public function userExist ($email) {
+    public function userExist($email)
+    {
         $statement = "SELECT 1 as userExist FROM `users` WHERE email=?";
         return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
     }
 
 
-    public function getUserByEmail ($email) {
+    public function getUserByEmail($email)
+    {
         $statement = "SELECT * FROM `users` WHERE email=?";
         return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
 
     }
 
-    public function updatePassword ($newPassword, $email) {
+    public function updatePassword($newPassword, $email)
+    {
         $statement = "UPDATE `users` SET password=? WHERE email=?";
         $values = [hashPassword($newPassword), $email];
         $update = $this->pdo->prepare($statement);

@@ -24,13 +24,15 @@ class HomeController
         $this->renderer->render("home.html.twig", $homeModel);
     }
 
-    public function sendContactRequest ($contactForm) {
+    public function sendContactRequest($contactForm)
+    {
         $homeService = new HomeService();
         $homeService->sendContactRequest($contactForm);
         $_SESSION['otherModel'] = ['mailSent' => true];
     }
 
-    public function persoHomePage ($persoHomeForm) {
+    public function persoHomePage($persoHomeForm)
+    {
         $homeService = new HomeService();
         $homeService->persoHomePage($persoHomeForm);
     }

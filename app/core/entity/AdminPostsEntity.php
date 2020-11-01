@@ -7,7 +7,6 @@ namespace App\core\entity;
 use App\core\database\DataAccessManager;
 
 
-
 class AdminPostsEntity extends DataAccessManager
 {
     protected static $table = 'posts';
@@ -16,7 +15,8 @@ class AdminPostsEntity extends DataAccessManager
     private $archived = 2;
     private $posted = 3;
 
-    protected function __construct() {
+    protected function __construct()
+    {
         parent::__construct();
     }
 
@@ -28,34 +28,39 @@ class AdminPostsEntity extends DataAccessManager
         return self::$_instance;
     }
 
-    public function getPaginatedPosts ($from, $nbPost) {
+    public function getPaginatedPosts($from, $nbPost)
+    {
         $statement =
             "SELECT * FROM `posts` ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
         return $this->query($statement, get_called_class(), false);
     }
 
-    public function getNbPosts() {
+    public function getNbPosts()
+    {
         $statement =
             "SELECT COUNT(posts.id) as nbPosts FROM posts";
         return $this->query($statement, get_called_class(), true);
     }
 
 
-    public function validatePost($id) {
-        $date= date("Y-m-d H:i:s");
+    public function validatePost($id)
+    {
+        $date = date("Y-m-d H:i:s");
         $statement = $this->pdo->prepare("UPDATE `posts` SET `status`=$this->posted, `lastUpdate`='$date' WHERE posts.id=?");
         $statement->execute([$id]);
     }
 
-    public function archivePost($id) {
+    public function archivePost($id)
+    {
         $statement = $this->pdo->prepare("UPDATE `posts` SET `status`=$this->archived WHERE posts.id=?");
         $statement->execute([$id]);
     }
 
-    public function modifyPost($adminPostModel, $id) {
-        $date= date("Y-m-d H:i:s");
+    public function modifyPost($adminPostModel, $id)
+    {
+        $date = date("Y-m-d H:i:s");
         $statement = "UPDATE `posts` SET `title`=?, `header`=?, `content`=?";
-        $values=[$adminPostModel->getTitle(), $adminPostModel->getHeader(), $adminPostModel->getContent()];
+        $values = [$adminPostModel->getTitle(), $adminPostModel->getHeader(), $adminPostModel->getContent()];
         if ($adminPostModel->getImg() != '') {
             $statement = $statement . ", `img`=?";
             array_push($values, $adminPostModel->getImg());

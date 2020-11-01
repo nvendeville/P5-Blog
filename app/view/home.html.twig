@@ -2,84 +2,91 @@
 
 {% block body %}
 
-<!-- Hero Section-->
-<section style="background: url(img/{{ home.heroImg }}); background-size: cover; background-position: center center;" class="hero" >
-    <div class="container">
+    <!-- Hero Section-->
+    <section
+            style="background: url(img/{{ home.heroImg }}); background-size: cover; background-position: center center;"
+            class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <h1 class="text-orange">{{ home.heroFirstname }} {{ home.heroLastname }}</h1><a href="#"
+                                                                                                    class="hero-link text-orange">{{ home.heroLink }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro Section-->
+    <section class="intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="h3">{{ home.sectionTitle }}</h2>
+                    <p class="text-big">{{ home.sectionContent }}</p>
+                </div>
+                <div class="col-lg-4">
+                    <h2 class="h3">Téléchargez mon CV !</h2>
+                    <a href="img/CV.jpg" download ><img src="img/{{ home.cvImg }}" alt="..." class="img-fluid"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section-->
+    <section class="gallery no-padding">
         <div class="row">
-            <div class="col-lg-7">
-                <h1 class="text-orange">{{ home.heroFirstname }} {{ home.heroLastname }}</h1><a href="#" class="hero-link text-orange">{{ home.heroLink }}</a>
+            <div class="mix col-lg-3 col-md-3 col-sm-6">
+                <div class="item"><img src="img/{{ home.galleryImg1 }}" alt="..." class="img-fluid"></div>
+            </div>
+            <div class="mix col-lg-3 col-md-3 col-sm-6">
+                <div class="item"><img src="img/{{ home.galleryImg2 }}" alt="..." class="img-fluid"></div>
+            </div>
+            <div class="mix col-lg-3 col-md-3 col-sm-6">
+                <div class="item"><img src="img/{{ home.galleryImg3 }}" alt="..." class="img-fluid"></div>
+            </div>
+            <div class="mix col-lg-3 col-md-3 col-sm-6">
+                <div class="item"><img src="img/{{ home.galleryImg4 }}" alt="..." class="img-fluid"></div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Intro Section-->
-<section class="intro">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <h2 class="h3">{{ home.sectionTitle }}</h2>
-                <p class="text-big">{{ home.sectionContent }}</p>
-            </div>
-            <div class="col-lg-4">
-                <h2 class="h3">Téléchargez mon CV !</h2>
-                <a href="img/CV.jpg"><img src="img/{{ home.cvImg }}" alt="..." class="img-fluid"></a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Gallery Section-->
-<section class="gallery no-padding">
-    <div class="row">
-        <div class="mix col-lg-3 col-md-3 col-sm-6">
-            <div class="item"><img src="img/{{ home.galleryImg1 }}" alt="..." class="img-fluid"></div>
-        </div>
-        <div class="mix col-lg-3 col-md-3 col-sm-6">
-            <div class="item"><img src="img/{{ home.galleryImg2 }}" alt="..." class="img-fluid"></div>
-        </div>
-        <div class="mix col-lg-3 col-md-3 col-sm-6">
-            <div class="item"><img src="img/{{ home.galleryImg3 }}" alt="..." class="img-fluid"></div>
-        </div>
-        <div class="mix col-lg-3 col-md-3 col-sm-6">
-            <div class="item"><img src="img/{{ home.galleryImg4 }}" alt="..." class="img-fluid"></div>
-        </div>
-    </div>
-</section>
-
-<!-- Divider Section-->
-<section style="background: url(img/{{ home.dividerImg }}); background-size: cover; background-position: center bottom" class="divider newsletter">
-    <div class="container">
-        <div class="row flex-center">
-            <div class="col-md-7">
-                <h2>Contactez-moi</h2>
-                <div class="form-holder">
-                    <form id="contactForm" class="select-width-100" action="/P5-Blog/" method="post">
-                        <input type="hidden" name="token" value="{{ token }}">
-                        <input type="hidden" name="type" value="contact_form">
-                        <div class="form-group">
-                            <input type="text" name="firstname" id="firstname" placeholder="Entrez votre prénom">
-                            <input type="text" name="lastname" id="lastname" placeholder="Entrez votre nom">
-                            <input type="email" name="email" id="email" placeholder="Entrez votre adresse mail">
-                            <textarea class="textarea" name="message" id="message" placeholder="Entrez votre message"></textarea>
-                        </div>
-                        <button type="submit" class="submit">Envoyer</button>
-                    </form>
-                    <div class="modal fade" id="mailWellSent" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content padding-modal center">
-                                <p>Votre message a bien été envoyé</p>
+    <!-- Divider Section-->
+    <section
+            style="background: url(img/{{ home.dividerImg }}); background-size: cover; background-position: center bottom"
+            class="divider newsletter">
+        <div class="container">
+            <div class="row flex-center">
+                <div class="col-md-7">
+                    <h2>Contactez-moi</h2>
+                    <div class="form-holder">
+                        <form id="contactForm" class="select-width-100" action="/P5-Blog/" method="post">
+                            <input type="hidden" name="token" value="{{ token }}">
+                            <input type="hidden" name="type" value="contact_form">
+                            <div class="form-group">
+                                <input type="text" name="firstname" id="firstname" placeholder="Entrez votre prénom">
+                                <input type="text" name="lastname" id="lastname" placeholder="Entrez votre nom">
+                                <input type="email" name="email" id="email" placeholder="Entrez votre adresse mail">
+                                <textarea class="textarea" name="message" id="message"
+                                          placeholder="Entrez votre message"></textarea>
+                            </div>
+                            <button type="submit" class="submit">Envoyer</button>
+                        </form>
+                        <div class="modal fade" id="mailWellSent" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content padding-modal center">
+                                    <p>Votre message a bien été envoyé</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     {% if mailSent %}
-        <div class="modal fade" id="sentMailContact" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal fade" id="sentMailContact" tabindex="-1" role="dialog" aria-hidden="true"
+             data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content padding-modal center">
                     <div class="modal-body text-gray">
@@ -101,7 +108,7 @@
 {% block script %}
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             if ($('#sentMailContact')) {
                 $('#sentMailContact').modal('show')
             }

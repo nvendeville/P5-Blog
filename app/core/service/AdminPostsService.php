@@ -14,6 +14,8 @@ use App\model\UserModel;
 class AdminPostsService extends AbstractService
 {
 
+    const NB_POSTS_PER_PAGE = 5;
+
     public function getModel()
     {
         $entity = AdminPostsEntity::getInstance()->one();
@@ -22,7 +24,30 @@ class AdminPostsService extends AbstractService
         return ["header" => $this->getHeader(), "footer" => $this->getFooter()];
     }
 
-    const NB_POSTS_PER_PAGE = 5;
+    public function getPost($id)
+    {
+        $post = AdminPostsEntity::getInstance()->getById($id);
+        $AdminPostModel = new AdminPostsModel();
+        $this->hydrate($post, $AdminPostModel);
+        $userEntity = UserEntity::getInstance()->getById($AdminPostModel->getIdUser());
+        $userModel = new UserModel();
+        $this->hydrate($userEntity, $userModel);
+        $AdminPostModel->setUser($userModel);
+        return ["header" => $this->getHeader(), "post" => $AdminPostModel];
+    }
+
+    public function addPost($formAddPost)
+    {
+        $postModel = new PostModel();
+        $this->hydrateFromPostArray($formAddPost, $postModel);
+        PostEntity::getInstance()->addPost($postModel);
+    }
+
+    public function validatePost($id, $currentPage)
+    {
+        AdminPostsEntity::getInstance()->validatePost($id);
+        return $this->getAll($currentPage);
+    }
 
     public function getAll($currentPage)
     {
@@ -44,32 +69,6 @@ class AdminPostsService extends AbstractService
     {
         $nbPosts = AdminPostsEntity::getInstance()->getNbPosts();
         return ceil((int)$nbPosts->nbPosts / (int)self::NB_POSTS_PER_PAGE);
-    }
-
-    public function getPost($id)
-    {
-        $post = AdminPostsEntity::getInstance()->getById($id);
-        $AdminPostModel = new AdminPostsModel();
-        $this->hydrate($post, $AdminPostModel);
-        $userEntity = UserEntity::getInstance()->getById($AdminPostModel->getIdUser());
-        $userModel = new UserModel();
-        $this->hydrate($userEntity, $userModel);
-        $AdminPostModel->setUser($userModel);
-        return ["header" => $this->getHeader(), "post" => $AdminPostModel];
-    }
-
-
-    public function addPost($formAddPost)
-    {
-        $postModel = new PostModel();
-        $this->hydrateFromPostArray($formAddPost, $postModel);
-        PostEntity::getInstance()->addPost($postModel);
-    }
-
-    public function validatePost($id, $currentPage)
-    {
-        AdminPostsEntity::getInstance()->validatePost($id);
-        return $this->getAll($currentPage);
     }
 
     public function archivePost($id, $currentPage)

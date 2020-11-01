@@ -33,9 +33,14 @@
                                                            alt="..."></div>
                     <div class="col-lg-2 align-self-center">{{ adminPost.status }}</div>
                     <div class="col-lg-2 space-evenly align-items-center">
-                        <a href="/P5-blog/public/?p=adminModifyPost&page={{ currentPage }}&article={{ adminPost.id }}"><i title="Modifier l'article" style="color: #6c757d;" class="fas fa-pen-square fa-2x"></i></a>
-                        <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=archivePost&adminArticle={{ adminPost.id }}"><i title="Archiver l'article" style="color: #6c757d;" class="fas fa-archive fa-2x"></i></a>
-                        <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=validatePost&adminArticle={{ adminPost.id }}"><i title="Mettre en ligne l'article" style="color: #6c757d;" class="fas fa-globe fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminModifyPost&page={{ currentPage }}&article={{ adminPost.id }}"><i
+                                    title="Modifier l'article" style="color: #6c757d;"
+                                    class="fas fa-pen-square fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=archivePost&adminArticle={{ adminPost.id }}"><i
+                                    title="Archiver l'article" style="color: #6c757d;" class="fas fa-archive fa-2x"></i></a>
+                        <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=validatePost&adminArticle={{ adminPost.id }}"><i
+                                    title="Mettre en ligne l'article" style="color: #6c757d;"
+                                    class="fas fa-globe fa-2x"></i></a>
                     </div>
                 </div>
             {% endfor %}

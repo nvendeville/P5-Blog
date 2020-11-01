@@ -20,7 +20,8 @@ class PostService extends AbstractService
         $this->userInstance = userEntity::getInstance();
     }*/
 
-    public function getAll ($currentPage) {
+    public function getAll($currentPage)
+    {
         $nbPages = $this->getNbPage();
         $premier = ($currentPage * self::NB_POSTS_PER_PAGE) - self::NB_POSTS_PER_PAGE;
 
@@ -35,16 +36,54 @@ class PostService extends AbstractService
             $this->hydrate($userEntity, $userModel);
             $postModel->setUser($userModel);
             $postModel->setUrl("/P5-blog/public/?p=post&action=detail&article=" . $postModel->getId());
-            $postModel->setNbComments(count($this->getComments( $postModel->getId())));
+            $postModel->setNbComments(count($this->getComments($postModel->getId())));
             array_push($postsModel, $postModel);
         }
 
         return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
-            "categories" =>$this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
+            "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
             "nbPages" => (int)$nbPages, "currentPage" => $currentPage];
     }
 
-    public function getPostsByCategory ($categoryName, $currentPage) {
+    private function getNbPage()
+    {
+        $nbPosts = PostEntity::getInstance()->getNbPosts();
+        return ceil((int)$nbPosts->nbPosts / (int)self::NB_POSTS_PER_PAGE);
+    }
+
+    protected function getComments($postId)
+    {
+        $comments = new CommentService();
+        return $comments->getCommentsByPostId($postId);
+    }
+
+    protected function getCategories()
+    {
+        $categories = PostEntity::getInstance()->getCategories();
+        $categoriesModel = [];
+        foreach ($categories as $category) {
+            $categoryModel = new CategoryModel();
+            $this->hydrate($category, $categoryModel);
+            array_push($categoriesModel, $categoryModel);
+        }
+        return $categoriesModel;
+    }
+
+    protected function getLatestCommentedPosts()
+    {
+        $latestCommentedPosts = PostEntity::getInstance()->getLatestCommentedPosts();
+        $latestCommentedPostsModel = [];
+        foreach ($latestCommentedPosts as $latestCommentedPost) {
+            $latestCommentedPostModel = new PostModel();
+            $this->hydrate($latestCommentedPost, $latestCommentedPostModel);
+            $latestCommentedPostModel->setUrl("/P5-blog/public/?p=post&action=detail&article=" . $latestCommentedPostModel->getId());
+            array_push($latestCommentedPostsModel, $latestCommentedPostModel);
+        }
+        return $latestCommentedPostsModel;
+    }
+
+    public function getPostsByCategory($categoryName, $currentPage)
+    {
         $nbPages = $this->getNbPostsByCategories($categoryName);
         $premier = ($currentPage * self::NB_POSTS_PER_PAGE) - self::NB_POSTS_PER_PAGE;
 
@@ -67,21 +106,18 @@ class PostService extends AbstractService
         }
 
         return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
-            "categories" =>$this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
+            "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
             "nbPages" => (int)$nbPages, "currentPage" => $currentPage, "urlParam" => "&action=getPostsByCategory&categorie=$categoryName"];
     }
 
-    private function getNbPage () {
-        $nbPosts = PostEntity::getInstance()->getNbPosts();
-        return ceil((int)$nbPosts->nbPosts / (int)self::NB_POSTS_PER_PAGE);
-    }
-
-    private function getNbPostsByCategories ($categoryName) {
+    private function getNbPostsByCategories($categoryName)
+    {
         $nbPosts = PostEntity::getInstance()->getNbPostsByCategories($categoryName);
         return ceil((int)$nbPosts->nbPosts / (int)self::NB_POSTS_PER_PAGE);
     }
 
-    public function getPost ($id) {
+    public function getPost($id)
+    {
         $post = PostEntity::getInstance()->getById($id);
         $postModel = new PostModel();
         $this->hydrate($post, $postModel);
@@ -90,36 +126,8 @@ class PostService extends AbstractService
         $this->hydrate($userEntity, $userModel);
         $postModel->setUser($userModel);
         return ["header" => $this->getHeader(), "post" => $postModel, "footer" => $this->getFooter(),
-            "categories" =>$this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
+            "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
             "comments" => $this->getComments($id)];
-    }
-
-    protected function getComments($postId) {
-        $comments = new CommentService();
-        return $comments->getCommentsByPostId($postId);
-    }
-
-    protected function getCategories() {
-        $categories = PostEntity::getInstance()->getCategories();
-        $categoriesModel = [];
-        foreach ($categories as $category) {
-            $categoryModel = new CategoryModel();
-            $this->hydrate($category, $categoryModel);
-            array_push($categoriesModel, $categoryModel);
-        }
-        return $categoriesModel;
-    }
-
-    protected function getLatestCommentedPosts() {
-        $latestCommentedPosts = PostEntity::getInstance()->getLatestCommentedPosts();
-        $latestCommentedPostsModel = [];
-        foreach ($latestCommentedPosts as $latestCommentedPost) {
-            $latestCommentedPostModel = new PostModel();
-            $this->hydrate($latestCommentedPost, $latestCommentedPostModel);
-            $latestCommentedPostModel->setUrl("/P5-blog/public/?p=post&action=detail&article=" . $latestCommentedPostModel->getId());
-            array_push($latestCommentedPostsModel, $latestCommentedPostModel);
-        }
-        return $latestCommentedPostsModel;
     }
 
     //

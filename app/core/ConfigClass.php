@@ -7,9 +7,8 @@ namespace App\Core;
 class ConfigClass
 {
 
-    private $settings = [];
-
     private static $_instance;
+    private $settings = [];
 
     private function __construct()
     {

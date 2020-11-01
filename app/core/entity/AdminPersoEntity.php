@@ -11,7 +11,8 @@ class AdminPersoEntity extends DataAccessManager
     protected static $table = 'home';
     protected static $_instance;
 
-    protected function __construct() {
+    protected function __construct()
+    {
         parent::__construct();
     }
 

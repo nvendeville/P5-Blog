@@ -3,16 +3,16 @@
 namespace App\Core\database;
 
 use App\Core\ConfigClass;
-use \PDO;
+use PDO;
 
 class DataAccessManager
 {
 
+    protected $pdo;
     private $db_name;
     private $db_user;
     private $db_pass;
     private $db_host;
-    protected $pdo;
 
     protected function __construct()
     {
@@ -34,25 +34,20 @@ class DataAccessManager
         $this->pdo = $pdo;
     }
 
-    public function one() {
+    public function one()
+    {
         return $this->all(true);
     }
 
-    public function all($one = false, $order = "") {
+    public function all($one = false, $order = "")
+    {
         return self::query("
             SELECT *
             FROM " . static::$table . " $order", get_called_class(), $one);
     }
 
-    public function getById($id) {
-        return self::query("
-            SELECT *
-            FROM " . static::$table . " 
-            WHERE id = '" . htmlspecialchars($id) . "'"
-            , get_called_class(), true);
-    }
-
-    protected function query($statement, $class_name, $one) {
+    protected function query($statement, $class_name, $one)
+    {
         $req = $this->pdo->query($statement);
         $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
         if ($one) {
@@ -63,7 +58,17 @@ class DataAccessManager
         return $data;
     }
 
-    protected function prepareAndFetch($statement, $attributes, $class_name, $one = false) {
+    public function getById($id)
+    {
+        return self::query("
+            SELECT *
+            FROM " . static::$table . " 
+            WHERE id = '" . htmlspecialchars($id) . "'"
+            , get_called_class(), true);
+    }
+
+    protected function prepareAndFetch($statement, $attributes, $class_name, $one = false)
+    {
         $req = $this->pdo->prepare($statement);
         $req->execute($attributes);
         $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
@@ -74,9 +79,6 @@ class DataAccessManager
         }
         return $data;
     }
-
-
-
 
 
 }
