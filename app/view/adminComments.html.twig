@@ -3,56 +3,100 @@
 {% block body %}
 
     <section>
-        <div class="container">
+        <div class="container margin-30">
             <div class="row">
                 <h1 class="text-orange d-flex flex-center latest-posts-width-100">Gérer les commentaires</h1>
             </div>
         </div>
-        <div class="container margin-100">
 
+        <div class="container">
+            <table id="listComments" class="display margin-30 commentsList" >
+            <thead class="text-orange center">
+                <tr>
+                    <th>Auteur</th>
+                    <th>Date du commentaire</th>
+                    <th>Titre de l'article</th>
+                    <th>Commentaire</th>
+                    <th>Statut</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
             {% for adminComment in adminComments %}
-                {% set style="" %}
-                {% if loop.index is not divisible by(2) %}
-                    {% set style="background-color: #f7c69e;" %}
-                {% endif %}
-                <div class="row commentsList" style="{{ style }}" ;>
-                    <div class="col-lg-2 align-self-center">{{ adminComment.user.firstname }} {{ adminComment.user.lastname }}</div>
-                    <div class="col-lg-1 align-self-center">{{ adminComment.creationDate | date(U) }}</div>
-                    <div class="col-lg-2 align-self-center">{{ adminComment.titlePost }}</div>
-                    <div class="col-lg-4 overflow-wrap">{{ adminComment.content }}</div>
-                    <div class="col-lg-1 align-self-center">{{ adminComment.status }}</div>
-                    <div class="col-lg-2 space-evenly align-items-center">
+               <tr>
+                    <td class="center">{{ adminComment.user.firstname }} {{ adminComment.user.lastname }}</td>
+                    <td class="center">{{ adminComment.creationDate | date(U) }}</td>
+                    <td class="center">{{ adminComment.titlePost }}</td>
+                    <td>{{ adminComment.content }}</td>
+                    <td class="center">{{ adminComment.status }}</td>
+                    <td class="space-evenly align-items-center">
                         <a href="/P5-blog/public/?p=adminComments&page={{ currentPage }}&action=rejectComment&commentaire={{ adminComment.id }}"><i
                                     title="Rejeter le commentaire" style="color: #6c757d;"
                                     class="fas fa-times fa-2x"></i></a>
                         <a href="/P5-blog/public/?p=adminComments&page={{ currentPage }}&action=validateComment&commentaire={{ adminComment.id }}"><i
                                     title="Valider le commentaire" style="color: #6c757d;"
                                     class="fas fa-check fa-2x"></i></a>
-                    </div>
-                </div>
+                    </td>
+                </tr>
             {% endfor %}
-
+            </tbody>
+        </table>
         </div>
-        <nav class="post-footer margin-100" aria-label="Page navigation example">
-            <ul class="pagination pagination-template d-flex justify-content-center">
-
-                <li class="page-item{% if currentPage == 1 %} disabled {% endif %}"><a
-                            href="/P5-blog/public/?p=adminComments&page={{ currentPage - 1 }}" class="page-link"> <i
-                                class="fa fa-angle-left"></i></a></li>
-                {% for numPage in 1..nbPages %}
-                    <li class="page-item{% if currentPage == numPage %} active {% endif %}"><a
-                                href="/P5-blog/public/?p=adminComments&page={{ numPage }}"
-                                class="page-link">{{ numPage }}</a></li>
-                {% endfor %}
-                <li class="page-item{% if currentPage == nbPages %} disabled {% endif %}"><a
-                            href="/P5-blog/public/?p=adminComments&page={{ currentPage + 1 }}" class="page-link"> <i
-                                class="fa fa-angle-right"></i></a></li>
-            </ul>
-        </nav>
-
     </section>
 
 
 {% endblock %}
 
 {% block footer %} {% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            $('#listComments').DataTable( {
+                initComplete: function () {
+                    this.api().columns().every( function () {
+                        if (this.selector.cols === 4) {
+                            var column = this;
+                            var select = $('<select><option value="">Tous</option></select>')
+                                .appendTo($("#listComments_filter").empty().append('<label>Filtrer&nbsp;</label>'))
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        }
+                    } );
+                },
+                "columnDefs": [
+                    { "width": "10%", "targets": 0 },
+                    { "width": "10%", "targets": 1 },
+                    { "width": "10%", "targets": 2 },
+                    { "width": "40%", "targets": 3 },
+                    { "width": "10%", "targets": 4 },
+                    { "width": "20%", "targets": 5 }
+                ],
+                "pageLength": 6,
+                "ordering": false,
+                "language": {
+                    "infoFiltered":   "sur _MAX_ ",
+                    "info": "_TOTAL_ commentaires",
+                    "lengthMenu":     "Afficher _MENU_ commentaires",
+                    "paginate": {
+                        "next": "Suivante",
+                        "previous": "Précédente"
+                    },
+                }
+
+            } );
+        } );
+    </script>
+
+{% endblock %}

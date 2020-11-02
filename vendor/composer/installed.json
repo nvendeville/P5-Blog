@@ -152,6 +152,85 @@
         ]
     },
     {
+        "name": "datatables.net/datatables.net",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/DataTables/Dist-DataTables.git",
+            "reference": "7634c901bb5d85024b3711fce248427947f9343b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/DataTables/Dist-DataTables/zipball/7634c901bb5d85024b3711fce248427947f9343b",
+            "reference": "7634c901bb5d85024b3711fce248427947f9343b",
+            "shasum": ""
+        },
+        "require": {
+            "components/jquery": "3.5.1"
+        },
+        "time": "2020-08-26T11:33:27+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "SpryMedia",
+                "homepage": "https://datatables.net"
+            }
+        ],
+        "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.",
+        "homepage": "http://www.datatables.net/",
+        "keywords": [
+            "datatables",
+            "jquery",
+            "table"
+        ]
+    },
+    {
+        "name": "datatables.net/datatables.net-dt",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/DataTables/Dist-DataTables-DataTables.git",
+            "reference": "30324a874128697971452b9fbc7ed4e711d72160"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/DataTables/Dist-DataTables-DataTables/zipball/30324a874128697971452b9fbc7ed4e711d72160",
+            "reference": "30324a874128697971452b9fbc7ed4e711d72160",
+            "shasum": ""
+        },
+        "require": {
+            "components/jquery": ">=3.5.1",
+            "datatables.net/datatables.net": ">=1.10.15"
+        },
+        "time": "2020-08-25T18:36:52+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "SpryMedia",
+                "homepage": "https://datatables.net"
+            }
+        ],
+        "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table. This is the DataTables integration extension for DataTables.",
+        "homepage": "http://www.datatables.net/",
+        "keywords": [
+            "datatables",
+            "jquery",
+            "table"
+        ]
+    },
+    {
         "name": "fancyapps/fancybox",
         "version": "v2.1.6",
         "version_normalized": "2.1.6.0",

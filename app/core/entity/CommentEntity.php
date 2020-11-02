@@ -30,12 +30,14 @@ class CommentEntity extends DataAccessManager
         return $this->query($statement, get_called_class(), false);
     }
 
+
     public function getPaginatedComments($from, $nbComment)
     {
         $statement =
-            "SELECT * FROM `comments` ORDER BY `creationDate` DESC LIMIT $from, $nbComment";
+            "SELECT * FROM `comments` ORDER BY creationDate DESC";
         return $this->query($statement, get_called_class(), false);
     }
+
 
     public function getNbComments()
     {
