@@ -12,7 +12,9 @@
     "fancyapps/fancybox": "^2.1",
     "twig/extensions": "^v1.5.4",
     "ext-openssl": "*",
-    "phpmailer/phpmailer": "^6.1"
+    "phpmailer/phpmailer": "^6.1",
+    "datatables.net/datatables.net": "dev-master",
+    "datatables.net/datatables.net-dt": "dev-master"
   },
   "autoload": {
     "psr-4": {

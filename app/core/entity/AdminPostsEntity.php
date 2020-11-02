@@ -31,7 +31,7 @@ class AdminPostsEntity extends DataAccessManager
     public function getPaginatedPosts($from, $nbPost)
     {
         $statement =
-            "SELECT * FROM `posts` ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
+            "SELECT * FROM `posts` ORDER BY `creationDate` DESC";
         return $this->query($statement, get_called_class(), false);
     }
 
