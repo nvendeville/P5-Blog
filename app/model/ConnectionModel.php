@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\model;
-
 
 class ConnectionModel
 {
@@ -126,6 +124,4 @@ class ConnectionModel
     {
         $this->isAdmin = $isAdmin;
     }
-
-
 }

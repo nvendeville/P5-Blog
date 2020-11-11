@@ -1,18 +1,16 @@
 <?php
 
-
 namespace App\model;
-
 
 class UserModel
 {
-    private $id;
+    private $idUser;
     private $firstname;
     private $lastname;
     private $avatar;
     private $password;
     private $email;
-    private $is_admin;
+    private $isAdmin;
 
     /**
      * @return mixed
@@ -35,15 +33,15 @@ class UserModel
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idUser;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $idUser
      */
-    public function setId($id)
+    public function setId($idUser)
     {
-        $this->id = $id;
+        $this->idUser = $idUser;
     }
 
     /**
@@ -116,17 +114,14 @@ class UserModel
      */
     public function getIsAdmin()
     {
-        return $this->is_admin;
+        return $this->isAdmin;
     }
 
     /**
-     * @param mixed $is_admin
+     * @param mixed $isAdmin
      */
-    public function setIsAdmin($is_admin)
+    public function setIsAdmin($isAdmin)
     {
-        $this->is_admin = $is_admin;
+        $this->isAdmin = $isAdmin;
     }
-
-
 }
-

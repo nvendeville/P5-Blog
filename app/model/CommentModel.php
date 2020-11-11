@@ -1,12 +1,10 @@
 <?php
 
-
 namespace App\model;
-
 
 class CommentModel
 {
-    private $id;
+    private $idComment;
     private $idUser;
     private $idPost;
     private $creationDate;
@@ -20,15 +18,15 @@ class CommentModel
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idComment;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $idComment
      */
-    public function setId($id)
+    public function setId($idComment)
     {
-        $this->id = $id;
+        $this->idComment = $idComment;
     }
 
     /**
@@ -143,5 +141,4 @@ class CommentModel
     {
         $this->titlePost = $titlePost;
     }
-
 }

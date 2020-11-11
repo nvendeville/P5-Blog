@@ -14,11 +14,26 @@
     "ext-openssl": "*",
     "phpmailer/phpmailer": "^6.1",
     "datatables.net/datatables.net": "dev-master",
-    "datatables.net/datatables.net-dt": "dev-master"
+    "datatables.net/datatables.net-dt": "dev-master",
+    "datatables.net/datatables.net-responsive": "dev-master",
+    "datatables.net/datatables.net-responsive-dt": "dev-master",
+    "datatables.net/datatables.net-responsive-bs4": "dev-master",
+    "squizlabs/php_codesniffer": "^3.5",
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {
       "App\\": "app"
     }
+  },
+  "scripts": {
+    "phpcs": "phpcs ./app --standard=PSR12 --report=code -p",
+    "phpmd": "phpmd ./app text cleancode,codesize,controversial,design,naming,unusedcode",
+    "phpstan": "phpstan analyse ./app --level=max",
+    "linter": [
+      "@phpcs",
+      "@phpmd",
+      "@phpstan"
+    ]
   }
 }

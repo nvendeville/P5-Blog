@@ -1,35 +1,35 @@
 <?php
 
-namespace App\Model;
+namespace App\model;
 
 class FooterModel
 {
-    private $id;
+    private int $idFooter;
     private $firstname;
     private $lastname;
     private $address;
-    private $phone_number;
+    private $phoneNumber;
     private $email;
-    private $facebook_link;
-    private $twitter_link;
-    private $instagram_link;
-    private $linkedin_link;
-    private $github_link;
+    private $facebookLink;
+    private $twitterLink;
+    private $instagramLink;
+    private $linkedinLink;
+    private $githubLink;
 
     /**
      * @return mixed
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idFooter;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $idFooter
      */
-    public function setId($id)
+    public function setId($idFooter)
     {
-        $this->id = $id;
+        $this->idFooter = $idFooter;
     }
 
     /**
@@ -85,15 +85,15 @@ class FooterModel
      */
     public function getPhoneNumber()
     {
-        return $this->phone_number;
+        return $this->phoneNumber;
     }
 
     /**
-     * @param mixed $phone_number
+     * @param mixed $phoneNumber
      */
-    public function setPhoneNumber($phone_number)
+    public function setPhoneNumber($phoneNumber)
     {
-        $this->phone_number = $phone_number;
+        $this->phoneNumber = $phoneNumber;
     }
 
     /**
@@ -117,15 +117,15 @@ class FooterModel
      */
     public function getFacebookLink()
     {
-        return $this->facebook_link;
+        return $this->facebookLink;
     }
 
     /**
-     * @param mixed $facebook_link
+     * @param mixed $facebookLink
      */
-    public function setFacebookLink($facebook_link)
+    public function setFacebookLink($facebookLink)
     {
-        $this->facebook_link = $facebook_link;
+        $this->facebookLink = $facebookLink;
     }
 
     /**
@@ -133,15 +133,15 @@ class FooterModel
      */
     public function getTwitterLink()
     {
-        return $this->twitter_link;
+        return $this->twitterLink;
     }
 
     /**
-     * @param mixed $twitter_link
+     * @param mixed $twitterLink
      */
-    public function setTwitterLink($twitter_link)
+    public function setTwitterLink($twitterLink)
     {
-        $this->twitter_link = $twitter_link;
+        $this->twitterLink = $twitterLink;
     }
 
     /**
@@ -149,15 +149,15 @@ class FooterModel
      */
     public function getInstagramLink()
     {
-        return $this->instagram_link;
+        return $this->instagramLink;
     }
 
     /**
-     * @param mixed $instagram_link
+     * @param mixed $instagramLink
      */
-    public function setInstagramLink($instagram_link)
+    public function setInstagramLink($instagramLink)
     {
-        $this->instagram_link = $instagram_link;
+        $this->instagramLink = $instagramLink;
     }
 
     /**
@@ -165,15 +165,15 @@ class FooterModel
      */
     public function getLinkedinLink()
     {
-        return $this->linkedin_link;
+        return $this->linkedinLink;
     }
 
     /**
-     * @param mixed $linkedin_link
+     * @param mixed $linkedinLink
      */
-    public function setLinkedinLink($linkedin_link)
+    public function setLinkedinLink($linkedinLink)
     {
-        $this->linkedin_link = $linkedin_link;
+        $this->linkedinLink = $linkedinLink;
     }
 
     /**
@@ -181,17 +181,14 @@ class FooterModel
      */
     public function getGithubLink()
     {
-        return $this->github_link;
+        return $this->githubLink;
     }
 
     /**
-     * @param mixed $github_link
+     * @param mixed $githubLink
      */
-    public function setGithubLink($github_link)
+    public function setGithubLink($githubLink)
     {
-        $this->github_link = $github_link;
+        $this->githubLink = $githubLink;
     }
-
-
 }
-

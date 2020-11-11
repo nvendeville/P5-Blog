@@ -231,6 +231,134 @@
         ]
     },
     {
+        "name": "datatables.net/datatables.net-responsive",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/DataTables/Dist-DataTables-Responsive.git",
+            "reference": "71719a780f2026931cba11b8d195193f2aad12c1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/DataTables/Dist-DataTables-Responsive/zipball/71719a780f2026931cba11b8d195193f2aad12c1",
+            "reference": "71719a780f2026931cba11b8d195193f2aad12c1",
+            "shasum": ""
+        },
+        "require": {
+            "components/jquery": ">=3.5.1",
+            "datatables.net/datatables.net": ">=1.10.15"
+        },
+        "time": "2020-08-26T11:21:32+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "SpryMedia",
+                "homepage": "https://datatables.net"
+            }
+        ],
+        "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table. This is the Responsive extension for DataTables.",
+        "homepage": "http://www.datatables.net/",
+        "keywords": [
+            "datatables",
+            "jquery",
+            "responsive",
+            "table"
+        ]
+    },
+    {
+        "name": "datatables.net/datatables.net-responsive-bs4",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/DataTables/Dist-DataTables-Responsive-Bootstrap4.git",
+            "reference": "0810772e21499d3ee5c6741d150f84914c87471f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/DataTables/Dist-DataTables-Responsive-Bootstrap4/zipball/0810772e21499d3ee5c6741d150f84914c87471f",
+            "reference": "0810772e21499d3ee5c6741d150f84914c87471f",
+            "shasum": ""
+        },
+        "require": {
+            "components/jquery": ">=3.5.1",
+            "datatables.net/datatables.net": ">=1.10.15",
+            "datatables.net/datatables.net-responsive": ">=2.2.5",
+            "twbs/bootstrap": "4.*"
+        },
+        "time": "2020-08-26T11:38:35+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "SpryMedia",
+                "homepage": "https://datatables.net"
+            }
+        ],
+        "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table. This is the Responsive extension for DataTables.",
+        "homepage": "http://www.datatables.net/",
+        "keywords": [
+            "bootstrap4",
+            "datatables",
+            "jquery",
+            "responsive",
+            "table"
+        ]
+    },
+    {
+        "name": "datatables.net/datatables.net-responsive-dt",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/DataTables/Dist-DataTables-Responsive-DataTables.git",
+            "reference": "500813d05cbe8669bcdd587d3868dfa670a02cf9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/DataTables/Dist-DataTables-Responsive-DataTables/zipball/500813d05cbe8669bcdd587d3868dfa670a02cf9",
+            "reference": "500813d05cbe8669bcdd587d3868dfa670a02cf9",
+            "shasum": ""
+        },
+        "require": {
+            "components/jquery": ">=3.5.1",
+            "datatables.net/datatables.net": ">=1.10.15",
+            "datatables.net/datatables.net-dt": ">=1.10.15",
+            "datatables.net/datatables.net-responsive": ">=2.2.5"
+        },
+        "time": "2020-08-26T11:38:35+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "SpryMedia",
+                "homepage": "https://datatables.net"
+            }
+        ],
+        "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table. This is the Responsive extension for DataTables.",
+        "homepage": "http://www.datatables.net/",
+        "keywords": [
+            "datatables",
+            "jquery",
+            "responsive",
+            "table"
+        ]
+    },
+    {
         "name": "fancyapps/fancybox",
         "version": "v2.1.6",
         "version_normalized": "2.1.6.0",
@@ -866,6 +994,59 @@
         "keywords": [
             "javascript",
             "jquery"
+        ]
+    },
+    {
+        "name": "squizlabs/php_codesniffer",
+        "version": "3.5.8",
+        "version_normalized": "3.5.8.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+            "reference": "9d583721a7157ee997f235f327de038e7ea6dac4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9d583721a7157ee997f235f327de038e7ea6dac4",
+            "reference": "9d583721a7157ee997f235f327de038e7ea6dac4",
+            "shasum": ""
+        },
+        "require": {
+            "ext-simplexml": "*",
+            "ext-tokenizer": "*",
+            "ext-xmlwriter": "*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+        },
+        "time": "2020-10-23T02:01:07+00:00",
+        "bin": [
+            "bin/phpcs",
+            "bin/phpcbf"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Greg Sherwood",
+                "role": "lead"
+            }
+        ],
+        "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+        "homepage": "https://github.com/squizlabs/PHP_CodeSniffer",
+        "keywords": [
+            "phpcs",
+            "standards"
         ]
     },
     {

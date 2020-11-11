@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\core\service;
-
 
 use App\core\entity\CommentEntity;
 use App\core\entity\UserEntity;
@@ -12,7 +10,7 @@ use App\model\UserModel;
 class CommentService extends AbstractService
 {
 
-    public function getCommentsByPostId($postId)
+    public function getCommentsByPostId(int $postId): array
     {
         $comments = CommentEntity::getInstance()->getCommentsByPostId($postId);
         $commentsModel = [];
@@ -32,6 +30,4 @@ class CommentService extends AbstractService
 
         return $commentsModel;
     }
-
-
 }

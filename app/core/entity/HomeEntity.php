@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\core\entity;
-
 
 use App\core\database\DataAccessManager;
 
 class HomeEntity extends DataAccessManager
 {
-    protected static $table = 'home';
-    protected static $_instance;
+    protected static string $table = 'home';
+    protected static $instance;
 
     protected function __construct()
     {
@@ -18,13 +16,13 @@ class HomeEntity extends DataAccessManager
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new HomeEntity();
+        if (is_null(self::$instance)) {
+            self::$instance = new HomeEntity();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
-    public function persoHomePage($homeModel)
+    public function persoHomePage(object $homeModel): void
     {
         $statement =
             "UPDATE `home` SET `heroFirstname`=?, `heroLastname`=?, `heroLink`=?";

@@ -1,19 +1,20 @@
 <?php
 
+use App\model\UserModel;
 
-function generateToken()
+function generateToken(): string
 {
     return md5(bin2hex(openssl_random_pseudo_bytes(128)));
 }
 
-function hashPassword($password)
+function hashPassword(string $password): string
 {
     return password_hash($password, PASSWORD_DEFAULT, ['salt' => '$W<_6,Vt^/%_:(G]{:X7w)hcS+,/eB']);
 }
 
-function getVal($obj, $field, $getter)
+function getVal(object $obj, string $field, string $getter): ?string
 {
-    if ($obj instanceof \App\model\UserModel) {
+    if ($obj instanceof UserModel) {
         return $obj->$getter();
     }
     foreach ($obj as $key => $value) {
@@ -21,4 +22,5 @@ function getVal($obj, $field, $getter)
             return $value;
         }
     }
+    return null;
 }

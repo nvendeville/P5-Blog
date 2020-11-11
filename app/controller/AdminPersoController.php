@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\controller;
-
 
 use App\core\Renderer;
 use App\core\service\HomeService;
 
 class AdminPersoController
 {
-    private $renderer;
+    private Renderer$renderer;
 
     public function __construct()
     {
@@ -17,7 +15,7 @@ class AdminPersoController
     }
 
 
-    public function index()
+    public function index(): void
     {
         $model = new HomeService();
         $this->renderer->render("adminPerso.html.twig", $model->getModel());

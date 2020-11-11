@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\core;
-
 
 use PHPMailer\PHPMailer\PHPMailer;
 
 trait Mailer
 {
 
-    public function sendMail($subject, $message, $replyTo)
+    public function sendMail(string $subject, string $message, string $replyTo): void
     {
         $config = ConfigClass::getInstance();
         $mail = new PHPMailer(true);
@@ -25,11 +23,6 @@ trait Mailer
         $mail->addReplyTo($replyTo);
         $mail->Subject = $subject;
         $mail->Body = $message;
-
-        if (!$mail->send()) {
-            echo 'Erreur, message non envoyé.';
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
-            die();
-        }
+        $mail->send();
     }
 }

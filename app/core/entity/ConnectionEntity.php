@@ -1,18 +1,13 @@
 <?php
 
-
 namespace App\core\entity;
-
 
 use App\core\database\DataAccessManager;
 
 class ConnectionEntity extends DataAccessManager
 {
-    protected static $table = 'home';
-    protected static $_instance;
-    private $toValidate = 1;
-    private $validated = 2;
-    private $deleted = 3;
+    protected static string $table = 'home';
+    protected static $instance;
 
     protected function __construct()
     {
@@ -21,21 +16,9 @@ class ConnectionEntity extends DataAccessManager
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new ConnectionEntity();
+        if (is_null(self::$instance)) {
+            self::$instance = new ConnectionEntity();
         }
-        return self::$_instance;
-    }
-
-    public function validateComment($id)
-    {
-        $statement = $this->pdo->prepare("UPDATE `comments` SET `status`=$this->validated WHERE comments.id=?");
-        $statement->execute([$id]);
-    }
-
-    public function rejectComment($id)
-    {
-        $statement = $this->pdo->prepare("UPDATE `comments` SET `status`=$this->deleted WHERE comments.id=?");
-        $statement->execute([$id]);
+        return self::$instance;
     }
 }

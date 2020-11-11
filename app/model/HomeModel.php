@@ -1,37 +1,37 @@
 <?php
 
-namespace App\Model;
+namespace App\model;
 
 class HomeModel
 {
-    private $id;
-    private $hero_firstname;
-    private $hero_lastname;
-    private $hero_link;
-    private $hero_img;
-    private $cv_img;
-    private $section_title;
-    private $section_content;
-    private $gallery_img1;
-    private $gallery_img2;
-    private $gallery_img3;
-    private $gallery_img4;
-    private $divider_img;
+    private $idHome;
+    private $heroFirstname;
+    private $heroLastname;
+    private $heroLink;
+    private $heroImg;
+    private $cvImg;
+    private $sectionTitle;
+    private $sectionContent;
+    private $galleryImg1;
+    private $galleryImg2;
+    private $galleryImg3;
+    private $galleryImg4;
+    private $dividerImg;
 
     /**
      * @return mixed
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idHome;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $idHome
      */
-    public function setId($id)
+    public function setId($idHome)
     {
-        $this->id = $id;
+        $this->idHome = $idHome;
     }
 
     /**
@@ -39,15 +39,15 @@ class HomeModel
      */
     public function getHeroFirstname()
     {
-        return $this->hero_firstname;
+        return $this->heroFirstname;
     }
 
     /**
-     * @param mixed $hero_firstname
+     * @param mixed $heroFirstname
      */
-    public function setHeroFirstname($hero_firstname)
+    public function setHeroFirstname($heroFirstname)
     {
-        $this->hero_firstname = $hero_firstname;
+        $this->heroFirstname = $heroFirstname;
     }
 
     /**
@@ -55,15 +55,15 @@ class HomeModel
      */
     public function getHeroLastname()
     {
-        return $this->hero_lastname;
+        return $this->heroLastname;
     }
 
     /**
-     * @param mixed $hero_lastname
+     * @param mixed $heroLastname
      */
-    public function setHeroLastname($hero_lastname)
+    public function setHeroLastname($heroLastname)
     {
-        $this->hero_lastname = $hero_lastname;
+        $this->heroLastname = $heroLastname;
     }
 
     /**
@@ -71,15 +71,15 @@ class HomeModel
      */
     public function getHeroLink()
     {
-        return $this->hero_link;
+        return $this->heroLink;
     }
 
     /**
-     * @param mixed $hero_link
+     * @param mixed $heroLink
      */
-    public function setHeroLink($hero_link)
+    public function setHeroLink($heroLink)
     {
-        $this->hero_link = $hero_link;
+        $this->heroLink = $heroLink;
     }
 
     /**
@@ -87,33 +87,31 @@ class HomeModel
      */
     public function getHeroImg()
     {
-        return $this->hero_img;
+        return $this->heroImg;
     }
 
     /**
-     * @param mixed $hero_img
+     * @param mixed $heroImg
      */
-    public function setHeroImg($hero_img)
+    public function setHeroImg($heroImg)
     {
-        $this->hero_img = $hero_img;
+        $this->heroImg = $heroImg;
     }
-
-   
 
     /**
      * @return mixed
      */
     public function getCvImg()
     {
-        return $this->cv_img;
+        return $this->cvImg;
     }
 
     /**
-     * @param mixed $cv_img
+     * @param mixed $cvImg
      */
-    public function setCvImg($cv_img)
+    public function setCvImg($cvImg)
     {
-        $this->cv_img = $cv_img;
+        $this->cvImg = $cvImg;
     }
 
     /**
@@ -121,15 +119,15 @@ class HomeModel
      */
     public function getSectionTitle()
     {
-        return $this->section_title;
+        return $this->sectionTitle;
     }
 
     /**
-     * @param mixed $section_title
+     * @param mixed $sectionTitle
      */
-    public function setSectionTitle($section_title)
+    public function setSectionTitle($sectionTitle)
     {
-        $this->section_title = $section_title;
+        $this->sectionTitle = $sectionTitle;
     }
 
     /**
@@ -137,15 +135,15 @@ class HomeModel
      */
     public function getSectionContent()
     {
-        return $this->section_content;
+        return $this->sectionContent;
     }
 
     /**
-     * @param mixed $section_content
+     * @param mixed $sectionContent
      */
-    public function setSectionContent($section_content)
+    public function setSectionContent($sectionContent)
     {
-        $this->section_content = $section_content;
+        $this->sectionContent = $sectionContent;
     }
 
     /**
@@ -153,15 +151,15 @@ class HomeModel
      */
     public function getGalleryImg1()
     {
-        return $this->gallery_img1;
+        return $this->galleryImg1;
     }
 
     /**
-     * @param mixed $gallery_img1
+     * @param mixed $galleryImg1
      */
-    public function setGalleryImg1($gallery_img1)
+    public function setGalleryImg1($galleryImg1)
     {
-        $this->gallery_img1 = $gallery_img1;
+        $this->galleryImg1 = $galleryImg1;
     }
 
     /**
@@ -169,15 +167,15 @@ class HomeModel
      */
     public function getGalleryImg2()
     {
-        return $this->gallery_img2;
+        return $this->galleryImg2;
     }
 
     /**
-     * @param mixed $gallery_img2
+     * @param mixed $galleryImg2
      */
-    public function setGalleryImg2($gallery_img2)
+    public function setGalleryImg2($galleryImg2)
     {
-        $this->gallery_img2 = $gallery_img2;
+        $this->galleryImg2 = $galleryImg2;
     }
 
     /**
@@ -185,15 +183,15 @@ class HomeModel
      */
     public function getGalleryImg3()
     {
-        return $this->gallery_img3;
+        return $this->galleryImg3;
     }
 
     /**
-     * @param mixed $gallery_img3
+     * @param mixed $galleryImg3
      */
-    public function setGalleryImg3($gallery_img3)
+    public function setGalleryImg3($galleryImg3)
     {
-        $this->gallery_img3 = $gallery_img3;
+        $this->galleryImg3 = $galleryImg3;
     }
 
     /**
@@ -201,15 +199,15 @@ class HomeModel
      */
     public function getGalleryImg4()
     {
-        return $this->gallery_img4;
+        return $this->galleryImg4;
     }
 
     /**
-     * @param mixed $gallery_img4
+     * @param mixed $galleryImg4
      */
-    public function setGalleryImg4($gallery_img4)
+    public function setGalleryImg4($galleryImg4)
     {
-        $this->gallery_img4 = $gallery_img4;
+        $this->galleryImg4 = $galleryImg4;
     }
 
     /**
@@ -217,16 +215,14 @@ class HomeModel
      */
     public function getDividerImg()
     {
-        return $this->divider_img;
+        return $this->dividerImg;
     }
 
     /**
-     * @param mixed $divider_img
+     * @param mixed $dividerImg
      */
-    public function setDividerImg($divider_img)
+    public function setDividerImg($dividerImg)
     {
-        $this->divider_img = $divider_img;
+        $this->dividerImg = $dividerImg;
     }
-
 }
-

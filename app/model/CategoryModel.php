@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\model;
-
 
 class CategoryModel
 {
@@ -41,6 +39,4 @@ class CategoryModel
     {
         $this->nbPosts = $nbPosts;
     }
-
-
 }

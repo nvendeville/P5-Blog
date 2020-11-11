@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Core;
-
-// Singleton
+namespace App\core;
 
 class ConfigClass
 {
 
-    private static $_instance;
+    private static $instance;
     private $settings = [];
 
     private function __construct()
@@ -17,19 +15,17 @@ class ConfigClass
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new ConfigClass();
+        if (is_null(self::$instance)) {
+            self::$instance = new ConfigClass();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
-    public function get($key)
+    public function get(string $key): ?string
     {
         if (!isset($this->settings[$key])) {
             return null;
         }
         return $this->settings[$key];
     }
-
-
 }

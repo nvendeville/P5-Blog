@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\controller;
-
 
 use App\core\Renderer;
 use App\core\service\ConnectionService;
 
 class ConnectionController
 {
-    private $renderer;
+    private Renderer $renderer;
 
     public function __construct()
     {
@@ -17,7 +15,7 @@ class ConnectionController
     }
 
 
-    public function index($userExist = false)
+    public function index(): void
     {
         $model = new ConnectionService();
         $homeModel = $model->getModel();

@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\core\entity;
-
 
 use App\core\database\DataAccessManager;
 
 class HeaderEntity extends DataAccessManager
 {
-    protected static $table = 'header';
-    protected static $_instance;
+    protected static string $table = 'header';
+    protected static $instance;
 
     protected function __construct()
     {
@@ -18,13 +16,13 @@ class HeaderEntity extends DataAccessManager
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new HeaderEntity();
+        if (is_null(self::$instance)) {
+            self::$instance = new HeaderEntity();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
-    public function persoHeader($headerModel)
+    public function persoHeader(object $headerModel): void
     {
         $statement = "UPDATE `header` SET `blogTitle`=?";
         $insert = $this->pdo->prepare($statement);
