@@ -1,18 +1,14 @@
 <?php
 
-
 namespace App\core\entity;
-
 
 use App\core\database\DataAccessManager;
 
 class PostEntity extends DataAccessManager
 {
-    protected static $table = 'posts';
-    protected static $_instance;
-    private $draft = 1;
-    private $archived = 2;
-    private $posted = 3;
+    protected static string $table = 'posts';
+    protected static $instance;
+    private const POSTED = 3;
 
     public function __construct()
     {
@@ -21,13 +17,13 @@ class PostEntity extends DataAccessManager
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new PostEntity();
+        if (is_null(self::$instance)) {
+            self::$instance = new PostEntity();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
-    public function addPost($postModel)
+    public function addPost(object $postModel): void
     {
         $statement =
             "INSERT INTO `posts` (`idUser`, `title`, `header`, `content`, `img`, `status`, `category`) 
@@ -43,29 +39,38 @@ class PostEntity extends DataAccessManager
         $insert->execute($values);
     }
 
-    public function getPaginatedPosts($from, $nbPost)
+    public function getPaginatedPosts(int $from, int $nbPost): array
     {
         $statement =
-            "SELECT * FROM `posts` WHERE `status` = $this->posted ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
+            "SELECT *
+            FROM `posts`
+            WHERE `status` = " . self::POSTED . "
+            ORDER BY `creationDate` DESC
+            LIMIT $from, $nbPost";
         return $this->query($statement, get_called_class(), false);
     }
 
-    public function getCategories()
+    public function getCategories(): array
     {
-        $statement = "SELECT  `category` as categoryName, COUNT(id) as nbPosts FROM `posts` WHERE `status`=$this->posted group by category";
+        $statement = "
+        SELECT  `category` as categoryName, COUNT(id) as nbPosts
+        FROM `posts`
+        WHERE `status`=" . self::POSTED . "
+        GROUP BY category";
         return $this->query($statement, get_called_class(), false);
     }
 
-    public function getPostsByCategory($categoryName, $from, $nbPost)
+    public function getPostsByCategory(string $categoryName, int $from, int $nbPost)
     {
         $statement = "SELECT `posts`.`id`, `posts`.`idUser`, `posts`.`creationDate`, `posts`.`title`, `posts`.`header`, 
                     `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category`, `posts`.`lastUpdate`
                     FROM `posts`
-                    WHERE `posts`.`category`=? AND `status`=$this->posted ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
-        return $this->prepareAndFetch($statement, [$categoryName], get_called_class());
+                    WHERE `posts`.`category`=? AND `status`=" . self::POSTED . "
+                    ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
+        return $this->prepareAndFetch($statement, [$categoryName], get_called_class(), false);
     }
 
-    public function getLatestCommentedPosts()
+    public function getLatestCommentedPosts(): array
     {
         $statement =
             "SELECT `posts`.`id`, `posts`.`idUser`, `comments`.`creationDate`, `posts`.`title`, `posts`.`header`, 
@@ -79,17 +84,19 @@ class PostEntity extends DataAccessManager
         return $this->query($statement, get_called_class(), false);
     }
 
-    public function getNbPosts()
+    public function getNbPosts(): object
     {
         $statement =
-            "SELECT COUNT(posts.id) as nbPosts FROM `posts` WHERE `status`=$this->posted";
+            "SELECT COUNT(posts.id) AS nbPosts FROM `posts` WHERE `status`=" . self::POSTED;
         return $this->query($statement, get_called_class(), true);
     }
 
-    public function getNbPostsByCategories($categoryName)
+    public function getNbPostsByCategories($categoryName): object
     {
         $statement =
-            "SELECT COUNT(posts.id) as nbPosts FROM `posts` WHERE `status`=$this->posted AND `posts`.`category`=?  ";
+            "SELECT COUNT(posts.id) AS nbPosts
+            FROM `posts`
+            WHERE `status`=" . self::POSTED . " AND `posts`.`category`=?  ";
         return $this->prepareAndFetch($statement, [$categoryName], get_called_class(), true);
     }
 }

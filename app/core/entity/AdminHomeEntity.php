@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\core\entity;
-
 
 use App\core\database\DataAccessManager;
 
 class AdminHomeEntity extends DataAccessManager
 {
-    protected static $table = 'home';
-    protected static $_instance;
+    protected static string $table = 'home';
+    protected static $instance;
 
     protected function __construct()
     {
@@ -18,9 +16,9 @@ class AdminHomeEntity extends DataAccessManager
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new AdminHomeEntity();
+        if (is_null(self::$instance)) {
+            self::$instance = new AdminHomeEntity();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 }

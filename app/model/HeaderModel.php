@@ -1,44 +1,42 @@
 <?php
 
-namespace App\Model;
+namespace App\model;
 
 class HeaderModel
 {
-    private $id;
-    private $blog_title;
+    private int $idHeader;
+    private string $blogTitle = "";
 
     /**
      * @return mixed
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idHeader;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $idHeader
      */
-    public function setId($id)
+    public function setId($idHeader)
     {
-        $this->id = $id;
+        $this->idHeader = $idHeader;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getBlogTitle()
+    public function getBlogTitle(): string
     {
-        return $this->blog_title;
+        return $this->blogTitle;
     }
 
     /**
-     * @param mixed $blog_title
+     * @param string $blogTitle
      */
-    public function setBlogTitle($blog_title)
+    public function setBlogTitle(string $blogTitle): void
     {
-        $this->blog_title = $blog_title;
+        $this->blogTitle = $blogTitle;
     }
-
 
 }
-

@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\controller;
-
 
 use App\core\Renderer;
 use App\core\service\PostService;
 
 class PostController
 {
-    private $renderer;
+    private Renderer $renderer;
 
     public function __construct()
     {
@@ -17,23 +15,21 @@ class PostController
     }
 
 
-    public function index($currentPage)
+    public function index(int $currentPage): void
     {
         $service = new PostService();
         $this->renderer->render("post.html.twig", $service->getAll($currentPage));
     }
 
-    public function detail($id)
+    public function detail(int $postId): void
     {
         $service = new PostService();
-        $this->renderer->render("postdetail.html.twig", $service->getPost($id));
+        $this->renderer->render("postDetail.html.twig", $service->getPost($postId));
     }
 
-    public function getPostsByCategory($categoryName, $currentPage)
+    public function getPostsByCategory(string $categoryName, int $currentPage): void
     {
         $service = new PostService();
         $this->renderer->render("post.html.twig", $service->getPostsByCategory($categoryName, $currentPage));
     }
-
-
 }

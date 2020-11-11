@@ -18,7 +18,6 @@ $(document).ready(function () {
     $("#colour").change(function () {
 
         if ($(this).val() !== '') {
-
             var theme_csspath = 'css/style.' + $(this).val() + '.css';
 
             alternateColour.attr("href", theme_csspath);
@@ -27,7 +26,6 @@ $(document).ready(function () {
                 expires: 365,
                 path: document.URL.substr(0, document.URL.lastIndexOf('/'))
             });
-
         }
 
         return false;
@@ -37,7 +35,8 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Equalixe height
     // ------------------------------------------------------ //
-    function equalizeHeight(x, y) {
+    function equalizeHeight(x, y)
+    {
         var textHeight = $(x).height();
         $(y).css('min-height', textHeight);
     }

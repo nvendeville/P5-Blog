@@ -1,4 +1,11 @@
 <?php
+
+use App\controller\AdminCommentsController;
+use App\controller\AdminModifyPostController;
+use App\controller\AdminPostsController;
+use App\controller\HomeController;
+use App\controller\UserController;
+
 session_start();
 
 require_once '../vendor/autoload.php';
@@ -19,8 +26,7 @@ if (isset($_POST) and !empty($_POST)) {
     }
     switch ($_POST["type"]) {
         case "add_post":
-            if (
-                isset($_FILES['img'])
+            if (            isset($_FILES['img'])
                 and $_FILES['img']['error'] == 0
                 and ($_FILES['img']['size'] <= 1000000)
             ) {
@@ -32,15 +38,15 @@ if (isset($_POST) and !empty($_POST)) {
                 }
                 $_POST["img"] = $_FILES['img']['name'];
             }
-            $adminPostsController = new \App\controller\AdminPostsController();
+            $adminPostsController = new AdminPostsController();
             $adminPostsController->addPost($_POST);
             exit;
         case "add_comment":
-            $adminCommentsController = new \App\controller\AdminCommentsController();
+            $adminCommentsController = new AdminCommentsController();
             $adminCommentsController->addComment($_POST);
             exit;
         case "add_user":
-            $userController = new \App\controller\UserController();
+            $userController = new UserController();
             $email = $_POST['email'];
             $password1 = $_POST['password'];
             $password2 = $_POST['passwordConfirmed'];
@@ -48,8 +54,7 @@ if (isset($_POST) and !empty($_POST)) {
                 $userController->resetPassword($email);
             }
             if (!$userController->userExist($email)) {
-                if (
-                    isset($_FILES['avatar'])
+                if (                    isset($_FILES['avatar'])
                     and $_FILES['avatar']['error'] == 0
                     and ($_FILES['avatar']['size'] <= 1000000)
                 ) {
@@ -62,18 +67,17 @@ if (isset($_POST) and !empty($_POST)) {
                     $_POST["avatar"] = $_FILES['avatar']['name'];
                 }
                 $userController->addUser($_POST);
-
             } else {
                 $_SESSION['otherModel'] = ['userExist' => true];
             }
             break;
         case "contact_form":
-            $HomeController = new \App\controller\HomeController();
+            $HomeController = new HomeController();
             $HomeController->sendContactRequest($_POST);
             break;
         case "modify_post":
             if (
-                isset($_FILES['img'])
+            isset($_FILES['img'])
                 and $_FILES['img']['error'] == 0
                 and ($_FILES['img']['size'] <= 1000000)
             ) {
@@ -87,13 +91,13 @@ if (isset($_POST) and !empty($_POST)) {
             }
             $id = $_POST['idPost'];
             $currentPage = (int)strip_tags($_GET['page']);
-            $adminModifyPostController = new \App\controller\AdminModifyPostController();
+            $adminModifyPostController = new AdminModifyPostController();
             $adminModifyPostController->modifyPost($_POST, $id, $currentPage);
             exit;
         case "perso-home":
             foreach ($_FILES as $key => $image) {
                 if (
-                    $_FILES[$key]['error'] == 0
+                $_FILES[$key]['error'] == 0
                     and ($_FILES[$key]['size'] <= 1000000)
                 ) {
                     $infoFileUploaded = pathinfo($_FILES[$key]['name']);
@@ -105,20 +109,20 @@ if (isset($_POST) and !empty($_POST)) {
                     $_POST[$key] = $_FILES[$key]['name'];
                 }
             }
-            $homeController = new \App\controller\HomeController();
+            $homeController = new HomeController();
             $homeController->persoHomePage($_POST);
             break;
         case "sign-in":
-            $userController = new \App\controller\UserController();
+            $userController = new UserController();
             $userController->signIn($_POST);
             break;
         case "forgot-password":
-            $userController = new \App\controller\UserController();
+            $userController = new UserController();
             $email = $_POST['email'];
             $userController->resetPassword($email);
             break;
         case "reset-password":
-            $userController = new \App\controller\UserController();
+            $userController = new UserController();
             $password1 = $_POST['newPassword'];
             $password2 = $_POST['confirmedNewPassword'];
             $email = $_POST['email'];
@@ -143,8 +147,10 @@ $method = isset($_GET["action"]) ? $_GET["action"] : 'index';
 
 if (isset($_GET['page']) && !empty($_GET['page'])) {
     $currentPage = (int)strip_tags($_GET['page']);
-} elseif ($p == 'post' or $p == 'adminPosts' or $p == 'adminComments'
-    or $p == 'adminModifyPost' && $method == 'index') {
+} elseif (
+$p == 'post' or $p == 'adminPosts' or $p == 'adminComments'
+    or $p == 'adminModifyPost' && $method == 'index'
+) {
     $currentPage = 1;
 }
 

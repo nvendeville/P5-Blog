@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ruleset name="P5-Blog">
+    <description>
+        Mes règles de formattage
+    </description>
+
+    <arg name="colors"/>
+    <arg value="p"/>
+
+    <file>app</file>
+    <file>public/index.php</file>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <rule ref="PSR2"/>
+    <rule ref="PSR12"/>
+
+
+</ruleset>

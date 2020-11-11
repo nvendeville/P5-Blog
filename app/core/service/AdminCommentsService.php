@@ -1,14 +1,10 @@
 <?php
 
-
 namespace App\core\service;
 
-
-use App\core\entity\AdminCommentsEntity;
 use App\core\entity\CommentEntity;
 use App\core\entity\PostEntity;
 use App\core\entity\UserEntity;
-use App\Model\AdminCommentsModel;
 use App\model\CommentModel;
 use App\model\PostModel;
 use App\model\UserModel;
@@ -16,35 +12,21 @@ use App\model\UserModel;
 class AdminCommentsService extends AbstractService
 {
 
-    const NB_COMMENTS_PER_PAGE = 6;
-
-    public function getModel()
+    public function validateComment(int $commentId, int $currentPage): array
     {
-        $entity = AdminCommentsEntity::getInstance()->one();
-        $adminModel = new AdminCommentsModel();
-        $this->hydrate($entity, $adminModel);
-        return ["header" => $this->getHeader(), "footer" => $this->getFooter()];
-    }
-
-    public function validateComment($id, $currentPage)
-    {
-        AdminCommentsEntity::getInstance()->validateComment($id);
+        CommentEntity::getInstance()->validateComment($commentId);
         return $this->getAll($currentPage);
     }
 
-    public function getAll($currentPage)
+    public function getAll(int $currentPage): array
     {
-        $nbPages = $this->getNbPage();
-        $premier = ($currentPage * self::NB_COMMENTS_PER_PAGE) - self::NB_COMMENTS_PER_PAGE;
-
-        $entities = CommentEntity::getInstance()->getPaginatedComments($premier, self::NB_COMMENTS_PER_PAGE);
+        $entities = CommentEntity::getInstance()->getPaginatedComments();
         $commentsModel = [];
         foreach ($entities as $comment) {
             $commentModel = new CommentModel();
             $this->hydrate($comment, $commentModel);
 
             $userEntity = UserEntity::getInstance()->getById($commentModel->getIdUser());
-            //$userEntity = $this->userInstance->getById($postModel->getIdUser());
             $userModel = new UserModel();
             $this->hydrate($userEntity, $userModel);
             $commentModel->setUser($userModel);
@@ -57,26 +39,21 @@ class AdminCommentsService extends AbstractService
             array_push($commentsModel, $commentModel);
         }
 
-        return ["header" => $this->getHeader(), "adminComments" => $commentsModel, "nbPages" => (int)$nbPages, "currentPage" => $currentPage];
+        return ["header" => $this->getHeader(),
+            "adminComments" => $commentsModel,
+            "currentPage" => $currentPage];
     }
 
-    private function getNbPage()
+    public function rejectComment(int $commentId, int $currentPage): array
     {
-        $nbComments = CommentEntity::getInstance()->getNbComments();
-        return ceil((int)$nbComments->nbComments / (int)self::NB_COMMENTS_PER_PAGE);
-    }
-
-    public function rejectComment($id, $currentPage)
-    {
-        AdminCommentsEntity::getInstance()->rejectComment($id);
+        CommentEntity::getInstance()->rejectComment($commentId);
         return $this->getAll($currentPage);
     }
 
-    public function addComment($formAddComment)
+    public function addComment(array $formAddComment): void
     {
         $commentModel = new commentModel();
         $this->hydrateFromPostArray($formAddComment, $commentModel);
         CommentEntity::getInstance()->addComment($commentModel);
     }
-
 }

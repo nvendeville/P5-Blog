@@ -1,19 +1,15 @@
 <?php
 
-
 namespace App\core\entity;
-
 
 use App\core\database\DataAccessManager;
 
-
 class AdminPostsEntity extends DataAccessManager
 {
-    protected static $table = 'posts';
-    protected static $_instance;
-    private $draft = 1;
-    private $archived = 2;
-    private $posted = 3;
+    private const ARCHIVED = 2;
+    private const POSTED = 3;
+    protected static string $table = 'posts';
+    protected static $instance;
 
     protected function __construct()
     {
@@ -22,41 +18,41 @@ class AdminPostsEntity extends DataAccessManager
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new AdminPostsEntity();
+        if (is_null(self::$instance)) {
+            self::$instance = new AdminPostsEntity();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
-    public function getPaginatedPosts($from, $nbPost)
+    public function getPaginatedPosts(): array
     {
-        $statement =
-            "SELECT * FROM `posts` ORDER BY `creationDate` DESC";
+        $statement = "SELECT * FROM `posts` ORDER BY `creationDate` DESC";
         return $this->query($statement, get_called_class(), false);
     }
 
-    public function getNbPosts()
+    public function getNbPosts(): int
     {
-        $statement =
-            "SELECT COUNT(posts.id) as nbPosts FROM posts";
+        $statement = "SELECT COUNT(posts.id) as nbPosts FROM posts";
         return $this->query($statement, get_called_class(), true);
     }
 
-
-    public function validatePost($id)
+    public function validatePost(int $postId): void
     {
         $date = date("Y-m-d H:i:s");
-        $statement = $this->pdo->prepare("UPDATE `posts` SET `status`=$this->posted, `lastUpdate`='$date' WHERE posts.id=?");
-        $statement->execute([$id]);
+        $statement = $this->pdo->prepare("
+        UPDATE `posts`
+        SET `status`=" . self::POSTED . ", `lastUpdate`='$date'
+        WHERE posts.id=?");
+        $statement->execute([$postId]);
     }
 
-    public function archivePost($id)
+    public function archivePost(int $postId): void
     {
-        $statement = $this->pdo->prepare("UPDATE `posts` SET `status`=$this->archived WHERE posts.id=?");
-        $statement->execute([$id]);
+        $statement = $this->pdo->prepare("UPDATE `posts` SET `status`=" . self::ARCHIVED . " WHERE posts.id=?");
+        $statement->execute([$postId]);
     }
 
-    public function modifyPost($adminPostModel, $id)
+    public function modifyPost(object $adminPostModel, int $postId): void
     {
         $date = date("Y-m-d H:i:s");
         $statement = "UPDATE `posts` SET `title`=?, `header`=?, `content`=?";
@@ -67,7 +63,7 @@ class AdminPostsEntity extends DataAccessManager
         }
         $statement = $statement . ",`status`=?, `category`=?, `lastUpdate`=?
             WHERE id=?";
-        array_push($values, $adminPostModel->getStatus(), $adminPostModel->getCategory(), $date, $id);
+        array_push($values, $adminPostModel->getStatus(), $adminPostModel->getCategory(), $date, $postId);
         $insert = $this->pdo->prepare($statement);
         $insert->execute($values);
     }

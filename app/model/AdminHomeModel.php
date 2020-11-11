@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Model;
+namespace App\model;
 
 class AdminHomeModel
 {
-    private $id;
-
 }

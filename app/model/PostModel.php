@@ -1,12 +1,10 @@
 <?php
 
-
 namespace App\model;
-
 
 class PostModel
 {
-    private $id;
+    private $idPost;
     private $idUser;
     private $creationDate;
     private $title;
@@ -73,15 +71,15 @@ class PostModel
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idPost;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $idPost
      */
-    public function setId($id)
+    public function setId($idPost)
     {
-        $this->id = $id;
+        $this->idPost = $idPost;
     }
 
     /**
@@ -227,5 +225,4 @@ class PostModel
     {
         $this->url = $url;
     }
-
 }

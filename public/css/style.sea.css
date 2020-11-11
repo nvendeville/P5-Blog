@@ -704,6 +704,10 @@ section.hero .continue i {
     section.hero .container {
         padding: 150px 20px;
     }
+
+    .intro img {
+        display: none;
+    }
 }
 
 /*
@@ -775,7 +779,7 @@ section.featured-posts .image {
     padding: 0;
 }
 
-section.featured-posts .image img {
+section.featured-posts .image img, .img-fluid{
     height: 100%;
 }
 
@@ -1270,6 +1274,17 @@ footer.main-footer .title::after {
     footer.main-footer .copyrights div[class*="col-"]:last-of-type {
         margin-bottom: 0;
     }
+
+    .flexCenterMQ {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .centerMQ {
+        text-align: center !important;
+    }
+
 }
 
 main.posts-listing {

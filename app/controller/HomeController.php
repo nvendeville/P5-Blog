@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\controller;
-
 
 use App\core\Renderer;
 use App\core\service\HomeService;
 
 class HomeController
 {
-    private $renderer;
+    private Renderer $renderer;
 
     public function __construct()
     {
@@ -17,21 +15,21 @@ class HomeController
     }
 
 
-    public function index()
+    public function index(): void
     {
         $homeService = new HomeService();
         $homeModel = $homeService->getModel();
         $this->renderer->render("home.html.twig", $homeModel);
     }
 
-    public function sendContactRequest($contactForm)
+    public function sendContactRequest(array $contactForm): void
     {
         $homeService = new HomeService();
         $homeService->sendContactRequest($contactForm);
         $_SESSION['otherModel'] = ['mailSent' => true];
     }
 
-    public function persoHomePage($persoHomeForm)
+    public function persoHomePage(array $persoHomeForm): void
     {
         $homeService = new HomeService();
         $homeService->persoHomePage($persoHomeForm);

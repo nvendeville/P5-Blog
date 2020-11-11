@@ -1,15 +1,14 @@
 <?php
 
-
 namespace App\core\entity;
-
 
 use App\core\database\DataAccessManager;
 
 class CommentEntity extends DataAccessManager
 {
-    protected static $table = 'comments';
-    protected static $_instance;
+    protected static string $table = 'comments';
+
+    protected static $instance;
 
     protected function __construct()
     {
@@ -18,20 +17,24 @@ class CommentEntity extends DataAccessManager
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new CommentEntity();
+        if (is_null(self::$instance)) {
+            self::$instance = new CommentEntity();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
-    public function getCommentsByPostId($postId)
+    public function getCommentsByPostId(int $postId): array
     {
-        $statement = "SELECT * FROM comments WHERE idPost = $postId AND status = 'validated' ORDER BY creationDate DESC";
+        $statement = "
+        SELECT *
+        FROM comments
+        WHERE idPost = $postId AND status = 'validated'
+        ORDER BY creationDate DESC";
         return $this->query($statement, get_called_class(), false);
     }
 
 
-    public function getPaginatedComments($from, $nbComment)
+    public function getPaginatedComments(): array
     {
         $statement =
             "SELECT * FROM `comments` ORDER BY creationDate DESC";
@@ -39,14 +42,14 @@ class CommentEntity extends DataAccessManager
     }
 
 
-    public function getNbComments()
+    public function getNbComments(): int
     {
         $statement =
             "SELECT COUNT(comments.id) as nbComments FROM comments";
         return $this->query($statement, get_called_class(), true);
     }
 
-    public function addComment($commentModel)
+    public function addComment(object $commentModel): void
     {
         $statement =
             "INSERT INTO `comments` (`idUser`, `idPost`, `content`, `status`) 
@@ -55,5 +58,17 @@ class CommentEntity extends DataAccessManager
             $commentModel->getContent(), $commentModel->getStatus()];
         $insert = $this->pdo->prepare($statement);
         $insert->execute($values);
+    }
+
+    public function validateComment(int $commentId): void
+    {
+        $statement = $this->pdo->prepare("UPDATE `comments` SET `status`=2 WHERE comments.id=?");
+        $statement->execute([$commentId]);
+    }
+
+    public function rejectComment(int $commentId): void
+    {
+        $statement = $this->pdo->prepare("UPDATE `comments` SET `status`=3 WHERE comments.id=?");
+        $statement->execute([$commentId]);
     }
 }

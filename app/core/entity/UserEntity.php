@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\core\entity;
-
 
 use App\core\database\DataAccessManager;
 
 class UserEntity extends DataAccessManager
 {
-    protected static $table = 'users';
-    protected static $_instance;
+    protected static string $table = 'users';
+    protected static $instance;
 
     protected function __construct()
     {
@@ -18,13 +16,13 @@ class UserEntity extends DataAccessManager
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new UserEntity();
+        if (is_null(self::$instance)) {
+            self::$instance = new UserEntity();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
-    public function addUser($userModel)
+    public function addUser(object $userModel): void
     {
         $statement =
             "INSERT INTO `users` (`firstname`, `lastname`, `avatar`, `password`, `email`, `isAdmin`) 
@@ -39,7 +37,7 @@ class UserEntity extends DataAccessManager
         $insert->execute($values);
     }
 
-    public function userExist($email)
+    public function userExist(string $email)
     {
         $statement = "SELECT 1 as userExist FROM `users` WHERE email=?";
         return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
@@ -50,10 +48,9 @@ class UserEntity extends DataAccessManager
     {
         $statement = "SELECT * FROM `users` WHERE email=?";
         return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
-
     }
 
-    public function updatePassword($newPassword, $email)
+    public function updatePassword(string $newPassword, string $email): void
     {
         $statement = "UPDATE `users` SET password=? WHERE email=?";
         $values = [hashPassword($newPassword), $email];

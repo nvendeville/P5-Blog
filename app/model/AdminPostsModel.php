@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Model;
+namespace App\model;
 
 class AdminPostsModel
 {
-    private $id;
+    private int $idAdminPost;
     private $creationDate;
     private $title;
     private $header;
@@ -86,15 +86,15 @@ class AdminPostsModel
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idAdminPost;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $idAdminPost
      */
-    public function setId($id)
+    public function setId($idAdminPost)
     {
-        $this->id = $id;
+        $this->idAdminPost = $idAdminPost;
     }
 
     /**
@@ -209,6 +209,3 @@ class AdminPostsModel
         $this->user = $user;
     }
 }
-
-
-

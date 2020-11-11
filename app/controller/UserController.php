@@ -1,69 +1,57 @@
 <?php
 
-
 namespace App\controller;
-
 
 use App\core\Renderer;
 use App\core\service\UserService;
 
-
 class UserController
 {
-    private $renderer;
+    private Renderer $renderer;
 
     public function __construct()
     {
         $this->renderer = new Renderer();
     }
 
-
-    public function addUser($formAddUser)
+    public function addUser(array $formAddUser): void
     {
         $userService = new UserService();
         $_SESSION['user'] = $userService->addUser($formAddUser);
         $_SESSION['token'] = generateToken();
     }
 
-    public function signIn($signInForm)
+    public function signIn(array $signInForm): void
     {
         $service = new UserService();
         $user = $service->signIn($signInForm['email']);
+        $_SESSION['otherModel'] = ['wrongPassword' => true];
         if (isset($user) && $service->controlPassword(hashPassword($signInForm['password']), $user->getPassword())) {
             $_SESSION['user'] = $user;
             $_SESSION['token'] = generateToken();
-        } else {
-            $_SESSION['otherModel'] = ['wrongPassword' => true];
+            unset($_SESSION['otherModel']);
         }
     }
 
-    public function resetPassword($email)
+    public function resetPassword(string $email): void
     {
-        if ($this->userExist($email)) {
-            /*
-            $homeModel['resetPassword'] = true;
-            $homeModel['email'] = $email;
-            */
-            $_SESSION['otherModel'] = ['resetPassword' => true, 'email' => $email];
-        } else {
-            //$homeModel['noUserExist'] = true;
-            $_SESSION['otherModel'] = ['noUserExist' => true];
-        }
+        $_SESSION['otherModel'] =
+            $this->userExist($email) ? ['resetPassword' => true, 'email' => $email] : ['noUserExist' => true];
     }
 
-    public function userExist($email)
+    public function userExist(string $email): bool
     {
         $service = new UserService();
         return $service->userExist($email);
     }
 
-    public function controlPassword($password1, $password2)
+    public function controlPassword(string $password1, string $password2): bool
     {
         $service = new UserService();
         return $service->controlPassword($password1, $password2);
     }
 
-    public function updatePassword($newPassword, $email)
+    public function updatePassword(string $newPassword, string $email): void
     {
         $userService = new UserService();
         $userService->updatePassword($newPassword, $email);

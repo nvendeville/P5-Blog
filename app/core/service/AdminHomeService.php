@@ -1,16 +1,14 @@
 <?php
 
-
 namespace App\core\service;
 
-
 use App\core\entity\AdminHomeEntity;
-use App\Model\AdminHomeModel;
+use App\model\AdminHomeModel;
 
 class AdminHomeService extends AbstractService
 {
 
-    public function getModel()
+    public function getModel(): array
     {
         $entity = AdminHomeEntity::getInstance()->one();
         $adminModel = new AdminHomeModel();

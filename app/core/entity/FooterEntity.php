@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\core\entity;
-
 
 use App\core\database\DataAccessManager;
 
 class FooterEntity extends DataAccessManager
 {
-    protected static $table = 'footer';
-    protected static $_instance;
+    protected static string $table = 'footer';
+    protected static $instance;
 
     protected function __construct()
     {
@@ -18,13 +16,13 @@ class FooterEntity extends DataAccessManager
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new FooterEntity();
+        if (is_null(self::$instance)) {
+            self::$instance = new FooterEntity();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
-    public function persoFooter($footerModel)
+    public function persoFooter(object $footerModel): void
     {
         $statement =
             "UPDATE `footer` SET `firstname`=?, `lastname`=?, `address`=?, `phoneNumber`=?, `email`=?, `facebookLink`=?,

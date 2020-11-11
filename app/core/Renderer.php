@@ -1,18 +1,18 @@
 <?php
 
-
 namespace App\core;
 
-
-require_once '../vendor/autoload.php';
+use Twig\Environment;
+use Twig\Extension\CoreExtension;
+use Twig\Loader\FilesystemLoader;
 
 class Renderer
 {
-    public function render($page_name, $models)
+    public function render(string $pageName, array $models): void
     {
-        $loader = new \Twig\Loader\FilesystemLoader('../app/view');
-        $twig = new \Twig\Environment($loader);
-        $twig->getExtension(\Twig\Extension\CoreExtension::class)->setDateFormat('d/m/Y H:i', '%d days');
+        $loader = new FilesystemLoader('../app/view');
+        $twig = new Environment($loader);
+        $twig->getExtension(CoreExtension::class)->setDateFormat('d/m/Y H:i', '%d days');
         $models['token'] = $_SESSION['token'];
         if (isset($_SESSION['user'])) {
             $models['logged'] = true;
@@ -21,7 +21,7 @@ class Renderer
             $models['idConnectedUser'] = getVal($_SESSION['user'], 'id', 'getId');
         }
         $models = $this->getOtherModel($models);
-        echo $twig->render($page_name, $models);
+        echo $twig->render($pageName, $models);
     }
 
     private function getOtherModel($models)

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6601ea21ddcfbfdd956486aecb860e08",
+    "content-hash": "f3c59c3f435b40d538816faf9ccabd1f",
     "packages": [
         {
             "name": "components/jquery",
@@ -168,6 +168,128 @@
                 "table"
             ],
             "time": "2020-08-25T18:36:52+00:00"
+        },
+        {
+            "name": "datatables.net/datatables.net-responsive",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DataTables/Dist-DataTables-Responsive.git",
+                "reference": "71719a780f2026931cba11b8d195193f2aad12c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DataTables/Dist-DataTables-Responsive/zipball/71719a780f2026931cba11b8d195193f2aad12c1",
+                "reference": "71719a780f2026931cba11b8d195193f2aad12c1",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=3.5.1",
+                "datatables.net/datatables.net": ">=1.10.15"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SpryMedia",
+                    "homepage": "https://datatables.net"
+                }
+            ],
+            "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table. This is the Responsive extension for DataTables.",
+            "homepage": "http://www.datatables.net/",
+            "keywords": [
+                "datatables",
+                "jquery",
+                "responsive",
+                "table"
+            ],
+            "time": "2020-08-26T11:21:32+00:00"
+        },
+        {
+            "name": "datatables.net/datatables.net-responsive-bs4",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DataTables/Dist-DataTables-Responsive-Bootstrap4.git",
+                "reference": "0810772e21499d3ee5c6741d150f84914c87471f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DataTables/Dist-DataTables-Responsive-Bootstrap4/zipball/0810772e21499d3ee5c6741d150f84914c87471f",
+                "reference": "0810772e21499d3ee5c6741d150f84914c87471f",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=3.5.1",
+                "datatables.net/datatables.net": ">=1.10.15",
+                "datatables.net/datatables.net-responsive": ">=2.2.5",
+                "twbs/bootstrap": "4.*"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SpryMedia",
+                    "homepage": "https://datatables.net"
+                }
+            ],
+            "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table. This is the Responsive extension for DataTables.",
+            "homepage": "http://www.datatables.net/",
+            "keywords": [
+                "bootstrap4",
+                "datatables",
+                "jquery",
+                "responsive",
+                "table"
+            ],
+            "time": "2020-08-26T11:38:35+00:00"
+        },
+        {
+            "name": "datatables.net/datatables.net-responsive-dt",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DataTables/Dist-DataTables-Responsive-DataTables.git",
+                "reference": "500813d05cbe8669bcdd587d3868dfa670a02cf9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DataTables/Dist-DataTables-Responsive-DataTables/zipball/500813d05cbe8669bcdd587d3868dfa670a02cf9",
+                "reference": "500813d05cbe8669bcdd587d3868dfa670a02cf9",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=3.5.1",
+                "datatables.net/datatables.net": ">=1.10.15",
+                "datatables.net/datatables.net-dt": ">=1.10.15",
+                "datatables.net/datatables.net-responsive": ">=2.2.5"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SpryMedia",
+                    "homepage": "https://datatables.net"
+                }
+            ],
+            "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table. This is the Responsive extension for DataTables.",
+            "homepage": "http://www.datatables.net/",
+            "keywords": [
+                "datatables",
+                "jquery",
+                "responsive",
+                "table"
+            ],
+            "time": "2020-08-26T11:38:35+00:00"
         },
         {
             "name": "fancyapps/fancybox",
@@ -501,6 +623,57 @@
                 "jquery"
             ],
             "time": "2019-05-06T02:13:39+00:00"
+        },
+        {
+            "name": "squizlabs/php_codesniffer",
+            "version": "3.5.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9d583721a7157ee997f235f327de038e7ea6dac4",
+                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "bin": [
+                "bin/phpcs",
+                "bin/phpcbf"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Sherwood",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "homepage": "https://github.com/squizlabs/PHP_CodeSniffer",
+            "keywords": [
+                "phpcs",
+                "standards"
+            ],
+            "time": "2020-10-23T02:01:07+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1709,6 +1882,9 @@
         "rsportella/popper": 20,
         "datatables.net/datatables.net": 20,
         "datatables.net/datatables.net-dt": 20,
+        "datatables.net/datatables.net-responsive": 20,
+        "datatables.net/datatables.net-responsive-dt": 20,
+        "datatables.net/datatables.net-responsive-bs4": 20,
         "phpmd/phpmd": 0
     },
     "prefer-stable": false,
