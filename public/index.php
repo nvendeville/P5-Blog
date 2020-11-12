@@ -41,6 +41,43 @@ if (isset($_POST) and !empty($_POST)) {
             $adminPostsController = new AdminPostsController();
             $adminPostsController->addPost($_POST);
             exit;
+        case "modify_post":
+            if (
+                isset($_FILES['img'])
+                and $_FILES['img']['error'] == 0
+                and ($_FILES['img']['size'] <= 1000000)
+            ) {
+                $infoFileUploaded = pathinfo($_FILES['img']['name']);
+                $extensionFileUploaded = $infoFileUploaded['extension'];
+                $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
+                if (in_array($extensionFileUploaded, $authorizedExtensions)) {
+                    move_uploaded_file($_FILES['img']['tmp_name'], './img/' . basename($_FILES['img']['name']));
+                }
+                $_POST["img"] = $_FILES['img']['name'];
+            }
+            $id = $_POST['idPost'];
+            $currentPage = (int)strip_tags($_GET['page']);
+            $adminModifyPostController = new AdminModifyPostController();
+            $adminModifyPostController->modifyPost($_POST, $id, $currentPage);
+            exit;
+        case "perso-home":
+            foreach ($_FILES as $key => $image) {
+                if (
+                    $_FILES[$key]['error'] == 0
+                    and ($_FILES[$key]['size'] <= 1000000)
+                ) {
+                    $infoFileUploaded = pathinfo($_FILES[$key]['name']);
+                    $extensionFileUploaded = $infoFileUploaded['extension'];
+                    $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
+                    if (in_array($extensionFileUploaded, $authorizedExtensions)) {
+                        move_uploaded_file($_FILES[$key]['tmp_name'], './img/' . basename($_FILES[$key]['name']));
+                    }
+                    $_POST[$key] = $_FILES[$key]['name'];
+                }
+            }
+            $homeController = new HomeController();
+            $homeController->persoHomePage($_POST);
+            break;
         case "add_comment":
             $adminCommentsController = new AdminCommentsController();
             $adminCommentsController->addComment($_POST);
@@ -74,43 +111,6 @@ if (isset($_POST) and !empty($_POST)) {
         case "contact_form":
             $HomeController = new HomeController();
             $HomeController->sendContactRequest($_POST);
-            break;
-        case "modify_post":
-            if (
-            isset($_FILES['img'])
-                and $_FILES['img']['error'] == 0
-                and ($_FILES['img']['size'] <= 1000000)
-            ) {
-                $infoFileUploaded = pathinfo($_FILES['img']['name']);
-                $extensionFileUploaded = $infoFileUploaded['extension'];
-                $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-                if (in_array($extensionFileUploaded, $authorizedExtensions)) {
-                    move_uploaded_file($_FILES['img']['tmp_name'], './img/' . basename($_FILES['img']['name']));
-                }
-                $_POST["img"] = $_FILES['img']['name'];
-            }
-            $id = $_POST['idPost'];
-            $currentPage = (int)strip_tags($_GET['page']);
-            $adminModifyPostController = new AdminModifyPostController();
-            $adminModifyPostController->modifyPost($_POST, $id, $currentPage);
-            exit;
-        case "perso-home":
-            foreach ($_FILES as $key => $image) {
-                if (
-                $_FILES[$key]['error'] == 0
-                    and ($_FILES[$key]['size'] <= 1000000)
-                ) {
-                    $infoFileUploaded = pathinfo($_FILES[$key]['name']);
-                    $extensionFileUploaded = $infoFileUploaded['extension'];
-                    $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-                    if (in_array($extensionFileUploaded, $authorizedExtensions)) {
-                        move_uploaded_file($_FILES[$key]['tmp_name'], './img/' . basename($_FILES[$key]['name']));
-                    }
-                    $_POST[$key] = $_FILES[$key]['name'];
-                }
-            }
-            $homeController = new HomeController();
-            $homeController->persoHomePage($_POST);
             break;
         case "sign-in":
             $userController = new UserController();

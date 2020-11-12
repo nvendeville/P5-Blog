@@ -28,7 +28,7 @@ class CommentEntity extends DataAccessManager
         $statement = "
         SELECT *
         FROM comments
-        WHERE idPost = $postId AND status = 'validated'
+        WHERE idPost = $postId AND status = 'validé'
         ORDER BY creationDate DESC";
         return $this->query($statement, get_called_class(), false);
     }
@@ -60,10 +60,10 @@ class CommentEntity extends DataAccessManager
         $insert->execute($values);
     }
 
-    public function validateComment(int $commentId): void
+    public function validateComment(int $commentId, string $commentStatus): void
     {
-        $statement = $this->pdo->prepare("UPDATE `comments` SET `status`=2 WHERE comments.id=?");
-        $statement->execute([$commentId]);
+        $statement = $this->pdo->prepare("UPDATE `comments` SET `status`= ? WHERE comments.id=?");
+        $statement->execute([$commentStatus, $commentId]);
     }
 
     public function rejectComment(int $commentId): void
