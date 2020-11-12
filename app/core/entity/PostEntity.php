@@ -8,6 +8,7 @@ class PostEntity extends DataAccessManager
 {
     protected static string $table = 'posts';
     protected static $instance;
+    private const ARCHIVED = 2;
     private const POSTED = 3;
 
     public function __construct()
@@ -84,7 +85,7 @@ class PostEntity extends DataAccessManager
         return $this->query($statement, get_called_class(), false);
     }
 
-    public function getNbPosts(): object
+    public function getPostedNbPosts(): object
     {
         $statement =
             "SELECT COUNT(posts.id) AS nbPosts FROM `posts` WHERE `status`=" . self::POSTED;
@@ -98,5 +99,48 @@ class PostEntity extends DataAccessManager
             FROM `posts`
             WHERE `status`=" . self::POSTED . " AND `posts`.`category`=?  ";
         return $this->prepareAndFetch($statement, [$categoryName], get_called_class(), true);
+    }
+    public function getAllPosts(): array
+    {
+        $statement = "SELECT * FROM `posts` ORDER BY `creationDate` DESC";
+        return $this->query($statement, get_called_class(), false);
+    }
+
+    public function getTotalNbPosts(): int
+    {
+        $statement = "SELECT COUNT(posts.id) as nbPosts FROM posts";
+        return $this->query($statement, get_called_class(), true);
+    }
+
+    public function updateStatus(int $postId, string $postStatus): void
+    {
+        $date = date("Y-m-d H:i:s");
+        $statement = $this->pdo->prepare("
+        UPDATE `posts`
+        SET `status`= ?, `lastUpdate`='$date'
+        WHERE posts.id=?");
+        $statement->execute([$postStatus, $postId]);
+    }
+
+    public function archivePost(int $postId): void
+    {
+        $statement = $this->pdo->prepare("UPDATE `posts` SET `status`=" . self::ARCHIVED . " WHERE posts.id=?");
+        $statement->execute([$postId]);
+    }
+
+    public function modifyPost(object $adminPostModel, int $postId): void
+    {
+        $date = date("Y-m-d H:i:s");
+        $statement = "UPDATE `posts` SET `title`=?, `header`=?, `content`=?";
+        $values = [$adminPostModel->getTitle(), $adminPostModel->getHeader(), $adminPostModel->getContent()];
+        if ($adminPostModel->getImg() != '') {
+            $statement = $statement . ", `img`=?";
+            array_push($values, $adminPostModel->getImg());
+        }
+        $statement = $statement . ",`status`=?, `category`=?, `lastUpdate`=?
+            WHERE id=?";
+        array_push($values, $adminPostModel->getStatus(), $adminPostModel->getCategory(), $date, $postId);
+        $insert = $this->pdo->prepare($statement);
+        $insert->execute($values);
     }
 }
