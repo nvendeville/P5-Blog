@@ -1,13 +1,13 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-
+<section>
     <div class="container">
         <div class="row">
             <main class="post blog-post col-lg-8">
                 <div class="container">
                     <div class="post-single">
-                        <div class="post-thumbnail"><img src="img/{{ post.img }}" alt="..." class="img-fluid"></div>
+                        <div class="post-thumbnail"><img src="/P5-Blog/img/{{ post.img }}" alt="..." class="img-fluid"></div>
                         <div class="post-details">
                             <div class="post-meta d-flex justify-content-between">
                                 <div class="category"><a href="#">{{ post.category }}</a></div>
@@ -16,7 +16,7 @@
                             <div>Dernière mise à jour : {{ post.lastUpdate | date(U) }}</div>
                             <div class="post-footer d-flex align-items-center flex-column flex-sm-row">
                                 <a href="#" class="author d-flex align-items-center flex-wrap">
-                                    <div class="avatar"><img src="img/{{ post.user.avatar }}" alt="..."
+                                    <div class="avatar"><img src="/P5-Blog/img/{{ post.user.avatar }}" alt="..."
                                                              class="img-fluid"></div>
                                     <div class="title"><span>{{ post.user.firstname }} {{ post.user.lastname }}</span>
                                     </div>
@@ -50,7 +50,7 @@
                                     <div class="comment">
                                         <div class="comment-header d-flex justify-content-between">
                                             <div class="user d-flex align-items-center">
-                                                <div class="image"><img src="img/{{ comment.user.avatar }}" alt="..."
+                                                <div class="image"><img src="/P5-Blog/img/{{ comment.user.avatar }}" alt="..."
                                                                         class="img-fluid rounded-circle"></div>
                                                 <div class="title">
                                                     <strong>{{ comment.user.firstname }} {{ comment.user.lasttname }}</strong>
@@ -69,11 +69,11 @@
 
                                     {% if logged %}
                                         <form id="addCommentForm"
-                                              action="/P5-blog/public/?p=post&action=detail&article={{ post.id }}"
+                                              action="/P5-blog/posts/addComment"
                                               method="post" class="commenting-form">
                                             <input type="hidden" name="token" value="{{ token }}">
                                             <input type="hidden" name="type" value="add_comment">
-                                            <input type="hidden" id="status" name="status" value="to_validate">
+                                            <input type="hidden" id="status" name="status" value="à valider">
                                             <input type="hidden" name="idPost" value="{{ post.id }}">
                                             <input type="hidden" name="idUser" value="{{ idConnectedUser }}">
                                             <div class="row">
@@ -132,6 +132,8 @@
             </aside>
         </div>
     </div>
+
+</section>
 
 
 

@@ -25,7 +25,7 @@
                     <p class="text-big">{{ home.sectionContent }}</p>
                 </div>
                 <div class="col-lg-4">
-                    <h2 class="h3">Téléchargez mon CV !</h2>
+                    <h2 class="h3"><a href="img/CV.jpg" download >Téléchargez mon CV !</a></h2>
                     <a href="img/CV.jpg" download ><img src="img/{{ home.cvImg }}" alt="..." class="img-fluid"></a>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                 <div class="col-md-7">
                     <h2>Contactez-moi</h2>
                     <div class="form-holder">
-                        <form id="contactForm" class="select-width-100" action="/P5-Blog/" method="post">
+                        <form id="contactForm" class="select-width-100" action="/P5-Blog/home" method="post">
                             <input type="hidden" name="token" value="{{ token }}">
                             <input type="hidden" name="type" value="contact_form">
                             <div class="form-group">

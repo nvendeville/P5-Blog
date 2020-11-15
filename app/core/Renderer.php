@@ -8,17 +8,19 @@ use Twig\Loader\FilesystemLoader;
 
 class Renderer
 {
+    use SessionManager;
+
     public function render(string $pageName, array $models): void
     {
-        $loader = new FilesystemLoader('../app/view');
+        $loader = new FilesystemLoader('app/view');
         $twig = new Environment($loader);
         $twig->getExtension(CoreExtension::class)->setDateFormat('d/m/Y H:i', '%d days');
-        $models['token'] = $_SESSION['token'];
-        if (isset($_SESSION['user'])) {
+        $models['token'] = $this->sessionGet('token');
+        if ($this->sessionIsset('user')) {
             $models['logged'] = true;
-            $models['isAdmin'] = getVal($_SESSION['user'], 'isAdmin', 'getIsAdmin') == '1';
-            $models['firstname'] = getVal($_SESSION['user'], 'firstname', 'getFirstname');
-            $models['idConnectedUser'] = getVal($_SESSION['user'], 'id', 'getId');
+            $models['isAdmin'] = getVal($this->sessionGet('user'), 'isAdmin', 'getIsAdmin') == '1';
+            $models['firstname'] = getVal($this->sessionGet('user'), 'firstname', 'getFirstname');
+            $models['idConnectedUser'] = getVal($this->sessionGet('user'), 'idUser', 'getId');
         }
         $models = $this->getOtherModel($models);
         echo $twig->render($pageName, $models);
@@ -26,11 +28,11 @@ class Renderer
 
     private function getOtherModel($models)
     {
-        if (isset($_SESSION['otherModel'])) {
-            foreach ($_SESSION['otherModel'] as $key => $value) {
+        if ($this->sessionIsset('otherModel')) {
+            foreach ($this->sessionGet('otherModel') as $key => $value) {
                 $models[$key] = $value;
             }
-            unset($_SESSION['otherModel']);
+            $this->sessionUnset('otherModel');
         }
         return $models;
     }
