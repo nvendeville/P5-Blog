@@ -78,10 +78,10 @@ class PostEntity extends DataAccessManager
                     `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category`, 
             count(comments.id) as nbComments 
             FROM `posts` 
-            inner join comments on comments.idPost = posts.id and comments.status = 3
-            group by  `posts`.`id`, `posts`.`idUser`, `comments`.`creationDate`, `posts`.`title`, `posts`.`header`, 
+            inner join comments on comments.idPost = posts.id and comments.status = 2
+            group by  `posts`.`id`, `posts`.`idUser`, `posts`.`title`, `posts`.`header`, 
                       `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category` 
-            order by comments.creationDate desc limit 3";
+            order by `comments`.`creationDate` desc limit 3";
         return $this->query($statement, get_called_class(), false);
     }
 

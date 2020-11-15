@@ -4,9 +4,12 @@ namespace App\controller;
 
 use App\core\Renderer;
 use App\core\service\UserService;
+use App\core\SessionManager;
 
-class UserController
+class UsersController
 {
+    use SessionManager;
+
     private Renderer $renderer;
 
     public function __construct()
@@ -17,26 +20,27 @@ class UserController
     public function addUser(array $formAddUser): void
     {
         $userService = new UserService();
-        $_SESSION['user'] = $userService->addUser($formAddUser);
-        $_SESSION['token'] = generateToken();
+        $this->sessionSet('user', $userService->addUser($formAddUser));
+        $this->sessionSet('token', generateToken());
     }
 
-    public function signIn(array $signInForm): void
+    public function login(array $signInForm): void
     {
         $service = new UserService();
         $user = $service->signIn($signInForm['email']);
-        $_SESSION['otherModel'] = ['wrongPassword' => true];
+        $this->sessionSet('otherModel', ['wrongPassword' => true]);
         if (isset($user) && $service->controlPassword(hashPassword($signInForm['password']), $user->getPassword())) {
-            $_SESSION['user'] = $user;
-            $_SESSION['token'] = generateToken();
-            unset($_SESSION['otherModel']);
+            $this->sessionSet('user', $user);
+            $this->sessionSet('token', generateToken());
+            $this->sessionUnset('otherModel');
         }
+        redirect($signInForm["redirect"]);
     }
 
     public function resetPassword(string $email): void
     {
-        $_SESSION['otherModel'] =
-            $this->userExist($email) ? ['resetPassword' => true, 'email' => $email] : ['noUserExist' => true];
+        $this->sessionSet('otherModel', $this->userExist($email) ? ['resetPassword' => true,
+                            'email' => $email] : ['noUserExist' => true]);
     }
 
     public function userExist(string $email): bool

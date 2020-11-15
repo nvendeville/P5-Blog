@@ -9,9 +9,10 @@
                 </button>
             </div>
             <div class="modal-body text-gray">
-                <form id="signInForm" action="/P5-Blog/" method="post" enctype="multipart/form-data">
+                <form id="signInForm" action="/P5-Blog/users/login" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="token" value="{{ token }}">
                     <input type="hidden" name="type" value="sign-in">
+                    <input type="hidden" name="redirect" value="">
                     <label for="email" class="text-orange">
                         Votre email :
                     </label>

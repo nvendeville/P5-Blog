@@ -34,7 +34,7 @@ class PostService extends AbstractService
             $userModel = new UserModel();
             $this->hydrate($userEntity, $userModel);
             $postModel->setUser($userModel);
-            $postModel->setUrl("/P5-blog/public/?p=post&action=detail&article=" . $postModel->getId());
+            $postModel->setUrl("/P5-blog/posts/detail:" . $postModel->getId());
             $postModel->setNbComments(count($this->getComments($postModel->getId())));
             array_push($postsModel, $postModel);
         }
@@ -86,7 +86,7 @@ class PostService extends AbstractService
         foreach ($commentedPosts as $commentedPost) {
             $commentedPostModel = new PostModel();
             $this->hydrate($commentedPost, $commentedPostModel);
-            $commentedPostModel->setUrl("/P5-blog/public/?p=post&action=detail&article=" .
+            $commentedPostModel->setUrl("/P5-blog/posts/detail:" .
                 $commentedPostModel->getId());
             array_push($commentedPostsModel, $commentedPostModel);
         }
@@ -103,11 +103,10 @@ class PostService extends AbstractService
             $postModel = new PostModel();
             $this->hydrate($post, $postModel);
             $userEntity = UserEntity::getInstance()->getById($postModel->getIdUser());
-            //$userEntity = $this->userInstance->getById($postModel->getIdUser());
             $userModel = new UserModel();
             $this->hydrate($userEntity, $userModel);
             $postModel->setUser($userModel);
-            $postModel->setUrl("/P5-blog/public/?p=post&action=detail&article=" . $postModel->getId());
+            $postModel->setUrl("/P5-blog/posts/detail:" . $postModel->getId());
             $postModel->setNbComments(count($this->getComments($postModel->getId())));
             $categoryModel = new CategoryModel();
             $this->hydrate($post, $categoryModel);
@@ -117,7 +116,7 @@ class PostService extends AbstractService
         return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
             "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
             "nbPages" => (int)$nbPages, "currentPage" => $currentPage,
-            "urlParam" => "&action=getPostsByCategory&categorie=$categoryName"];
+            "urlParam" => $categoryName];
     }
 
     private function getNbPostsByCategories(string $categoryName): int
@@ -159,16 +158,9 @@ class PostService extends AbstractService
         PostEntity::getInstance()->addPost($postModel);
     }
 
-    public function updateStatus($postId, $postStatus, $currentPage): array
+    public function updateStatus($postId, $postStatus): void
     {
         PostEntity::getInstance()->updateStatus($postId, $postStatus);
-        return $this->getAll($currentPage);
-    }
-
-    public function archivePost(int $postId, int $currentPage): array
-    {
-        PostEntity::getInstance()->archivePost($postId);
-        return $this->getAll($currentPage);
     }
 
     public function modifyPost(array $formModifyPost, int $postId): void

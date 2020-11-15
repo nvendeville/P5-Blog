@@ -1,20 +1,5 @@
 <header class="header">
     <nav class="navbar navbar-expand-lg">
-        <div class="search-area">
-            <div class="search-area-inner d-flex align-items-center justify-content-center">
-                <div class="close-btn"><i class="icon-close"></i></div>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-8">
-                        <form action="#">
-                            <div class="form-group">
-                                <input type="search" name="search" id="search" placeholder="What are you looking for?">
-                                <button type="submit" class="submit"><i class="icon-search-1"></i></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container">
             <!-- Navbar Brand -->
             <div class="navbar-header d-flex align-items-center justify-content-between">
@@ -30,21 +15,21 @@
 
                     <li class="nav-item"><a id="homeLink" href="/P5-Blog/" class="nav-link">Home</a>
                     </li>
-                    <li class="nav-item"><a href="?p=post" class="nav-link">Blog</a>
+                    <li class="nav-item"><a href="/P5-Blog/posts/1" class="nav-link">Blog</a>
                     </li>
                     {% if isAdmin %}
-                        <li class="nav-item dropdown"><a href="?p=adminHome" class="nav-link dropdown-toggle"
+                        <li class="nav-item dropdown"><a href="" class="nav-link dropdown-toggle"
                                                          id="adminDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false">Administration</a>
                             <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                                <a class="dropdown-item" href="?p=adminPosts">Gérer les articles</a>
-                                <a class="dropdown-item" href="?p=adminComments">Gérer les commentaires</a>
-                                <a class="dropdown-item" href="?p=adminPerso">Personnaliser la page d'accueil</a>
+                                <a class="dropdown-item" href="/P5-Blog/admin/listPost:1">Gérer les articles</a>
+                                <a class="dropdown-item" href="/P5-Blog/admin/listComment:1">Gérer les commentaires</a>
+                                <a class="dropdown-item" href="/P5-Blog/admin/updateHomePage">Personnaliser la page d'accueil</a>
                             </div>
                         </li>
                     {% endif %}
                     {% if logged %}
-                        <li class="nav-item"><a href="?p=logout" class="nav-link">Se déconnecter</a>
+                        <li class="nav-item"><a href="/P5-Blog/users/logout" class="nav-link">Se déconnecter</a>
                         </li>
                         <li class="navbar-brand text-gray">Bienvenue {{ firstname }} !</li>
                     {% else %}

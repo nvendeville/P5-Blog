@@ -29,7 +29,7 @@ class AdminController
             return;
         }
         $this->postService->addPost($formAddPost);
-        $this->renderer->render("adminPosts.html.twig", $this->postService->getPosts(1));
+        redirect("/P5-Blog/admin/listPost:1");
     }
 
     public function listPost(int $currentPage): void
@@ -37,7 +37,7 @@ class AdminController
         $this->renderer->render("adminPosts.html.twig", $this->postService->getPosts($currentPage));
     }
 
-    public function updatePost(int $postId, int $currentPage, array $formModifyPost = []): void
+    public function updatePost(int $postId, int $currentPage, ?array $formModifyPost = []): void
     {
         if (empty($formModifyPost)) {
             $post = $this->postService->getPost($postId);
@@ -46,15 +46,13 @@ class AdminController
             return;
         }
         $this->postService->modifyPost($formModifyPost, $postId);
-        $this->listPost($currentPage);
+        redirect("/P5-Blog/admin/listPost:$currentPage");
     }
 
     public function updateStatusPost(int $postId, string $postStatus, int $currentPage): void
     {
-        $this->renderer->render(
-            "adminPosts.html.twig",
-            $this->postService->updateStatus($postId, $postStatus, $currentPage)
-        );
+        $this->postService->updateStatus($postId, $postStatus);
+        redirect("/P5-Blog/admin/listPost:$currentPage");
     }
 
     public function listComment(int $currentPage): void
@@ -77,6 +75,6 @@ class AdminController
             return;
         }
         $this->homeService->persoHomePage($formUpdateHome);
-        header("Location: /P5-Blog");
+        redirect("/P5-Blog");
     }
 }

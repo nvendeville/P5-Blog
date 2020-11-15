@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for adminComment in adminComments %}
+            {% for adminComment in comments %}
                <tr>
                     <td class="center">{{ adminComment.user.firstname }} {{ adminComment.user.lastname }}</td>
                     <td class="center">{{ adminComment.creationDate | date(U) }}</td>
@@ -53,6 +53,7 @@
     <script>
         $(document).ready(function() {
             $('#listComments').DataTable( {
+
                 initComplete: function () {
                     this.api().columns().every( function () {
                         if (this.selector.cols === 4) {
@@ -75,6 +76,7 @@
                         }
                     } );
                 },
+
                 "columnDefs": [
                     { "width": "10%", "targets": 0 },
                     { "width": "10%", "targets": 1 },
@@ -96,6 +98,7 @@
                 }
 
             } );
+
         } );
     </script>
 

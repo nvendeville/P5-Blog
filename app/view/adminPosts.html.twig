@@ -11,7 +11,7 @@
                 <div class="col-lg-6 flex-end">
                     <div>
                         <button type="button" class="btn btn-outline-secondary"><a
-                                    class="btn-outline-secondary" href="?p=adminAddPost">
+                                    class="btn-outline-secondary" href="/P5-Blog/admin/createPost/">
                                 Nouvel article</a></button>
                     </div>
 
@@ -36,16 +36,16 @@
                             <td class="center">{{ adminPost.category }}</td>
                             <td class="center">{{ adminPost.creationDate | date(U) }}</td>
                             <td class="center"">{{ adminPost.title }}</td>
-                            <td class="center"><img class="admin-img no-margin" src="img/{{ adminPost.img }}"
+                            <td class="center"><img class="admin-img no-margin" src="/P5-Blog/img/{{ adminPost.img }}"
                                                                    alt="..."></td>
                             <td class="center">{{ adminPost.status }}</td>
                             <td class="space-evenly align-items-center">
-                                <a href="/P5-blog/public/?p=adminModifyPost&page={{ currentPage }}&article={{ adminPost.id }}"><i
+                                <a href="/P5-blog/admin/updatePost:{{ adminPost.id }}:{{ currentPage }}"><i
                                             title="Modifier l'article" style="color: #6c757d;"
                                             class="fas fa-pen-square fa-2x"></i></a>
-                                <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=archivePost&adminArticle={{ adminPost.id }}"><i
+                                <a href="/P5-blog/admin/updateStatusPost:{{ adminPost.id }}:2:{{ currentPage }}"><i
                                             title="Archiver l'article" style="color: #6c757d;" class="fas fa-archive fa-2x"></i></a>
-                                <a href="/P5-blog/public/?p=adminPosts&page={{ currentPage }}&action=validatePost&adminArticle={{ adminPost.id }}"><i
+                                <a href="/P5-blog/admin/updateStatusPost:{{ adminPost.id }}:3:{{ currentPage }}"><i
                                             title="Mettre en ligne l'article" style="color: #6c757d;"
                                             class="fas fa-globe fa-2x"></i></a>
                             </td>
@@ -95,6 +95,7 @@
                     { "width": "10%", "targets": 4 },
                     { "width": "25%", "targets": 5 }
                 ],
+                "responsive":true,
                 "pageLength": 6,
                 "ordering": false,
                 "language": {

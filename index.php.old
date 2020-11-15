@@ -1,15 +1,12 @@
 <?php
 
-use App\controller\AdminCommentsController;
-use App\controller\AdminModifyPostController;
-use App\controller\AdminPostsController;
 use App\controller\HomeController;
 use App\controller\UserController;
 
 session_start();
 
-require_once '../vendor/autoload.php';
-require_once '../app/core/tools.php';
+require_once 'vendor/autoload.php';
+require_once 'app/core/tools.php';
 
 
 if (isset($_GET['p']) and $_GET['p'] == 'logout') {
