@@ -9,39 +9,40 @@ use App\core\SessionManager;
 
 class PostsController
 {
-    use SessionManager;
 
     private Renderer $renderer;
+    private PostService $postService;
+    private CommentService $commentService;
+    private SessionManager $sessionManager;
 
     public function __construct()
     {
+        $this->sessionManager = new SessionManager();
         $this->renderer = new Renderer();
+        $this->postService = new PostService();
+        $this->commentService = new CommentService();
     }
 
     public function index(int $currentPage): void
     {
-        $service = new PostService();
-        $this->renderer->render("post.html.twig", $service->getBlog($currentPage));
+        $this->renderer->render("post.html.twig", $this->postService->getBlog($currentPage));
     }
 
     public function detail(int $postId): void
     {
-        $service = new PostService();
-        $this->renderer->render("postDetail.html.twig", $service->getPostDetail($postId));
+        $this->renderer->render("postDetail.html.twig", $this->postService->getPostDetail($postId));
     }
 
     public function getPostsByCategory(string $categoryName, int $currentPage = 1): void
     {
         $category = str_replace('_', ' ', $categoryName);
-        $service = new PostService();
-        $this->renderer->render("post.html.twig", $service->getPostsByCategory($category, $currentPage));
+        $this->renderer->render("post.html.twig", $this->postService->getPostsByCategory($category, $currentPage));
     }
 
     public function addComment(array $formAddComment): void
     {
-        $service = new CommentService();
-        $service->addComment($formAddComment);
-        $this->sessionSet('otherModel', ['addedComment' => true]);
+        $this->commentService->addComment($formAddComment);
+        $this->sessionManager->sessionSet('otherModel', ['addedComment' => true]);
         redirect("/P5-blog/posts/detail:" . $formAddComment["idPost"]);
     }
 }

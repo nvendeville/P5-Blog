@@ -12,19 +12,22 @@ use App\core\SessionManager;
  */
 class HomeController
 {
-    use SessionManager;
 
     /**
      * @var \App\core\Renderer
      */
     private Renderer $renderer;
+    private HomeService $homeService;
+    private SessionManager $sessionManager;
 
     /**
      * HomeController constructor.
      */
     public function __construct()
     {
+        $this->sessionManager = new SessionManager();
         $this->renderer = new Renderer();
+        $this->homeService = new HomeService();
     }
 
     /**
@@ -32,8 +35,7 @@ class HomeController
      */
     public function index(): void
     {
-        $homeService = new HomeService();
-        $homeModel = $homeService->getModel();
+        $homeModel = $this->homeService->getModel();
         $this->renderer->render("home.html.twig", $homeModel);
     }
 
@@ -42,9 +44,8 @@ class HomeController
      */
     public function sendContactRequest(array $contactForm): void
     {
-        $homeService = new HomeService();
-        $homeService->sendContactRequest($contactForm);
-        $this->sessionSet('otherModel', ['mailSent' => true]);
+        $this->homeService->sendContactRequest($contactForm);
+        $this->sessionManager->sessionSet('otherModel', ['mailSent' => true]);
         redirect("/P5-Blog/");
     }
 }

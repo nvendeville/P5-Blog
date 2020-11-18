@@ -11,15 +11,26 @@ use App\model\UserModel;
 
 class CommentService extends AbstractService
 {
+    private CommentEntity $commentEntity;
+    private UserEntity $userEntity;
+    private PostEntity $postEntity;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->commentEntity = CommentEntity::getInstance();
+        $this->userEntity = UserEntity::getInstance();
+        $this->postEntity = PostEntity::getInstance();
+    }
 
     public function getCommentsByPostId(int $postId): array
     {
-        $comments = CommentEntity::getInstance()->getCommentsByPostId($postId);
+        $comments = $this->commentEntity->getCommentsByPostId($postId);
         $commentsModel = [];
         foreach ($comments as $comment) {
             $commentModel = new CommentModel();
             $this->hydrate($comment, $commentModel);
-            $userEntity = UserEntity::getInstance()->getById($commentModel->getIdUser());
+            $userEntity = $this->userEntity->getById($commentModel->getIdUser());
             $userModel = new UserModel();
             $this->hydrate($userEntity, $userModel);
             $commentModel->setUser($userModel);
@@ -32,24 +43,24 @@ class CommentService extends AbstractService
 
     public function updateStatus(int $commentId, string $commentStatus, int $currentPage): array
     {
-        CommentEntity::getInstance()->updateStatus($commentId, $commentStatus);
+        $this->commentEntity->updateStatus($commentId, $commentStatus);
         return $this->getAll($currentPage);
     }
 
     public function getAll(int $currentPage): array
     {
-        $entities = CommentEntity::getInstance()->getPaginatedComments();
+        $entities = $this->commentEntity->getPaginatedComments();
         $commentsModel = [];
         foreach ($entities as $comment) {
             $commentModel = new CommentModel();
             $this->hydrate($comment, $commentModel);
 
-            $userEntity = UserEntity::getInstance()->getById($commentModel->getIdUser());
+            $userEntity = $this->userEntity->getById($commentModel->getIdUser());
             $userModel = new UserModel();
             $this->hydrate($userEntity, $userModel);
             $commentModel->setUser($userModel);
 
-            $postEntity = PostEntity::getInstance()->getById($commentModel->getIdPost());
+            $postEntity = $this->postEntity->getById($commentModel->getIdPost());
             $postModel = new PostModel();
             $this->hydrate($postEntity, $postModel);
             $commentModel->setTitlePost($postModel->getTitle());
@@ -62,16 +73,10 @@ class CommentService extends AbstractService
             "currentPage" => $currentPage];
     }
 
-    public function rejectComment(int $commentId, int $currentPage): array
-    {
-        CommentEntity::getInstance()->rejectComment($commentId);
-        return $this->getAll($currentPage);
-    }
-
     public function addComment(array $formAddComment): void
     {
-        $commentModel = new commentModel();
+        $commentModel = new CommentModel();
         $this->hydrateFromPostArray($formAddComment, $commentModel);
-        CommentEntity::getInstance()->addComment($commentModel);
+        $this->commentEntity->addComment($commentModel);
     }
 }

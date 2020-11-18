@@ -4,45 +4,16 @@ namespace App\router;
 
 use ReflectionClass;
 
-/**
- * Class Router
- * @package App\router
- */
+
 class Router
 {
-    /**
-     * @var string
-     */
     private string $uri;
-    /**
-     * @var array|string[]
-     */
     private array $controllers = ["Home", "Admin", "Posts", "Users"];
-    /**
-     * @var string
-     */
     private string $explicitController;
-    /**
-     * @var string
-     */
     private string $explicitMethod;
-    /**
-     * @var array
-     */
     private array $explicitParams;
-    /**
-     * @var array|null
-     */
     private ?array $callable = [];
 
-    /**
-     * Router constructor.
-     *
-     * @param string $uri
-     *
-     * @throws \App\router\RouterException
-     * @throws \ReflectionException
-     */
     public function __construct(string $uri)
     {
         $this->uri = $uri;
@@ -55,10 +26,6 @@ class Router
         $this->callable = $this->getMethod();
     }
 
-    /**
-     *
-     * @throws \ReflectionException
-     */
     private function findExplicitMethod(): void
     {
         $split = explode("/", $this->uri);
@@ -75,25 +42,11 @@ class Router
         }
     }
 
-    /**
-     * @param string $controller
-     * @param        $uriParams
-     *
-     * @return bool
-     * @throws \ReflectionException
-     */
     private function containRealMethod(string $controller, array $uriParams): bool
     {
         return (count($uriParams) == 1 and $this->hasMethod($controller, $uriParams[0])) or count($uriParams) > 1;
     }
 
-    /**
-     * @param string $controller
-     * @param string $methodName
-     *
-     * @return bool
-     * @throws \ReflectionException
-     */
     private function hasMethod(string $controller, string $methodName): bool
     {
         if (!in_array(ucfirst($controller), $this->controllers)) {
@@ -109,17 +62,11 @@ class Router
         return false;
     }
 
-    /**
-     * @param array|null $params
-     */
     private function addingPostParams(?array &$params): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($_FILES as $key => $image) {
-                if (
-                    $_FILES[$key]['error'] == 0
-                    and ($_FILES[$key]['size'] <= 1000000)
-                ) {
+                if ($_FILES[$key]['error'] == 0 and ($_FILES[$key]['size'] <= 1000000)) {
                     $infoFileUploaded = pathinfo($_FILES[$key]['name']);
                     $extensionFileUploaded = $infoFileUploaded['extension'];
                     $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
@@ -134,14 +81,8 @@ class Router
         }
     }
 
-    /**
-     * @return array|null
-     * @throws \App\router\RouterException
-     */
     private function getMethod(): ?array
     {
-        // chaque url est contruite comme ceci : http://domain/controller/params...
-        // on recupère le contrôleur et les paramètres
         $split = explode("/", $this->uri);
         if ($split[0] === "/") {
             array_shift($split);
@@ -152,15 +93,8 @@ class Router
         return $this->getMatchMethod($split);
     }
 
-    /**
-     * @param array $splitUri
-     *
-     * @return array
-     * @throws \App\router\RouterException
-     */
     private function getMatchMethod(array $splitUri): array
     {
-        // recherche des méthodes compatibles pour le contrôleur on utilise la rélfexion
         $controller = "App\\Controller\\" . ucfirst($splitUri[0]) . "Controller";
         array_shift($splitUri);
         $this->addingPostParams($splitUri);
@@ -181,12 +115,6 @@ class Router
         }
     }
 
-    /**
-     * @param array $methodParameters
-     * @param array $uriParameters
-     *
-     * @return bool
-     */
     private function compareParameters(array $methodParameters, array $uriParameters): bool
     {
         if (count($methodParameters) == 0 and count($uriParameters) == 0) {
@@ -203,22 +131,11 @@ class Router
         return true;
     }
 
-    /**
-     * @param string $type1
-     * @param string $type2
-     *
-     * @return bool
-     */
     private function compareTypes(string $type1, string $type2): bool
     {
         return $type1 == $type2;
     }
 
-    /**
-     * @param $param
-     *
-     * @return string
-     */
     private function convertParam($param): string
     {
         if (is_array($param)) {
@@ -230,9 +147,6 @@ class Router
         return "string";
     }
 
-    /**
-     * @return object|null
-     */
     public function run(): ?object
     {
         $controller = new $this->callable[0]();

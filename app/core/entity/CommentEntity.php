@@ -60,15 +60,9 @@ class CommentEntity extends DataAccessManager
         $insert->execute($values);
     }
 
-    public function validateComment(int $commentId, string $commentStatus): void
+    public function updateStatus(int $commentId, string $commentStatus): void
     {
         $statement = $this->pdo->prepare("UPDATE `comments` SET `status`= ? WHERE comments.id=?");
         $statement->execute([$commentStatus, $commentId]);
-    }
-
-    public function rejectComment(int $commentId): void
-    {
-        $statement = $this->pdo->prepare("UPDATE `comments` SET `status`=3 WHERE comments.id=?");
-        $statement->execute([$commentId]);
     }
 }

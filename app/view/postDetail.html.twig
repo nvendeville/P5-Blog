@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<section>
+<section class="featured-posts">
     <div class="container">
         <div class="row">
             <main class="post blog-post col-lg-8">
@@ -125,7 +125,7 @@
                 </div>
             {% endif %}
 
-            <aside class="col-lg-4">
+            <aside class="col-lg-4 padding-media">
                 {% include 'latestPosts.html.twig' with latestCommentedPosts %}
 
                 {% include 'categories.html.twig' with categories %}

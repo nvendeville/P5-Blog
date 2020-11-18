@@ -14,25 +14,36 @@ class HomeService extends AbstractService
 {
     use Mailer;
 
+    private HeaderEntity $headerEntity;
+    private FooterEntity $footerEntity;
+    private HomeEntity $homeEntity;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->headerEntity = HeaderEntity::getInstance();
+        $this->footerEntity = FooterEntity::getInstance();
+        $this->homeEntity = HomeEntity::getInstance();
+    }
+
     public function getModel(): array
     {
-        $entity = HomeEntity::getInstance()->one();
         $homeModel = new HomeModel();
-        $this->hydrate($entity, $homeModel);
+        $this->hydrate($this->homeEntity->one(), $homeModel);
         return ["header" => $this->getHeader(), "home" => $homeModel, "footer" => $this->getFooter()];
     }
 
     public function persoHomePage(array $persoHomeForm): void
     {
         $homeModel = new HomeModel();
-        $this->hydrateFromPostArray($persoHomeForm, $homeModel);
         $headerModel = new HeaderModel();
-        $this->hydrateFromPostArray($persoHomeForm, $headerModel);
         $footerModel = new FooterModel();
+        $this->hydrateFromPostArray($persoHomeForm, $homeModel);
+        $this->hydrateFromPostArray($persoHomeForm, $headerModel);
         $this->hydrateFromPostArray($persoHomeForm, $footerModel);
-        HeaderEntity::getInstance()->persoHeader($headerModel);
-        HomeEntity::getInstance()->persoHomePage($homeModel);
-        FooterEntity::getInstance()->persoFooter($footerModel);
+        $this->headerEntity->persoHeader($headerModel);
+        $this->homeEntity->persoHomePage($homeModel);
+        $this->footerEntity->persoFooter($footerModel);
     }
 
     public function sendContactRequest(array $contactForm): void

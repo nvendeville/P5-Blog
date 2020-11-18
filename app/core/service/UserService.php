@@ -3,34 +3,50 @@
 namespace App\core\service;
 
 use App\core\entity\UserEntity;
+use App\core\SessionManager;
 use App\model\UserModel;
 
 class UserService extends AbstractService
 {
 
+    private UserEntity $userEntity;
+    private SessionManager $sessionManager;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->sessionManager = new SessionManager();
+        $this->userEntity = UserEntity::getInstance();
+    }
+
     public function addUser(array $formAddUser): object
     {
         $userModel = new UserModel();
         $this->hydrateFromPostArray($formAddUser, $userModel);
-        UserEntity::getInstance()->addUser($userModel);
-        return UserEntity::getInstance()->getUserByEmail($userModel->getEmail());
+        $this->userEntity->addUser($userModel);
+        return $this->userEntity->getUserByEmail($userModel->getEmail());
     }
 
     public function userExist(string $email): bool
     {
-        return UserEntity::getInstance()->userExist($email) != null;
+        return $this->userEntity->userExist($email) != null;
     }
 
 
     public function signIn(string $email): ?object
     {
-        $user = UserEntity::getInstance()->getUserByEmail($email);
+        $userModel = new UserModel();
+        $user = $this->userEntity->getUserByEmail($email);
         if (isset($user)) {
-            $userModel = new UserModel();
             $this->hydrate($user, $userModel);
             return $userModel;
         }
         return null;
+    }
+
+    public function logout(): void
+    {
+        $this->sessionManager->sessionUnset('user', 'token', 'isAdmin');
     }
 
     public function controlPassword(string $password1, string $password2): bool
@@ -40,6 +56,6 @@ class UserService extends AbstractService
 
     public function updatePassword(string $newPassword, string $email): void
     {
-        UserEntity::getInstance()->updatePassword($newPassword, $email);
+        $this->userEntity->updatePassword($newPassword, $email);
     }
 }

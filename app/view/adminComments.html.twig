@@ -5,7 +5,7 @@
     <section>
         <div class="container margin-30">
             <div class="row">
-                <h1 class="text-orange d-flex flex-center latest-posts-width-100">Gérer les commentaires</h1>
+                <h1 class="col-lg-6 text-orange d-flex flex-center latest-posts-width-100">Gérer les commentaires</h1>
             </div>
         </div>
 
@@ -30,10 +30,10 @@
                     <td>{{ adminComment.content }}</td>
                     <td class="center">{{ adminComment.status }}</td>
                     <td class="space-evenly align-items-center">
-                        <a href="/P5-blog/public/?p=adminComments&page={{ currentPage }}&action=rejectComment&commentaire={{ adminComment.id }}"><i
+                        <a href="/P5-blog/admin/updateStatusComment:{{ adminComment.id }}:3:{{ currentPage }}"><i
                                     title="Rejeter le commentaire" style="color: #6c757d;"
                                     class="fas fa-times fa-2x"></i></a>
-                        <a href="/P5-blog/public/?p=adminComments&page={{ currentPage }}&action=validateComment&commentaire={{ adminComment.id }}"><i
+                        <a href="/P5-blog/admin/updateStatusComment:{{ adminComment.id }}:2:{{ currentPage }}"><i
                                     title="Valider le commentaire" style="color: #6c757d;"
                                     class="fas fa-check fa-2x"></i></a>
                     </td>
@@ -85,6 +85,7 @@
                     { "width": "10%", "targets": 4 },
                     { "width": "20%", "targets": 5 }
                 ],
+                "responsive": true,
                 "pageLength": 6,
                 "ordering": false,
                 "language": {
