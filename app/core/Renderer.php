@@ -8,19 +8,24 @@ use Twig\Loader\FilesystemLoader;
 
 class Renderer
 {
-    use SessionManager;
+    private SessionManager $sessionManager;
+
+    public function __construct()
+    {
+        $this->sessionManager = new SessionManager();
+    }
 
     public function render(string $pageName, array $models): void
     {
         $loader = new FilesystemLoader('app/view');
         $twig = new Environment($loader);
         $twig->getExtension(CoreExtension::class)->setDateFormat('d/m/Y H:i', '%d days');
-        $models['token'] = $this->sessionGet('token');
-        if ($this->sessionIsset('user')) {
+        $models['token'] = $this->sessionManager->sessionGet('token');
+        if ($this->sessionManager->sessionIsset('user')) {
             $models['logged'] = true;
-            $models['isAdmin'] = getVal($this->sessionGet('user'), 'isAdmin', 'getIsAdmin') == '1';
-            $models['firstname'] = getVal($this->sessionGet('user'), 'firstname', 'getFirstname');
-            $models['idConnectedUser'] = getVal($this->sessionGet('user'), 'idUser', 'getId');
+            $models['isAdmin'] = getVal($this->sessionManager->sessionGet('user'), 'isAdmin', 'getIsAdmin') == '1';
+            $models['firstname'] = getVal($this->sessionManager->sessionGet('user'), 'firstname', 'getFirstname');
+            $models['idConnectedUser'] = getVal($this->sessionManager->sessionGet('user'), 'idUser', 'getId');
         }
         $models = $this->getOtherModel($models);
         echo $twig->render($pageName, $models);
@@ -28,11 +33,11 @@ class Renderer
 
     private function getOtherModel($models)
     {
-        if ($this->sessionIsset('otherModel')) {
-            foreach ($this->sessionGet('otherModel') as $key => $value) {
+        if ($this->sessionManager->sessionIsset('otherModel')) {
+            foreach ($this->sessionManager->sessionGet('otherModel') as $key => $value) {
                 $models[$key] = $value;
             }
-            $this->sessionUnset('otherModel');
+            $this->sessionManager->sessionUnset('otherModel');
         }
         return $models;
     }

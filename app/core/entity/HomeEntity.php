@@ -33,11 +33,11 @@ class HomeEntity extends DataAccessManager
             $statement = $statement . ", `heroImg`=?";
             array_push($values, $homeModel->getHeroImg());
         }
-        $statement = $statement . ", `cvLink`=?";
-        array_push($values, $homeModel->getCvLink());
-        if ($homeModel->getcvImg() != '') {
+        //$statement = $statement . ", `cvLink`=?";
+        //array_push($values, $homeModel->getCvLink());
+        if ($homeModel->getCvImg() != '') {
             $statement = $statement . ", `cvImg`=?";
-            array_push($values, $homeModel->getcvImg());
+            array_push($values, $homeModel->getCvImg());
         }
         $statement = $statement . ", `sectionTitle`=?, `sectionContent`=?";
         array_push($values, $homeModel->getSectionTitle(), $homeModel->getSectionContent());

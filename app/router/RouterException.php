@@ -2,7 +2,7 @@
 
 namespace App\router;
 
-
-class RouterException extends \Exception {
+class RouterException extends \Exception
+{
 
 }

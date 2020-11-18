@@ -2,71 +2,38 @@
 
 namespace App\core;
 
-/**
- * Class SessionManager
- * @package App\core
- */
-trait SessionManager
+class SessionManager
 {
-    /**
-     * @var array
-     */
-    private array $session_vars = [];
+    private array $sessionVars = [];
 
-
-    /**
-     * SessionManager constructor.
-     */
     public function __construct()
     {
-        if (!(session_status() === PHP_SESSION_ACTIVE)) {
-            session_start();
-        }
-        $this->session_vars = &$_SESSION;
+        $this->sessionVars = &$_SESSION;
     }
 
-
-
-    /**
-     * @param string $name
-     * @param mixed $value
-     */
-    public function sessionSet(string $name, object $value): void
+    public function sessionSet(string $name, $value): void
     {
-        $this->session_vars[$name] = $value;
+        $this->sessionVars[$name] = $value;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return object|string
-     */
     public function sessionGet(string $name)
     {
         if ($this->sessionIsset($name)) {
-            return $this->session_vars[$name];
+            return $this->sessionVars[$name];
         }
-        return "";
+        return  "";
     }
 
-    /**
-     * @param string $name
-     * @return bool
-     */
     public function sessionIsset(string $name): bool
     {
-        return isset($this->session_vars[$name]);
+        return isset($this->sessionVars[$name]);
     }
 
-    /**
-     * @param string $name
-     * @param mixed ...$vars
-     */
     public function sessionUnset(string $name, ...$vars): void
     {
-        unset($this->session_vars[$name]);
+        unset($this->sessionVars[$name]);
         foreach ($vars as $var) {
-            unset($this->session_vars[$var]);
+            unset($this->sessionVars[$var]);
         }
     }
 }

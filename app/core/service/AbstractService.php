@@ -10,6 +10,16 @@ use App\model\HeaderModel;
 class AbstractService
 {
 
+    private HeaderEntity $headerEntity;
+    private FooterEntity $footerEntity;
+
+    public function __construct()
+    {
+        $this->headerEntity = HeaderEntity::getInstance();
+        $this->footerEntity = FooterEntity::getInstance();
+    }
+
+
     protected function hydrateFromPostArray(array $source, object $target): void
     {
         foreach ($source as $key => $value) {
@@ -22,7 +32,7 @@ class AbstractService
 
     protected function getHeader(): object
     {
-        $entity = HeaderEntity::getInstance()->all(true);
+        $entity = $this->headerEntity->all(true);
         $headerModel = new HeaderModel();
         $this->hydrate($entity, $headerModel);
         return $headerModel;
@@ -40,7 +50,7 @@ class AbstractService
 
     protected function getFooter(): object
     {
-        $entity = FooterEntity::getInstance()->all(true);
+        $entity = $this->footerEntity->all(true);
         $footerModel = new FooterModel();
         $this->hydrate($entity, $footerModel);
         return $footerModel;
