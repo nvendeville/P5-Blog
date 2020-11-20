@@ -22,14 +22,16 @@ class UsersController
 
     public function addUser(array $formAddUser): void
     {
-        $this->sessionManager->sessionSet('user', $this->userService->addUser($formAddUser));
+        $user = $this->userService->addUser($formAddUser);
+        $this->sessionManager->sessionSet('user', $user);
         $this->sessionManager->sessionSet('token', generateToken());
+        redirect($formAddUser["redirect"]);
     }
 
     public function login(array $signInForm): void
     {
-        $user = $this->userService->signIn($signInForm['email']);
         $this->sessionManager->sessionSet('otherModel', ['wrongPassword' => true]);
+        $user = $this->userService->signIn($signInForm['email']);
         if (isset($user) && $this->userService->controlPassword(hashPassword($signInForm['password']), $user->getPassword())) {
             $this->sessionManager->sessionSet('user', $user);
             $this->sessionManager->sessionSet('token', generateToken());
@@ -44,10 +46,12 @@ class UsersController
         redirect('/P5-Blog');
     }
 
-    public function resetPassword(string $email): void
+    public function resetPassword(array $resetPasswordForm): void
     {
-        $this->sessionManager->sessionSet('otherModel', $this->userExist($email) ? ['resetPassword' => true,
-                            'email' => $email] : ['noUserExist' => true]);
+        $this->sessionManager->sessionSet('otherModel', $this->userExist($resetPasswordForm['email']) ? ['resetPassword' => true,
+                            'email' => $resetPasswordForm['email']] : ['noUserExist' => true]);
+
+        redirect($resetPasswordForm["redirect"]);
     }
 
     public function userExist(string $email): bool

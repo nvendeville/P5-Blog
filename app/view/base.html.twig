@@ -63,25 +63,22 @@
 
         $('#navbarcollapse a').removeClass('active')
 
-        if (queryParams.has('p')) {
-            if (queryParams.get('p').includes('admin')) {
+        if (queryParams.has('admin')) {
                 $('#adminDropdown').addClass('active')
             }
-            let links = $('#navbarcollapse a')
-            for (let link of links) {
-                let linkParams = new URLSearchParams($(link).attr('href'))
-                if (linkParams.has('p') && queryParams.get('p') === linkParams.get('p')) {
-                    $(link).addClass('active')
-                }
+        let links = $('#navbarcollapse a')
+        for (let link of links) {
+            let linkParams = new URLSearchParams($(link).attr('href'))
+            if (linkParams.has('admin') && queryParams.get('admin') === linkParams.get('admin')) {
+                $(link).addClass('active')
+            } else {
+                $('#homeLink').addClass('active')
             }
-        } else {
-            $('#homeLink').addClass('active')
         }
-
         $('#signInForm input[name="redirect"]').attr('value', document.URL)
-        $('#ForgotPasswordForm').attr('action', document.URL)
-        $('#restPasswordForm').attr('action', document.URL)
-        $('#AddUserForm').attr('action', document.URL)
+        $('#ForgotPasswordForm input[name="redirect"]').attr('value', document.URL)
+        $('#restPasswordForm input[name="redirect"]').attr('value', document.URL)
+        $('#AddUserForm input[name="redirect"]').attr('value', document.URL)
 
         if ($('#alreadyKnown').length) {
             $('#alreadyKnown').modal('show')
