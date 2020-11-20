@@ -13,6 +13,10 @@ Bootstrap Temple Blog Template
 * =====================
 */
 
+.padding-404 {
+    padding-left: 10em;
+    padding-top: 10em;
+}
 
 .text-bold {
     font-weight: 700;

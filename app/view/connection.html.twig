@@ -52,9 +52,10 @@
                 </button>
             </div>
             <div class="modal-body text-gray">
-                <form id="ForgotPasswordForm" action="/P5-Blog/" method="post" enctype="multipart/form-data">
+                <form id="ForgotPasswordForm" action="/P5-Blog/users/resetPassword" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="token" value="{{ token }}">
                     <input type="hidden" name="type" value="forgot-password">
+                    <input type="hidden" name="redirect" value="">
                     <label for="email" class="text-orange">
                         Votre email :
                     </label>
@@ -85,9 +86,10 @@
                 </button>
             </div>
             <div class="modal-body text-gray">
-                <form id="restPasswordForm" action="/P5-Blog/" method="post" enctype="multipart/form-data">
+                <form id="restPasswordForm" action="/P5-Blog/users/updatePassword" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="token" value="{{ token }}">
                     <input type="hidden" name="type" value="reset-password">
+                    <input type="hidden" name="redirect" value="">
                     <input type="hidden" name="email" value="{{ email }}">
 
                     <label for="newPassword" class="text-orange">
@@ -124,10 +126,11 @@
                     </button>
                 </div>
                 <div class="modal-body text-gray">
-                    <form id="AddUserForm" class="select-width-100" action="/P5-Blog/" method="post"
+                    <form id="AddUserForm" class="select-width-100" action="/P5-Blog/users/addUser" method="post"
                           enctype="multipart/form-data">
                         <input type="hidden" name="token" value="{{ token }}">
                         <input type="hidden" name="type" value="add_user">
+                        <input type="hidden" name="redirect" value="">
                         <input type="hidden" name="isAdmin" value="0">
                         <div class="form-holder">
                             <div class="form-group container">

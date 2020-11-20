@@ -1,5 +1,6 @@
 <?php
 
+use App\core\Renderer;
 use App\router\RouterException;
 
 session_start();
@@ -11,5 +12,11 @@ if (!isset($_SESSION['token'])) {
     $_SESSION['token'] = generateToken();
 }
 
-$router = new App\Router\Router(isset($_GET['uri']) ? $_GET['uri'] : 'home');
-$router->run();
+try {
+    $router = new App\Router\Router(isset($_GET['uri']) ? $_GET['uri'] : 'home');
+    $router->run();
+} catch (\Exception $e) {
+    var_dump($e);
+    $renderer = new Renderer();
+    $renderer->render('404.html.twig', []);
+}

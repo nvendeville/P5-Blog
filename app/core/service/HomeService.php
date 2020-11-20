@@ -2,6 +2,7 @@
 
 namespace App\core\service;
 
+use App\core\ConfigClass;
 use App\core\entity\FooterEntity;
 use App\core\entity\HeaderEntity;
 use App\core\entity\HomeEntity;
@@ -51,6 +52,7 @@ class HomeService extends AbstractService
         $message = 'Vous avez reçu un message de <br/>' . $contactForm['firstname'] . ' ' . $contactForm['lastname'] .
             ' : <br/>' . $contactForm['message'];
         $subject = 'Demande de contact';
-        $this->sendMail($subject, $message, $contactForm['email']);
+        $config = ConfigClass::getInstance();
+        $this->sendMail($subject, $message, $config->get('smtp_setFromMail'), $contactForm['email']);
     }
 }
