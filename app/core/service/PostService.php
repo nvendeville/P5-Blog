@@ -52,18 +52,6 @@ class PostService extends AbstractService
             "nbPages" => (int)$nbPages, "currentPage" => $currentPage];
     }
 
-    public function getPosts(int $currentPage): array
-    {
-        $entities = $this->postEntity->getAllPosts();
-        $postsModel = [];
-        foreach ($entities as $post) {
-            $postModel = new PostModel();
-            $this->hydrate($post, $postModel);
-            array_push($postsModel, $postModel);
-        }
-        return ["header" => $this->getHeader(), "adminPosts" => $postsModel, "currentPage" => $currentPage];
-    }
-
     private function getNbPage(): int
     {
         $nbPosts = $this->postEntity->getPostedNbPosts();
@@ -95,11 +83,22 @@ class PostService extends AbstractService
         foreach ($commentedPosts as $commentedPost) {
             $commentedPostModel = new PostModel();
             $this->hydrate($commentedPost, $commentedPostModel);
-            $commentedPostModel->setUrl("/P5-blog/posts/detail:" .
-                $commentedPostModel->getId());
+            $commentedPostModel->setUrl("/P5-blog/posts/detail:" . $commentedPostModel->getId());
             array_push($commentedPostsModel, $commentedPostModel);
         }
         return $commentedPostsModel;
+    }
+
+    public function getPosts(int $currentPage): array
+    {
+        $entities = $this->postEntity->getAllPosts();
+        $postsModel = [];
+        foreach ($entities as $post) {
+            $postModel = new PostModel();
+            $this->hydrate($post, $postModel);
+            array_push($postsModel, $postModel);
+        }
+        return ["header" => $this->getHeader(), "adminPosts" => $postsModel, "currentPage" => $currentPage];
     }
 
     public function getPostsByCategory(string $categoryName, int $currentPage): array
@@ -123,8 +122,7 @@ class PostService extends AbstractService
         }
         return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
             "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
-            "nbPages" => (int)$nbPages, "currentPage" => $currentPage,
-            "urlParam" => $categoryName];
+            "nbPages" => (int)$nbPages, "currentPage" => $currentPage, "urlParam" => $categoryName];
     }
 
     private function getNbPostsByCategories(string $categoryName): int

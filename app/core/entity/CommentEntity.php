@@ -7,8 +7,7 @@ use App\core\database\DataAccessManager;
 class CommentEntity extends DataAccessManager
 {
     protected static string $table = 'comments';
-
-    protected static $instance;
+    protected static CommentEntity $instance;
 
     protected function __construct()
     {
@@ -33,36 +32,31 @@ class CommentEntity extends DataAccessManager
         return $this->query($statement, get_called_class(), false);
     }
 
-
     public function getPaginatedComments(): array
     {
-        $statement =
-            "SELECT * FROM `comments` ORDER BY creationDate DESC";
+        $statement = "SELECT * FROM `comments` ORDER BY creationDate DESC";
         return $this->query($statement, get_called_class(), false);
     }
 
-
     public function getNbComments(): int
     {
-        $statement =
-            "SELECT COUNT(comments.id) as nbComments FROM comments";
+        $statement = "SELECT COUNT(comments.id) as nbComments FROM comments";
         return $this->query($statement, get_called_class(), true);
     }
 
     public function addComment(object $commentModel): void
     {
-        $statement =
-            "INSERT INTO `comments` (`idUser`, `idPost`, `content`, `status`) 
+        $statement = "INSERT INTO `comments` (`idUser`, `idPost`, `content`, `status`) 
             VALUES (?,?,?,?)";
-        $values = [$commentModel->getIdUser(), $commentModel->getIdPost(),
-            $commentModel->getContent(), $commentModel->getStatus()];
-        $insert = $this->pdo->prepare($statement);
+        $values = [$commentModel->getIdUser(), $commentModel->getIdPost(), $commentModel->getContent(),
+            $commentModel->getStatus()];
+        $insert = self::getPdo()->prepare($statement);
         $insert->execute($values);
     }
 
     public function updateStatus(int $commentId, string $commentStatus): void
     {
-        $statement = $this->pdo->prepare("UPDATE `comments` SET `status`= ? WHERE comments.id=?");
+        $statement = self::getPdo()->prepare("UPDATE `comments` SET `status`= ? WHERE comments.id=?");
         $statement->execute([$commentStatus, $commentId]);
     }
 }

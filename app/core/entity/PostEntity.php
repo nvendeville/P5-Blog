@@ -6,10 +6,10 @@ use App\core\database\DataAccessManager;
 
 class PostEntity extends DataAccessManager
 {
-    protected static string $table = 'posts';
-    protected static $instance;
     private const ARCHIVED = 2;
     private const POSTED = 3;
+    protected static string $table = 'posts';
+    protected static PostEntity $instance;
 
     public function __construct()
     {
@@ -26,24 +26,17 @@ class PostEntity extends DataAccessManager
 
     public function addPost(object $postModel): void
     {
-        $statement =
-            "INSERT INTO `posts` (`idUser`, `title`, `header`, `content`, `img`, `status`, `category`) 
+        $statement = "INSERT INTO `posts` (`idUser`, `title`, `header`, `content`, `img`, `status`, `category`) 
             VALUES (?,?,?,?,?,?,?)";
-        $values = [$postModel->getIdUser(),
-            $postModel->getTitle(),
-            $postModel->getHeader(),
-            $postModel->getContent(),
-            $postModel->getImg(),
-            $postModel->getStatus(),
-            $postModel->getCategory()];
-        $insert = $this->pdo->prepare($statement);
+        $values = [$postModel->getIdUser(), $postModel->getTitle(), $postModel->getHeader(), $postModel->getContent(),
+            $postModel->getImg(), $postModel->getStatus(), $postModel->getCategory()];
+        $insert = self::getPdo()->prepare($statement);
         $insert->execute($values);
     }
 
     public function getPaginatedPosts(int $from, int $nbPost): array
     {
-        $statement =
-            "SELECT *
+        $statement = "SELECT *
             FROM `posts`
             WHERE `status` = " . self::POSTED . "
             ORDER BY `creationDate` DESC
@@ -73,8 +66,7 @@ class PostEntity extends DataAccessManager
 
     public function getLatestCommentedPosts(): array
     {
-        $statement =
-            "SELECT `posts`.`id`, `posts`.`idUser`, `comments`.`creationDate`, `posts`.`title`, `posts`.`header`, 
+        $statement = "SELECT `posts`.`id`, `posts`.`idUser`, `comments`.`creationDate`, `posts`.`title`, `posts`.`header`, 
                     `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category`, 
             count(comments.id) as nbComments 
             FROM `posts` 
@@ -87,19 +79,18 @@ class PostEntity extends DataAccessManager
 
     public function getPostedNbPosts(): object
     {
-        $statement =
-            "SELECT COUNT(posts.id) AS nbPosts FROM `posts` WHERE `status`=" . self::POSTED;
+        $statement = "SELECT COUNT(posts.id) AS nbPosts FROM `posts` WHERE `status`=" . self::POSTED;
         return $this->query($statement, get_called_class(), true);
     }
 
     public function getNbPostsByCategories($categoryName): object
     {
-        $statement =
-            "SELECT COUNT(posts.id) AS nbPosts
+        $statement = "SELECT COUNT(posts.id) AS nbPosts
             FROM `posts`
             WHERE `status`=" . self::POSTED . " AND `posts`.`category`=?  ";
         return $this->prepareAndFetch($statement, [$categoryName], get_called_class(), true);
     }
+
     public function getAllPosts(): array
     {
         $statement = "SELECT * FROM `posts` ORDER BY `creationDate` DESC";
@@ -115,7 +106,7 @@ class PostEntity extends DataAccessManager
     public function updateStatus(int $postId, string $postStatus): void
     {
         $date = date("Y-m-d H:i:s");
-        $statement = $this->pdo->prepare("
+        $statement = self::getPdo()->prepare("
         UPDATE `posts`
         SET `status`= ?, `lastUpdate`='$date'
         WHERE posts.id=?");
@@ -124,7 +115,7 @@ class PostEntity extends DataAccessManager
 
     public function archivePost(int $postId): void
     {
-        $statement = $this->pdo->prepare("UPDATE `posts` SET `status`=" . self::ARCHIVED . " WHERE posts.id=?");
+        $statement = self::getPdo()->prepare("UPDATE `posts` SET `status`=" . self::ARCHIVED . " WHERE posts.id=?");
         $statement->execute([$postId]);
     }
 
@@ -140,7 +131,7 @@ class PostEntity extends DataAccessManager
         $statement = $statement . ",`status`=?, `category`=?, `lastUpdate`=?
             WHERE id=?";
         array_push($values, $adminPostModel->getStatus(), $adminPostModel->getCategory(), $date, $postId);
-        $insert = $this->pdo->prepare($statement);
+        $insert = self::getPdo()->prepare($statement);
         $insert->execute($values);
     }
 }

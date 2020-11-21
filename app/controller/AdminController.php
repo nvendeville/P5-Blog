@@ -2,21 +2,19 @@
 
 namespace App\controller;
 
-use App\core\Renderer;
 use App\core\service\CommentService;
 use App\core\service\HomeService;
 use App\core\service\PostService;
 
-class AdminController
+class AdminController extends AbstractController
 {
-    private Renderer $renderer;
     private PostService $postService;
     private CommentService $commentService;
     private HomeService $homeService;
 
     public function __construct()
     {
-        $this->renderer = new Renderer();
+        parent::__construct();
         $this->postService = new PostService();
         $this->commentService = new CommentService();
         $this->homeService = new HomeService();

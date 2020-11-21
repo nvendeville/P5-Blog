@@ -9,7 +9,6 @@ use App\model\HeaderModel;
 
 class AbstractService
 {
-
     private HeaderEntity $headerEntity;
     private FooterEntity $footerEntity;
 
@@ -18,7 +17,6 @@ class AbstractService
         $this->headerEntity = HeaderEntity::getInstance();
         $this->footerEntity = FooterEntity::getInstance();
     }
-
 
     protected function hydrateFromPostArray(array $source, object $target): void
     {

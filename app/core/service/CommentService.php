@@ -34,10 +34,8 @@ class CommentService extends AbstractService
             $userModel = new UserModel();
             $this->hydrate($userEntity, $userModel);
             $commentModel->setUser($userModel);
-
             array_push($commentsModel, $commentModel);
         }
-
         return $commentsModel;
     }
 
@@ -54,23 +52,17 @@ class CommentService extends AbstractService
         foreach ($entities as $comment) {
             $commentModel = new CommentModel();
             $this->hydrate($comment, $commentModel);
-
             $userEntity = $this->userEntity->getById($commentModel->getIdUser());
             $userModel = new UserModel();
             $this->hydrate($userEntity, $userModel);
             $commentModel->setUser($userModel);
-
             $postEntity = $this->postEntity->getById($commentModel->getIdPost());
             $postModel = new PostModel();
             $this->hydrate($postEntity, $postModel);
             $commentModel->setTitlePost($postModel->getTitle());
-
             array_push($commentsModel, $commentModel);
         }
-
-        return ["header" => $this->getHeader(),
-            "comments" => $commentsModel,
-            "currentPage" => $currentPage];
+        return ["header" => $this->getHeader(), "comments" => $commentsModel, "currentPage" => $currentPage];
     }
 
     public function addComment(array $formAddComment): void
