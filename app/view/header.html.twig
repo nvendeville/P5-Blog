@@ -15,16 +15,16 @@
 
                     <li class="nav-item"><a id="homeLink" href="/P5-Blog/" class="nav-link">Home</a>
                     </li>
-                    <li class="nav-item"><a href="/P5-Blog/posts/1" class="nav-link">Blog</a>
+                    <li class="nav-item"><a id="postsLink" href="/P5-Blog/posts/1" class="nav-link">Blog</a>
                     </li>
                     {% if isAdmin %}
                         <li class="nav-item dropdown"><a href="" class="nav-link dropdown-toggle"
                                                          id="adminDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false">Administration</a>
                             <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                                <a class="dropdown-item" href="/P5-Blog/admin/listPost:1">Gérer les articles</a>
-                                <a class="dropdown-item" href="/P5-Blog/admin/listComment:1">Gérer les commentaires</a>
-                                <a class="dropdown-item" href="/P5-Blog/admin/updateHomePage">Personnaliser la page d'accueil</a>
+                                <a id="listPost" class="dropdown-item" href="/P5-Blog/admin/listPost:1">Gérer les articles</a>
+                                <a id="listComment" class="dropdown-item" href="/P5-Blog/admin/listComment:1">Gérer les commentaires</a>
+                                <a id="updateHome" class="dropdown-item" href="/P5-Blog/admin/updateHomePage">Personnaliser la page d'accueil</a>
                             </div>
                         </li>
                     {% endif %}

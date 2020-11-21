@@ -59,22 +59,26 @@
 <script>
     $(document).ready(function () {
 
-        let queryParams = new URLSearchParams(window.location.search)
 
         $('#navbarcollapse a').removeClass('active')
 
-        if (queryParams.has('admin')) {
-                $('#adminDropdown').addClass('active')
-            }
-        let links = $('#navbarcollapse a')
-        for (let link of links) {
-            let linkParams = new URLSearchParams($(link).attr('href'))
-            if (linkParams.has('admin') && queryParams.get('admin') === linkParams.get('admin')) {
-                $(link).addClass('active')
+
+        let uri = window.location.pathname
+        if (uri.includes('admin')) {
+            $('#adminDropdown').addClass('active')
+            if (uri.includes('listPost')) {
+                $('#listPost').addClass('active')
+            } else if (uri.includes('listComment')) {
+                $('#listComment').addClass('active')
             } else {
-                $('#homeLink').addClass('active')
+                $('#updateHome').addClass('active')
             }
+        } else if(uri.includes('posts')) {
+            $("#postsLink").addClass('active')
+        } else {
+            $('#homeLink').addClass('active')
         }
+
         $('#signInForm input[name="redirect"]').attr('value', document.URL)
         $('#ForgotPasswordForm input[name="redirect"]').attr('value', document.URL)
         $('#restPasswordForm input[name="redirect"]').attr('value', document.URL)
