@@ -64,26 +64,51 @@
 {% block script %}
     <script>
         $(document).ready(function() {
+            // activation du tableau des posts
             $('#listPosts').DataTable( {
+                // après initialisation
                 initComplete: function () {
+                    // parcourt des colonnes du tableau
                     this.api().columns().every( function () {
+                        // traitement uniquement sur la colonne status
                         if (this.selector.cols === 4) {
                             var column = this;
+                            // recupèration du dernier filtre selectionné
+                            var lastValueFilter = sessionStorage.getItem("postsFilter")
+                            // création du selecteur de filtre
                             var select = $('<select><option value="">Tous</option></select>')
+                                // on ajoute le selecteur au dessus du tableau dans la div listPosts_filter
+                                // après l'avoir vidée
                                 .appendTo($("#listPosts_filter").empty().append('<label>Filtrer&nbsp;</label>'))
+                                // au changement de valeur du selecteur
                                 .on('change', function () {
+                                    // on recupère la valeur choise
                                     var val = $.fn.dataTable.util.escapeRegex(
                                         $(this).val()
                                     );
-
+                                    // on stock en session la valeur pour la retrouver au prochain chargement de la page
+                                    sessionStorage.setItem("postsFilter", val);
+                                    // on filtre la colonne pour n'afficher ques les ligne dont le statut
+                                    // correspond à la valeur choisie
                                     column
                                         .search(val ? '^' + val + '$' : '', true, false)
                                         .draw();
                                 });
 
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>')
+                            // recherche des valeur unique dans la colonne pour créer la lsite des options du selecteur
+                            column.data().unique().sort().each(function (valeur, index) {
+                                var appender = '<option value="' + valeur + '">' + valeur + '</option>'
+                                if (lastValueFilter && lastValueFilter == d) {
+                                    appender = '<option value="' + valeur + '" selected>' + valeur + '</option>'
+                                }
+                                select.append(appender)
                             });
+                            // si on avait déjà une valeur en session, alors on filtre ke tableau
+                            if (lastValueFilter) {
+                                column
+                                    .search(lastValueFilter ? '^' + lastValueFilter + '$' : '', true, false)
+                                    .draw();
+                            }
                         }
                     } );
                 },

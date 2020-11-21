@@ -58,6 +58,7 @@
                     this.api().columns().every( function () {
                         if (this.selector.cols === 4) {
                             var column = this;
+                            var lastValueFilter = sessionStorage.getItem("commentsFilter")
                             var select = $('<select><option value="">Tous</option></select>')
                                 .appendTo($("#listComments_filter").empty().append('<label>Filtrer&nbsp;</label>'))
                                 .on('change', function () {
@@ -65,14 +66,24 @@
                                         $(this).val()
                                     );
 
+                                    sessionStorage.setItem("commentsFilter", val);
                                     column
                                         .search(val ? '^' + val + '$' : '', true, false)
                                         .draw();
                                 });
 
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>')
+                            column.data().unique().sort().each(function (valeur, index) {
+                                var appender = '<option value="' + valeur + '">' + valeur + '</option>'
+                                if (lastValueFilter && lastValueFilter == d) {
+                                    appender = '<option value="' + valeur + '" selected>' + valeur + '</option>'
+                                }
+                                select.append(appender)
                             });
+                            if (lastValueFilter) {
+                                column
+                                    .search(lastValueFilter ? '^' + lastValueFilter + '$' : '', true, false)
+                                    .draw();
+                            }
                         }
                     } );
                 },

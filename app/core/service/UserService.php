@@ -28,7 +28,8 @@ class UserService extends AbstractService
         $this->hydrateFromPostArray($formAddUser, $userModel);
         $this->userEntity->addUser($userModel);
         $this->sendAddedUserConfirmation($formAddUser);
-        return $this->userEntity->getUserByEmail($userModel->getEmail());
+        $this->hydrate($this->userEntity->getUserByEmail($userModel->getEmail()), $userModel);
+        return $userModel;
     }
 
     public function sendAddedUserConfirmation(array $formAddUser): void

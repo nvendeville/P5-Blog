@@ -71,7 +71,7 @@ class Router
                     $extensionFileUploaded = $infoFileUploaded['extension'];
                     $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
                     if (in_array($extensionFileUploaded, $authorizedExtensions)) {
-                        move_uploaded_file($_FILES[$key]['tmp_name'], './img/' . basename($_FILES[$key]['name']));
+                        move_uploaded_file($_FILES[$key]['tmp_name'], './public/img/' . basename($_FILES[$key]['name']));
                     }
                     $_POST[$key] = $_FILES[$key]['name'];
                 }
