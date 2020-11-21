@@ -81,7 +81,6 @@ class UserService extends AbstractService
         return $this->userEntity->userExist($email) != null;
     }
 
-
     public function signIn(string $email): ?object
     {
         $userModel = new UserModel();

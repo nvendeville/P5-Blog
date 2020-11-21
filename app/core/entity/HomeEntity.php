@@ -7,7 +7,7 @@ use App\core\database\DataAccessManager;
 class HomeEntity extends DataAccessManager
 {
     protected static string $table = 'home';
-    protected static $instance;
+    protected static HomeEntity $instance;
 
     protected function __construct()
     {
@@ -24,11 +24,8 @@ class HomeEntity extends DataAccessManager
 
     public function persoHomePage(object $homeModel): void
     {
-        $statement =
-            "UPDATE `home` SET `heroFirstname`=?, `heroLastname`=?, `heroLink`=?";
-        $values = [$homeModel->getHeroFirstname(),
-            $homeModel->getHeroLastname(),
-            $homeModel->getHeroLink()];
+        $statement = "UPDATE `home` SET `heroFirstname`=?, `heroLastname`=?, `heroLink`=?";
+        $values = [$homeModel->getHeroFirstname(), $homeModel->getHeroLastname(), $homeModel->getHeroLink()];
         if ($homeModel->getHeroImg() != '') {
             $statement = $statement . ", `heroImg`=?";
             array_push($values, $homeModel->getHeroImg());
@@ -61,7 +58,7 @@ class HomeEntity extends DataAccessManager
             $statement = $statement . ", `dividerImg`=?";
             array_push($values, $homeModel->getDividerImg());
         }
-        $insert = $this->pdo->prepare($statement);
+        $insert = self::getPdo()->prepare($statement);
         $insert->execute($values);
     }
 }

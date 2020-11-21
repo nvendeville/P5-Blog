@@ -7,7 +7,7 @@ use App\core\database\DataAccessManager;
 class UserEntity extends DataAccessManager
 {
     protected static string $table = 'users';
-    protected static $instance;
+    protected static UserEntity $instance;
 
     protected function __construct()
     {
@@ -24,16 +24,11 @@ class UserEntity extends DataAccessManager
 
     public function addUser(object $userModel): void
     {
-        $statement =
-            "INSERT INTO `users` (`firstname`, `lastname`, `avatar`, `password`, `email`, `isAdmin`) 
+        $statement = "INSERT INTO `users` (`firstname`, `lastname`, `avatar`, `password`, `email`, `isAdmin`) 
             VALUES (?,?,?,?,?,?)";
-        $values = [$userModel->getFirstname(),
-            $userModel->getLastname(),
-            $userModel->getAvatar(),
-            hashPassword($userModel->getPassword()),
-            $userModel->getEmail(),
-            $userModel->getIsAdmin()];
-        $insert = $this->pdo->prepare($statement);
+        $values = [$userModel->getFirstname(), $userModel->getLastname(), $userModel->getAvatar(),
+            hashPassword($userModel->getPassword()), $userModel->getEmail(), $userModel->getIsAdmin()];
+        $insert = self::getPdo()->prepare($statement);
         $insert->execute($values);
     }
 
@@ -42,7 +37,6 @@ class UserEntity extends DataAccessManager
         $statement = "SELECT 1 as userExist FROM `users` WHERE email=?";
         return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
     }
-
 
     public function getUserByEmail($email)
     {
@@ -54,7 +48,7 @@ class UserEntity extends DataAccessManager
     {
         $statement = "UPDATE `users` SET password=? WHERE email=?";
         $values = [hashPassword($newPassword), $email];
-        $update = $this->pdo->prepare($statement);
+        $update = self::getPdo()->prepare($statement);
         $update->execute($values);
     }
 }

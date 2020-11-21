@@ -7,7 +7,7 @@ use App\core\database\DataAccessManager;
 class HeaderEntity extends DataAccessManager
 {
     protected static string $table = 'header';
-    protected static $instance;
+    protected static HeaderEntity $instance;
 
     protected function __construct()
     {
@@ -25,7 +25,7 @@ class HeaderEntity extends DataAccessManager
     public function persoHeader(object $headerModel): void
     {
         $statement = "UPDATE `header` SET `blogTitle`=?";
-        $insert = $this->pdo->prepare($statement);
+        $insert = self::getPdo()->prepare($statement);
         $insert->execute([$headerModel->getBlogtitle()]);
     }
 }

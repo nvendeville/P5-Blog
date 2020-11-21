@@ -2,23 +2,18 @@
 
 namespace App\controller;
 
-use App\core\Renderer;
 use App\core\service\CommentService;
 use App\core\service\PostService;
-use App\core\SessionManager;
 
-class PostsController
+class PostsController extends AbstractController
 {
 
-    private Renderer $renderer;
     private PostService $postService;
     private CommentService $commentService;
-    private SessionManager $sessionManager;
 
     public function __construct()
     {
-        $this->sessionManager = new SessionManager();
-        $this->renderer = new Renderer();
+        parent::__construct();
         $this->postService = new PostService();
         $this->commentService = new CommentService();
     }

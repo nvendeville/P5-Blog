@@ -2,21 +2,16 @@
 
 namespace App\controller;
 
-use App\core\Renderer;
 use App\core\service\UserService;
-use App\core\SessionManager;
 
-class UsersController
+class UsersController extends AbstractController
 {
 
-    private Renderer $renderer;
     private UserService $userService;
-    private SessionManager $sessionManager;
 
     public function __construct()
     {
-        $this->sessionManager = new SessionManager();
-        $this->renderer = new Renderer();
+        parent::__construct();
         $this->userService = new UserService();
     }
 
