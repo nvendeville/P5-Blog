@@ -74,7 +74,7 @@
 
                             column.data().unique().sort().each(function (valeur, index) {
                                 var appender = '<option value="' + valeur + '">' + valeur + '</option>'
-                                if (lastValueFilter && lastValueFilter == d) {
+                                if (lastValueFilter && lastValueFilter == valeur) {
                                     appender = '<option value="' + valeur + '" selected>' + valeur + '</option>'
                                 }
                                 select.append(appender)

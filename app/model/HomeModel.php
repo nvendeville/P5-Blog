@@ -4,224 +4,224 @@ namespace App\model;
 
 class HomeModel
 {
-    private $idHome;
-    private $heroFirstname;
-    private $heroLastname;
-    private $heroLink;
-    private $heroImg;
-    private $cvImg;
-    private $sectionTitle;
-    private $sectionContent;
-    private $galleryImg1;
-    private $galleryImg2;
-    private $galleryImg3;
-    private $galleryImg4;
-    private $dividerImg;
+    private int $idHome;
+    private string $heroFirstname;
+    private string $heroLastname;
+    private string $heroLink;
+    private string $heroImg;
+    private string $cvImg;
+    private string $sectionTitle;
+    private string $sectionContent;
+    private string $galleryImg1;
+    private string $galleryImg2;
+    private string $galleryImg3;
+    private string $galleryImg4;
+    private string $dividerImg;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->idHome;
     }
 
     /**
-     * @param mixed $idHome
+     * @param int $idHome
      */
-    public function setId($idHome)
+    public function setId(int $idHome): void
     {
         $this->idHome = $idHome;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getHeroFirstname()
+    public function getHeroFirstname(): string
     {
         return $this->heroFirstname;
     }
 
     /**
-     * @param mixed $heroFirstname
+     * @param string $heroFirstname
      */
-    public function setHeroFirstname($heroFirstname)
+    public function setHeroFirstname(string $heroFirstname): void
     {
         $this->heroFirstname = $heroFirstname;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getHeroLastname()
+    public function getHeroLastname(): string
     {
         return $this->heroLastname;
     }
 
     /**
-     * @param mixed $heroLastname
+     * @param string $heroLastname
      */
-    public function setHeroLastname($heroLastname)
+    public function setHeroLastname(string $heroLastname): void
     {
         $this->heroLastname = $heroLastname;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getHeroLink()
+    public function getHeroLink(): string
     {
         return $this->heroLink;
     }
 
     /**
-     * @param mixed $heroLink
+     * @param string $heroLink
      */
-    public function setHeroLink($heroLink)
+    public function setHeroLink(string $heroLink): void
     {
         $this->heroLink = $heroLink;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getHeroImg()
+    public function getHeroImg(): string
     {
-        return $this->heroImg;
+        return isset($this->heroImg) ? $this->heroImg : '';
     }
 
     /**
-     * @param mixed $heroImg
+     * @param string $heroImg
      */
-    public function setHeroImg($heroImg)
+    public function setHeroImg(string $heroImg): void
     {
         $this->heroImg = $heroImg;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getCvImg()
+    public function getCvImg(): string
     {
-        return $this->cvImg;
+        return isset($this->cvImg) ? $this->cvImg : '';
     }
 
     /**
-     * @param mixed $cvImg
+     * @param string $cvImg
      */
-    public function setCvImg($cvImg)
+    public function setCvImg(string $cvImg): void
     {
         $this->cvImg = $cvImg;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getSectionTitle()
+    public function getSectionTitle(): string
     {
         return $this->sectionTitle;
     }
 
     /**
-     * @param mixed $sectionTitle
+     * @param string $sectionTitle
      */
-    public function setSectionTitle($sectionTitle)
+    public function setSectionTitle(string $sectionTitle): void
     {
         $this->sectionTitle = $sectionTitle;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getSectionContent()
+    public function getSectionContent(): string
     {
         return $this->sectionContent;
     }
 
     /**
-     * @param mixed $sectionContent
+     * @param string $sectionContent
      */
-    public function setSectionContent($sectionContent)
+    public function setSectionContent(string $sectionContent): void
     {
         $this->sectionContent = $sectionContent;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getGalleryImg1()
+    public function getGalleryImg1(): string
     {
-        return $this->galleryImg1;
+        return isset($this->galleryImg1) ? $this->galleryImg1 : '';
     }
 
     /**
-     * @param mixed $galleryImg1
+     * @param string $galleryImg1
      */
-    public function setGalleryImg1($galleryImg1)
+    public function setGalleryImg1(string $galleryImg1): void
     {
         $this->galleryImg1 = $galleryImg1;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getGalleryImg2()
+    public function getGalleryImg2(): string
     {
-        return $this->galleryImg2;
+        return isset($this->galleryImg2) ? $this->galleryImg2 : '';
     }
 
     /**
-     * @param mixed $galleryImg2
+     * @param string $galleryImg2
      */
-    public function setGalleryImg2($galleryImg2)
+    public function setGalleryImg2(string $galleryImg2): void
     {
         $this->galleryImg2 = $galleryImg2;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getGalleryImg3()
+    public function getGalleryImg3(): string
     {
-        return $this->galleryImg3;
+        return isset($this->galleryImg3) ? $this->galleryImg3 : '';
     }
 
     /**
-     * @param mixed $galleryImg3
+     * @param string $galleryImg3
      */
-    public function setGalleryImg3($galleryImg3)
+    public function setGalleryImg3(string $galleryImg3): void
     {
         $this->galleryImg3 = $galleryImg3;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getGalleryImg4()
+    public function getGalleryImg4(): string
     {
-        return $this->galleryImg4;
+        return isset($this->galleryImg4) ? $this->galleryImg4 : '';
     }
 
     /**
-     * @param mixed $galleryImg4
+     * @param string $galleryImg4
      */
-    public function setGalleryImg4($galleryImg4)
+    public function setGalleryImg4(string $galleryImg4): void
     {
         $this->galleryImg4 = $galleryImg4;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getDividerImg()
+    public function getDividerImg(): string
     {
-        return $this->dividerImg;
+        return isset($this->dividerImg) ? $this->dividerImg : '';
     }
 
     /**
-     * @param mixed $dividerImg
+     * @param string $dividerImg
      */
-    public function setDividerImg($dividerImg)
+    public function setDividerImg(string $dividerImg): void
     {
         $this->dividerImg = $dividerImg;
     }

@@ -29,7 +29,7 @@
   "scripts": {
     "phpcs": "phpcs ./app --standard=PSR12 --report=code -p",
     "phpmd": "phpmd ./app text cleancode,codesize,controversial,design,naming,unusedcode",
-    "phpstan": "phpstan analyse ./app --level=max",
+    "phpstan": "phpstan analyse",
     "linter": [
       "@phpcs",
       "@phpmd",

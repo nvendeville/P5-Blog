@@ -3,6 +3,7 @@
 namespace App\core\entity;
 
 use App\core\database\DataAccessManager;
+use App\model\CommentModel;
 
 class CommentEntity extends DataAccessManager
 {
@@ -14,9 +15,9 @@ class CommentEntity extends DataAccessManager
         parent::__construct();
     }
 
-    public static function getInstance()
+    public static function getInstance(): CommentEntity
     {
-        if (is_null(self::$instance)) {
+        if (!isset(self::$instance)) {
             self::$instance = new CommentEntity();
         }
         return self::$instance;
@@ -29,22 +30,16 @@ class CommentEntity extends DataAccessManager
         FROM comments
         WHERE idPost = $postId AND status = 'validé'
         ORDER BY creationDate DESC";
-        return $this->query($statement, get_called_class(), false);
+        return $this->all($statement);
     }
 
     public function getPaginatedComments(): array
     {
         $statement = "SELECT * FROM `comments` ORDER BY creationDate DESC";
-        return $this->query($statement, get_called_class(), false);
+        return $this->all($statement);
     }
 
-    public function getNbComments(): int
-    {
-        $statement = "SELECT COUNT(comments.id) as nbComments FROM comments";
-        return $this->query($statement, get_called_class(), true);
-    }
-
-    public function addComment(object $commentModel): void
+    public function addComment(CommentModel $commentModel): void
     {
         $statement = "INSERT INTO `comments` (`idUser`, `idPost`, `content`, `status`) 
             VALUES (?,?,?,?)";

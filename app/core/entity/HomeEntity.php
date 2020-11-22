@@ -3,6 +3,7 @@
 namespace App\core\entity;
 
 use App\core\database\DataAccessManager;
+use App\model\HomeModel;
 
 class HomeEntity extends DataAccessManager
 {
@@ -14,15 +15,15 @@ class HomeEntity extends DataAccessManager
         parent::__construct();
     }
 
-    public static function getInstance()
+    public static function getInstance(): HomeEntity
     {
-        if (is_null(self::$instance)) {
+        if (!isset(self::$instance)) {
             self::$instance = new HomeEntity();
         }
         return self::$instance;
     }
 
-    public function persoHomePage(object $homeModel): void
+    public function persoHomePage(HomeModel $homeModel): void
     {
         $statement = "UPDATE `home` SET `heroFirstname`=?, `heroLastname`=?, `heroLink`=?";
         $values = [$homeModel->getHeroFirstname(), $homeModel->getHeroLastname(), $homeModel->getHeroLink()];
@@ -30,8 +31,6 @@ class HomeEntity extends DataAccessManager
             $statement = $statement . ", `heroImg`=?";
             array_push($values, $homeModel->getHeroImg());
         }
-        //$statement = $statement . ", `cvLink`=?";
-        //array_push($values, $homeModel->getCvLink());
         if ($homeModel->getCvImg() != '') {
             $statement = $statement . ", `cvImg`=?";
             array_push($values, $homeModel->getCvImg());
@@ -60,5 +59,10 @@ class HomeEntity extends DataAccessManager
         }
         $insert = self::getPdo()->prepare($statement);
         $insert->execute($values);
+    }
+
+    public function getHome(): object
+    {
+        return $this->one("SELECT * FROM `home`");
     }
 }

@@ -28,14 +28,6 @@ class AbstractService
         }
     }
 
-    protected function getHeader(): object
-    {
-        $entity = $this->headerEntity->all(true);
-        $headerModel = new HeaderModel();
-        $this->hydrate($entity, $headerModel);
-        return $headerModel;
-    }
-
     protected function hydrate(object $source, object $target): void
     {
         foreach ($source as $key => $value) {
@@ -46,9 +38,17 @@ class AbstractService
         }
     }
 
+    protected function getHeader(): object
+    {
+        $entity = $this->headerEntity->getHeader();
+        $headerModel = new HeaderModel();
+        $this->hydrate($entity, $headerModel);
+        return $headerModel;
+    }
+
     protected function getFooter(): object
     {
-        $entity = $this->footerEntity->all(true);
+        $entity = $this->footerEntity->getFooter();
         $footerModel = new FooterModel();
         $this->hydrate($entity, $footerModel);
         return $footerModel;

@@ -31,7 +31,7 @@ class Renderer
         echo $twig->render($pageName, $models);
     }
 
-    private function getOtherModel($models)
+    private function getOtherModel(array $models): array
     {
         if ($this->sessionManager->sessionIsset('otherModel')) {
             foreach ($this->sessionManager->sessionGet('otherModel') as $key => $value) {

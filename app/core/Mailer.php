@@ -12,9 +12,9 @@ trait Mailer
         $mail = new PHPMailer(true);
         $mail->isSMTP();
         $mail->isHTML(true);
-        $mail->SMTPAuth = $config->get("smtp_auth");
+        $mail->SMTPAuth = boolval($config->get("smtp_auth"));
         $mail->Host = $config->get("smtp_host");
-        $mail->Port = $config->get("smtp_port");
+        $mail->Port = intval($config->get("smtp_port"));
         $mail->setFrom($config->get("smtp_setFromMail"), $config->get("smtp_setFromName"));
         $mail->addAddress($addAddress);
         $mail->addReplyTo($replyTo);

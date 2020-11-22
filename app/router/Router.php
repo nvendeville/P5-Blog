@@ -4,7 +4,6 @@ namespace App\router;
 
 use ReflectionClass;
 
-
 class Router
 {
     private string $uri;
@@ -37,7 +36,7 @@ class Router
                 $this->explicitController = "App\\Controller\\" . ucfirst($controller) . "Controller";
                 $this->explicitMethod = $uriParams[0];
                 array_shift($uriParams);
-                $this->explicitParams = is_array($uriParams) ? $uriParams : [$uriParams];
+                $this->explicitParams = $uriParams;
             }
         }
     }
@@ -66,14 +65,15 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($_FILES as $key => $image) {
-                if ($_FILES[$key]['error'] == 0 and ($_FILES[$key]['size'] <= 1000000)) {
-                    $infoFileUploaded = pathinfo($_FILES[$key]['name']);
-                    $extensionFileUploaded = $infoFileUploaded['extension'];
-                    $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-                    if (in_array($extensionFileUploaded, $authorizedExtensions)) {
-                        move_uploaded_file($_FILES[$key]['tmp_name'], './public/img/' . basename($_FILES[$key]['name']));
+                if ($image['error'] == 0 and ($image['size'] <= 1000000)) {
+                    $infoFileUploaded = pathinfo($image['name']);
+                    $extensionUploaded = $infoFileUploaded['extension'];
+                    $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png', 'ico');
+                    if (in_array($extensionUploaded, $authorizedExtensions)) {
+                        move_uploaded_file($image['tmp_name'], './public/img/'
+                        . basename($image['name']));
                     }
-                    $_POST[$key] = $_FILES[$key]['name'];
+                    $_POST[$key] = $image['name'];
                 }
             }
             $params = !isset($params) ? [] : $params;
@@ -81,7 +81,7 @@ class Router
         }
     }
 
-    private function getMethod(): ?array
+    private function getMethod(): array
     {
         $split = explode("/", $this->uri);
         if ($split[0] === "/") {
@@ -117,13 +117,14 @@ class Router
 
     private function compareParameters(array $methodParameters, array $uriParameters): bool
     {
-        if (count($methodParameters) == 0 and count($uriParameters) == 0) {
+        $paramCount = count($methodParameters);
+        if ($paramCount == 0 and count($uriParameters) == 0) {
             return true;
         }
-        if (count($methodParameters) !== count($uriParameters)) {
+        if ($paramCount !== count($uriParameters)) {
             return false;
         }
-        for ($i = 0; $i < count($methodParameters); $i++) {
+        for ($i = 0; $i < $paramCount; $i++) {
             if (!$this->compareTypes($methodParameters[$i]->getType(), $this->convertParam($uriParameters[$i]))) {
                 return false;
             }
