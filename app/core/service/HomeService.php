@@ -30,7 +30,7 @@ class HomeService extends AbstractService
     public function getModel(): array
     {
         $homeModel = new HomeModel();
-        $this->hydrate($this->homeEntity->one(), $homeModel);
+        $this->hydrate($this->homeEntity->getHome(), $homeModel);
         return ["header" => $this->getHeader(), "home" => $homeModel, "footer" => $this->getFooter()];
     }
 

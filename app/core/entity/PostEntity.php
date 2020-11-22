@@ -3,6 +3,7 @@
 namespace App\core\entity;
 
 use App\core\database\DataAccessManager;
+use App\model\PostModel;
 
 class PostEntity extends DataAccessManager
 {
@@ -16,15 +17,15 @@ class PostEntity extends DataAccessManager
         parent::__construct();
     }
 
-    public static function getInstance()
+    public static function getInstance(): PostEntity
     {
-        if (is_null(self::$instance)) {
+        if (!isset(self::$instance)) {
             self::$instance = new PostEntity();
         }
         return self::$instance;
     }
 
-    public function addPost(object $postModel): void
+    public function addPost(PostModel $postModel): void
     {
         $statement = "INSERT INTO `posts` (`idUser`, `title`, `header`, `content`, `img`, `status`, `category`) 
             VALUES (?,?,?,?,?,?,?)";
@@ -41,7 +42,7 @@ class PostEntity extends DataAccessManager
             WHERE `status` = " . self::POSTED . "
             ORDER BY `creationDate` DESC
             LIMIT $from, $nbPost";
-        return $this->query($statement, get_called_class(), false);
+        return $this->all($statement);
     }
 
     public function getCategories(): array
@@ -51,56 +52,52 @@ class PostEntity extends DataAccessManager
         FROM `posts`
         WHERE `status`=" . self::POSTED . "
         GROUP BY category";
-        return $this->query($statement, get_called_class(), false);
+        return $this->all($statement);
     }
 
-    public function getPostsByCategory(string $categoryName, int $from, int $nbPost)
+    public function getPostsByCategory(string $categoryName, int $from, int $nbPost): array
     {
         $statement = "SELECT `posts`.`id`, `posts`.`idUser`, `posts`.`creationDate`, `posts`.`title`, `posts`.`header`, 
                     `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category`, `posts`.`lastUpdate`
                     FROM `posts`
                     WHERE `posts`.`category`=? AND `status`=" . self::POSTED . "
                     ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
-        return $this->prepareAndFetch($statement, [$categoryName], get_called_class(), false);
+        $req =  $this->prepare($statement, [$categoryName], get_called_class());
+        return $req->fetchAll();
     }
 
     public function getLatestCommentedPosts(): array
     {
-        $statement = "SELECT `posts`.`id`, `posts`.`idUser`, `comments`.`creationDate`, `posts`.`title`, `posts`.`header`, 
-                    `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category`, 
+        $statement = "SELECT `posts`.`id`, `posts`.`idUser`, `comments`.`creationDate`, `posts`.`title`,
+        `posts`.`header`, `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category`, 
             count(comments.id) as nbComments 
             FROM `posts` 
             inner join comments on comments.idPost = posts.id and comments.status = 2
             group by  `posts`.`id`, `posts`.`idUser`, `posts`.`title`, `posts`.`header`, 
                       `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category` 
             order by `comments`.`creationDate` desc limit 3";
-        return $this->query($statement, get_called_class(), false);
+        return $this->all($statement);
     }
 
     public function getPostedNbPosts(): object
     {
         $statement = "SELECT COUNT(posts.id) AS nbPosts FROM `posts` WHERE `status`=" . self::POSTED;
-        return $this->query($statement, get_called_class(), true);
+        return $this->one($statement);
     }
 
-    public function getNbPostsByCategories($categoryName): object
+    public function getNbPostsByCategories(string $categoryName): object
     {
         $statement = "SELECT COUNT(posts.id) AS nbPosts
             FROM `posts`
             WHERE `status`=" . self::POSTED . " AND `posts`.`category`=?  ";
-        return $this->prepareAndFetch($statement, [$categoryName], get_called_class(), true);
+        $req = $this->prepare($statement, [$categoryName], get_called_class());
+        return $req->fetch();
     }
 
     public function getAllPosts(): array
     {
         $statement = "SELECT * FROM `posts` ORDER BY `creationDate` DESC";
-        return $this->query($statement, get_called_class(), false);
-    }
-
-    public function getTotalNbPosts(): int
-    {
-        $statement = "SELECT COUNT(posts.id) as nbPosts FROM posts";
-        return $this->query($statement, get_called_class(), true);
+        return $this->all($statement);
     }
 
     public function updateStatus(int $postId, string $postStatus): void
@@ -119,7 +116,7 @@ class PostEntity extends DataAccessManager
         $statement->execute([$postId]);
     }
 
-    public function modifyPost(object $adminPostModel, int $postId): void
+    public function modifyPost(PostModel $adminPostModel, int $postId): void
     {
         $date = date("Y-m-d H:i:s");
         $statement = "UPDATE `posts` SET `title`=?, `header`=?, `content`=?";

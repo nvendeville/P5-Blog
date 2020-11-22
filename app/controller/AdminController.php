@@ -5,6 +5,7 @@ namespace App\controller;
 use App\core\service\CommentService;
 use App\core\service\HomeService;
 use App\core\service\PostService;
+use App\model\UserModel;
 
 class AdminController extends AbstractController
 {

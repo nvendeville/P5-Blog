@@ -3,6 +3,7 @@
 namespace App\core\entity;
 
 use App\core\database\DataAccessManager;
+use App\model\UserModel;
 
 class UserEntity extends DataAccessManager
 {
@@ -14,15 +15,15 @@ class UserEntity extends DataAccessManager
         parent::__construct();
     }
 
-    public static function getInstance()
+    public static function getInstance(): UserEntity
     {
-        if (is_null(self::$instance)) {
+        if (!isset(self::$instance)) {
             self::$instance = new UserEntity();
         }
         return self::$instance;
     }
 
-    public function addUser(object $userModel): void
+    public function addUser(UserModel $userModel): void
     {
         $statement = "INSERT INTO `users` (`firstname`, `lastname`, `avatar`, `password`, `email`, `isAdmin`) 
             VALUES (?,?,?,?,?,?)";
@@ -32,16 +33,18 @@ class UserEntity extends DataAccessManager
         $insert->execute($values);
     }
 
-    public function userExist(string $email)
+    public function userExist(string $email): object
     {
         $statement = "SELECT 1 as userExist FROM `users` WHERE email=?";
-        return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
+        $req = $this->prepare($statement, [$email], get_called_class());
+        return $req->fetch();
     }
 
-    public function getUserByEmail($email)
+    public function getUserByEmail(string $email): object
     {
         $statement = "SELECT * FROM `users` WHERE email=?";
-        return $this->prepareAndFetch($statement, [$email], get_called_class(), true);
+        $req = $this->prepare($statement, [$email], get_called_class());
+        return $req->fetch();
     }
 
     public function updatePassword(string $newPassword, string $email): void

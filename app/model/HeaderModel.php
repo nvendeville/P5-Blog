@@ -8,17 +8,17 @@ class HeaderModel
     private string $blogTitle = "";
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->idHeader;
     }
 
     /**
-     * @param mixed $idHeader
+     * @param int $idHeader
      */
-    public function setId($idHeader)
+    public function setId(int $idHeader): void
     {
         $this->idHeader = $idHeader;
     }
@@ -38,5 +38,4 @@ class HeaderModel
     {
         $this->blogTitle = $blogTitle;
     }
-
 }

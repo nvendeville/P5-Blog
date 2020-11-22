@@ -2,8 +2,10 @@
 
 namespace App\core\database;
 
+use _HumbugBox50262afef792\Nette\Neon\Exception;
 use App\core\ConfigClass;
 use PDO;
+use PDOStatement;
 
 class DataAccessManager
 {
@@ -14,28 +16,29 @@ class DataAccessManager
     {
     }
 
-    public function one()
-    {
-        return $this->all(true);
-    }
-
-    public function all($one, $order = "")
-    {
-        return self::query("
-            SELECT *
-            FROM " . static::$table . " $order", get_called_class(), $one);
-    }
-
-    protected function query($statement, $className, $one)
+    public function one(string $statement): object
     {
         $req = self::getPdo()->query($statement);
-        $req->setFetchMode(PDO::FETCH_CLASS, $className);
-        return $one ? $req->fetch() : $req->fetchall();
+        if ($req === false) {
+            throw new Exception();
+        }
+        $req->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $req->fetch();
+    }
+
+    public function all(string $statement): array
+    {
+        $req = self::getPdo()->query($statement);
+        if ($req === false) {
+            throw new Exception();
+        }
+        $req->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return  $req->fetchall();
     }
 
     public static function getPdo(): PDO
     {
-        if (is_null(self::$pdo)) {
+        if (!isset(self::$pdo)) {
             $config = ConfigClass::getInstance();
             $dbName = $config->get("db_name");
             $dbUser = $config->get("db_user");
@@ -48,19 +51,27 @@ class DataAccessManager
         return self::$pdo;
     }
 
-    public function getById(int $idInTable)
+    public function getById(int $idInTable): object
     {
-        return self::query("
+        $req = self::getPdo()->query("
             SELECT *
             FROM " . static::$table . " 
-            WHERE id = '" . htmlspecialchars($idInTable) . "'", get_called_class(), true);
+            WHERE id = '" . $idInTable . "'");
+        if ($req === false) {
+            throw new Exception();
+        }
+        $req->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $req->fetch();
     }
 
-    protected function prepareAndFetch(string $statement, array $attributes, string $className, bool $one)
+    protected function prepare(string $statement, array $attributes, string $className): PDOStatement
     {
         $req = self::getPdo()->prepare($statement);
+        if ($req == false) {
+            throw new Exception();
+        }
         $req->execute($attributes);
         $req->setFetchMode(PDO::FETCH_CLASS, $className);
-        return $one ? $req->fetch() : $req->fetchall();
+        return $req;
     }
 }

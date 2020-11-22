@@ -27,7 +27,8 @@ class UsersController extends AbstractController
     {
         $this->sessionManager->sessionSet('otherModel', ['wrongPassword' => true]);
         $user = $this->userService->signIn($signInForm['email']);
-        if (isset($user) && $this->userService->controlPassword(hashPassword($signInForm['password']), $user->getPassword())) {
+        if ($this->userService->controlPassword(hashPassword($signInForm['password']), $user->getPassword())
+        ) {
             $this->sessionManager->sessionSet('user', $user);
             $this->sessionManager->sessionSet('token', generateToken());
             $this->sessionManager->sessionUnset('otherModel');
@@ -35,7 +36,7 @@ class UsersController extends AbstractController
         redirect($signInForm["redirect"]);
     }
 
-    public function logout()
+    public function logout(): void
     {
         $this->userService->logout();
         redirect('/P5-Blog');
@@ -43,8 +44,11 @@ class UsersController extends AbstractController
 
     public function resetPassword(array $resetPasswordForm): void
     {
-        $this->sessionManager->sessionSet('otherModel', $this->userExist($resetPasswordForm['email']) ? ['resetPassword' => true,
-                            'email' => $resetPasswordForm['email']] : ['noUserExist' => true]);
+        $this->sessionManager->sessionSet(
+            'otherModel',
+            $this->userExist($resetPasswordForm['email']) ? ['resetPassword' => true,
+            'email' => $resetPasswordForm['email']] : ['noUserExist' => true]
+        );
 
         redirect($resetPasswordForm["redirect"]);
     }

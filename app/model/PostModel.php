@@ -4,225 +4,225 @@ namespace App\model;
 
 class PostModel
 {
-    private $idPost;
-    private $idUser;
-    private $creationDate;
-    private $title;
-    private $header;
-    private $content;
-    private $img;
-    private $status;
-    private $category;
-    private $lastUpdate;
-    private $user;
-    private $url;
-    private $nbComments;
+    private int $idPost;
+    private int $idUser;
+    private string $creationDate;
+    private string $title;
+    private string $header;
+    private string $content;
+    private string $img;
+    private string $status;
+    private string $category;
+    private string $lastUpdate;
+    private UserModel $user;
+    private string $url;
+    private int $nbComments;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getLastUpdate()
-    {
-        return $this->lastUpdate;
-    }
-
-    /**
-     * @param mixed $lastUpdate
-     */
-    public function setLastUpdate($lastUpdate)
-    {
-        $this->lastUpdate = $lastUpdate;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNbComments()
-    {
-        return $this->nbComments;
-    }
-
-    /**
-     * @param mixed $nbComments
-     */
-    public function setNbComments($nbComments)
-    {
-        $this->nbComments = $nbComments;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImg()
-    {
-        return $this->img;
-    }
-
-    /**
-     * @param mixed $img
-     */
-    public function setImg($img)
-    {
-        $this->img = $img;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->idPost;
     }
 
     /**
-     * @param mixed $idPost
+     * @param int $idPost
      */
-    public function setId($idPost)
+    public function setId(int $idPost): void
     {
         $this->idPost = $idPost;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getIdUser()
+    public function getIdUser(): int
     {
         return $this->idUser;
     }
 
     /**
-     * @param mixed $idUser
+     * @param int $idUser
      */
-    public function setIdUser($idUser)
+    public function setIdUser(int $idUser): void
     {
         $this->idUser = $idUser;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getCreationDate()
+    public function getCreationDate(): string
     {
         return $this->creationDate;
     }
 
     /**
-     * @param mixed $creationDate
+     * @param string $creationDate
      */
-    public function setCreationDate($creationDate)
+    public function setCreationDate(string $creationDate): void
     {
         $this->creationDate = $creationDate;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getHeader()
+    public function getHeader(): string
     {
         return $this->header;
     }
 
     /**
-     * @param mixed $header
+     * @param string $header
      */
-    public function setHeader($header)
+    public function setHeader(string $header): void
     {
         $this->header = $header;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
 
     /**
-     * @param mixed $content
+     * @param string $content
      */
-    public function setContent($content)
+    public function setContent(string $content): void
     {
         $this->content = $content;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getStatus()
+    public function getImg(): string
+    {
+        return $this->img;
+    }
+
+    /**
+     * @param string $img
+     */
+    public function setImg(string $img): void
+    {
+        $this->img = $img;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
     {
         return $this->status;
     }
 
     /**
-     * @param mixed $status
+     * @param string $status
      */
-    public function setStatus($status)
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getCategory()
+    public function getCategory(): string
     {
         return $this->category;
     }
 
     /**
-     * @param mixed $category
+     * @param string $category
      */
-    public function setCategory($category)
+    public function setCategory(string $category): void
     {
         $this->category = $category;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getUser()
+    public function getLastUpdate(): string
+    {
+        return $this->lastUpdate;
+    }
+
+    /**
+     * @param string $lastUpdate
+     */
+    public function setLastUpdate(string $lastUpdate): void
+    {
+        $this->lastUpdate = $lastUpdate;
+    }
+
+    /**
+     * @return \App\model\UserModel
+     */
+    public function getUser(): UserModel
     {
         return $this->user;
     }
 
     /**
-     * @param mixed $user
+     * @param \App\model\UserModel $user
      */
-    public function setUser($user)
+    public function setUser(UserModel $user): void
     {
         $this->user = $user;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
 
     /**
-     * @param mixed $url
+     * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(string $url): void
     {
         $this->url = $url;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbComments(): int
+    {
+        return $this->nbComments;
+    }
+
+    /**
+     * @param int $nbComments
+     */
+    public function setNbComments(int $nbComments): void
+    {
+        $this->nbComments = $nbComments;
     }
 }

@@ -4,123 +4,122 @@ namespace App\model;
 
 class UserModel
 {
-    private $idUser;
-    private $firstname;
-    private $lastname;
-    private $avatar;
-    private $password;
-    private $email;
-    private $isAdmin;
+    private int $idUser;
+    private string $firstname;
+    private string $lastname;
+    private string $avatar;
+    private string $password;
+    private string $email;
+    private int $isAdmin;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-    /**
-     * @param mixed $avatar
-     */
-    public function setAvatar($avatar)
-    {
-        $this->avatar = $avatar;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->idUser;
     }
 
     /**
-     * @param mixed $idUser
+     * @param int $idUser
      */
-    public function setId($idUser)
+    public function setId(int $idUser): void
     {
         $this->idUser = $idUser;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getFirstname()
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
 
     /**
-     * @param mixed $firstname
+     * @param string $firstname
      */
-    public function setFirstname($firstname)
+    public function setFirstname(string $firstname): void
     {
         $this->firstname = $firstname;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLastname()
+    public function getLastname(): string
     {
         return $this->lastname;
     }
 
     /**
-     * @param mixed $lastname
+     * @param string $lastname
      */
-    public function setLastname($lastname)
+    public function setLastname(string $lastname): void
     {
         $this->lastname = $lastname;
     }
 
+    /**
+     * @return string
+     */
+    public function getAvatar(): string
+    {
+        return $this->avatar;
+    }
 
     /**
-     * @return mixed
+     * @param string $avatar
      */
-    public function getPassword()
+    public function setAvatar(string $avatar): void
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
 
     /**
-     * @param mixed $password
+     * @param string $password
      */
-    public function setPassword($password)
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
      */
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getIsAdmin()
+    public function getIsAdmin(): int
     {
         return $this->isAdmin;
     }
 
     /**
-     * @param mixed $isAdmin
+     * @param int $isAdmin
      */
-    public function setIsAdmin($isAdmin)
+    public function setIsAdmin(int $isAdmin): void
     {
         $this->isAdmin = $isAdmin;
     }

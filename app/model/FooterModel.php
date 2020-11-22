@@ -5,189 +5,189 @@ namespace App\model;
 class FooterModel
 {
     private int $idFooter;
-    private $firstname;
-    private $lastname;
-    private $address;
-    private $phoneNumber;
-    private $email;
-    private $facebookLink;
-    private $twitterLink;
-    private $instagramLink;
-    private $linkedinLink;
-    private $githubLink;
+    private string $firstname;
+    private string $lastname;
+    private string $address;
+    private string $phoneNumber;
+    private string $email;
+    private string $facebookLink;
+    private string $twitterLink;
+    private string $instagramLink;
+    private string $linkedinLink;
+    private string $githubLink;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->idFooter;
     }
 
     /**
-     * @param mixed $idFooter
+     * @param int $idFooter
      */
-    public function setId($idFooter)
+    public function setId(int $idFooter): void
     {
         $this->idFooter = $idFooter;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getFirstname()
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
 
     /**
-     * @param mixed $firstname
+     * @param string $firstname
      */
-    public function setFirstname($firstname)
+    public function setFirstname(string $firstname): void
     {
         $this->firstname = $firstname;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLastname()
+    public function getLastname(): string
     {
         return $this->lastname;
     }
 
     /**
-     * @param mixed $lastname
+     * @param string $lastname
      */
-    public function setLastname($lastname)
+    public function setLastname(string $lastname): void
     {
         $this->lastname = $lastname;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
 
     /**
-     * @param mixed $address
+     * @param string $address
      */
-    public function setAddress($address)
+    public function setAddress(string $address): void
     {
         $this->address = $address;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
 
     /**
-     * @param mixed $phoneNumber
+     * @param string $phoneNumber
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
      */
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getFacebookLink()
+    public function getFacebookLink(): string
     {
         return $this->facebookLink;
     }
 
     /**
-     * @param mixed $facebookLink
+     * @param string $facebookLink
      */
-    public function setFacebookLink($facebookLink)
+    public function setFacebookLink(string $facebookLink): void
     {
         $this->facebookLink = $facebookLink;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getTwitterLink()
+    public function getTwitterLink(): string
     {
         return $this->twitterLink;
     }
 
     /**
-     * @param mixed $twitterLink
+     * @param string $twitterLink
      */
-    public function setTwitterLink($twitterLink)
+    public function setTwitterLink(string $twitterLink): void
     {
         $this->twitterLink = $twitterLink;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getInstagramLink()
+    public function getInstagramLink(): string
     {
         return $this->instagramLink;
     }
 
     /**
-     * @param mixed $instagramLink
+     * @param string $instagramLink
      */
-    public function setInstagramLink($instagramLink)
+    public function setInstagramLink(string $instagramLink): void
     {
         $this->instagramLink = $instagramLink;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLinkedinLink()
+    public function getLinkedinLink(): string
     {
         return $this->linkedinLink;
     }
 
     /**
-     * @param mixed $linkedinLink
+     * @param string $linkedinLink
      */
-    public function setLinkedinLink($linkedinLink)
+    public function setLinkedinLink(string $linkedinLink): void
     {
         $this->linkedinLink = $linkedinLink;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getGithubLink()
+    public function getGithubLink(): string
     {
         return $this->githubLink;
     }
 
     /**
-     * @param mixed $githubLink
+     * @param string $githubLink
      */
-    public function setGithubLink($githubLink)
+    public function setGithubLink(string $githubLink): void
     {
         $this->githubLink = $githubLink;
     }

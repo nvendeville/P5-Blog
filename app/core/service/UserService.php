@@ -55,7 +55,8 @@ class UserService extends AbstractService
 </head>
 
 <body> 
-<div style="background: url(http://localhost/P5-Blog/img/404.jpg); background-size: cover; background-position: center center; height: 600px !important;">
+<div style="background: url(http://localhost/P5-Blog/img/404.jpg); background-size: cover;
+    background-position: center center; height: 600px !important;">
         <div class="flex-direction padding-404">
             <div>
                 <h1 class="text-orange">Bienvenue sur mon Blog</h1>
@@ -64,7 +65,8 @@ class UserService extends AbstractService
                 <h4 class="text-orange">Cher(e) ' . $formAddUser['firstname'] . ',</h4>
             </div>
             <div>
-                <p>Je vous confirme votre inscription et suis impatiente de vous retrouver bient&ocirc;t sur mon blog pour partager avec vous.</p>
+                <p>Je vous confirme votre inscription et suis impatiente de vous retrouver bient&ocirc;t 
+                sur mon blog pour partager avec vous.</p>
                 <p>Nathalie</p>
             </div>
         </div>
@@ -81,15 +83,12 @@ class UserService extends AbstractService
         return $this->userEntity->userExist($email) != null;
     }
 
-    public function signIn(string $email): ?object
+    public function signIn(string $email): UserModel
     {
         $userModel = new UserModel();
         $user = $this->userEntity->getUserByEmail($email);
-        if (isset($user)) {
-            $this->hydrate($user, $userModel);
-            return $userModel;
-        }
-        return null;
+        $this->hydrate($user, $userModel);
+        return $userModel;
     }
 
     public function logout(): void

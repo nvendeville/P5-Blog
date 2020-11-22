@@ -4,140 +4,139 @@ namespace App\model;
 
 class CommentModel
 {
-    private $idComment;
-    private $idUser;
-    private $idPost;
-    private $creationDate;
-    private $content;
-    private $status;
-    private $user;
-    private $titlePost;
+    private int $idComment;
+    private int $idUser;
+    private int $idPost;
+    private string $creationDate;
+    private string $content;
+    private string $status;
+    private UserModel $user;
+    private string $titlePost;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->idComment;
     }
 
     /**
-     * @param mixed $idComment
+     * @param int $idComment
      */
-    public function setId($idComment)
+    public function setId(int $idComment): void
     {
         $this->idComment = $idComment;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getIdUser()
+    public function getIdUser(): int
     {
         return $this->idUser;
     }
 
     /**
-     * @param mixed $idUser
+     * @param int $idUser
      */
-    public function setIdUser($idUser)
+    public function setIdUser(int $idUser): void
     {
         $this->idUser = $idUser;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getIdPost()
+    public function getIdPost(): int
     {
         return $this->idPost;
     }
 
     /**
-     * @param mixed $idPost
+     * @param int $idPost
      */
-    public function setIdPost($idPost)
+    public function setIdPost(int $idPost): void
     {
         $this->idPost = $idPost;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getCreationDate()
+    public function getCreationDate(): string
     {
         return $this->creationDate;
     }
 
     /**
-     * @param mixed $creationDate
+     * @param string $creationDate
      */
-    public function setCreationDate($creationDate)
+    public function setCreationDate(string $creationDate): void
     {
         $this->creationDate = $creationDate;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
 
     /**
-     * @param mixed $content
+     * @param string $content
      */
-    public function setContent($content)
+    public function setContent(string $content): void
     {
         $this->content = $content;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
 
     /**
-     * @param mixed $status
+     * @param string $status
      */
-    public function setStatus($status)
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
 
-
     /**
-     * @return mixed
+     * @return \App\model\UserModel
      */
-    public function getUser()
+    public function getUser(): UserModel
     {
         return $this->user;
     }
 
     /**
-     * @param mixed $user
+     * @param \App\model\UserModel $user
      */
-    public function setUser($user)
+    public function setUser(UserModel $user): void
     {
         $this->user = $user;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getTitlePost()
+    public function getTitlePost(): string
     {
         return $this->titlePost;
     }
 
     /**
-     * @param mixed $titlePost
+     * @param string $titlePost
      */
-    public function setTitlePost($titlePost)
+    public function setTitlePost(string $titlePost): void
     {
         $this->titlePost = $titlePost;
     }

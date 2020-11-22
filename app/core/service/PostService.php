@@ -24,13 +24,6 @@ class PostService extends AbstractService
         $this->postEntity = PostEntity::getInstance();
     }
 
-    public function getModel(): array
-    {
-        $postModel = new PostModel();
-        $this->hydrate($this->postEntity->one(), $postModel);
-        return ["header" => $this->getHeader(), "footer" => $this->getFooter()];
-    }
-
     public function getBlog(int $currentPage): array
     {
         $nbPages = $this->getNbPage();
@@ -117,7 +110,7 @@ class PostService extends AbstractService
             $postModel->setNbComments(count($this->getComments($postModel->getId())));
             $categoryModel = new CategoryModel();
             $this->hydrate($post, $categoryModel);
-            $categoryModel->setCategoryName($postModel);
+            $categoryModel->setCategoryName($postModel->getCategory());
             array_push($postsModel, $postModel);
         }
         return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
@@ -161,7 +154,7 @@ class PostService extends AbstractService
         $this->postEntity->addPost($postModel);
     }
 
-    public function updateStatus($postId, $postStatus): void
+    public function updateStatus(int $postId, string $postStatus): void
     {
         $this->postEntity->updateStatus($postId, $postStatus);
     }

@@ -25,7 +25,7 @@ function getVal(object $obj, string $field, string $getter): ?string
     return null;
 }
 
-function redirect($uri): void
+function redirect(string $uri): void
 {
     header("Location: $uri");
     exit();
