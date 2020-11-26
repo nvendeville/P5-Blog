@@ -8,20 +8,20 @@ use App\model\FooterModel;
 class FooterEntity extends DataAccessManager
 {
     protected static string $table = 'footer';
-    protected static FooterEntity $instance;
+    /*protected static FooterEntity $instance;*/
 
-    protected function __construct()
+    /*protected function __construct()
     {
         parent::__construct();
-    }
+    }*/
 
-    public static function getInstance(): FooterEntity
+    /*public static function getInstance(): FooterEntity
     {
         if (!isset(self::$instance)) {
             self::$instance = new FooterEntity();
         }
         return self::$instance;
-    }
+    }*/
 
     public function persoFooter(FooterModel $footerModel): void
     {

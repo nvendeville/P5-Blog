@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Connectez-vous</h5>
+                <p class="modalTitle" id="exampleModalCenterTitle">Connectez-vous</p>
                 <button type="reset" class="close" id="resetSignInTimes" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -16,11 +16,11 @@
                     <label for="email" class="text-orange">
                         Votre email :
                     </label>
-                    <input class="select-width-100" type="text" name="email" id="email">
+                    <input class="select-width-100" type="text" name="email" id="email" required>
                     <label for="password" class="text-orange">
                         Votre mot de passe :
                     </label>
-                    <input class="select-width-100" type="password" name="password" id="password">
+                    <input class="select-width-100" type="password" name="password" id="password" required>
                     <div class="margin-100 margin-30 width-100 flex-center space-evenly">
                         <button type="submit" class="submit">Se connecter</button>
                     </div>
@@ -46,7 +46,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Mot de passe oublié</h5>
+                <p class="modalTitle" id="exampleModalCenterTitle2">Mot de passe oublié</p>
                 <button type="reset" class="close" id="resetForgotPassword" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -56,15 +56,15 @@
                     <input type="hidden" name="token" value="{{ token }}">
                     <input type="hidden" name="type" value="forgot-password">
                     <input type="hidden" name="redirect" value="">
-                    <label for="email" class="text-orange">
+                    <label for="email2" class="text-orange">
                         Votre email :
                     </label>
-                    <input class="select-width-100" type="text" name="email" id="email">
+                    <input class="select-width-100" type="text" name="email" id="email2" required>
                     <div class="margin-100 margin-30 width-100 flex-center space-evenly">
                         <button type="submit" class="submit">Envoyer</button>
                     </div>
                     <div class="modal-footer">
-                        <button type="reset" class="btn btn-primary" id="resetForgotPassword" data-dismiss="modal">
+                        <button type="reset" class="btn btn-primary" id="resetForgotPassword2" data-dismiss="modal">
                             Annuler
                         </button>
                     </div>
@@ -80,7 +80,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Mot de passe oublié</h5>
+                <p class="modalTitle" id="exampleModalCenterTitle3">Mot de passe oublié</p>
                 <button type="reset" class="close" id="restPasswordForm" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -95,17 +95,17 @@
                     <label for="newPassword" class="text-orange">
                         Nouveau mot de passe :
                     </label>
-                    <input class="select-width-100" type="password" name="newPassword" id="newPassword">
+                    <input class="select-width-100" type="password" name="newPassword" id="newPassword" required>
                     <label for="password" class="text-orange">
                         Confirmez le nouveau mot de passe :
                     </label>
                     <input class="select-width-100" type="password" name="confirmedNewPassword"
-                           id="confirmedNewPassword">
+                           id="confirmedNewPassword" required>
                     <div class="margin-100 margin-30 width-100 flex-center space-evenly">
                         <button type="submit" class="submit">Envoyer</button>
                     </div>
                     <div class="modal-footer">
-                        <button type="reset" class="btn btn-primary" id="restPasswordForm" data-dismiss="modal">
+                        <button type="reset" class="btn btn-primary" id="restPasswordForm2" data-dismiss="modal">
                             Annuler
                         </button>
                     </div>
@@ -120,7 +120,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-gray" id="exampleModalCenterTitle2">Créez un compte</h5>
+                    <p class="modalTitle" id="exampleModalCenterTitle4">Créez un compte</p>
                     <button type="reset" class="close" id="resetSignUp" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -137,15 +137,15 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="firstname" class="text-orange">
-                                            Votre prénom :
+                                            Votre prénom : *
                                         </label>
-                                        <input class="select-width-100" type="text" name="firstname" id="firstname">
+                                        <input class="select-width-100" type="text" name="firstname" id="firstname" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="lastname" class="text-orange">
-                                            Votre nom :
+                                            Votre nom : *
                                         </label>
-                                        <input class="select-width-100" type="text" name="lastname" id="lastname">
+                                        <input class="select-width-100" type="text" name="lastname" id="lastname" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -158,26 +158,29 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <label for="email" class="text-orange">
-                                            Votre email :
+                                        <label for="email3" class="text-orange">
+                                            Votre email : *
                                         </label>
-                                        <input class="select-width-100" type="email" name="email" id="email">
+                                        <input class="select-width-100" type="email" name="email" id="email3" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="password" class="text-orange">
-                                            Votre mot de passe :
+                                        <label for="password2" class="text-orange">
+                                            Votre mot de passe : *
                                         </label>
-                                        <input class="select-width-100" type="password" name="password" id="password">
+                                        <input class="select-width-100" type="password" name="password" id="password2" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="passwordConfirmed" class="text-orange">
-                                            Confirmez votre mot de passe
+                                        <label for="passwordConfirmed" class="text-orange commentsList">
+                                            Confirmez votre mot de passe *
                                         </label>
                                         <input class="select-width-100" type="password" name="passwordConfirmed"
-                                               id="passwordConfirmed">
+                                               id="passwordConfirmed" required>
                                     </div>
+                                </div>
+                                <div>
+                                    <p class="text-orange">* Champs obligatoires</p>
                                 </div>
                                 <div class="row">
                                     <div class="margin-100 width-100 flex-center space-evenly col-sm-12">
@@ -189,7 +192,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-primary" id="resetSignUp" data-dismiss="modal">Annuler</button>
+                    <button type="reset" class="btn btn-primary" id="resetSignUp2" data-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>
@@ -201,7 +204,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-gray" id="exampleModalCenterTitle">Utilisateur déjà enregistré</h5>
+                        <h5 class="modal-title text-gray" id="exampleModalCenterTitle5">Utilisateur déjà enregistré</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

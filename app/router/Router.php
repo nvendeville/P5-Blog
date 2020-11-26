@@ -33,7 +33,7 @@ class Router
         foreach ($split as $uriContent) {
             $uriParams = explode(":", $uriContent);
             if ($this->containRealMethod($controller, $uriParams)) {
-                $this->explicitController = "App\\Controller\\" . ucfirst($controller) . "Controller";
+                $this->explicitController = "App\\controller\\" . ucfirst($controller) . "Controller";
                 $this->explicitMethod = $uriParams[0];
                 array_shift($uriParams);
                 $this->explicitParams = $uriParams;
@@ -51,7 +51,7 @@ class Router
         if (!in_array(ucfirst($controller), $this->controllers)) {
             return false;
         }
-        $reflector = new ReflectionClass("App\\Controller\\" . $controller . "Controller");
+        $reflector = new ReflectionClass("App\\controller\\" . ucfirst($controller) . "Controller");
         $methods = $reflector->getMethods();
         foreach ($methods as $method) {
             if ($method->getName() == $methodName) {
@@ -64,7 +64,8 @@ class Router
     private function addingPostParams(?array &$params): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            foreach ($_FILES as $key => $image) {
+            $files = $_FILES;
+            foreach ($files as $key => $image) {
                 if ($image['error'] == 0 and ($image['size'] <= 1000000)) {
                     $infoFileUploaded = pathinfo($image['name']);
                     $extensionUploaded = $infoFileUploaded['extension'];
@@ -95,7 +96,7 @@ class Router
 
     private function getMatchMethod(array $splitUri): array
     {
-        $controller = "App\\Controller\\" . ucfirst($splitUri[0]) . "Controller";
+        $controller = "App\\controller\\" . ucfirst($splitUri[0]) . "Controller";
         array_shift($splitUri);
         $this->addingPostParams($splitUri);
         try {

@@ -2,21 +2,19 @@
 
 {% block body %}
 
-    <!-- Hero Section-->
     <section
             style="background: url(img/{{ home.heroImg }}); background-size: cover; background-position: center center;"
             class="hero">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    <h1 class="text-orange">{{ home.heroFirstname }} {{ home.heroLastname }}</h1><a href="#"
-                                                                                                    class="hero-link text-orange">{{ home.heroLink }}</a>
+                    <h1 class="text-orange">{{ home.heroFirstname }} {{ home.heroLastname }}</h1>
+                    <a href="#" class="hero-link text-orange">{{ home.heroLink }}</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Intro Section-->
     <section class="intro">
         <div class="container">
             <div class="row">
@@ -26,31 +24,29 @@
                 </div>
                 <div class="col-lg-4">
                     <h2 class="h3"><a href="img/CV.jpg" download >Téléchargez mon CV !</a></h2>
-                    <a href="img/CV.jpg" download ><img src="img/{{ home.cvImg }}" alt="..." class="container-fluid"></a>
+                    <a href="img/CV.jpg" download ><img src="img/{{ home.cvImg }}" alt="Image du CV de Nathalie Vendeville" class="container-fluid"></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section-->
-    <section class="gallery no-padding">
+    <div class="gallery no-padding">
         <div class="row">
             <div class="mix col-lg-3 col-md-3 col-sm-6">
-                <div class="item"><img src="img/{{ home.galleryImg1 }}" alt="..." class="img-fluid"></div>
+                <div class="item"><img src="img/{{ home.galleryImg1 }}" alt="Compétence 1" class="img-fluid"></div>
             </div>
             <div class="mix col-lg-3 col-md-3 col-sm-6">
-                <div class="item"><img src="img/{{ home.galleryImg2 }}" alt="..." class="img-fluid"></div>
+                <div class="item"><img src="img/{{ home.galleryImg2 }}" alt="Compétence 2" class="img-fluid"></div>
             </div>
             <div class="mix col-lg-3 col-md-3 col-sm-6">
-                <div class="item"><img src="img/{{ home.galleryImg3 }}" alt="..." class="img-fluid"></div>
+                <div class="item"><img src="img/{{ home.galleryImg3 }}" alt="Compétence 3" class="img-fluid"></div>
             </div>
             <div class="mix col-lg-3 col-md-3 col-sm-6">
-                <div class="item"><img src="img/{{ home.galleryImg4 }}" alt="..." class="img-fluid"></div>
+                <div class="item"><img src="img/{{ home.galleryImg4 }}" alt="Compétence 4" class="img-fluid"></div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Divider Section-->
     <section
             style="background: url(img/{{ home.dividerImg }}); background-size: cover; background-position: center bottom"
             class="divider newsletter">
@@ -63,21 +59,17 @@
                             <input type="hidden" name="token" value="{{ token }}">
                             <input type="hidden" name="type" value="contact_form">
                             <div class="form-group">
-                                <input type="text" name="firstname" id="firstname" placeholder="Entrez votre prénom">
-                                <input type="text" name="lastname" id="lastname" placeholder="Entrez votre nom">
-                                <input type="email" name="email" id="email" placeholder="Entrez votre adresse mail">
-                                <textarea class="textarea" name="message" id="message"
-                                          placeholder="Entrez votre message"></textarea>
+                                <input class="text-bold" type="text" name="firstname" id="firstname2" placeholder="Entrez votre prénom *" required>
+                                <input class="text-bold"type="text" name="lastname" id="lastname2" placeholder="Entrez votre nom *" required>
+                                <input class="text-bold" type="email" name="email" id="email4" placeholder="Entrez votre adresse mail *" required>
+                                <textarea class="textarea text-bold" name="message" id="message"
+                                          placeholder="Entrez votre message *"></textarea>
+                            </div>
+                            <div>
+                                <p class="text-white">* Tous les champs sont obligatoires</p>
                             </div>
                             <button type="submit" class="submit">Envoyer</button>
                         </form>
-                        <div class="modal fade" id="mailWellSent" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content padding-modal center">
-                                    <p>Votre message a bien été envoyé</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

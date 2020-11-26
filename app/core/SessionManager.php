@@ -8,7 +8,14 @@ class SessionManager
 
     public function __construct()
     {
+        $this->setSession();
+    }
+
+    private function setSession(): SessionManager
+    {
         $this->sessionVars = &$_SESSION;
+
+        return $this;
     }
 
     public function sessionSet(string $name, $value): void
