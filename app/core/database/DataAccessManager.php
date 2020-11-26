@@ -12,7 +12,7 @@ class DataAccessManager
     protected static PDO $pdo;
     protected static string $table;
 
-    protected function __construct()
+    public function __construct()
     {
     }
 
@@ -33,6 +33,16 @@ class DataAccessManager
             throw new Exception();
         }
         $req->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return  $req->fetchall();
+    }
+
+    public function allRefacto(string $statement, $class): array
+    {
+        $req = self::getPdo()->query($statement);
+        if ($req === false) {
+            throw new Exception();
+        }
+        $req->setFetchMode(PDO::FETCH_CLASS, $class);
         return  $req->fetchall();
     }
 

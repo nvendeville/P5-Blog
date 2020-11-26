@@ -15,11 +15,15 @@ class Renderer
         $this->sessionManager = new SessionManager();
     }
 
+    private function getTwigCoreExtension($twig): CoreExtension
+    {
+        return $twig->getExtension(CoreExtension::class);
+    }
     public function render(string $pageName, array $models): void
     {
         $loader = new FilesystemLoader('app/view');
         $twig = new Environment($loader);
-        $twig->getExtension(CoreExtension::class)->setDateFormat('d/m/Y H:i', '%d days');
+        $this->getTwigCoreExtension($twig)->setDateFormat('d/m/Y H:i', '%d days');
         $models['token'] = $this->sessionManager->sessionGet('token');
         if ($this->sessionManager->sessionIsset('user')) {
             $models['logged'] = true;

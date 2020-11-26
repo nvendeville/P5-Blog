@@ -94,6 +94,13 @@ class PostService extends AbstractService
         return ["header" => $this->getHeader(), "adminPosts" => $postsModel, "currentPage" => $currentPage];
     }
 
+    public function getPostsRefacto(int $currentPage): array
+    {
+        $posts = $this->postEntity->getAllPostsRefacto();
+
+        return ["header" => $this->getHeader(), "adminPosts" => $posts, "currentPage" => $currentPage];
+    }
+
     public function getPostsByCategory(string $categoryName, int $currentPage): array
     {
         $nbPages = $this->getNbPostsByCategories($categoryName);

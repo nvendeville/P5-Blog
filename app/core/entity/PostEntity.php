@@ -100,6 +100,12 @@ class PostEntity extends DataAccessManager
         return $this->all($statement);
     }
 
+    public function getAllPostsRefacto(): array
+    {
+        $statement = "SELECT * FROM `posts` ORDER BY `creationDate` DESC";
+        return $this->allRefacto($statement, PostModel::class);
+    }
+
     public function updateStatus(int $postId, string $postStatus): void
     {
         $date = date("Y-m-d H:i:s");

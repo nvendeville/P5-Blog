@@ -13,13 +13,21 @@ Bootstrap Temple Blog Template
 * =====================
 */
 
+.modalTitle {
+    color: #999999 !important;
+    line-height: 1.5 !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    font-family: inherit !important;
+}
+
 .padding-404 {
     padding-left: 10em;
     padding-top: 10em;
 }
 
 .text-bold {
-    font-weight: 700;
+    font-weight: 700 !important;
 }
 
 .text-small {

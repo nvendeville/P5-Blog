@@ -15,7 +15,7 @@ class AbstractService
     public function __construct()
     {
         $this->headerEntity = HeaderEntity::getInstance();
-        $this->footerEntity = FooterEntity::getInstance();
+        $this->footerEntity = new FooterEntity();
     }
 
     protected function hydrateFromPostArray(array $source, object $target): void

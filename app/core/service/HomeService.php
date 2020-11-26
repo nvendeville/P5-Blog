@@ -23,7 +23,7 @@ class HomeService extends AbstractService
     {
         parent::__construct();
         $this->headerEntity = HeaderEntity::getInstance();
-        $this->footerEntity = FooterEntity::getInstance();
+        $this->footerEntity = new FooterEntity();
         $this->homeEntity = HomeEntity::getInstance();
     }
 

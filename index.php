@@ -13,7 +13,7 @@ if (!isset($_SESSION['token'])) {
 }
 
 try {
-    $router = new App\Router\Router(isset($_GET['uri']) ? $_GET['uri'] : 'home');
+    $router = new App\router\Router(isset($_GET['uri']) ? $_GET['uri'] : 'home');
     $router->run();
 } catch (\Exception $e) {
     var_dump($e);
