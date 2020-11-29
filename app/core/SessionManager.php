@@ -13,7 +13,7 @@ class SessionManager
 
     private function setSession(): SessionManager
     {
-        $this->sessionVars = &$_SESSION;
+        $this->sessionVars = &$_SESSION; // phpcs:ignore
 
         return $this;
     }
