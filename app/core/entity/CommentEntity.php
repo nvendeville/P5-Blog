@@ -8,20 +8,6 @@ use App\model\CommentModel;
 class CommentEntity extends DataAccessManager
 {
     protected static string $table = 'comments';
-    protected static CommentEntity $instance;
-
-    protected function __construct()
-    {
-        parent::__construct();
-    }
-
-    public static function getInstance(): CommentEntity
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new CommentEntity();
-        }
-        return self::$instance;
-    }
 
     public function getCommentsByPostId(int $postId): array
     {

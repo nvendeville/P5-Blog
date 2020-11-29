@@ -18,9 +18,9 @@ class PostService extends AbstractService
     public function __construct()
     {
         parent::__construct();
-        $this->commentEntity = CommentEntity::getInstance();
-        $this->userEntity = UserEntity::getInstance();
-        $this->postEntity = PostEntity::getInstance();
+        $this->commentEntity = new CommentEntity();
+        $this->userEntity = new UserEntity();
+        $this->postEntity = new PostEntity();
     }
 
     public function getBlog(int $currentPage): array
@@ -89,7 +89,7 @@ class PostService extends AbstractService
     private function getNbPostsByCategories(string $categoryName): int
     {
         $nbPosts = $this->postEntity->getNbPostsByCategories($categoryName);
-        return ceil((int)$nbPosts->nbPosts / (int)self::NB_POSTS_PER_PAGE);
+        return ceil((int)$nbPosts->getNbPosts() / (int)self::NB_POSTS_PER_PAGE);
     }
 
     public function getPostDetail(int $postId): array

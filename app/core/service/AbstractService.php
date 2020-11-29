@@ -7,12 +7,12 @@ use App\core\entity\HeaderEntity;
 
 class AbstractService
 {
-    private HeaderEntity $headerEntity;
-    private FooterEntity $footerEntity;
+    protected HeaderEntity $headerEntity;
+    protected FooterEntity $footerEntity;
 
     public function __construct()
     {
-        $this->headerEntity = HeaderEntity::getInstance();
+        $this->headerEntity = new HeaderEntity();
         $this->footerEntity = new FooterEntity();
     }
 
