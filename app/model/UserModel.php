@@ -65,7 +65,7 @@ class UserModel
      */
     public function getAvatar(): string
     {
-        return $this->avatar;
+        return isset($this->avatar) ? $this->avatar : '';
     }
 
     /**

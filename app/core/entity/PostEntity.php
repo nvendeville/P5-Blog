@@ -11,20 +11,6 @@ class PostEntity extends DataAccessManager
     private const ARCHIVED = 2;
     private const POSTED = 3;
     protected static string $table = 'posts';
-    protected static PostEntity $instance;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    public static function getInstance(): PostEntity
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new PostEntity();
-        }
-        return self::$instance;
-    }
 
     public function addPost(PostModel $postModel): void
     {
@@ -91,7 +77,7 @@ class PostEntity extends DataAccessManager
         $statement = "SELECT COUNT(posts.id) AS nbPosts
             FROM `posts`
             WHERE `status`=" . self::POSTED . " AND `posts`.`category`=?  ";
-        $req = $this->prepare($statement, [$categoryName], get_called_class());
+        $req = $this->prepare($statement, [$categoryName], CategoryModel::class);
         return $req->fetch();
     }
 

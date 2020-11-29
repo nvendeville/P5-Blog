@@ -3,8 +3,6 @@
 namespace App\core\service;
 
 use App\core\ConfigClass;
-use App\core\entity\FooterEntity;
-use App\core\entity\HeaderEntity;
 use App\core\entity\HomeEntity;
 use App\core\Mailer;
 use App\model\FooterModel;
@@ -15,16 +13,12 @@ class HomeService extends AbstractService
 {
     use Mailer;
 
-    private HeaderEntity $headerEntity;
-    private FooterEntity $footerEntity;
     private HomeEntity $homeEntity;
 
     public function __construct()
     {
         parent::__construct();
-        $this->headerEntity = HeaderEntity::getInstance();
-        $this->footerEntity = new FooterEntity();
-        $this->homeEntity = HomeEntity::getInstance();
+        $this->homeEntity = new HomeEntity();
     }
 
     public function getModel(): array

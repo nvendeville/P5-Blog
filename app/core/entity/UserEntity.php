@@ -8,20 +8,6 @@ use App\model\UserModel;
 class UserEntity extends DataAccessManager
 {
     protected static string $table = 'users';
-    protected static UserEntity $instance;
-
-    protected function __construct()
-    {
-        parent::__construct();
-    }
-
-    public static function getInstance(): UserEntity
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new UserEntity();
-        }
-        return self::$instance;
-    }
 
     public function addUser(UserModel $userModel): void
     {
@@ -31,13 +17,6 @@ class UserEntity extends DataAccessManager
             hashPassword($userModel->getPassword()), $userModel->getEmail(), $userModel->getIsAdmin()];
         $insert = self::getPdo()->prepare($statement);
         $insert->execute($values);
-    }
-
-    public function userExist(string $email): object
-    {
-        $statement = "SELECT 1 as userExist FROM `users` WHERE email=?";
-        $req = $this->prepare($statement, [$email], get_called_class());
-        return $req->fetch();
     }
 
     public function getUserByEmail(string $email): UserModel

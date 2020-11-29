@@ -119,7 +119,7 @@ class PostModel
      */
     public function getImg(): string
     {
-        return $this->img;
+        return isset($this->img) ? $this->img : '';
     }
 
     /**

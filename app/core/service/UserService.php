@@ -19,7 +19,7 @@ class UserService extends AbstractService
     {
         parent::__construct();
         $this->sessionManager = new SessionManager();
-        $this->userEntity = UserEntity::getInstance();
+        $this->userEntity = new UserEntity();
     }
 
     public function addUser(array $formAddUser): object
@@ -79,7 +79,7 @@ class UserService extends AbstractService
 
     public function userExist(string $email): bool
     {
-        return $this->userEntity->userExist($email) != null;
+        return $this->userEntity->getUserByEmail($email) != null;
     }
 
     public function signIn(string $email): UserModel

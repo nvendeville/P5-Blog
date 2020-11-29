@@ -18,9 +18,9 @@ class CommentService extends AbstractService
     public function __construct()
     {
         parent::__construct();
-        $this->commentEntity = CommentEntity::getInstance();
-        $this->userEntity = UserEntity::getInstance();
-        $this->postEntity = PostEntity::getInstance();
+        $this->commentEntity = new CommentEntity();
+        $this->userEntity = new UserEntity();
+        $this->postEntity = new PostEntity();
     }
 
     public function getCommentsByPostId(int $postId): array

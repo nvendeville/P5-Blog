@@ -8,20 +8,6 @@ use App\model\HomeModel;
 class HomeEntity extends DataAccessManager
 {
     protected static string $table = 'home';
-    protected static HomeEntity $instance;
-
-    protected function __construct()
-    {
-        parent::__construct();
-    }
-
-    public static function getInstance(): HomeEntity
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new HomeEntity();
-        }
-        return self::$instance;
-    }
 
     public function persoHomePage(HomeModel $homeModel): void
     {
