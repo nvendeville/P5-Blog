@@ -63,6 +63,6 @@ class HomeEntity extends DataAccessManager
 
     public function getHome(): object
     {
-        return $this->one("SELECT * FROM `home`");
+        return $this->one("SELECT * FROM `home`", HomeModel::class);
     }
 }

@@ -4,7 +4,7 @@ namespace App\model;
 
 class UserModel
 {
-    private int $idUser;
+    private int $id;
     private string $firstname;
     private string $lastname;
     private string $avatar;
@@ -17,15 +17,15 @@ class UserModel
      */
     public function getId(): int
     {
-        return $this->idUser;
+        return $this->id;
     }
 
     /**
-     * @param int $idUser
+     * @param int $id
      */
-    public function setId(int $idUser): void
+    public function setId(int $id): void
     {
-        $this->idUser = $idUser;
+        $this->id = $id;
     }
 
     /**

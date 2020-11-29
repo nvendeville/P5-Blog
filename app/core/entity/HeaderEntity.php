@@ -25,7 +25,7 @@ class HeaderEntity extends DataAccessManager
 
     public function getHeader(): object
     {
-        return $this->one("SELECT * FROM `header`");
+        return $this->one("SELECT * FROM `header`", HeaderModel::class);
     }
 
     public function persoHeader(HeaderModel $headerModel): void

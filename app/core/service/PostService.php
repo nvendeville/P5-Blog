@@ -5,7 +5,6 @@ namespace App\core\service;
 use App\core\entity\CommentEntity;
 use App\core\entity\PostEntity;
 use App\core\entity\UserEntity;
-use App\model\CategoryModel;
 use App\model\PostModel;
 use App\model\UserModel;
 
@@ -28,17 +27,11 @@ class PostService extends AbstractService
     {
         $nbPages = $this->getNbPage();
         $premier = ($currentPage * self::NB_POSTS_PER_PAGE) - self::NB_POSTS_PER_PAGE;
-        $entities = $this->postEntity->getPaginatedPosts($premier, self::NB_POSTS_PER_PAGE);
-        $postsModel = [];
-        foreach ($entities as $post) {
-            $postModel = new PostModel();
-            $this->hydrate($post, $postModel);
-            $userModel = new UserModel();
-            $this->hydrate($this->userEntity->getById($postModel->getIdUser()), $userModel);
-            $postModel->setUser($userModel);
+        $postsModel = $this->postEntity->getPaginatedPosts($premier, self::NB_POSTS_PER_PAGE);
+        foreach ($postsModel as $postModel) {
+            $postModel->setUser($this->userEntity->getById($postModel->getIdUser(), UserModel::class));
             $postModel->setUrl("/P5-blog/posts/detail:" . $postModel->getId());
             $postModel->setNbComments(count($this->getComments($postModel->getId())));
-            array_push($postsModel, $postModel);
         }
         return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
             "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
@@ -59,44 +52,21 @@ class PostService extends AbstractService
 
     protected function getCategories(): array
     {
-        $categories = $this->postEntity->getCategories();
-        $categoriesModel = [];
-        foreach ($categories as $category) {
-            $categoryModel = new CategoryModel();
-            $this->hydrate($category, $categoryModel);
-            array_push($categoriesModel, $categoryModel);
-        }
-        return $categoriesModel;
+        return $this->postEntity->getCategories();
     }
 
     protected function getLatestCommentedPosts(): array
     {
-        $commentedPosts = $this->postEntity->getLatestCommentedPosts();
-        $commentedPostsModel = [];
-        foreach ($commentedPosts as $commentedPost) {
-            $commentedPostModel = new PostModel();
-            $this->hydrate($commentedPost, $commentedPostModel);
+        $commentedPostsModel = $this->postEntity->getLatestCommentedPosts();
+        foreach ($commentedPostsModel as $commentedPostModel) {
             $commentedPostModel->setUrl("/P5-blog/posts/detail:" . $commentedPostModel->getId());
-            array_push($commentedPostsModel, $commentedPostModel);
         }
         return $commentedPostsModel;
     }
 
-    public function getPostsRefacto(int $currentPage): array
-    {
-        $entities = $this->postEntity->getAllPosts();
-        $postsModel = [];
-        foreach ($entities as $post) {
-            $postModel = new PostModel();
-            $this->hydrate($post, $postModel);
-            array_push($postsModel, $postModel);
-        }
-        return ["header" => $this->getHeader(), "adminPosts" => $postsModel, "currentPage" => $currentPage];
-    }
-
     public function getPosts(int $currentPage): array
     {
-        $posts = $this->postEntity->getAllPostsRefacto();
+        $posts = $this->postEntity->getAllPosts();
 
         return ["header" => $this->getHeader(), "adminPosts" => $posts, "currentPage" => $currentPage];
     }
@@ -105,20 +75,11 @@ class PostService extends AbstractService
     {
         $nbPages = $this->getNbPostsByCategories($categoryName);
         $premier = ($currentPage * self::NB_POSTS_PER_PAGE) - self::NB_POSTS_PER_PAGE;
-        $entities = $this->postEntity->getPostsByCategory($categoryName, $premier, self::NB_POSTS_PER_PAGE);
-        $postsModel = [];
-        foreach ($entities as $post) {
-            $postModel = new PostModel();
-            $this->hydrate($post, $postModel);
-            $userModel = new UserModel();
-            $this->hydrate($this->userEntity->getById($postModel->getIdUser()), $userModel);
-            $postModel->setUser($userModel);
+        $postsModel = $this->postEntity->getPostsByCategory($categoryName, $premier, self::NB_POSTS_PER_PAGE);
+        foreach ($postsModel as $postModel) {
+            $postModel->setUser($this->userEntity->getById($postModel->getIdUser(), UserModel::class));
             $postModel->setUrl("/P5-blog/posts/detail:" . $postModel->getId());
             $postModel->setNbComments(count($this->getComments($postModel->getId())));
-            $categoryModel = new CategoryModel();
-            $this->hydrate($post, $categoryModel);
-            $categoryModel->setCategoryName($postModel->getCategory());
-            array_push($postsModel, $postModel);
         }
         return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
             "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
@@ -133,12 +94,8 @@ class PostService extends AbstractService
 
     public function getPostDetail(int $postId): array
     {
-        $post = $this->postEntity->getById($postId);
-        $postModel = new PostModel();
-        $this->hydrate($post, $postModel);
-        $userModel = new UserModel();
-        $this->hydrate($this->userEntity->getById($postModel->getIdUser()), $userModel);
-        $postModel->setUser($userModel);
+        $postModel = $this->postEntity->getById($postId, PostModel::class);
+        $postModel->setUser($this->userEntity->getById($postModel->getIdUser(), UserModel::class));
         return ["header" => $this->getHeader(), "post" => $postModel, "footer" => $this->getFooter(),
             "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
             "comments" => $this->getComments($postId)];
@@ -146,11 +103,8 @@ class PostService extends AbstractService
 
     public function getPost(int $postId): array
     {
-        $postModel = new PostModel();
-        $this->hydrate($this->postEntity->getById($postId), $postModel);
-        $userModel = new UserModel();
-        $this->hydrate($this->userEntity->getById($postModel->getIdUser()), $userModel);
-        $postModel->setUser($userModel);
+        $postModel = $this->postEntity->getById($postId, PostModel::class);
+        $postModel->setUser($this->userEntity->getById($postModel->getIdUser(), UserModel::class));
         return ["header" => $this->getHeader(), "post" => $postModel];
     }
 

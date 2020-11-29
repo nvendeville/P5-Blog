@@ -40,10 +40,10 @@ class UserEntity extends DataAccessManager
         return $req->fetch();
     }
 
-    public function getUserByEmail(string $email): object
+    public function getUserByEmail(string $email): UserModel
     {
         $statement = "SELECT * FROM `users` WHERE email=?";
-        $req = $this->prepare($statement, [$email], get_called_class());
+        $req = $this->prepare($statement, [$email], UserModel::class);
         return $req->fetch();
     }
 

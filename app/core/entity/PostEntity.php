@@ -3,6 +3,7 @@
 namespace App\core\entity;
 
 use App\core\database\DataAccessManager;
+use App\model\CategoryModel;
 use App\model\PostModel;
 
 class PostEntity extends DataAccessManager
@@ -42,7 +43,7 @@ class PostEntity extends DataAccessManager
             WHERE `status` = " . self::POSTED . "
             ORDER BY `creationDate` DESC
             LIMIT $from, $nbPost";
-        return $this->all($statement);
+        return $this->all($statement, PostModel::class);
     }
 
     public function getCategories(): array
@@ -52,7 +53,7 @@ class PostEntity extends DataAccessManager
         FROM `posts`
         WHERE `status`=" . self::POSTED . "
         GROUP BY category";
-        return $this->all($statement);
+        return $this->all($statement, CategoryModel::class);
     }
 
     public function getPostsByCategory(string $categoryName, int $from, int $nbPost): array
@@ -62,7 +63,7 @@ class PostEntity extends DataAccessManager
                     FROM `posts`
                     WHERE `posts`.`category`=? AND `status`=" . self::POSTED . "
                     ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
-        $req =  $this->prepare($statement, [$categoryName], get_called_class());
+        $req =  $this->prepare($statement, [$categoryName], PostModel::class);
         return $req->fetchAll();
     }
 
@@ -76,13 +77,13 @@ class PostEntity extends DataAccessManager
             group by  `posts`.`id`, `posts`.`idUser`, `posts`.`title`, `posts`.`header`, 
                       `posts`.`content`, `posts`.`img`, `posts`.`status`, `posts`.`category` 
             order by `comments`.`creationDate` desc limit 3";
-        return $this->all($statement);
+        return $this->all($statement, PostModel::class);
     }
 
     public function getPostedNbPosts(): object
     {
         $statement = "SELECT COUNT(posts.id) AS nbPosts FROM `posts` WHERE `status`=" . self::POSTED;
-        return $this->one($statement);
+        return $this->one($statement, PostModel::class);
     }
 
     public function getNbPostsByCategories(string $categoryName): object
@@ -97,13 +98,7 @@ class PostEntity extends DataAccessManager
     public function getAllPosts(): array
     {
         $statement = "SELECT * FROM `posts` ORDER BY `creationDate` DESC";
-        return $this->all($statement);
-    }
-
-    public function getAllPostsRefacto(): array
-    {
-        $statement = "SELECT * FROM `posts` ORDER BY `creationDate` DESC";
-        return $this->allRefacto($statement, PostModel::class);
+        return $this->all($statement, PostModel::class);
     }
 
     public function updateStatus(int $postId, string $postStatus): void
