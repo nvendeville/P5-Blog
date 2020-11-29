@@ -63,7 +63,7 @@ class Router
 
     private function addingPostParams(?array &$params): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] === 'POST') {
             $files = $_FILES;
             foreach ($files as $key => $image) {
                 if ($image['error'] == 0 and ($image['size'] <= 1000000)) {

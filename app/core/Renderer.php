@@ -19,6 +19,7 @@ class Renderer
     {
         return $twig->getExtension(CoreExtension::class);
     }
+
     public function render(string $pageName, array $models): void
     {
         $loader = new FilesystemLoader('app/view');
@@ -32,7 +33,7 @@ class Renderer
             $models['idConnectedUser'] = getVal($this->sessionManager->sessionGet('user'), 'idUser', 'getId');
         }
         $models = $this->getOtherModel($models);
-        echo $twig->render($pageName, $models);
+        print_r($twig->render(htmlspecialchars($pageName), $models));
     }
 
     private function getOtherModel(array $models): array
