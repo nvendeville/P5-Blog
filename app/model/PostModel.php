@@ -4,7 +4,7 @@ namespace App\model;
 
 class PostModel
 {
-    private int $idPost;
+    private int $id;
     private int $idUser;
     private string $creationDate;
     private string $title;
@@ -23,15 +23,15 @@ class PostModel
      */
     public function getId(): int
     {
-        return $this->idPost;
+        return $this->id;
     }
 
     /**
-     * @param int $idPost
+     * @param int $id
      */
-    public function setId(int $idPost): void
+    public function setId(int $id): void
     {
-        $this->idPost = $idPost;
+        $this->id = $id;
     }
 
     /**

@@ -25,16 +25,9 @@ class CommentService extends AbstractService
 
     public function getCommentsByPostId(int $postId): array
     {
-        $comments = $this->commentEntity->getCommentsByPostId($postId);
-        $commentsModel = [];
-        foreach ($comments as $comment) {
-            $commentModel = new CommentModel();
-            $this->hydrate($comment, $commentModel);
-            $userEntity = $this->userEntity->getById($commentModel->getIdUser());
-            $userModel = new UserModel();
-            $this->hydrate($userEntity, $userModel);
-            $commentModel->setUser($userModel);
-            array_push($commentsModel, $commentModel);
+        $commentsModel = $this->commentEntity->getCommentsByPostId($postId);
+        foreach ($commentsModel as $commentModel) {
+            $commentModel->setUser($this->userEntity->getById($commentModel->getIdUser(), UserModel::class));
         }
         return $commentsModel;
     }
@@ -47,20 +40,11 @@ class CommentService extends AbstractService
 
     public function getAll(int $currentPage): array
     {
-        $entities = $this->commentEntity->getPaginatedComments();
-        $commentsModel = [];
-        foreach ($entities as $comment) {
-            $commentModel = new CommentModel();
-            $this->hydrate($comment, $commentModel);
-            $userEntity = $this->userEntity->getById($commentModel->getIdUser());
-            $userModel = new UserModel();
-            $this->hydrate($userEntity, $userModel);
-            $commentModel->setUser($userModel);
-            $postEntity = $this->postEntity->getById($commentModel->getIdPost());
-            $postModel = new PostModel();
-            $this->hydrate($postEntity, $postModel);
+        $commentsModel = $this->commentEntity->getPaginatedComments();
+        foreach ($commentsModel as $commentModel) {
+            $commentModel->setUser($this->userEntity->getById($commentModel->getIdUser(), UserModel::class));
+            $postModel = $this->postEntity->getById($commentModel->getIdPost(), PostModel::class);
             $commentModel->setTitlePost($postModel->getTitle());
-            array_push($commentsModel, $commentModel);
         }
         return ["header" => $this->getHeader(), "comments" => $commentsModel, "currentPage" => $currentPage];
     }

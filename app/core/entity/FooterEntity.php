@@ -37,6 +37,6 @@ class FooterEntity extends DataAccessManager
 
     public function getFooter(): object
     {
-        return $this->one("SELECT * FROM `footer`");
+        return $this->one("SELECT * FROM `footer`", FooterModel::class);
     }
 }

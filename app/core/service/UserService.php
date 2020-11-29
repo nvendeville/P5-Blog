@@ -28,8 +28,7 @@ class UserService extends AbstractService
         $this->hydrateFromPostArray($formAddUser, $userModel);
         $this->userEntity->addUser($userModel);
         $this->sendAddedUserConfirmation($formAddUser);
-        $this->hydrate($this->userEntity->getUserByEmail($userModel->getEmail()), $userModel);
-        return $userModel;
+        return $this->userEntity->getUserByEmail($userModel->getEmail());
     }
 
     public function sendAddedUserConfirmation(array $formAddUser): void
@@ -85,10 +84,7 @@ class UserService extends AbstractService
 
     public function signIn(string $email): UserModel
     {
-        $userModel = new UserModel();
-        $user = $this->userEntity->getUserByEmail($email);
-        $this->hydrate($user, $userModel);
-        return $userModel;
+        return $this->userEntity->getUserByEmail($email);
     }
 
     public function logout(): void

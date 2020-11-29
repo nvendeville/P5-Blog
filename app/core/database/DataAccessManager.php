@@ -16,27 +16,17 @@ class DataAccessManager
     {
     }
 
-    public function one(string $statement): object
+    public function one(string $statement, string $class): object
     {
         $req = self::getPdo()->query($statement);
         if ($req === false) {
             throw new Exception();
         }
-        $req->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $req->setFetchMode(PDO::FETCH_CLASS, $class);
         return $req->fetch();
     }
 
-    public function all(string $statement): array
-    {
-        $req = self::getPdo()->query($statement);
-        if ($req === false) {
-            throw new Exception();
-        }
-        $req->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-        return  $req->fetchall();
-    }
-
-    public function allRefacto(string $statement, $class): array
+    public function all(string $statement, string $class): array
     {
         $req = self::getPdo()->query($statement);
         if ($req === false) {
@@ -61,7 +51,7 @@ class DataAccessManager
         return self::$pdo;
     }
 
-    public function getById(int $idInTable): object
+    public function getById(int $idInTable, string $class): object
     {
         $req = self::getPdo()->query("
             SELECT *
@@ -70,7 +60,7 @@ class DataAccessManager
         if ($req === false) {
             throw new Exception();
         }
-        $req->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $req->setFetchMode(PDO::FETCH_CLASS, $class);
         return $req->fetch();
     }
 
