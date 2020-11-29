@@ -1,4 +1,4 @@
-<section class="modal fade newsletter divider" id="SignInModal" tabindex="-1" role="dialog"
+<div class="modal fade newsletter divider" id="SignInModal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -13,10 +13,10 @@
                     <input type="hidden" name="token" value="{{ token }}">
                     <input type="hidden" name="type" value="sign-in">
                     <input type="hidden" name="redirect" value="">
-                    <label for="email" class="text-orange">
+                    <label for="email10" class="text-orange">
                         Votre email :
                     </label>
-                    <input class="select-width-100" type="text" name="email" id="email" required>
+                    <input class="select-width-100" type="text" name="email" id="email10" required>
                     <label for="password" class="text-orange">
                         Votre mot de passe :
                     </label>
@@ -39,9 +39,9 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<section class="modal fade newsletter divider" id="ForgotPasswordModal" tabindex="-1" role="dialog"
+<div class="modal fade newsletter divider" id="ForgotPasswordModal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -73,9 +73,9 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 {% if resetPassword %}
-<section class="modal fade newsletter divider" id="resetPasswordModal" tabindex="-1" role="dialog"
+<div class="modal fade newsletter divider" id="resetPasswordModal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -115,7 +115,7 @@
     </div>
     {% endif %}
 
-    <section class="modal fade collapse text-small newsletter divider" id="AddUserModal" tabindex="-1" role="dialog"
+    <div class="modal fade collapse text-small newsletter divider" id="AddUserModal" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -136,16 +136,16 @@
                             <div class="form-group container">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="firstname" class="text-orange">
+                                        <label for="firstname10" class="text-orange">
                                             Votre prénom : *
                                         </label>
-                                        <input class="select-width-100" type="text" name="firstname" id="firstname" required>
+                                        <input class="select-width-100" type="text" name="firstname" id="firstname10" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="lastname" class="text-orange">
+                                        <label for="lastname10" class="text-orange">
                                             Votre nom : *
                                         </label>
-                                        <input class="select-width-100" type="text" name="lastname" id="lastname" required>
+                                        <input class="select-width-100" type="text" name="lastname" id="lastname10" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -196,10 +196,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     {% if userExist %}
-        <section class="modal fade newsletter divider" id="alreadyKnown" tabindex="-1" role="dialog"
+        <div class="modal fade newsletter divider" id="alreadyKnown" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -217,11 +217,11 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     {% endif %}
 
     {% if noUserExist %}
-        <section class="modal fade newsletter divider" id="noUserExistModal" tabindex="-1" role="dialog"
+        <div class="modal fade newsletter divider" id="noUserExistModal" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -239,11 +239,11 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     {% endif %}
 
     {% if wrongPassword %}
-        <section class="modal fade newsletter divider" id="wrongPasswordModal" tabindex="-1" role="dialog"
+        <div class="modal fade newsletter divider" id="wrongPasswordModal" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -261,5 +261,5 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     {% endif %}

@@ -5,12 +5,12 @@
     <section class="featured-posts">
         <div class="container">
             <div class="row">
-                <main class="col-lg-8">
+                <div class="col-lg-8">
                     <div class="container">
                         {% for post in posts %}
                             <div class="row d-flex align-items-stretch">
                                 {% if loop.index is divisible by(2) %}
-                                    <div class="image col-lg-5"><img src="/P5-Blog/img/{{ post.img }}" alt="..."></div>
+                                    <div class="image col-lg-5"><img src="/P5-Blog/img/{{ post.img }}" alt="photo illustrant le post"></div>
                                 {% endif %}
                                 <div class="text col-lg-7">
                                     <div class="text-inner d-flex align-items-center">
@@ -24,7 +24,7 @@
                                             </header>
                                             <p>{{ post.content | slice(0, 200) }} ...</p>
                                             <footer class="post-footer d-flex align-items-center">
-                                                <div class="avatar"><img src="/P5-Blog/img/{{ post.user.avatar }}" alt="..."
+                                                <div class="avatar"><img src="/P5-Blog/img/{{ post.user.avatar }}" alt="avatar du membre"
                                                                          class="img-fluid"></div>
                                                 <div class="padding-post-footer">
                                                     <div class="title">{{ post.user.firstname }}</div>
@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                                 {% if loop.index is not divisible by(2) %}
-                                    <div class="image col-lg-5"><img src="/P5-Blog/img/{{ post.img }}" alt="..."></div>
+                                    <div class="image col-lg-5"><img src="/P5-Blog/img/{{ post.img }}" alt="photo illustrant le post"></div>
                                 {% endif %}
                             </div>
                         {% endfor %}
@@ -63,7 +63,7 @@
                         </nav>
 
                     </div>
-                </main>
+                </div>
                 <aside class="col-lg-4">
                     {% include 'latestPosts.html.twig' with latestCommentedPosts %}
 

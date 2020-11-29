@@ -1,12 +1,12 @@
 <div class="widget latest-posts" >
     <header>
-        <h3 class="h6">Derniers Articles Commentés</h3>
+        <p class="categoryTitle">Derniers Articles Commentés</p>
     </header>
     {% for latestCommentedPost in latestCommentedPosts %}
         <div class="blog-post">
             <a class="latest-posts-width-100" href="{{ latestCommentedPost.url }}">
                 <div class="item d-flex align-items-center latest-posts-width-100">
-                    <div class="image"><img src="/P5-BLog/img/{{ latestCommentedPost.img }}" alt="..." class="img-fluid"></div>
+                    <div class="image"><img src="/P5-Blog/img/{{ latestCommentedPost.img }}" alt="Illustration de l'article" class="img-fluid"></div>
                     <div class="title latest-posts-width-100"><strong>{{ latestCommentedPost.title }}</strong>
                         <div class="d-flex align-items-center latest-posts-width-100  justify-content-between">
                             <div class="date"> {{ latestCommentedPost.creationDate | date(U) }}</div>

@@ -1,10 +1,8 @@
 /*
 =========================================
-=========================================
 
 Bootstrap Temple Blog Template
 
-=========================================
 ========================================= */
 /*
 
@@ -12,6 +10,15 @@ Bootstrap Temple Blog Template
 * GENERAL
 * =====================
 */
+
+.categoryTitle {
+    margin-bottom: 1rem !important;
+    font-family: inherit !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+    color: #555555 !important;
+    font-size: 1rem !important;
+}
 
 .modalTitle {
     color: #999999 !important;

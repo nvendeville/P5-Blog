@@ -16,7 +16,6 @@ try {
     $router = new App\router\Router(isset($_GET['uri']) ? $_GET['uri'] : 'home');
     $router->run();
 } catch (\Exception $e) {
-    var_dump($e);
     $renderer = new Renderer();
     $renderer->render('404.html.twig', []);
 }
