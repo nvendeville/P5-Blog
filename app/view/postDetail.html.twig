@@ -4,10 +4,10 @@
 <section class="featured-posts">
     <div class="container">
         <div class="row">
-            <main class="post blog-post col-lg-8">
+            <div class="post blog-post col-lg-8">
                 <div class="container">
                     <div class="post-single">
-                        <div class="post-thumbnail"><img src="/P5-Blog/img/{{ post.img }}" alt="..." class="img-fluid"></div>
+                        <div class="post-thumbnail"><img src="/P5-Blog/img/{{ post.img }}" alt="Illustration de l'article" class="img-fluid"></div>
                         <div class="post-details">
                             <div class="post-meta d-flex justify-content-between">
                                 <div class="category"><a href="#">{{ post.category }}</a></div>
@@ -43,18 +43,21 @@
                                     {% for comment in comments %}
                                         {% set count = count + 1 %}
                                     {% endfor %}
-                                    <h3 class="h6">Commentaires<span class="no-of-comments">( {{ count }} )</span></h3>
+                                    <p class="categoryTitle">Commentaires<span class="no-of-comments">( {{ count }} )</span></p>
                                 </header>
                                 {% for comment in comments %}
                                     {% set count = count + 1 %}
                                     <div class="comment">
                                         <div class="comment-header d-flex justify-content-between">
                                             <div class="user d-flex align-items-center">
-                                                <div class="image"><img src="/P5-Blog/img/{{ comment.user.avatar }}" alt="..."
-                                                                        class="img-fluid rounded-circle"></div>
+                                                <div class="avatar">
+                                                    <img src="/P5-Blog/img/{{ comment.user.avatar }}" alt="..."
+                                                         class="img-fluid">
+                                                </div>
                                                 <div class="title">
                                                     <strong>{{ comment.user.firstname }} {{ comment.user.lasttname }}</strong>
-                                                    <span class="date">{{ comment.creationDate | date(U) }}</span></div>
+                                                    <span class="date">{{ comment.creationDate | date(U) }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="comment-body">
@@ -65,7 +68,7 @@
                             </div>
                             <div class="add-comment">
                                 <header>
-                                    <h3 class="h6">Ajouter un commentaire</h3>
+                                    <p class="categoryTitle">Ajouter un commentaire</p>
 
                                     {% if logged %}
                                         <form id="addCommentForm"
@@ -105,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
             {% if addedComment %}
                 <div class="modal fade" id="waitingValidation" tabindex="-1" role="dialog" aria-hidden="true"
                      data-backdrop="static">

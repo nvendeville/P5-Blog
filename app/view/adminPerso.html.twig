@@ -18,24 +18,24 @@
                     </legend>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label class="text-orange">
+                            <label for="firstname" class="text-orange">
                                 Prénom coordonnées :
                             </label>
                             <input class="select-width-100" type="text" name="firstname" id="firstname"
                                    value="{{ footer.firstname }}">
-                            <label class="text-orange">
+                            <label for="address" class="text-orange">
                                 Votre adresse :
                             </label>
                             <input class="select-width-100" type="text" name="address" id="address"
                                    value="{{ footer.address }}">
                         </div>
                         <div class="col-sm-6">
-                            <label class="text-orange">
+                            <label for="lastname" class="text-orange">
                                 Nom coordonnées :
                             </label>
                             <input class="select-width-100" type="text" name="lastname" id="lastname"
                                    value="{{ footer.lastname }}">
-                            <label class="text-orange">
+                            <label for="phoneNumber" class="text-orange">
                                 Votre téléphone :
                             </label>
                             <input class="select-width-100" type="text" name="phoneNumber" id="phoneNumber"
@@ -44,7 +44,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label class="text-orange">
+                            <label for="email" class="text-orange">
                                 Votre email :
                             </label>
                             <input class="select-width-100" type="text" name="email" id="email"
@@ -58,34 +58,34 @@
                     </legend>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label class="text-orange">
+                            <label for="facebookLink" class="text-orange">
                                 Lien facebook :
                             </label>
                             <input class="select-width-100" type="text" name="facebookLink" id="facebookLink"
                                    value="{{ footer.facebookLink }}">
-                            <label class="text-orange">
+                            <label for="twitterLink" class="text-orange">
                                 Lien twitter :
                             </label>
                             <input class="select-width-100" type="text" name="twitterLink" id="twitterLink"
                                    value="{{ footer.twitterLink }}">
-                            <label class="text-orange">
+                            <label for="instagramLink" class="text-orange">
                                 Lien instagram :
                             </label>
                             <input class="select-width-100" type="text" name="instagramLink" id="instagramLink"
                                    value="{{ footer.instagramLink }}">
                         </div>
                         <div class="col-sm-6">
-                            <label class="text-orange">
+                            <label for="linkedinLink" class="text-orange">
                                 Lien linkedin :
                             </label>
                             <input class="select-width-100" type="text" name="linkedinLink" id="linkedinLink"
                                    value="{{ footer.linkedinLink }}">
-                            <label class="text-orange">
+                            <label for="githubLink" class="text-orange">
                                 Lien github :
                             </label>
                             <input class="select-width-100" type="text" name="githubLink" id="githubLink"
                                    value="{{ footer.githubLink }}">
-                            <label class="text-orange">
+                            <label for="dividerImg" class="text-orange">
                                 Image du Formulaire de contact :
                             </label>
                             <input class="select-width-100" type="file" name="dividerImg" id="dividerImg">
@@ -98,24 +98,24 @@
                     </legend>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label class="text-orange">
+                            <label for="blogTitle" class="text-orange">
                                 Titre de votre blog :
                             </label>
                             <input class="select-width-100" type="text" name="blogTitle" id="blogTitle"
                                    value="{{ header.blogTitle }}">
-                            <label class="text-orange">
+                            <label for="heroFirstname" class="text-orange">
                                 Votre prénom :
                             </label>
                             <input class="select-width-100" type="text" name="heroFirstname" id="heroFirstname"
                                    value="{{ home.heroFirstname }}">
                         </div>
                         <div class="col-sm-6">
-                            <label class="text-orange">
+                            <label for="herolink" class="text-orange">
                                 Phrase d'accroche :
                             </label>
                             <input class="select-width-100" type="text" name="heroLink" id="herolink"
                                    value="{{ home.heroLink }}">
-                            <label class="text-orange">
+                            <label for="heroLastname" class="text-orange">
                                 Votre nom :
                             </label>
                             <input class="select-width-100" type="text" name="heroLastname" id="heroLastname"
@@ -124,7 +124,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label class="text-orange">
+                            <label for="heroImg" class="text-orange">
                                 Image de l'entête :
                             </label>
                             <input class="select-width-100 height-60" type="file" name="heroImg" id="heroImg">
@@ -135,17 +135,16 @@
                     <legend>
                         Contenu de la page :
                     </legend>
-                    <label class="text-orange">
+                    <label for="sectionTitle" class="text-orange">
                         Titre de la section :
                     </label>
                     <input class="select-width-100" type="text" name="sectionTitle" id="sectionTitle"
                            value="{{ home.sectionTitle }}">
-                    <label class="text-orange">
+                    <label for="sectionContent" class="text-orange">
                         Contenu de la section :
                     </label>
                     <textarea class="textarea section-content select-width-100" name="sectionContent"
                               id="sectionContent">{{ home.sectionContent }}</textarea>
-                    <label class="text-orange">
                 </fieldset>
                 <fieldset class="text-gray">
                     <legend>
@@ -153,21 +152,21 @@
                     </legend>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label class="text-orange">
+                            <label for="galleryImg1" class="text-orange">
                                 Image Compétence 1 :
                             </label>
                             <input class="select-width-100" type="file" name="galleryImg1" id="galleryImg1">
-                            <label class="text-orange">
+                            <label for="galleryImg3" class="text-orange">
                                 Image Compétence 3 :
                             </label>
                             <input class="select-width-100" type="file" name="galleryImg3" id="galleryImg3">
                         </div>
                         <div class="col-sm-6">
-                            <label class="text-orange">
+                            <label for="galleryImg2" class="text-orange">
                                 Image Compétence 2 :
                             </label>
                             <input class="select-width-100" type="file" name="galleryImg2" id="galleryImg2">
-                            <label class="text-orange">
+                            <label for="galleryImg4" class="text-orange">
                                 Image Compétence 4 :
                             </label>
                             <input class="select-width-100" type="file" name="galleryImg4" id="galleryImg4">
@@ -175,7 +174,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label class="text-orange">
+                            <label for="cvImg" class="text-orange">
                                 Image du CV :
                             </label>
                             <input class="select-width-100" type="file" name="cvImg" id="cvImg">
