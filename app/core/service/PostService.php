@@ -82,7 +82,7 @@ class PostService extends AbstractService
         return $commentedPostsModel;
     }
 
-    public function getPosts(int $currentPage): array
+    public function getPostsRefacto(int $currentPage): array
     {
         $entities = $this->postEntity->getAllPosts();
         $postsModel = [];
@@ -94,7 +94,7 @@ class PostService extends AbstractService
         return ["header" => $this->getHeader(), "adminPosts" => $postsModel, "currentPage" => $currentPage];
     }
 
-    public function getPostsRefacto(int $currentPage): array
+    public function getPosts(int $currentPage): array
     {
         $posts = $this->postEntity->getAllPostsRefacto();
 
