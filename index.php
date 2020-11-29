@@ -5,8 +5,9 @@ use App\router\RouterException;
 
 session_start();
 
-require_once 'vendor/autoload.php';
-require_once 'app/core/tools.php';
+require 'vendor/autoload.php';
+require 'app/core/tools.php';
+require 'app/core/config.php';
 
 if (!isset($_SESSION['token'])) {
     $_SESSION['token'] = generateToken();

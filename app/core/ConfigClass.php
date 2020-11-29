@@ -10,7 +10,7 @@ class ConfigClass
 
     private function __construct()
     {
-        $this->settings = require dirname(__DIR__) . '/core/config.php';
+        $this->settings = getConfig();
     }
 
     public static function getInstance(): ConfigClass
