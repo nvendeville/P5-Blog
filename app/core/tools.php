@@ -22,6 +22,7 @@ function getVal(object $obj, string $field, string $getter): ?string
             return $value;
         }
     }
+
     return null;
 }
 

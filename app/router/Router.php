@@ -91,6 +91,7 @@ class Router
         if (!in_array(ucfirst($split[0]), $this->controllers)) {
             throw new RouterException("Pas de route pour l'url saisie");
         }
+
         return $this->getMatchMethod($split);
     }
 
@@ -152,6 +153,7 @@ class Router
     public function run(): ?object
     {
         $controller = new $this->callable[0]();
+
         return call_user_func_array([$controller, $this->callable[1]], $this->callable[2]);
     }
 }

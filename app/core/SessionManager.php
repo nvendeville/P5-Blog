@@ -28,6 +28,7 @@ class SessionManager
         if ($this->sessionIsset($name)) {
             return $this->sessionVars[$name];
         }
+
         return  "";
     }
 

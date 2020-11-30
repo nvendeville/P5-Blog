@@ -17,9 +17,17 @@ class UsersController extends AbstractController
 
     public function addUser(array $formAddUser): void
     {
-        $user = $this->userService->addUser($formAddUser);
-        $this->sessionManager->sessionSet('user', $user);
-        $this->sessionManager->sessionSet('token', generateToken());
+        $this->sessionManager->sessionSet(
+            'otherModel',
+            ['wrongPassword' => true]
+        );
+        if ($this->controlPassword($formAddUser['password'], $formAddUser['passwordConfirmed'])) {
+            $user = $this->userService->addUser($formAddUser);
+            $this->sessionManager->sessionSet('user', $user);
+            $this->sessionManager->sessionSet('token', generateToken());
+            $this->sessionManager->sessionUnset('otherModel');
+        }
+
         redirect($formAddUser["redirect"]);
     }
 
@@ -27,8 +35,7 @@ class UsersController extends AbstractController
     {
         $this->sessionManager->sessionSet('otherModel', ['wrongPassword' => true]);
         $user = $this->userService->signIn($signInForm['email']);
-        if ($this->userService->controlPassword(hashPassword($signInForm['password']), $user->getPassword())
-        ) {
+        if ($this->userService->controlPassword(hashPassword($signInForm['password']), $user->getPassword())) {
             $this->sessionManager->sessionSet('user', $user);
             $this->sessionManager->sessionSet('token', generateToken());
             $this->sessionManager->sessionUnset('otherModel');
@@ -63,8 +70,19 @@ class UsersController extends AbstractController
         return $this->userService->controlPassword($password1, $password2);
     }
 
-    public function updatePassword(string $newPassword, string $email): void
+    public function updatePassword(array $updatePasswordForm): void
     {
-        $this->userService->updatePassword($newPassword, $email);
+        $this->sessionManager->sessionSet(
+            'otherModel',
+            ['wrongPassword' => true]
+        );
+        if ($this->controlPassword($updatePasswordForm['newPassword'], $updatePasswordForm['confirmedNewPassword'])) {
+            $this->userService->updatePassword($updatePasswordForm['newPassword'], $updatePasswordForm['email']);
+            $user = $this->userService->signIn($updatePasswordForm['email']);
+            $this->sessionManager->sessionSet('user', $user);
+            $this->sessionManager->sessionSet('token', generateToken());
+            $this->sessionManager->sessionUnset('otherModel');
+        }
+        redirect($updatePasswordForm["redirect"]);
     }
 }

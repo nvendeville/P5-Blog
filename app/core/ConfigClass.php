@@ -18,6 +18,7 @@ class ConfigClass
         if (!isset(self::$instance)) {
             self::$instance = new ConfigClass();
         }
+
         return self::$instance;
     }
 

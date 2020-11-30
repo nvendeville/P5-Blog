@@ -29,6 +29,7 @@ class PostEntity extends DataAccessManager
             WHERE `status` = " . self::POSTED . "
             ORDER BY `creationDate` DESC
             LIMIT $from, $nbPost";
+
         return $this->all($statement, PostModel::class);
     }
 
@@ -39,6 +40,7 @@ class PostEntity extends DataAccessManager
         FROM `posts`
         WHERE `status`=" . self::POSTED . "
         GROUP BY category";
+
         return $this->all($statement, CategoryModel::class);
     }
 
@@ -50,6 +52,7 @@ class PostEntity extends DataAccessManager
                     WHERE `posts`.`category`=? AND `status`=" . self::POSTED . "
                     ORDER BY `creationDate` DESC LIMIT $from, $nbPost";
         $req =  $this->prepare($statement, [$categoryName], PostModel::class);
+
         return $req->fetchAll();
     }
 
@@ -69,6 +72,7 @@ class PostEntity extends DataAccessManager
     public function getPostedNbPosts(): object
     {
         $statement = "SELECT COUNT(posts.id) AS nbPosts FROM `posts` WHERE `status`=" . self::POSTED;
+
         return $this->one($statement, PostModel::class);
     }
 
@@ -78,12 +82,14 @@ class PostEntity extends DataAccessManager
             FROM `posts`
             WHERE `status`=" . self::POSTED . " AND `posts`.`category`=?  ";
         $req = $this->prepare($statement, [$categoryName], CategoryModel::class);
+
         return $req->fetch();
     }
 
     public function getAllPosts(): array
     {
         $statement = "SELECT * FROM `posts` ORDER BY `creationDate` DESC";
+
         return $this->all($statement, PostModel::class);
     }
 

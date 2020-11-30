@@ -33,7 +33,8 @@ class Renderer
             $models['idConnectedUser'] = getVal($this->sessionManager->sessionGet('user'), 'idUser', 'getId');
         }
         $models = $this->getOtherModel($models);
-        print_r($twig->render(htmlspecialchars($pageName), $models));
+
+         echo $twig->render(htmlspecialchars($pageName), $models);
     }
 
     private function getOtherModel(array $models): array
@@ -44,6 +45,7 @@ class Renderer
             }
             $this->sessionManager->sessionUnset('otherModel');
         }
+
         return $models;
     }
 }

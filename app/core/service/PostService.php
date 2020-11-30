@@ -33,6 +33,7 @@ class PostService extends AbstractService
             $postModel->setUrl("/P5-blog/posts/detail:" . $postModel->getId());
             $postModel->setNbComments(count($this->getComments($postModel->getId())));
         }
+
         return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
             "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
             "nbPages" => (int)$nbPages, "currentPage" => $currentPage];
@@ -41,12 +42,14 @@ class PostService extends AbstractService
     private function getNbPage(): int
     {
         $nbPosts = $this->postEntity->getPostedNbPosts();
+
         return ceil((int)$nbPosts->nbPosts / (int)self::NB_POSTS_PER_PAGE);
     }
 
     protected function getComments(int $postId): array
     {
         $comments = new CommentService();
+
         return $comments->getCommentsByPostId($postId);
     }
 
@@ -61,6 +64,7 @@ class PostService extends AbstractService
         foreach ($commentedPostsModel as $commentedPostModel) {
             $commentedPostModel->setUrl("/P5-blog/posts/detail:" . $commentedPostModel->getId());
         }
+
         return $commentedPostsModel;
     }
 
@@ -81,6 +85,7 @@ class PostService extends AbstractService
             $postModel->setUrl("/P5-blog/posts/detail:" . $postModel->getId());
             $postModel->setNbComments(count($this->getComments($postModel->getId())));
         }
+
         return ["header" => $this->getHeader(), "posts" => $postsModel, "footer" => $this->getFooter(),
             "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
             "nbPages" => (int)$nbPages, "currentPage" => $currentPage, "urlParam" => $categoryName];
@@ -89,6 +94,7 @@ class PostService extends AbstractService
     private function getNbPostsByCategories(string $categoryName): int
     {
         $nbPosts = $this->postEntity->getNbPostsByCategories($categoryName);
+
         return ceil((int)$nbPosts->getNbPosts() / (int)self::NB_POSTS_PER_PAGE);
     }
 
@@ -96,6 +102,7 @@ class PostService extends AbstractService
     {
         $postModel = $this->postEntity->getById($postId, PostModel::class);
         $postModel->setUser($this->userEntity->getById($postModel->getIdUser(), UserModel::class));
+
         return ["header" => $this->getHeader(), "post" => $postModel, "footer" => $this->getFooter(),
             "categories" => $this->getCategories(), "latestCommentedPosts" => $this->getLatestCommentedPosts(),
             "comments" => $this->getComments($postId)];
@@ -105,6 +112,7 @@ class PostService extends AbstractService
     {
         $postModel = $this->postEntity->getById($postId, PostModel::class);
         $postModel->setUser($this->userEntity->getById($postModel->getIdUser(), UserModel::class));
+
         return ["header" => $this->getHeader(), "post" => $postModel];
     }
 
