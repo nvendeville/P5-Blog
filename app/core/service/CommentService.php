@@ -29,12 +29,14 @@ class CommentService extends AbstractService
         foreach ($commentsModel as $commentModel) {
             $commentModel->setUser($this->userEntity->getById($commentModel->getIdUser(), UserModel::class));
         }
+
         return $commentsModel;
     }
 
     public function updateStatus(int $commentId, string $commentStatus, int $currentPage): array
     {
         $this->commentEntity->updateStatus($commentId, $commentStatus);
+
         return $this->getAll($currentPage);
     }
 
@@ -46,6 +48,7 @@ class CommentService extends AbstractService
             $postModel = $this->postEntity->getById($commentModel->getIdPost(), PostModel::class);
             $commentModel->setTitlePost($postModel->getTitle());
         }
+
         return ["header" => $this->getHeader(), "comments" => $commentsModel, "currentPage" => $currentPage];
     }
 

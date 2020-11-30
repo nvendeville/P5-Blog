@@ -16,12 +16,14 @@ class CommentEntity extends DataAccessManager
         FROM comments
         WHERE idPost = $postId AND status = 'validé'
         ORDER BY creationDate DESC";
+
         return $this->all($statement, CommentModel::class);
     }
 
     public function getPaginatedComments(): array
     {
         $statement = "SELECT * FROM `comments` ORDER BY creationDate DESC";
+
         return $this->all($statement, CommentModel::class);
     }
 

@@ -23,6 +23,7 @@ class UserEntity extends DataAccessManager
     {
         $statement = "SELECT * FROM `users` WHERE email=?";
         $req = $this->prepare($statement, [$email], UserModel::class);
+
         return $req->fetch();
     }
 

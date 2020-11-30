@@ -23,6 +23,7 @@ class DataAccessManager
             throw new Exception();
         }
         $req->setFetchMode(PDO::FETCH_CLASS, $class);
+
         return $req->fetch();
     }
 
@@ -33,6 +34,7 @@ class DataAccessManager
             throw new Exception();
         }
         $req->setFetchMode(PDO::FETCH_CLASS, $class);
+
         return  $req->fetchall();
     }
 
@@ -48,6 +50,7 @@ class DataAccessManager
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             self::$pdo = $pdo;
         }
+
         return self::$pdo;
     }
 
@@ -61,6 +64,7 @@ class DataAccessManager
             throw new Exception();
         }
         $req->setFetchMode(PDO::FETCH_CLASS, $class);
+
         return $req->fetch();
     }
 
@@ -72,6 +76,7 @@ class DataAccessManager
         }
         $req->execute($attributes);
         $req->setFetchMode(PDO::FETCH_CLASS, $className);
+
         return $req;
     }
 }
