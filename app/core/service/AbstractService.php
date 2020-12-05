@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\core\service;
 
 use App\core\entity\FooterEntity;
@@ -20,6 +22,9 @@ class AbstractService
     {
         foreach ($source as $key => $value) {
             $targetSetter = 'set' . ucfirst($key);
+            if (preg_match("/^\d+$/", $value) and $key !== 'phoneNumber') {
+                $value = intval($value);
+            }
             if (method_exists($target, $targetSetter)) {
                 $target->$targetSetter($value);
             }

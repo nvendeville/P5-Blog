@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\controller;
 
 use App\core\service\CommentService;
@@ -37,7 +39,7 @@ class PostsController extends AbstractController
     public function addComment(array $formAddComment): void
     {
         $this->commentService->addComment($formAddComment);
-        $this->sessionManager->sessionSet('otherModel', ['addedComment' => true]);
+        $this->sessionManager->sessionSetArray('otherModel', ['addedComment' => true]);
         redirect("/P5-blog/posts/detail:" . $formAddComment["idPost"]);
     }
 }

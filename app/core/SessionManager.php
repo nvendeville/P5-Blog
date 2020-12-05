@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\core;
+
+use App\model\UserModel;
 
 class SessionManager
 {
@@ -13,23 +17,51 @@ class SessionManager
 
     private function setSession(): SessionManager
     {
-        $this->sessionVars = &$_SESSION; // phpcs:ignore
+        $this->sessionVars = &$_SESSION;
 
         return $this;
     }
 
-    public function sessionSet(string $name, $value): void
+    public function sessionSetUser(string $name, UserModel $value): void
     {
         $this->sessionVars[$name] = $value;
     }
 
-    public function sessionGet(string $name)
+    public function sessionGetUser(string $name): ?UserModel
+    {
+        if ($this->sessionIsset($name)) {
+            return $this->sessionVars[$name];
+        }
+
+        return  null;
+    }
+
+    public function sessionSetString(string $name, string $value): void
+    {
+        $this->sessionVars[$name] = $value;
+    }
+
+    public function sessionGetString(string $name): string
     {
         if ($this->sessionIsset($name)) {
             return $this->sessionVars[$name];
         }
 
         return  "";
+    }
+
+    public function sessionSetArray(string $name, array $value): void
+    {
+        $this->sessionVars[$name] = $value;
+    }
+
+    public function sessionGetArray(string $name): array
+    {
+        if ($this->sessionIsset($name)) {
+            return $this->sessionVars[$name];
+        }
+
+        return  [];
     }
 
     public function sessionIsset(string $name): bool

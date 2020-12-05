@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\controller;
 
 use App\core\service\HomeService;
@@ -25,7 +27,7 @@ class HomeController extends AbstractController
     public function sendContactRequest(array $contactForm): void
     {
         $this->homeService->sendContactRequest($contactForm);
-        $this->sessionManager->sessionSet('otherModel', ['mailSent' => true]);
+        $this->sessionManager->sessionSetArray('otherModel', ['mailSent' => true]);
         redirect("/P5-Blog/");
     }
 }

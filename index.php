@@ -1,7 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use App\core\Renderer;
-use App\router\RouterException;
+
+spl_autoload_register(function ($className) {
+    include $className . '.php';
+});
 
 session_start();
 

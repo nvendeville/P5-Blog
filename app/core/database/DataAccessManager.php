@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\core\database;
 
 use _HumbugBox50262afef792\Nette\Neon\Exception;
@@ -42,10 +44,10 @@ class DataAccessManager
     {
         if (!isset(self::$pdo)) {
             $config = ConfigClass::getInstance();
-            $dbName = $config->get("db_name");
-            $dbUser = $config->get("db_user");
-            $dbPass = $config->get("db_pass");
-            $dbHost = $config->get("db_host");
+            $dbName = $config->getString("db_name");
+            $dbUser = $config->getString("db_user");
+            $dbPass = $config->getString("db_pass");
+            $dbHost = $config->getString("db_host");
             $pdo = new PDO("mysql:dbname=$dbName;host=$dbHost", $dbUser, $dbPass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             self::$pdo = $pdo;

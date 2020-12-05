@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\core\service;
 
 use App\core\ConfigClass;
@@ -47,6 +49,6 @@ class HomeService extends AbstractService
             ' : <br/>' . $contactForm['message'];
         $subject = 'Demande de contact';
         $config = ConfigClass::getInstance();
-        $this->sendMail($subject, $message, $config->get('smtp_setFromMail'), $contactForm['email']);
+        $this->sendMail($subject, $message, $config->getString('smtp_setFromMail'), $contactForm['email']);
     }
 }
