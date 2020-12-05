@@ -8,7 +8,7 @@
                 <div class="col-md-7">
                     <h1 class="center text-orange">Modifier un article</h1>
                     <div class="form-holder margin-100 flex-center">
-                        <form id="addPostForm" class="select-width-100" action="/P5-Blog/admin/{{ post.id }}/{{ currentPage }}" method="post"
+                        <form id="modifyPostForm" class="select-width-100" action="/P5-Blog/admin/{{ post.id }}/{{ currentPage }}" method="post"
                               enctype="multipart/form-data">
                             <input type="hidden" name="token" value="{{ token }}">
                             <input type="hidden" name="type" value="modify_post">
@@ -78,7 +78,7 @@
         $(document).ready(function () {
             $('#btnOnline').click(function () {
                 $('#status').val('en ligne')
-                $('#addPostForm').submit()
+                $('#modifyPostForm').submit()
                 return false
             });
             $("#resetModifyPost").click(function () {
