@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\model\UserModel;
 
 function generateToken(): string
@@ -12,14 +14,14 @@ function hashPassword(string $password): string
     return password_hash($password, PASSWORD_DEFAULT, ['salt' => '$W<_6,Vt^/%_:(G]{:X7w)hcS+,/eB']);
 }
 
-function getVal(object $obj, string $field, string $getter): ?string
+function getVal(UserModel $obj, string $field, string $getter): ?string
 {
     if ($obj instanceof UserModel) {
-        return $obj->$getter();
+        return strval($obj->$getter());
     }
     foreach ($obj as $key => $value) {
         if ($key == $field) {
-            return $value;
+            return strval($value);
         }
     }
 

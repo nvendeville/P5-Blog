@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\core\service;
 
 use App\core\ConfigClass;
@@ -22,7 +24,7 @@ class UserService extends AbstractService
         $this->userEntity = new UserEntity();
     }
 
-    public function addUser(array $formAddUser): object
+    public function addUser(array $formAddUser): UserModel
     {
         $userModel = new UserModel();
         $this->hydrateFromPostArray($formAddUser, $userModel);
@@ -75,7 +77,7 @@ class UserService extends AbstractService
 </html>';
         $subject = "Confirmation d'inscription";
         $config = ConfigClass::getInstance();
-        $this->sendMail($subject, $message, $formAddUser['email'], $config->get("smtp_setFromMail"));
+        $this->sendMail($subject, $message, $formAddUser['email'], $config->getString("smtp_setFromMail"));
     }
 
     public function userExist(string $email): bool

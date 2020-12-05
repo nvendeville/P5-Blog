@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 function getConfig(): array
 {
     return array(

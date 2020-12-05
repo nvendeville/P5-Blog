@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\core;
 
 use Twig\Environment;
@@ -25,12 +27,12 @@ class Renderer
         $loader = new FilesystemLoader('app/view');
         $twig = new Environment($loader);
         $this->getTwigCoreExtension($twig)->setDateFormat('d/m/Y H:i', '%d days');
-        $models['token'] = $this->sessionManager->sessionGet('token');
+        $models['token'] = $this->sessionManager->sessionGetString('token');
         if ($this->sessionManager->sessionIsset('user')) {
             $models['logged'] = true;
-            $models['isAdmin'] = getVal($this->sessionManager->sessionGet('user'), 'isAdmin', 'getIsAdmin') == '1';
-            $models['firstname'] = getVal($this->sessionManager->sessionGet('user'), 'firstname', 'getFirstname');
-            $models['idConnectedUser'] = getVal($this->sessionManager->sessionGet('user'), 'id', 'getId');
+            $models['isAdmin'] = getVal($this->sessionManager->sessionGetUser('user'), 'isAdmin', 'getIsAdmin') == '1';
+            $models['firstname'] = getVal($this->sessionManager->sessionGetUser('user'), 'firstname', 'getFirstname');
+            $models['idConnectedUser'] = getVal($this->sessionManager->sessionGetUser('user'), 'id', 'getId');
         }
         $models = $this->getOtherModel($models);
 
@@ -40,7 +42,7 @@ class Renderer
     private function getOtherModel(array $models): array
     {
         if ($this->sessionManager->sessionIsset('otherModel')) {
-            foreach ($this->sessionManager->sessionGet('otherModel') as $key => $value) {
+            foreach ($this->sessionManager->sessionGetArray('otherModel') as $key => $value) {
                 $models[$key] = $value;
             }
             $this->sessionManager->sessionUnset('otherModel');

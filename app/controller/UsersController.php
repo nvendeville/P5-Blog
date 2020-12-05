@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\controller;
 
 use App\core\service\UserService;
@@ -17,14 +19,14 @@ class UsersController extends AbstractController
 
     public function addUser(array $formAddUser): void
     {
-        $this->sessionManager->sessionSet(
+        $this->sessionManager->sessionSetArray(
             'otherModel',
             ['wrongPassword' => true]
         );
         if ($this->controlPassword($formAddUser['password'], $formAddUser['passwordConfirmed'])) {
             $user = $this->userService->addUser($formAddUser);
-            $this->sessionManager->sessionSet('user', $user);
-            $this->sessionManager->sessionSet('token', generateToken());
+            $this->sessionManager->sessionSetUser('user', $user);
+            $this->sessionManager->sessionSetString('token', generateToken());
             $this->sessionManager->sessionUnset('otherModel');
         }
 
@@ -33,11 +35,11 @@ class UsersController extends AbstractController
 
     public function login(array $signInForm): void
     {
-        $this->sessionManager->sessionSet('otherModel', ['wrongPassword' => true]);
+        $this->sessionManager->sessionSetArray('otherModel', ['wrongPassword' => true]);
         $user = $this->userService->signIn($signInForm['email']);
         if ($this->userService->controlPassword(hashPassword($signInForm['password']), $user->getPassword())) {
-            $this->sessionManager->sessionSet('user', $user);
-            $this->sessionManager->sessionSet('token', generateToken());
+            $this->sessionManager->sessionSetUser('user', $user);
+            $this->sessionManager->sessionSetString('token', generateToken());
             $this->sessionManager->sessionUnset('otherModel');
         }
         redirect($signInForm["redirect"]);
@@ -51,7 +53,7 @@ class UsersController extends AbstractController
 
     public function resetPassword(array $resetPasswordForm): void
     {
-        $this->sessionManager->sessionSet(
+        $this->sessionManager->sessionSetArray(
             'otherModel',
             $this->userExist($resetPasswordForm['email']) ? ['resetPassword' => true,
             'email' => $resetPasswordForm['email']] : ['noUserExist' => true]
@@ -72,15 +74,15 @@ class UsersController extends AbstractController
 
     public function updatePassword(array $updatePasswordForm): void
     {
-        $this->sessionManager->sessionSet(
+        $this->sessionManager->sessionSetArray(
             'otherModel',
             ['wrongPassword' => true]
         );
         if ($this->controlPassword($updatePasswordForm['newPassword'], $updatePasswordForm['confirmedNewPassword'])) {
             $this->userService->updatePassword($updatePasswordForm['newPassword'], $updatePasswordForm['email']);
             $user = $this->userService->signIn($updatePasswordForm['email']);
-            $this->sessionManager->sessionSet('user', $user);
-            $this->sessionManager->sessionSet('token', generateToken());
+            $this->sessionManager->sessionSetUser('user', $user);
+            $this->sessionManager->sessionSetString('token', generateToken());
             $this->sessionManager->sessionUnset('otherModel');
         }
         redirect($updatePasswordForm["redirect"]);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\core;
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -12,10 +14,10 @@ trait Mailer
         $mail = new PHPMailer(true);
         $mail->isSMTP();
         $mail->isHTML(true);
-        $mail->SMTPAuth = boolval($config->get("smtp_auth"));
-        $mail->Host = $config->get("smtp_host");
-        $mail->Port = intval($config->get("smtp_port"));
-        $mail->setFrom($config->get("smtp_setFromMail"), $config->get("smtp_setFromName"));
+        $mail->SMTPAuth = $config->getBool("smtp_auth");
+        $mail->Host = $config->getString("smtp_host");
+        $mail->Port = $config->getInt("smtp_port");
+        $mail->setFrom($config->getString("smtp_setFromMail"), $config->getString("smtp_setFromName"));
         $mail->addAddress($addAddress);
         $mail->addReplyTo($replyTo);
         $mail->Subject = $subject;

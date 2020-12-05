@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\router;
 
 use ReflectionClass;
@@ -127,7 +129,7 @@ class Router
             return false;
         }
         for ($i = 0; $i < $paramCount; $i++) {
-            if (!$this->compareTypes($methodParameters[$i]->getType(), $this->convertParam($uriParameters[$i]))) {
+            if (!$this->compareTypes($methodParameters[$i]->getType()->getName(), $this->convertParam($uriParameters[$i]))) {
                 return false;
             }
         }

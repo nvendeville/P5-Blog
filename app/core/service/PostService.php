@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\core\service;
 
 use App\core\entity\CommentEntity;
@@ -43,7 +45,7 @@ class PostService extends AbstractService
     {
         $nbPosts = $this->postEntity->getPostedNbPosts();
 
-        return ceil((int)$nbPosts->nbPosts / (int)self::NB_POSTS_PER_PAGE);
+        return intval(ceil((int)$nbPosts->nbPosts / (int)self::NB_POSTS_PER_PAGE));
     }
 
     protected function getComments(int $postId): array
@@ -95,7 +97,7 @@ class PostService extends AbstractService
     {
         $nbPosts = $this->postEntity->getNbPostsByCategories($categoryName);
 
-        return ceil((int)$nbPosts->getNbPosts() / (int)self::NB_POSTS_PER_PAGE);
+        return intval(ceil((int)$nbPosts->getNbPosts() / (int)self::NB_POSTS_PER_PAGE));
     }
 
     public function getPostDetail(int $postId): array
