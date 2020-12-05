@@ -1,3 +1,25 @@
+.input-modal {
+  line-height: 60px;
+  padding: 0 15px;
+  border: 1px solid #111;
+  font-size: 1.1em;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.submit-modal {
+  height: 40px;
+  padding: 0 30px;
+  line-height: 40px !important;
+  background: #090909;
+  border: 1px solid #111;
+  color: #fff;
+  top: 0;
+  right: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
 .categoryTitle {
   margin-bottom: 1rem !important;
   font-family: inherit !important;
@@ -431,11 +453,11 @@ h6 {
   color: #111;
 }
 
-a.hero-link {
+.hero-link {
   color: #fd7e14 !important;
   text-transform: uppercase;
   font-size: 1em;
-  text-decoration: none !important;
+  text-decoration: underline !important;
   margin-top: 20px;
   font-weight: 400;
 }

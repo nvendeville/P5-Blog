@@ -30,7 +30,7 @@ class Renderer
             $models['logged'] = true;
             $models['isAdmin'] = getVal($this->sessionManager->sessionGet('user'), 'isAdmin', 'getIsAdmin') == '1';
             $models['firstname'] = getVal($this->sessionManager->sessionGet('user'), 'firstname', 'getFirstname');
-            $models['idConnectedUser'] = getVal($this->sessionManager->sessionGet('user'), 'idUser', 'getId');
+            $models['idConnectedUser'] = getVal($this->sessionManager->sessionGet('user'), 'id', 'getId');
         }
         $models = $this->getOtherModel($models);
 
